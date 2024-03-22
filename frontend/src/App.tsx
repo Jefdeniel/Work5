@@ -1,5 +1,5 @@
 import './App.scss';
-import Logo from './components/ui';
+import Logo from './components/ui/Logo';
 
 function App() {
   return (
