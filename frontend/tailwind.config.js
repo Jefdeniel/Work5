@@ -14,13 +14,21 @@ module.exports = {
       black: '#000',
       white: '#fff',
     },
+    fontFamily: {
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+    },
     extend: {
       spacing: {
         128: '32rem',
         144: '36rem',
       },
       borderRadius: {
-        '4xl': '2rem',
+        none: '0',
+        sm: '.125rem',
+        DEFAULT: '.25rem',
+        lg: '.5rem',
+        full: '9999px',
       },
     },
   },
