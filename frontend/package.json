@@ -35,6 +35,10 @@
     "typescript": "^4.5.5",
     "vite": "^2.9.12"
   },
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "maintained node versions"
+  ],
   "pre-commit": "lint",
   "license": "MIT"
 }
