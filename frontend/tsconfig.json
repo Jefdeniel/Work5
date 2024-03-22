@@ -14,7 +14,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-     /* Linting */
+    /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
@@ -24,9 +24,9 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
-   "jsoncompilerOptions": {
+  "jsoncompilerOptions": {
     "strictNullChecks": true
   },
   "include": ["src"],

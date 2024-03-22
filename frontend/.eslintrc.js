@@ -32,6 +32,7 @@ module.exports = {
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
   plugins: ['simple-import-sort', 'prettier'],
+  ignorePatterns: ['.eslintrc.js', 'node_modules/', 'build/', 'dist/'],
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'react/react-in-jsx-scope': 'off',
