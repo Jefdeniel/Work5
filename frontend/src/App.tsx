@@ -1,16 +1,14 @@
 import './App.scss';
-
-import logo from './logo.svg';
+import Logo from './components/ui';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <p className="header">
-          🚀 Vite + React + Typescript 🤘 & <br />
-          Eslint 🔥+ Prettier
+          <Logo width="100px" height="100px" />
+          Agenda tool
         </p>
-
         <div className="body"></div>
       </header>
     </div>
