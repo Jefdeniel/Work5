@@ -44,4 +44,5 @@ jobs:
       #     # Example: npm run test
       - name: 🚨 Run Frontend Linting
         run: |
+          cd frontend
           npm run lint
