@@ -12,13 +12,16 @@
 
 ## DB
 
-- Make sure your virtual environment is active with Pipenv shell (run from root).
+- Make sure your virtual environment is active with `pipenv shell` (run from root).
 - After making changes, such as adding models, re-run `python manage.py makemigrations calendar`.
 
 ## How to start
 
-- Run migrations: `python manage.py migrate`.
+- Create new migration: `python manage.py makemigrations`
+- Apply migration to update database schema: `python manage.py migrate`.
 - Start the server: `python manage.py runserver`.
+- Admin dashboard: `http://localhost:8000/admin`
+- API: `http://localhost:8000/api`
 
 ## Handy links
 
