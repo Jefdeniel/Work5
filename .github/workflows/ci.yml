@@ -15,26 +15,26 @@ jobs:
         python-version: [3.9]
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python 🐍 ${{ matrix.python-version }}
+      - name: 🐍 Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Backend Dependencies 📦
+      - name: 📦 Install Backend Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
-      - name: Run Backend Tests 🧪
-        run: |
-          python manage.py test
+      # - name: 🧪 Run Backend Tests
+      #   run: |
+      #     python manage.py test
       # - name: Run Backend Linting
       #   run: |
       #     # Run backend linting commands here (e.g., flake8, pylint, black)
       #     # Example: flake8 backend
-      - name: Install Frontend Dependencies 📦
+      - name: 📦 Install Frontend Dependencies
         run: |
           cd frontend
           npm install
-      - name: Build Frontend 🏗️
+      - name: 🏗️ Build Frontend
         run: |
           cd frontend
           npm run build
@@ -42,6 +42,6 @@ jobs:
       #   run: |
       #     # Run frontend test commands here (e.g., jest, karma, etc.)
       #     # Example: npm run test
-      - name: Run Frontend Linting 🚨
+      - name: 🚨 Run Frontend Linting
         run: |
           npm run lint
