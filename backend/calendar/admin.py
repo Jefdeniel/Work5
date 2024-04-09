@@ -3,7 +3,7 @@ from django.contrib import admin
 # This is the admin interface that Django provides by default
 # Register your models here.
 
-from .models import Event, Reminder, Calender
+from .models import Event, Reminder, Calendar
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -29,7 +29,7 @@ class ReminderAdmin(admin.ModelAdmin):
     )
 
 
-class CalenderAdmin(admin.ModelAdmin):
+class CalendarAdmin(admin.ModelAdmin):
     list_display = ("name", "owner", "created_at", "updated_at", "display_events")
 
     def display_events(self, obj):
@@ -40,4 +40,4 @@ class CalenderAdmin(admin.ModelAdmin):
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Reminder, ReminderAdmin)
-admin.site.register(Calender, CalenderAdmin)
+admin.site.register(Calendar, CalendarAdmin)
