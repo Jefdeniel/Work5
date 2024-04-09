@@ -14,4 +14,8 @@ yarn && yarn start
 
 ```
 yarn build
+
+- https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
+- - https://stackoverflow.com/questions/49966547/pip-10-0-1-warning-consider-adding-this-directory-to-path-or
+
 ```
