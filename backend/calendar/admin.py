@@ -3,6 +3,8 @@ from django.contrib import admin
 # This is the admin interface that Django provides by default
 # Register your models here.
 
+# TODO: switch to postgresql
+
 from .models import Event, Reminder, Calendar
 
 
