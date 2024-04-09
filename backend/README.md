@@ -1,3 +1,7 @@
+# Backend
+
+**When adding dependencies, add them to requirements.txt!**
+
 ## Handy links
 
 - [DigitalOcean Tutorial: Build a To-Do Application using Django and React](https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react)
