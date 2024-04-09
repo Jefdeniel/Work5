@@ -18,9 +18,9 @@ class Calendar(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
+    location = models.CharField(max_length=200)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    location = models.CharField(max_length=200)
     creator = models.ForeignKey(
         "auth.User", related_name="events", on_delete=models.CASCADE
     )

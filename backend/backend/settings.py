@@ -142,3 +142,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS settings for allowing requests from FRONTEND
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
+
+CORS_ORIGIN_ALLOW_ALL = True

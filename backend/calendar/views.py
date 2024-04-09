@@ -3,6 +3,8 @@
 
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .serializers import EventSerializer, ReminderSerializer, CalendarSerializer
 from .models import Event, Reminder, Calendar
 
@@ -22,3 +24,10 @@ class ReminderView(viewsets.ModelViewSet):
 class CalendarView(viewsets.ModelViewSet):
     serializer_class = CalendarSerializer
     queryset = Calendar.objects.all()
+
+
+@api_view(["GET"])
+def get_calendars(request):
+    calendars = Calendar.objects.all()
+    serializer = CalendarSerializer(calendars, many=True)
+    return Response(serializer.data)

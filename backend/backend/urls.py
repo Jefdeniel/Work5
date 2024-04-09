@@ -28,6 +28,8 @@ router.register(r"reminders", views.ReminderView, "reminder")
 router.register(r"calendars", views.CalendarView, "calendar")
 
 urlpatterns = [
+    path("", include(router.urls)),
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
+    path("api/get_calendars/", views.get_calendars),
 ]
