@@ -1,11 +1,5 @@
 :root {
   --primay: black;
   --bg-primay: white;
-
   --link: #2a0b0b;
 }
-
-
-
-// @use 'styles/_colors.scss'; // assuming a styles directory under src/
-// @use '~nprogress/nprogress'; // loading a css file from the nprogress node module
