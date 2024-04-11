@@ -29,12 +29,9 @@ router.register(r"reminders", views.ReminderView, "reminder")
 router.register(r"calendars", views.CalendarView, "calendar")
 
 urlpatterns = [
-    path("", include(router.urls)),
-    path("admin/", admin.site.urls),
-    path("api/", include(router.urls)),
-    path("api/get_calendars/", views.get_calendars),
-    path("events/", views.EventView.as_view(), name="event"),
-    path("get_calendars/", views.get_calendars),
+    # path("api/get_calendars/", views.get_calendars),
+    # path("events/", views.EventView.as_view(), name="event"),
+    # path("get_calendars/", views.get_calendars),
     path("login/", views.login_view, name="api_login"),
     path("logout/", views.logout_view, name="api_logout"),
     path("session/", views.session_view, name="api_session"),

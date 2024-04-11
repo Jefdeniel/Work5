@@ -28,8 +28,13 @@ router.register(r"events", views.EventView, "event")
 router.register(r"reminders", views.ReminderView, "reminder")
 router.register(r"calendars", views.CalendarView, "calendar")
 
+
+def index_view(request):
+    return render(request, "dist/index.html")
+
+
 urlpatterns = [
-    path("", include(router.urls)),
     path("admin/", admin.site.urls),
-    path("api/", include(router.urls)),
+    path("api/", include("calendar_app.urls")),
+    path("", index_view, name="index"),
 ]

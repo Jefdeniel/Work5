@@ -69,7 +69,7 @@ REST_FRAMEWORK = {
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR.joinpath("frontend")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -81,6 +81,8 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
 
 WSGI_APPLICATION = "backend.wsgi.application"
 
@@ -144,7 +146,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS settings for allowing requests from FRONTEND
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://localhost:5177"]
 CORS_ORIGIN_ALLOW_ALL = True
 
 # If you host your front-end and back-end at different hosts, you should configure the CORS settings to make the front-end is able to access the resources of the back-end

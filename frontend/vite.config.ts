@@ -8,4 +8,7 @@ export default defineConfig({
   },
   plugins: [react()],
   base: '/static/',
+  build: {
+    outDir: 'frontend/dist',
+  },
 });
