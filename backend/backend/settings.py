@@ -32,7 +32,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    "calendar",
+    "backend",
+    "calendar_app",
 ]
 
 MIDDLEWARE = [
@@ -59,6 +59,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "backend.urls"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
 
 TEMPLATES = [
     {
@@ -93,7 +99,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -112,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -123,7 +127,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -142,5 +145,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS settings for allowing requests from FRONTEND
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
-
 CORS_ORIGIN_ALLOW_ALL = True
+
+# If you host your front-end and back-end at different hosts, you should configure the CORS settings to make the front-end is able to access the resources of the back-end
+CORS_ALLOWED_ORIGINS = ["http://localhost:5177"]
+CORS_ALLOW_CREDENTIALS = True
+
+# Security settings
+CSRF_COOKIE_SAMESITE = "Strict"
+SESSION_COOKIE_SANME_SITE = "Strict"
+
+# PRODUCTION: SET TO TRUE
+# CSRF_COOKY_HTTPONLY = False
+# SESSION_COOKIE_HTTPONLY = True

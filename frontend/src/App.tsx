@@ -1,45 +1,158 @@
+import { Component, ChangeEvent, FormEvent } from 'react';
+import Cookies from 'universal-cookie';
 import './App.css';
-import Logo from './components/ui/Logo';
-import Test from './components/test';
 
-// IsAuthenticated
-import { useContext } from 'react';
-import AuthContext from './store/AuthContext';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
+interface AppState {
+  username: string;
+  password: string;
+  error: string;
+  isAuthenticated: boolean;
+}
 
-function App() {
-  let { isAuthenticated }: any = useContext(AuthContext);
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        {/* main layout ########################### */}
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              <div className="App">
-                <header className="App-header">
-                  <p className="header">
-                    <Logo width="100px" height="100px" />
-                    Agenda tool
-                  </p>
-                  <Test />
-                  <div className="body"></div>
-                </header>
-              </div>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        >
-          <Route path="/" element={<Navigate to="/expense/TWD" />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+const cookies = new Cookies();
+
+class App extends Component<{}, AppState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      error: '',
+      isAuthenticated: false,
+    };
+  }
+
+  componentDidMount(): void {
+    this.getSession();
+  }
+
+  getSession(): void {
+    fetch('/api/session', {
+      credentials: 'same-origin',
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data: { isAuthenticated: boolean }) => {
+        console.log(data);
+        if (data.isAuthenticated) {
+          this.setState({ isAuthenticated: true });
+        } else {
+          this.setState({ isAuthenticated: false });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  whoami(): void {
+    fetch('/api/whoami', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        return res.json(); // Explicitly return the response data
+      })
+      .then((data: { username: string }) => {
+        // Specify the type of the response data
+        console.log('Logged in as: ', data.username);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ password: event.target.value });
+  };
+
+  handleUsernameChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ username: event.target.value });
+  };
+
+  isResponseOk = (response: Response): any => {
+    if (response.status >= 200 && response.status <= 299) {
+      return response.json();
+    } else {
+      throw Error(response.statusText);
+    }
+  };
+
+  login = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    // make POST request to /api/login
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': cookies.get('csrftoken'),
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      }),
+    })
+      .then(this.isResponseOk)
+      .then((data) => {
+        this.setState({
+          isAuthenticated: true,
+          username: '',
+          password: '',
+          error: '',
+        });
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        this.setState({ error: 'Invalid username or password' });
+      });
+  };
+
+  logout = (): void => {
+    fetch('/api/logout', {
+      credentials: 'same-origin',
+    })
+      .then(this.isResponseOk)
+      .then((data) => {
+        this.setState({ isAuthenticated: false });
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  render() {
+    if (!this.state.isAuthenticated) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <h1>Login</h1>
+            <form onSubmit={this.login}>
+              <input
+                type="text"
+                placeholder="Username"
+                value={this.state.username}
+                onChange={this.handleUsernameChange}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.handlePasswordChange}
+              />
+              <button type="submit">Login</button>
+            </form>
+            <p>{this.state.error && <small>{this.state.error}</small>}</p>
+          </header>
+        </div>
+      );
+    }
+    return <p>you are logged in</p>;
+  }
 }
 
 export default App;

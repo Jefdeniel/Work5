@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import render
 from rest_framework import routers
-from calendar_app import views
+from . import views
 
 # WARNING: after changes, you need to restart the server ⚠️
 
@@ -32,4 +32,11 @@ urlpatterns = [
     path("", include(router.urls)),
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
+    path("api/get_calendars/", views.get_calendars),
+    path("events/", views.EventView.as_view(), name="event"),
+    path("get_calendars/", views.get_calendars),
+    path("login/", views.login_view, name="api_login"),
+    path("logout/", views.logout_view, name="api_logout"),
+    path("session/", views.session_view, name="api_session"),
+    path("whoami/", views.whoami_view, name="api_whoami"),
 ]
