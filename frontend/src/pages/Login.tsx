@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Cookies from 'universal-cookie';
 
 interface AppState {
@@ -39,20 +39,20 @@ const Login = () => {
       });
   };
 
-  const whoami = (): void => {
-    fetch('/api/whoami', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data: { username: string }) => {
-        console.log('Logged in as: ', data.username);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const whoami = (): void => {
+  //   fetch('/api/whoami', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data: { username: string }) => {
+  //       console.log('Logged in as: ', data.username);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setState((prevState) => ({
@@ -110,22 +110,22 @@ const Login = () => {
       });
   };
 
-  const logout = (): void => {
-    fetch('/api/logout', {
-      credentials: 'same-origin',
-    })
-      .then(isResponseOk)
-      .then((data) => {
-        setState((prevState) => ({
-          ...prevState,
-          isAuthenticated: false,
-        }));
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
+  // const logout = (): void => {
+  //   fetch('/api/logout', {
+  //     credentials: 'same-origin',
+  //   })
+  //     .then(isResponseOk)
+  //     .then((data) => {
+  //       setState((prevState) => ({
+  //         ...prevState,
+  //         isAuthenticated: false,
+  //       }));
+  //       console.log('Success:', data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // };
 
   return (
     <>
