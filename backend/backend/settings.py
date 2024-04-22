@@ -32,7 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
+# Application definition: when installing: put here!!!
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -131,7 +131,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/5.0/howto/static-files/ CHECK THIS
 
 STATIC_URL = "static/"
 
