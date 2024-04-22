@@ -1,4 +1,4 @@
-import { Component, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Cookies from 'universal-cookie';
 
 interface AppState {
@@ -10,68 +10,65 @@ interface AppState {
 
 const cookies = new Cookies();
 
-class Login extends Component<{}, AppState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      error: '',
-      isAuthenticated: false,
-    };
-  }
+const Login = () => {
+  const [state, setState] = useState<AppState>({
+    username: '',
+    password: '',
+    error: '',
+    isAuthenticated: false,
+  });
 
-  componentDidMount(): void {
-    this.getSession();
-  }
+  useEffect(() => {
+    getSession();
+  }, []);
 
-  getSession(): void {
+  const getSession = (): void => {
     fetch('/api/session', {
       credentials: 'same-origin',
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data: { isAuthenticated: boolean }) => {
         console.log(data);
-        if (data.isAuthenticated) {
-          this.setState({ isAuthenticated: true });
-        } else {
-          this.setState({ isAuthenticated: false });
-        }
+        setState((prevState) => ({
+          ...prevState,
+          isAuthenticated: data.isAuthenticated,
+        }));
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
-  whoami(): void {
+  const whoami = (): void => {
     fetch('/api/whoami', {
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => {
-        return res.json(); // Explicitly return the response data
-      })
+      .then((res) => res.json())
       .then((data: { username: string }) => {
-        // Specify the type of the response data
         console.log('Logged in as: ', data.username);
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ password: event.target.value });
   };
 
-  handleUsernameChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ username: event.target.value });
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setState((prevState) => ({
+      ...prevState,
+      password: event.target.value,
+    }));
   };
 
-  isResponseOk = (response: Response): any => {
+  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setState((prevState) => ({
+      ...prevState,
+      username: event.target.value,
+    }));
+  };
+
+  const isResponseOk = (response: Response): any => {
     if (response.status >= 200 && response.status <= 299) {
       return response.json();
     } else {
@@ -79,9 +76,8 @@ class Login extends Component<{}, AppState> {
     }
   };
 
-  login = (event: FormEvent<HTMLFormElement>): void => {
+  const login = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    // make POST request to /api/login
     fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -90,33 +86,40 @@ class Login extends Component<{}, AppState> {
       },
       credentials: 'same-origin',
       body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password,
+        username: state.username,
+        password: state.password,
       }),
     })
-      .then(this.isResponseOk)
+      .then(isResponseOk)
       .then((data) => {
-        this.setState({
+        setState((prevState) => ({
+          ...prevState,
           isAuthenticated: true,
           username: '',
           password: '',
           error: '',
-        });
+        }));
         console.log('Success:', data);
       })
       .catch((error) => {
         console.error('Error:', error);
-        this.setState({ error: 'Invalid username or password' });
+        setState((prevState) => ({
+          ...prevState,
+          error: 'Invalid username or password',
+        }));
       });
   };
 
-  logout = (): void => {
+  const logout = (): void => {
     fetch('/api/logout', {
       credentials: 'same-origin',
     })
-      .then(this.isResponseOk)
+      .then(isResponseOk)
       .then((data) => {
-        this.setState({ isAuthenticated: false });
+        setState((prevState) => ({
+          ...prevState,
+          isAuthenticated: false,
+        }));
         console.log('Success:', data);
       })
       .catch((error) => {
@@ -124,30 +127,28 @@ class Login extends Component<{}, AppState> {
       });
   };
 
-  render() {
-    return (
-      <>
-        <div className="container mx-auto my-auto flex flex-row justify-center items-center">
-          <form onSubmit={this.login}>
-            <input
-              type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.handleUsernameChange}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-            />
-            <button type="submit">Login</button>
-          </form>
-          <p>{this.state.error && <small>{this.state.error}</small>}</p>
-        </div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div className="container mx-auto my-auto flex flex-row justify-center items-center">
+        <form onSubmit={login}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={state.username}
+            onChange={handleUsernameChange}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={state.password}
+            onChange={handlePasswordChange}
+          />
+          <button type="submit">Login</button>
+        </form>
+        <p>{state.error && <small>{state.error}</small>}</p>
+      </div>
+    </>
+  );
+};
 
 export default Login;
