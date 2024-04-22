@@ -4,6 +4,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
@@ -31,7 +32,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
-  plugins: ['simple-import-sort', 'prettier'],
+  plugins: ['simple-import-sort', 'prettier', 'dist', 'eslintrc.cjs'],
   ignorePatterns: ['.eslintrc.js', 'node_modules/', 'build/', 'dist/'],
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
@@ -41,6 +42,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    'no-empty-function': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
