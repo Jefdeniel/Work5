@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
+// USED FOR LOGIN AND REGISTER
 const AccountLayout = () => {
   return (
     // <div className="container"> fix this with bootstrap or tailwind
