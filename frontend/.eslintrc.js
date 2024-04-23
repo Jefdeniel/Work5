@@ -9,48 +9,25 @@ module.exports = {
       jsx: true,
     },
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
-  },
-  env: {
-    browser: true,
-    amd: true,
-    node: true,
-  },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:react-hooks/recommended',
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
-  plugins: ['simple-import-sort', 'prettier'],
+  plugins: ['react', 'react-refresh', 'prettier', '@typescript-eslint'],
   ignorePatterns: ['.eslintrc.js', 'node_modules/', 'build/', 'dist/'],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-    'react/react-in-jsx-scope': 'off',
-    'jsx-a11y/accessible-emoji': 'off',
-    'react/prop-types': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-    'no-empty-function': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'import/prefer-default-export': 'off',
+    'import/extensions': 'off',
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
     ],
+    '@typescript-eslint/strict-boolean-expressions': 'warn',
+    '@typescript-eslint/prefer-nullish-coalescing': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'warn',
   },
 };

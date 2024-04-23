@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Button.module.css';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,7 +12,9 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   style?: React.CSSProperties;
   className?: string;
+  disabled?: boolean;
   onClick?: () => void;
+  children?: React.ReactNode;
 }
 
 const Button = ({

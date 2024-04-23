@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
 import Button from '../../ui/Button/Button';
 import Logo from '../../ui/Logo';
 import NavigationItem from './NavigationItem';
@@ -28,6 +27,7 @@ const menuItems: MenuItem[] = [
     icon: <img src="/icons/notifications.svg" alt="notifications" />,
     label: 'general:navigation.notifications',
   },
+
   {
     link: '/sharing-hub',
     icon: <img src="/icons/share.svg" alt="sharing-hub" />,
@@ -47,7 +47,6 @@ const DetailedNavigation = ({
   setIsMenuToggled,
   setIsMenuBroken,
 }: Props) => {
-  const auth = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation(['general']);
 
@@ -59,7 +58,7 @@ const DetailedNavigation = ({
 
   // TODO: fix this
   const onLogout = () => {
-    auth.logout();
+    console.log('logout');
   };
 
   return (
@@ -123,7 +122,6 @@ const DetailedNavigation = ({
         >
           <Button
             icon={<img src="/icons/logout.svg" alt="logout" />}
-            name="logoutButton"
             onClick={onLogout}
             text={t('general:buttons.logout')}
             style={{ marginLeft: isMenuToggled ? 0 : 15 }}

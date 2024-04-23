@@ -1,15 +1,13 @@
+import { Settings } from 'luxon';
+import { useTranslation } from 'react-i18next';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import useAuth from './hooks/useAuth';
+// import useAuth from './hooks/useAuth';
 import Layout from './layout/Layout';
-import AccountLayout from './layout/AccountLayout';
-import Login from './pages/Login';
 import Agenda from './pages/Agenda/Agenda';
-import { useTranslation } from 'react-i18next';
-import { Settings } from 'luxon';
 
 function App() {
-  const auth = useAuth();
+  // const auth = useAuth();
   const { i18n } = useTranslation();
   Settings.defaultLocale = i18n.language;
   return (
