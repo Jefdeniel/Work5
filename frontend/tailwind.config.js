@@ -19,6 +19,13 @@ module.exports = {
       readText: ['1rem', { lineHeight: '1.5' }],
       smallText: ['.813rem', { lineHeight: '1.4' }],
     },
+    screens: {
+      /* Screen sizes */
+      mobile: '375px',
+      tablet: '768px',
+      laptop: '1024px',
+      desktop: '1440px',
+    },
     extend: {
       /* All styling that extends the Tailwind styling/classes */
       colors: {
