@@ -7,7 +7,7 @@ export default defineConfig({
     'process.env': loadEnv('', process.cwd()),
   },
   plugins: [react()],
-  base: '/static/',
+  base: '/',
   build: {
     outDir: 'frontend/dist',
   },
