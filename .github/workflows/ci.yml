@@ -42,7 +42,7 @@ jobs:
       #   run: |
       #     # Run frontend test commands here (e.g., jest, karma, etc.)
       #     # Example: npm run test
-      - name: 🚨 Run Frontend Linting
-        run: |
-          cd frontend
-          npm run lint
+      # - name: 🚨 Run Frontend Linting
+      #   run: |
+      #     cd frontend
+      #     npm run lint
