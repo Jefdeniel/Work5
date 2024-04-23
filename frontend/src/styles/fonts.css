@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "Rubik";
+    src: url("./rubik-regular.woff2") format("woff2"),
+        url("./rubik-regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url("./rubik-bold.woff2") format("woff2"),
+        url("./rubik-bold.woff") format("woff");
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url("./lato-light.woff2") format("woff2"),
+        url("./lato-light.woff") format("woff");
+    font-style: normal;
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url("./lato-regular.woff2") format("woff2"),
+        url("./lato-regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url("./lato-bold.woff2") format("woff2"),
+        url("./lato-bold.woff") format("woff");
+    font-style: normal;
+    font-weight: 600;
+}
