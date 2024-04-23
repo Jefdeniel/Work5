@@ -6,6 +6,8 @@ import IconButton from '../../ui/IconButton/IconButton';
 import Logo from '../../ui/Logo';
 import DetailedItem from './DetailedItem';
 
+import './navigation.css';
+
 interface MenuItem {
   link: string;
   icon: React.ReactNode;
@@ -75,6 +77,7 @@ const DetailedNavigation = ({
         style={{
           borderRight: '1px solid rgba(0, 0, 0, 0.1)',
         }}
+        className={`sidebar`}
       >
         <div className="d-flex flex-row justify-content-between my-4">
           <div className="d-flex flex-col">
