@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font loadin */
+/* Fonts loadin */
 @font-face {
   font-family: 'Rubik';
   src:
