@@ -10,7 +10,7 @@ interface Props {
   children: string;
 }
 
-const NavigationItem = ({
+const DetailedItem = ({
   icon,
   link,
   onClick,
@@ -43,4 +43,4 @@ const NavigationItem = ({
   );
 };
 
-export default NavigationItem;
+export default DetailedItem;

@@ -3,5 +3,10 @@
     "notifications": "Notifications",
     "sharing-hub": "Hub de partage",
     "customize": "Personnaliser"
+  },
+  "buttons": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "back": "Retour"
   }
 }

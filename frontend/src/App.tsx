@@ -2,8 +2,13 @@ import { Settings } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
+import AgendaLayout from './layout/AgendaLayout';
 import Layout from './layout/Layout';
-import Agenda from './pages/Agenda/Agenda';
+import CreateAgenda from './pages/Agenda/CreateAgenda.tsx';
+import SettingsPage from './pages/Settings/SettingsPage';
+import NotificationPage from './pages/NotificationPage.tsx';
+import SharingHubPage from './pages/SharingHubPage.tsx';
+import CustomizePage from './pages/CustomizePage.tsx';
 
 function App() {
   const { i18n } = useTranslation();
@@ -24,7 +29,17 @@ function App() {
     <Routes>
       <Route element={<Layout title="Agenda" />}>
         <Route path="/" element={<Navigate to="/" replace />} />
-        <Route index path="agenda" element={<Agenda />} />
+        {/* Settings */}
+        <Route index path="/settings" element={<SettingsPage />} />
+        <Route index path="/notifications" element={<NotificationPage />} />
+        <Route index path="/sharing-hub" element={<SharingHubPage />} />
+        <Route index path="/customize-agenda" element={<CustomizePage />} />
+      </Route>
+      <Route element={<AgendaLayout title="Agenda" />}>
+        {/* Agenda */}
+        <Route path="agenda">
+          <Route path="create" element={<CreateAgenda />} />
+        </Route>
       </Route>
     </Routes>
   );

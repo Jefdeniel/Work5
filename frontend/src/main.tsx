@@ -3,8 +3,8 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './i18n.js';
 import LoadingScreen from './components/ui/Loading/LoadingScreen';
+import './i18n.js';
 
 import App from './App';
 

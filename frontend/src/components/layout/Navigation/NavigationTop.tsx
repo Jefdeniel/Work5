@@ -12,7 +12,7 @@ const NavigationTop = ({ title, onMenuClose }: Props) => {
         onClick={onMenuClose}
         icon={<img src="/icons/menu.svg" alt="menu" />}
       />
-      {title && <h1 className="text-center m-0 p-0">{title}</h1>}
+      {title && <h1 className="text-left mt-2 p-0">{title}</h1>}
       <div></div>
     </div>
   );

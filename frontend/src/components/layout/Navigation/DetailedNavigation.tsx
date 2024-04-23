@@ -2,8 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../ui/Button/Button';
+import IconButton from '../../ui/IconButton/IconButton';
 import Logo from '../../ui/Logo';
-import NavigationItem from './NavigationItem';
+import DetailedItem from './DetailedItem';
 
 interface MenuItem {
   link: string;
@@ -75,11 +76,35 @@ const DetailedNavigation = ({
           borderRight: '1px solid rgba(0, 0, 0, 0.1)',
         }}
       >
-        <div className="d-flex justify-content-center my-4">
-          <Link to="/" className="mb-2 mt-2 text-center">
-            <Logo width={isMenuCollapsed ? '50px' : '150px'} height="50px" />
-          </Link>
+        <div className="d-flex flex-row justify-content-between my-4">
+          <div className="d-flex flex-col">
+            <Link to="/">
+              <Logo width={isMenuCollapsed ? '50px' : '75px'} height="50px" />
+            </Link>
+          </div>
+          <IconButton
+            icon={<img src="/icons/settings.svg" alt="close" />}
+            onClick={() => navigate('/settings')}
+          />
         </div>
+
+        <div>
+          <Button
+            icon={<img src="/icons/back.svg" alt="home" />}
+            onClick={() => {
+              window.history.back();
+            }}
+            text={t('general:buttons.back')}
+            style={{ marginTop: 10 }}
+          />
+        </div>
+
+        <img
+          src="/img/agenda.png"
+          alt="close"
+          onClick={() => setIsMenuToggled(false)}
+          style={{ cursor: 'pointer', padding: 10 }}
+        />
 
         <Menu
           menuItemStyles={{
@@ -100,14 +125,14 @@ const DetailedNavigation = ({
           }}
         >
           {menuItems.map(({ link, icon, label }) => (
-            <NavigationItem
+            <DetailedItem
               key={link}
               link={link}
               icon={icon}
               onClick={handleOnClickMenu}
             >
               {t(label.toString())}
-            </NavigationItem>
+            </DetailedItem>
           ))}
         </Menu>
         <div
@@ -120,10 +145,9 @@ const DetailedNavigation = ({
             justifyContent: isMenuToggled ? 'space-between' : 'center',
           }}
         >
-          <Button
+          <IconButton
             icon={<img src="/icons/logout.svg" alt="logout" />}
             onClick={onLogout}
-            text={t('general:buttons.logout')}
             style={{ marginLeft: isMenuToggled ? 0 : 15 }}
           />
         </div>

@@ -4,7 +4,9 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  color: black;
   height: 60px;
+  border: 2px solid black;
   padding: 7px 14px;
   font-weight: 700;
   transition:
@@ -13,7 +15,7 @@
     color 0.2s ease-in-out;
 
   &:disabled {
-    background-color: #d2d5db;
+    background-color: #d2dbd8;
     border: 1px solid #d2d5db;
     color: #535a60;
 

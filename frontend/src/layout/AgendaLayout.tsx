@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import DetailedNavigation from '../components/layout/Navigation/DetailedNavigation';
+import AgendaNavigation from '../components/layout/Navigation/AgendaNavigation';
 import NavigationTop from '../components/layout/Navigation/NavigationTop';
 import './Layout.css';
 
@@ -8,8 +8,8 @@ interface Props {
   title: string;
 }
 
-// USER FOR DETAILED SIDEBAR
-const Layout = ({ title }: Props) => {
+// USER FOR AGENDA SIDEBAR
+const AgendaLayout = ({ title }: Props) => {
   const [isMenuBroken, setIsMenuBroken] = useState(false);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -23,7 +23,7 @@ const Layout = ({ title }: Props) => {
   };
   return (
     <div className="flex flex-row p-0" style={{ minHeight: '100%' }}>
-      <DetailedNavigation
+      <AgendaNavigation
         title={title}
         isMenuBroken={isMenuBroken}
         isMenuCollapsed={isMenuCollapsed}
@@ -64,4 +64,4 @@ const Layout = ({ title }: Props) => {
   );
 };
 
-export default Layout;
+export default AgendaLayout;
