@@ -26,17 +26,17 @@ const menuItems: MenuItem[] = [
   {
     link: '/notifications',
     icon: <img src="/icons/notifications.svg" alt="notifications" />,
-    label: 'general:notifications',
+    label: 'general:navigation.notifications',
   },
   {
     link: '/sharing-hub',
     icon: <img src="/icons/share.svg" alt="sharing-hub" />,
-    label: 'general:sharing-hub',
+    label: 'general:navigation.sharing-hub',
   },
   {
     link: '/customize-agenda',
     icon: <img src="/icons/customize.svg" alt="customize" />,
-    label: 'general:customize',
+    label: 'general:navigation.customize',
   },
 ];
 
@@ -49,7 +49,7 @@ const DetailedNavigation = ({
 }: Props) => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation(['general']);
 
   const menuWidth = isMenuToggled ? menuItems.length * 75 + 'px' : 'auto';
   const handleOnClickMenu = (link: string) => {
