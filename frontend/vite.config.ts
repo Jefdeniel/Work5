@@ -1,14 +1,15 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    'process.env': loadEnv('', process.cwd()),
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
   },
   plugins: [react()],
   base: '/',
   build: {
     outDir: 'frontend/dist',
+    target: 'esnext',
   },
 });

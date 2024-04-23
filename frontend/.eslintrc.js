@@ -27,7 +27,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     '@typescript-eslint/strict-boolean-expressions': 'warn',
-    '@typescript-eslint/prefer-nullish-coalescing': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
   },
 };

@@ -2,14 +2,13 @@ import { Settings } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-// import useAuth from './hooks/useAuth';
 import Layout from './layout/Layout';
 import Agenda from './pages/Agenda/Agenda';
 
 function App() {
-  // const auth = useAuth();
   const { i18n } = useTranslation();
   Settings.defaultLocale = i18n.language;
+
   return (
     // <Routes>
     //   {auth.isLoggedIn ? (
@@ -22,14 +21,11 @@ function App() {
     //     </Route>
     //   )}
     // </Routes>
-
     <Routes>
-      {/* layout with detailed sidebar */}
       <Route element={<Layout title="Agenda" />}>
         <Route path="/" element={<Navigate to="/" replace />} />
         <Route index path="agenda" element={<Agenda />} />
       </Route>
-      {/* layout without other sidebar */}
     </Routes>
   );
 }
