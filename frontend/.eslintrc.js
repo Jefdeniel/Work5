@@ -28,5 +28,6 @@ module.exports = {
     ],
     '@typescript-eslint/strict-boolean-expressions': 'warn',
     '@typescript-eslint/no-unsafe-assignment': 'warn',
+    '@typescript-eslint/recommended-type-checked': 'warn',
   },
 };
