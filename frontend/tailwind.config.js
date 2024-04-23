@@ -6,6 +6,8 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  /* Enable darkmode trough dark: selector */
+  darkMode: 'selector',
   theme: {
     /* All styling that replaces the Tailwind styling/classes comes outside extend */
     fontFamily: {
@@ -13,11 +15,11 @@ module.exports = {
       lato: ['Lato', 'sans-serif'],
     },
     fontSize: {
-      headingOne: ['2.25rem', { lineHeight: '1.2' }],
-      headingTwo: ['1.625rem', { lineHeight: '1.1' }],
-      headingThree: ['1rem', { lineHeight: '1.5' }],
-      readText: ['1rem', { lineHeight: '1.5' }],
-      smallText: ['.813rem', { lineHeight: '1.4' }],
+      headingOne: ['clamp(2rem, 5vw, 2.25rem)', { lineHeight: '1.2' }],
+      headingTwo: ['clamp(1.5rem, 4vw, 1.625rem)', { lineHeight: '1.1' }],
+      headingThree: ['clamp(.9rem, 3vw, 1rem)', { lineHeight: '1.5' }],
+      readText: ['clamp(.9rem, 3vw, 1rem)', { lineHeight: '1.5' }],
+      smallText: ['clamp(.8rem, 2vw, .813rem)', { lineHeight: '1.4' }],
     },
     screens: {
       /* Screen sizes */
@@ -38,8 +40,13 @@ module.exports = {
         },
         sa_secondary: 'hsla(141, 70%, 51%, 100)',
         sa_error: 'hsla(5, 88%, 57%, 100)',
-        sa_bright: 'hsla(0, 0%, 99%, 100)',
-        sa_dark: 'hsla(220, 53%, 15%, 100)',
+        // sa_bright: 'hsla(0, 0%, 99%, 100)',
+        sa_bright: 'hsla(var(--sa_bright))',
+        // sa_dark: 'hsla(220, 53%, 15%, 100)',
+        sa_dark: 'hsla(var(--sa_dark))',
+      },
+      padding: {
+        base: '1.5rem',
       },
       spacing: {
         xs: '.625rem',
