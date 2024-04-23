@@ -19,7 +19,6 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Strict type-checking options */
-
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,

@@ -4,6 +4,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
@@ -41,6 +42,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    'no-empty-function': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
