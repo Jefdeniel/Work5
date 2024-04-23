@@ -23,20 +23,24 @@ interface Props {
 
 const menuItems: MenuItem[] = [
   {
-    link: '/',
-    img: <img src="/icons/notifications.svg" alt="notifications" />,
+    link: '/test',
+    img: <img src="/img/temp-nav-item.png" alt="notifications" />,
     label: 'work',
   },
-
   {
-    link: '/',
-    img: <img src="/icons/share.svg" alt="sharing-hub" />,
+    link: '/test2',
+    img: <img src="/img/temp-nav-item.png" alt="sharing-hub" />,
     label: 'familityTime',
   },
   {
-    link: '/',
-    img: <img src="/icons/customize.svg" alt="customize" />,
+    link: '/test3',
+    img: <img src="/img/temp-nav-item.png" alt="customize" />,
     label: 'alotofpeople',
+  },
+  {
+    link: '/agenda/create',
+    img: <img src="/icons/plus.svg" alt="create" />,
+    label: 'create',
   },
 ];
 
