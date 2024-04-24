@@ -1,0 +1,39 @@
+{
+  "general": {
+    "title": "Algemeen",
+    "language": "Taal",
+    "languageDescription": "Verander de taal via de app",
+    "timeZone": "Tijdzone",
+    "timeZoneDescription": "Verander de tijdzone via de app",
+    "timeFormat": "Tijdformaat",
+    "timeFormatDescription": "Specificeer het tijdformaat",
+    "12Hour": "12-uur",
+    "24Hour": "24-uur",
+    "theme": "Thema",
+    "themeDescription": "Specificeer het thema",
+    "light": "Licht",
+    "dark": "Donker"
+  },
+  "notifications": {
+    "title": "Meldingen",
+    "eventReminder": "Herinnering aan gebeurtenis",
+    "eventReminderDescription": "Herinnering aan aankomende gebeurtenis",
+    "activityNotification": "Activiteitsmelding",
+    "activityNotificationDescription": "Ontvang meldingen voor activiteiten"
+  },
+  "agendaView": {
+    "weekStartPreference": "Voorkeur voor weekstart",
+    "weekStartPreferenceDescription": "Specificeer de voorkeur voor de start van de week",
+    "sunday": "Zondag",
+    "monday": "Maandag",
+    "weekendVisibilityToggle": "Zichtbaarheid van weekenden wisselen",
+    "weekendVisibilityToggleDescription": "Wissel de zichtbaarheid van weekenden"
+  },
+  "account": {
+    "title": "Account",
+    "SignOut": "Afmelden",
+    "SignOutDescription": "Meld u af bij het account",
+    "deleteAccount": "Account verwijderen",
+    "deleteAccountDescription": "Verwijder het account"
+  }
+}

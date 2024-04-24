@@ -1,0 +1,39 @@
+{
+  "general": {
+    "title": "Allgemein",
+    "language": "Sprache",
+    "languageDescription": "Ändern Sie die Sprache über die App",
+    "timeZone": "Zeitzone",
+    "timeZoneDescription": "Ändern Sie die Zeitzone über die App",
+    "timeFormat": "Zeitformat",
+    "timeFormatDescription": "Spezifizieren Sie das Zeitformat",
+    "12Hour": "12-Stunden",
+    "24Hour": "24-Stunden",
+    "theme": "Thema",
+    "themeDescription": "Spezifizieren Sie das Thema",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "eventReminder": "Ereigniserinnerung",
+    "eventReminderDescription": "Bevorstehende Ereigniserinnerung",
+    "activityNotification": "Aktivitätsbenachrichtigung",
+    "activityNotificationDescription": "Erhalten Sie Benachrichtigungen für Aktivitäten"
+  },
+  "agendaView": {
+    "weekStartPreference": "Wochenstartpräferenz",
+    "weekStartPreferenceDescription": "Spezifizieren Sie die Wochenstartpräferenz",
+    "sunday": "Sonntag",
+    "monday": "Montag",
+    "weekendVisibilityToggle": "Wochenend-Sichtbarkeit umschalten",
+    "weekendVisibilityToggleDescription": "Umschalten der Sichtbarkeit von Wochenenden"
+  },
+  "account": {
+    "title": "Konto",
+    "SignOut": "Abmelden",
+    "SignOutDescription": "Melden Sie sich vom Konto ab",
+    "deleteAccount": "Konto löschen",
+    "deleteAccountDescription": "Löschen Sie das Konto"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "general": {
+    "title": "General",
+    "language": "Language",
+    "languageDescription": "Change the language through the app",
+    "timeZone": "Time Zone",
+    "timeZoneDescription": "Change the time zone through the app",
+    "timeFormat": "Time Format",
+    "timeFormatDescription": "Specify the time format",
+    "12Hour": "12-hour",
+    "24Hour": "24-hour",
+    "theme": "Theme",
+    "themeDescription": "Specify the theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "eventReminder": "Event Reminder",
+    "eventReminderDescription": "Upcoming event reminder",
+    "activityNotification": "Activity Notification",
+    "activityNotificationDescription": "Receive notifications for activities"
+  },
+  "agendaView": {
+    "weekStartPreference": "Week Start Preference",
+    "weekStartPreferenceDescription": "Specify the week start preference",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "weekendVisibilityToggle": "Weekend Visibility Toggle",
+    "weekendVisibilityToggleDescription": "Toggle the visibility of weekends"
+  },
+  "account": {
+    "title": "Account",
+    "SignOut": "Sign Out",
+    "SignOutDescription": "Sign out of the account",
+    "deleteAccount": "Delete Account",
+    "deleteAccountDescription": "Delete the account"
+  }
+}

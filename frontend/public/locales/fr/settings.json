@@ -1,0 +1,39 @@
+{
+  "general": {
+    "title": "Général",
+    "language": "Langue",
+    "languageDescription": "Modifier la langue via l'application",
+    "timeZone": "Fuseau horaire",
+    "timeZoneDescription": "Modifier le fuseau horaire via l'application",
+    "timeFormat": "Format de l'heure",
+    "timeFormatDescription": "Spécifiez le format de l'heure",
+    "12Hour": "12 heures",
+    "24Hour": "24 heures",
+    "theme": "Thème",
+    "themeDescription": "Spécifiez le thème",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "eventReminder": "Rappel d'événement",
+    "eventReminderDescription": "Rappel d'événement à venir",
+    "activityNotification": "Notification d'activité",
+    "activityNotificationDescription": "Recevoir des notifications pour les activités"
+  },
+  "agendaView": {
+    "weekStartPreference": "Préférence de début de semaine",
+    "weekStartPreferenceDescription": "Spécifiez la préférence de début de semaine",
+    "sunday": "Dimanche",
+    "monday": "Lundi",
+    "weekendVisibilityToggle": "Basculer la visibilité du week-end",
+    "weekendVisibilityToggleDescription": "Basculer la visibilité des week-ends"
+  },
+  "account": {
+    "title": "Compte",
+    "SignOut": "Déconnexion",
+    "SignOutDescription": "Se déconnecter du compte",
+    "deleteAccount": "Supprimer le compte",
+    "deleteAccountDescription": "Supprimer le compte"
+  }
+}
