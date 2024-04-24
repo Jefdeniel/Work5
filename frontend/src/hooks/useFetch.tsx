@@ -1,37 +1,79 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from 'react';
+import { Config } from '../Config';
+import useAuth from './useAuth';
 
-interface FetchProps {
-  url?: string;
-  data: any;
-  isLoading: boolean;
-  error: any;
-}
+let QUEUE_COUNTER = 0;
 
-const useFetch = (url: string): FetchProps => {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+const delayFetch = (url: string, options: RequestInit & { delay: number }) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(fetch(url, options));
+    }, options.delay);
+  });
 
-  useEffect(() => {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error('could not fetch the data for that resource');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setIsLoading(false);
-        setData(data);
-        setError(null);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setError(err.message);
+const useFetch = (
+  method: 'POST' | 'GET' | 'DELETE' | 'PUT',
+  requestArray: string[]
+) => {
+  const auth = useAuth();
+
+  const [loading, setIsLoading] = useState(false);
+
+  const fetchData = async (
+    params?: any,
+    body?: any,
+    customAuthorizationToken: string | null = null,
+    useContentType = true
+  ): Promise<Response> => {
+    setIsLoading(true);
+
+    const parametersToAdd = params ? params : body;
+    const url = `${Config.apiBaseUrl}/${requestArray.join(
+      '/'
+    )}?${new URLSearchParams(parametersToAdd).toString()}`;
+
+    QUEUE_COUNTER++;
+
+    try {
+      const response = await delayFetch(url, {
+        delay: QUEUE_COUNTER * 500,
+        method: method || 'GET',
+        headers: {
+          accept: 'application/json',
+          ...(useContentType && {
+            'Content-Type': 'application/json',
+          }),
+          Authorization: `Bearer ${auth.token}`,
+          ...(customAuthorizationToken
+            ? {
+                Authorization: `Bearer ${customAuthorizationToken}`,
+              }
+            : {}),
+        },
+        ...(method !== 'GET' &&
+          method !== 'DELETE' &&
+          body && { body: useContentType ? JSON.stringify(body) : body }),
       });
-  }, [url]);
 
-  return { data, isLoading, error };
+      setIsLoading(false);
+
+      QUEUE_COUNTER--;
+
+      return response as Response;
+    } catch (error: any) {
+      setIsLoading(false);
+
+      return new Promise(() => {
+        return {
+          status: 500,
+          statusText: error.message,
+        };
+      });
+    }
+  };
+
+  return { fetchData, loading };
 };
 
 export default useFetch;
