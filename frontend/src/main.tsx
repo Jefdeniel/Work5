@@ -1,20 +1,28 @@
-import './index.css';
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import LoadingScreen from './components/ui/Loading/LoadingScreen';
 import './i18n.js';
+import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 
-import App from './App';
+import { ToastContainer } from 'react-toastify';
+import { SettingsContextProvider } from './store/SettingsContext.js';
 
-ReactDOM.render(
+import { createRoot } from 'react-dom/client';
+
+// as per docs, createRoot is the new way to render in React 18
+const root = createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <React.Suspense fallback={<LoadingScreen />}>
-        <App />
-      </React.Suspense>
+      <SettingsContextProvider>
+        <React.Suspense fallback={<LoadingScreen />}>
+          <App />
+        </React.Suspense>
+        <ToastContainer theme="colored" position="bottom-right" closeOnClick />
+      </SettingsContextProvider>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
