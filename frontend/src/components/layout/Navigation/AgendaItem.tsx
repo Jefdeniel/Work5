@@ -7,7 +7,7 @@ interface Props {
   onClick: (link: string, isSubMenu?: boolean) => void;
   isSubMenu?: boolean;
   style?: React.CSSProperties;
-  children: string;
+  children?: string;
 }
 
 const AgendaItem = ({

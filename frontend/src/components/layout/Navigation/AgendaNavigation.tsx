@@ -7,8 +7,8 @@ import AgendaItem from './AgendaItem';
 
 interface MenuItem {
   link: string;
-  img: React.ReactNode;
-  label: string;
+  icon: React.ReactNode;
+  label?: string;
 }
 
 interface Props {
@@ -24,23 +24,19 @@ interface Props {
 const menuItems: MenuItem[] = [
   {
     link: '/test',
-    img: <img src="/img/temp-nav-item.png" alt="notifications" />,
-    label: 'work',
+    icon: <img src="/img/temp-nav-item.png" alt="notifications" />,
   },
   {
     link: '/test2',
-    img: <img src="/img/temp-nav-item.png" alt="sharing-hub" />,
-    label: 'familityTime',
+    icon: <img src="/img/temp-nav-item.png" alt="sharing-hub" />,
   },
   {
     link: '/test3',
-    img: <img src="/img/temp-nav-item.png" alt="customize" />,
-    label: 'alotofpeople',
+    icon: <img src="/img/temp-nav-item.png" alt="customize" />,
   },
   {
     link: '/agenda/create',
-    img: <img src="/icons/plus.svg" alt="create" />,
-    label: 'create',
+    icon: <img src="/icons/plus.svg" alt="create" />,
   },
 ];
 
@@ -110,15 +106,13 @@ const AgendaNavigation = ({
           }}
         >
           <p>Agenda list</p>
-          {menuItems.map(({ link, img, label }) => (
+          {menuItems.map(({ link, icon }) => (
             <AgendaItem
               key={link}
               link={link}
-              img={img}
+              icon={icon}
               onClick={handleOnClickMenu}
-            >
-              {t(label.toString())}
-            </AgendaItem>
+            />
           ))}
         </Menu>
         <div
