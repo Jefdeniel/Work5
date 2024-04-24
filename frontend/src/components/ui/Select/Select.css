@@ -1,0 +1,22 @@
+.form-select {
+  height: 50px;
+  width: 100%;
+  padding: 0 15px;
+  background-color: white;
+  border: 1px solid black;
+
+  &:focus {
+    outline: none;
+    border-color: #64748b;
+  }
+
+  & .select-option {
+    color: black;
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
