@@ -6,6 +6,8 @@ import useSetTitle from '../../hooks/setTitle';
 import useFetch from '../../hooks/useFetch';
 import { useSettings } from '../../hooks/useSettings';
 import saveIcon from '/icons/menu.svg';
+import Heading from '../../components/ui/Heading/Heading';
+import Row from '../../components/ui/Flex/Row';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -30,11 +32,13 @@ const SettingsPage = () => {
 
   return (
     <>
+      <Heading level={1}>{t('settings:general.title')}</Heading>
       <LanguageSelector
         onChange={settings.setLanguage}
         initialLanguage={settings.language}
       />
-      <div className="d-flex flex-row-12 justify-content-end">
+      {/* why tf werkt dit niet */}
+      <Row alignItems="end" justifyContent="end">
         <Button
           icon={<img src={saveIcon} alt="menu" />}
           isOutline={false}
@@ -42,7 +46,7 @@ const SettingsPage = () => {
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={handleSaveSettings}
         />
-      </div>
+      </Row>
     </>
   );
 };
