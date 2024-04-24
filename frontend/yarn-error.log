@@ -8,19 +8,19 @@ Yarn version:
   1.22.19
 
 Node version: 
-  18.15.0
+  18.18.0
 
 Platform: 
   win32 x64
 
 Trace: 
   Error: https://registry.yarnpkg.com/estlint-plugin-dist: Not found
-      at params.callback [as _callback] (C:\scoop\persist\nvm\nodejs\v18.15.0\node_modules\yarn\lib\cli.js:66145:18)
-      at self.callback (C:\scoop\persist\nvm\nodejs\v18.15.0\node_modules\yarn\lib\cli.js:140890:22)
+      at params.callback [as _callback] (C:\scoop\persist\nvm\nodejs\v18.18.0\node_modules\yarn\lib\cli.js:66145:18)
+      at self.callback (C:\scoop\persist\nvm\nodejs\v18.18.0\node_modules\yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:513:28)
-      at Request.<anonymous> (C:\scoop\persist\nvm\nodejs\v18.15.0\node_modules\yarn\lib\cli.js:141862:10)
+      at Request.<anonymous> (C:\scoop\persist\nvm\nodejs\v18.18.0\node_modules\yarn\lib\cli.js:141862:10)
       at Request.emit (node:events:513:28)
-      at IncomingMessage.<anonymous> (C:\scoop\persist\nvm\nodejs\v18.15.0\node_modules\yarn\lib\cli.js:141784:12)
+      at IncomingMessage.<anonymous> (C:\scoop\persist\nvm\nodejs\v18.18.0\node_modules\yarn\lib\cli.js:141784:12)
       at Object.onceWrapper (node:events:627:28)
       at IncomingMessage.emit (node:events:525:35)
       at endReadableNT (node:internal/streams/readable:1359:12)
@@ -52,7 +52,7 @@ npm manifest:
       "universal-cookie": "^7.1.4"
     },
     "devDependencies": {
-      "@types/node": "^20.12.7",
+      "@types/node": "^18.18.0",
       "@types/react": "^17.0.38",
       "@types/react-dom": "^17.0.11",
       "@typescript-eslint/eslint-plugin": "^5.62.0",
