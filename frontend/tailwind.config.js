@@ -8,6 +8,11 @@ module.exports = {
   ],
   /* Enable darkmode trough dark: selector */
   darkMode: 'selector',
+  variants: {
+    extend: {
+      flexDirection: ['hover', 'focus'],
+    },
+  },
   theme: {
     /* All styling that replaces the Tailwind styling/classes comes outside extend */
     fontFamily: {
