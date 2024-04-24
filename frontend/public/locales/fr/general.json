@@ -5,8 +5,35 @@
     "customize": "Personnaliser"
   },
   "buttons": {
-    "cancel": "Annuler",
     "save": "Enregistrer",
-    "back": "Retour"
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "export": "Exporter",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "clear": "Effacer",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "logout": "Déconnexion",
+    "back": "Retour",
+    "next": "Suivant"
+  },
+  "fields": {
+    "validators": {
+      "required": "Ce champ est obligatoire.",
+      "maxLength": "Ce champ peut contenir au maximum {{value}} caractères.",
+      "minLength": "Ce champ doit contenir au moins {{value}} caractères.",
+      "maxValue": "Ce champ peut avoir une valeur maximale de {{value}}.",
+      "minValue": "Ce champ doit avoir une valeur minimale de {{value}}.",
+      "number": "Ce champ doit être un nombre.",
+      "email": "Ce champ doit être une adresse e-mail valide.",
+      "emailNoPublicDomain": "Ce champ ne peut pas contenir gmail, yahoo ou hotmail.",
+      "telephone": "Ce champ doit être un numéro de téléphone valide.",
+      "date": "Ce champ doit être une date valide.",
+      "colorCode": "Ce champ doit être un code couleur valide. (#FFFFFFFF)",
+      "password": "Ce champ doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
+    }
   }
 }

@@ -7,6 +7,33 @@
   "buttons": {
     "save": "Opslaan",
     "cancel": "Annuleren",
-    "back": "Terug"
+    "delete": "Verwijderen",
+    "add": "Toevoegen",
+    "export": "Exporteren",
+    "edit": "Bewerken",
+    "search": "Zoeken",
+    "clear": "Wissen",
+    "close": "Sluiten",
+    "yes": "Ja",
+    "no": "Nee",
+    "logout": "Uitloggen",
+    "back": "Terug",
+    "next": "Volgende"
+  },
+  "fields": {
+    "validators": {
+      "required": "Dit veld is verplicht.",
+      "maxLength": "Dit veld kan maximaal {{value}} tekens bevatten.",
+      "minLength": "Dit veld moet minimaal {{value}} tekens bevatten.",
+      "maxValue": "Dit veld kan maximaal de waarde {{value}} hebben.",
+      "minValue": "Dit veld moet minimaal de waarde {{value}} hebben.",
+      "number": "Dit veld moet een nummer zijn.",
+      "email": "Dit veld moet een geldig e-mailadres zijn.",
+      "emailNoPublicDomain": "Dit veld mag geen gmail, yahoo of hotmail bevatten.",
+      "telephone": "Dit veld moet een geldig telefoonnummer zijn.",
+      "date": "Dit veld moet een geldige datum zijn.)",
+      "colorCode": "Dit veld moet een geldige kleurcode zijn. (#FFFFFFFF)",
+      "password": "Dit veld moet minimaal 8 tekens bevatten, waarvan minimaal 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal"
+    }
   }
 }

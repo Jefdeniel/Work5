@@ -7,6 +7,33 @@
   "buttons": {
     "save": "Save",
     "cancel": "Cancel",
-    "back": "Back"
+    "delete": "Delete",
+    "add": "Add",
+    "export": "Export",
+    "edit": "Edit",
+    "search": "Search",
+    "clear": "Clear",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "logout": "Logout",
+    "back": "Back",
+    "next": "Next"
+  },
+  "fields": {
+    "validators": {
+      "required": "This field is mandatory.",
+      "maxLength": "This field can be maximum {{value}} characters long.",
+      "minLength": "This field must be at least {{value}} characters long.",
+      "maxValue": "This field can be maximum {{value}}.",
+      "minValue": "This field must be at least {{value}}.",
+      "number": "This field must be a number.",
+      "email": "This field must be a valid email address.",
+      "emailNoPublicDomain": "This field may not contain gmail, yahoo or hotmail.",
+      "telephone": "This fields needs to be a valid phone number.",
+      "date": "This field needs to be a valid date.)",
+      "colorCode": "This field must be a valid color code. (#FFFFFFFF)",
+      "password": "This field must be a valid password. (At least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character.)"
+    }
   }
 }
