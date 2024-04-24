@@ -5,10 +5,10 @@ import './App.css';
 import AgendaLayout from './layout/AgendaLayout';
 import Layout from './layout/Layout';
 import CreateAgenda from './pages/Agenda/CreateAgenda.tsx';
-import SettingsPage from './pages/Settings/SettingsPage';
-import NotificationPage from './pages/NotificationPage.tsx';
-import SharingHubPage from './pages/SharingHubPage.tsx';
 import CustomizePage from './pages/CustomizePage.tsx';
+import NotificationPage from './pages/NotificationPage.tsx';
+import SettingsPage from './pages/Settings/SettingsPage';
+import SharingHubPage from './pages/SharingHubPage.tsx';
 
 function App() {
   const { i18n } = useTranslation();
