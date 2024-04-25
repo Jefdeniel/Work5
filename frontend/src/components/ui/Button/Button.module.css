@@ -28,47 +28,49 @@
 }
 
 .button-default {
-  background-color: gray;
-  color: white;
+  background-color: white;
+  color: black;
+  margin-top: 25px;
   border: 1px solid gray;
 
   &:hover {
     background-color: #333;
     border-color: #333;
+    color: white;
   }
 }
 
 .button-danger {
-  background-color: red; /* Change to desired color */
+  background-color: red;
   color: white;
-  border: 1px solid red; /* Change to desired color */
+  border: 1px solid red;
 
   &:hover {
-    background-color: #cc0000; /* Change to desired color */
-    border-color: #cc0000; /* Change to desired color */
+    background-color: #cc0000;
+    border-color: #cc0000;
   }
 }
 
 .button-danger-outline {
   background-color: white;
-  color: red; /* Change to desired color */
-  border: 1px solid red; /* Change to desired color */
+  color: red;
+  border: 1px solid red;
 
   &:hover {
-    background-color: #cc0000; /* Change to desired color */
-    border-color: #cc0000; /* Change to desired color */
+    background-color: #cc0000;
+    border-color: #cc0000;
     color: white;
   }
 }
 
 .button-default-outline {
   background-color: white;
-  color: gray; /* Change to desired color */
-  border: 1px solid gray; /* Change to desired color */
+  color: gray;
+  border: 1px solid gray;
 
   &:hover {
-    background-color: #333; /* Change to desired color */
-    border-color: #333; /* Change to desired color */
+    background-color: #333;
+    border-color: #333;
     color: white;
   }
 }
