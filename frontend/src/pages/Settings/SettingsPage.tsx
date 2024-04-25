@@ -8,7 +8,8 @@ import { useSettings } from '../../hooks/useSettings';
 import saveIcon from '/icons/menu.svg';
 import Heading from '../../components/ui/Heading/Heading';
 import Row from '../../components/ui/Flex/Row';
-
+import Spinner, { SpinnerColor } from '../../components/ui/Loading/Spinner';
+import TimeZoneSelector from '../../components/settings/TimeZoneSelector';
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:title'));
@@ -37,13 +38,16 @@ const SettingsPage = () => {
         onChange={settings.setLanguage}
         initialLanguage={settings.language}
       />
+      <TimeZoneSelector
+        onChange={settings.setSelectedTimezone}
+        initialTimeZone={settings.selectedTimezone}
+      />
       {/* why tf werkt dit niet */}
-      <Row alignItems="end" justifyContent="end">
+      <Row justifyContent="end">
         <Button
           icon={<img src={saveIcon} alt="menu" />}
           isOutline={false}
           text={t('settings:save')}
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={handleSaveSettings}
         />
       </Row>

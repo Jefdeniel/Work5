@@ -1,10 +1,7 @@
-import { useTranslation } from 'react-i18next';
 import { FieldMetaState } from 'react-final-form';
-import ErrorText from '../ui/ErrorText/ErrorText.js';
-import Select from '../ui/Select/Select.js';
+import { useTranslation } from 'react-i18next';
 import { AVAILABLE_LANGUAGES } from '../../i18n.js';
-import Row from '../ui/Flex/Row.js';
-import Col from '../ui/Flex/Col.js';
+import Select from '../ui/Select/Select.js';
 
 interface LanguageSelectorProps {
   changeLanguageOfSystem?: boolean;
@@ -37,8 +34,6 @@ const LanguageSelector = ({
     }
   };
 
-  const isNotValid = meta?.error?.[0] && meta.touched;
-
   const options = AVAILABLE_LANGUAGES.map((language) => ({
     title: language.name,
     value: language.value,
@@ -46,23 +41,14 @@ const LanguageSelector = ({
   }));
 
   return (
-    <>
-      <Select
-        title={t('settings:general.language')}
-        description={t('settings:general.languageDescription')}
-        defaultValue={initialLanguage}
-        onChange={onLanguageSelectionChange}
-        options={options}
-        {...rest}
-      />
-      {isNotValid && (
-        <ErrorText>
-          {t(`general:fields.validators.${meta.error[0]}`, {
-            value: meta.error[1],
-          })}
-        </ErrorText>
-      )}
-    </>
+    <Select
+      title={t('settings:general.language')}
+      description={t('settings:general.languageDescription')}
+      defaultValue={initialLanguage}
+      onChange={onLanguageSelectionChange}
+      options={options}
+      {...rest}
+    />
   );
 };
 
