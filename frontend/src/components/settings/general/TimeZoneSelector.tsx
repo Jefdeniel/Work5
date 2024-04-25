@@ -1,7 +1,7 @@
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { allTimezones } from 'react-timezone-select';
-import Select from '../ui/Select/Select';
+import Select from '../../ui/Select/Select';
 
 interface TimeZoneSelectorProps {
   changeTimeZone?: boolean;

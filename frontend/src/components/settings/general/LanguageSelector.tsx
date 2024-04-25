@@ -1,7 +1,7 @@
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
-import { AVAILABLE_LANGUAGES } from '../../i18n.js';
-import Select from '../ui/Select/Select.js';
+import { AVAILABLE_LANGUAGES } from '../../../i18n.js';
+import Select from '../../ui/Select/Select.js';
 
 interface LanguageSelectorProps {
   changeLanguageOfSystem?: boolean;
