@@ -1,3 +1,4 @@
+import Spinner from '../Loading/Spinner';
 import styles from './Button.module.css';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -5,7 +6,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: string;
   isOutline?: boolean;
   isBlock?: boolean;
-  // isLoading?: boolean;
+  isLoading?: boolean;
   isDanger?: boolean;
   isSmall?: boolean;
   icon?: React.ReactNode;
@@ -22,7 +23,7 @@ const Button = ({
   color,
   isOutline,
   isBlock,
-  // isLoading,
+  isLoading,
   isDanger,
   isSmall,
   icon,
@@ -86,8 +87,8 @@ const Button = ({
     >
       <div className={styles['button-content']}>
         {icon && <span className={styles['button-icon']}>{icon}</span>}
-        {/* {text && !isLoading && <span>{text}</span>} */}
-        {/* {isLoading && <Spinner animation="border" size="sm" />} */}
+        {text && !isLoading && <span>{text}</span>}
+        {isLoading && <Spinner />}
         {children}
       </div>
     </button>

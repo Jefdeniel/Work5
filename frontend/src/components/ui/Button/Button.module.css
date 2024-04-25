@@ -28,47 +28,47 @@
 }
 
 .button-default {
-  background-color: $main-color;
+  background-color: gray;
   color: white;
-  border: 1px solid $main-color;
+  border: 1px solid gray;
 
   &:hover {
-    background-color: darken($main-color, 10%);
-    border-color: darken($main-color, 10%);
+    background-color: #333;
+    border-color: #333;
   }
 }
 
 .button-danger {
-  background-color: $danger-color;
+  background-color: red; /* Change to desired color */
   color: white;
-  border: 1px solid $danger-color;
+  border: 1px solid red; /* Change to desired color */
 
   &:hover {
-    background-color: darken($danger-color, 10%);
-    border-color: darken($danger-color, 10%);
+    background-color: #cc0000; /* Change to desired color */
+    border-color: #cc0000; /* Change to desired color */
   }
 }
 
 .button-danger-outline {
   background-color: white;
-  color: $danger-color;
-  border: 1px solid $danger-color;
+  color: red; /* Change to desired color */
+  border: 1px solid red; /* Change to desired color */
 
   &:hover {
-    background-color: darken($danger-color, 10%);
-    border-color: darken($danger-color, 10%);
+    background-color: #cc0000; /* Change to desired color */
+    border-color: #cc0000; /* Change to desired color */
     color: white;
   }
 }
 
 .button-default-outline {
   background-color: white;
-  color: $main-color;
-  border: 1px solid $main-color;
+  color: gray; /* Change to desired color */
+  border: 1px solid gray; /* Change to desired color */
 
   &:hover {
-    background-color: darken($main-color, 10%);
-    border-color: darken($main-color, 10%);
+    background-color: #333; /* Change to desired color */
+    border-color: #333; /* Change to desired color */
     color: white;
   }
 }
@@ -99,7 +99,7 @@
     text-overflow: ellipsis;
   }
 }
-/* TODO: fix duplicated code */
+
 @screen desktop {
   .button-main {
     font-size: smaller;
