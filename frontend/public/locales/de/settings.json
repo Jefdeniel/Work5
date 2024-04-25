@@ -22,12 +22,15 @@
     "activityNotificationDescription": "Erhalten Sie Benachrichtigungen für Aktivitäten"
   },
   "agendaView": {
+    "title": "Agenda-Ansicht",
     "weekStartPreference": "Wochenstartpräferenz",
     "weekStartPreferenceDescription": "Spezifizieren Sie die Wochenstartpräferenz",
     "sunday": "Sonntag",
     "monday": "Montag",
     "weekendVisibilityToggle": "Wochenend-Sichtbarkeit umschalten",
-    "weekendVisibilityToggleDescription": "Umschalten der Sichtbarkeit von Wochenenden"
+    "weekendVisibilityToggleDescription": "Umschalten der Sichtbarkeit von Wochenenden",
+    "show": "Anzeigen",
+    "dontShow": "Nicht anzeigen"
   },
   "account": {
     "title": "Konto",
