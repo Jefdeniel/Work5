@@ -1,10 +1,11 @@
-import React from 'react';
+import Heading from '../Heading/Heading';
+import IconButton from '../IconButton/IconButton';
 
 interface Props {
-  show: boolean;
-  onClose: () => void;
   title?: string;
   subtitle?: string;
+  show: boolean;
+  onClose: () => void;
   message?: string;
   size?: 's' | 'sm' | 'lg' | 'xl';
   fullscreen?: boolean;
@@ -12,6 +13,7 @@ interface Props {
   children: React.ReactNode;
 }
 
+// WORK IN PROGRESS
 const Modal = ({
   show,
   onClose,
@@ -25,16 +27,33 @@ const Modal = ({
 }: Props) => {
   if (!show) return null;
 
-  const modalSize =
+  const MODAL_SIZE =
     size === 's'
-      ? 'w-96'
+      ? 'w-2/12'
       : size === 'sm'
-        ? 'w-128'
+        ? 'w-4/12'
         : size === 'lg'
-          ? 'w-192'
+          ? 'w-6/12'
           : size === 'xl'
-            ? 'w-256'
-            : 'w-128';
+            ? 'w-8/12'
+            : 'w-4/12';
+
+  const ICON = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6"
+      fill={isDanger ? 'red' : 'none'}
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  );
 
   return (
     <div
@@ -43,31 +62,21 @@ const Modal = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`relative bg-white rounded-lg shadow-lg ${modalSize} ${fullscreen ? 'w-screen h-screen' : ''}`}
+        className={`relative bg-white rounded-lg shadow-lg ${MODAL_SIZE} ${fullscreen ? 'w-screen h-screen' : ''}`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div>
-            <h3 className="text-lg font-semibold">{title}</h3>
+            <Heading level={3} className={isDanger ? 'text-red-500' : ''}>
+              {title}
+            </Heading>
             {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
           </div>
-          <button onClick={onClose} className="text-gray-500">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+          <IconButton icon={ICON} onClick={onClose}></IconButton>
         </div>
-        <div className="p-4">{children}</div>
+        <div className="p-4">
+          {message && <p className="text-sm mb-3 text-gray-500">{message}</p>}
+          {children}
+        </div>
       </div>
     </div>
   );

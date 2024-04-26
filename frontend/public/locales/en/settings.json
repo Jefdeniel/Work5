@@ -37,6 +37,6 @@
     "SignOut": "Sign Out",
     "SignOutDescription": "Sign out of the account",
     "deleteAccount": "Delete Account",
-    "deleteAccountDescription": "Delete the account"
+    "deleteAccountDescription": "Delete the account, this is a permanent action."
   }
 }
