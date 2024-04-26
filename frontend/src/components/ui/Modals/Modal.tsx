@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface Props {
   show: boolean;
   onClose: () => void;
@@ -12,6 +10,7 @@ interface Props {
   children: React.ReactNode;
 }
 
+// WORK IN PROGRESS
 const Modal = ({
   show,
   onClose,
