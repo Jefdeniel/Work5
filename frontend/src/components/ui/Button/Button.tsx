@@ -14,12 +14,9 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = ({ type, isLoading, icon, text, className, onClick }: Props) => {
   const button = (
     <button type={type} className={`button ${className}`} onClick={onClick}>
-      {text}
-      <div>
-        {icon && <span className="button-icon">{icon}</span>}
-        {text && !isLoading && <span>{text}</span>}
-        {isLoading && <Spinner />}
-      </div>
+      {icon && <span className="button-icon">{icon}</span>}
+      {text && !isLoading && <span>{text}</span>}
+      {isLoading && <Spinner />}
     </button>
   );
 
