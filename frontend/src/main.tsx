@@ -1,13 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import LoadingScreen from './components/ui/Loading/LoadingScreen';
 import './i18n.js';
 import './index.css';
-import 'react-toastify/dist/ReactToastify.css';
 
-import { ToastContainer } from 'react-toastify';
 import { SettingsContextProvider } from './store/SettingsContext.js';
 
 import { createRoot } from 'react-dom/client';
@@ -21,7 +18,6 @@ root.render(
         <React.Suspense fallback={<LoadingScreen />}>
           <App />
         </React.Suspense>
-        <ToastContainer theme="colored" position="bottom-right" closeOnClick />
       </SettingsContextProvider>
     </BrowserRouter>
   </React.StrictMode>

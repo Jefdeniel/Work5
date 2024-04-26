@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import saveIcon from '/icons/menu.svg';
@@ -10,17 +10,17 @@ import { useSettings } from '../../hooks/useSettings';
 import Col from '../../components/ui/Flex/Col';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
+import Signout from '../../components/settings/account/Signout';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
+import DeleteAccount from '../../components/settings/account/DeleteAccount';
 import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
-import EventReminder from '../../components/settings/notifications/EventReminder';
 import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
 import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
-import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
-import Signout from '../../components/settings/account/Signout';
-import DeleteAccount from '../../components/settings/account/DeleteAccount';
-import { useState } from 'react';
 import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
+import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
+import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
+import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -40,19 +40,19 @@ const SettingsPage = () => {
           selectedTimezone: settings.selectedTimezone,
           timeFormat: settings.timeFormat,
           theme: settings.theme,
-          // event reminder
-          // activity Notification
+          eventReminderEnabled: settings.eventReminderEnabled,
+          activityNotificationEnabled: settings.activityNotificationEnabled,
           weekStartsOn: settings.weekStartsOn,
+          weekendVisibility: settings.weekendVisibility,
         }
       );
 
       if (response.ok) {
-        toast.success(t('settings:toasts.success'));
+        console.log('Settings saved');
       } else {
         throw new Error('Failed to save settings' + response.statusText);
       }
     } catch (error) {
-      toast.error(t('settings:toasts.error'));
       console.error(error);
     }
   };
@@ -63,7 +63,7 @@ const SettingsPage = () => {
     setShowDeleteAccountModal(true);
   };
 
-  const clodeDeleteAccountModal = () => {
+  const closeDeleteAccountModal = () => {
     setShowDeleteAccountModal(false);
   };
 
@@ -94,7 +94,14 @@ const SettingsPage = () => {
         <Heading level={2} isUnderlined>
           {t('settings:notifications.title')}
         </Heading>
-        <EventReminder />
+        <EventReminderSelector
+          eventReminderEnabled={settings.eventReminderEnabled}
+          onChange={settings.setEventReminderEnabled}
+        />
+        <ActivityNotification
+          activityNotificationEnabled={settings.activityNotificationEnabled}
+          onChange={settings.setActivityNotificationEnabled}
+        />
       </Col>
       <Col>
         <Heading level={2} isUnderlined>
@@ -127,7 +134,7 @@ const SettingsPage = () => {
       </Col>
 
       {showDeleteAccountModal && (
-        <DeleteAccountModal onClose={clodeDeleteAccountModal} />
+        <DeleteAccountModal onClose={closeDeleteAccountModal} />
       )}
     </>
   );
