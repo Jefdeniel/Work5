@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
 import saveIcon from '/icons/menu.svg';
@@ -49,12 +48,11 @@ const SettingsPage = () => {
       );
 
       if (response.ok) {
-        toast.success(t('settings:toasts.success'));
+        console.log('Settings saved');
       } else {
         throw new Error('Failed to save settings' + response.statusText);
       }
     } catch (error) {
-      toast.error(t('settings:toasts.error'));
       console.error(error);
     }
   };
