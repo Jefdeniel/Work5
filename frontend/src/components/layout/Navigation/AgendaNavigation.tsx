@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../ui/Logo';
@@ -48,7 +47,6 @@ const AgendaNavigation = ({
   setIsMenuBroken,
 }: Props) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(['general']);
 
   const menuWidth = isMenuToggled ? menuItems.length * 75 + 'px' : 'auto';
   const handleOnClickMenu = (link: string) => {

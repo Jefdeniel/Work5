@@ -73,6 +73,9 @@ module.exports = {
         base: '.5rem',
         full: '9999px',
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
     },
   },
   plugins: [],

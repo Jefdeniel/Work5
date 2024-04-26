@@ -21,6 +21,7 @@ export default function Heading({
     }
 
     classes.push(className);
+    classes.push(' uppercase font-bold text-xl');
 
     return classes.join(' ');
   };

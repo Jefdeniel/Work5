@@ -22,18 +22,21 @@
     "activityNotificationDescription": "Receive notifications for activities"
   },
   "agendaView": {
+    "title": "Agenda View",
     "weekStartPreference": "Week Start Preference",
     "weekStartPreferenceDescription": "Specify the week start preference",
     "sunday": "Sunday",
     "monday": "Monday",
     "weekendVisibilityToggle": "Weekend Visibility Toggle",
-    "weekendVisibilityToggleDescription": "Toggle the visibility of weekends"
+    "weekendVisibilityToggleDescription": "Toggle the visibility of weekends",
+    "show": "Show",
+    "dontShow": "Don't Show"
   },
   "account": {
     "title": "Account",
     "SignOut": "Sign Out",
     "SignOutDescription": "Sign out of the account",
     "deleteAccount": "Delete Account",
-    "deleteAccountDescription": "Delete the account"
+    "deleteAccountDescription": "Delete the account, this is a permanent action."
   }
 }
