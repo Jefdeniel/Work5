@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
@@ -10,17 +11,17 @@ import { useSettings } from '../../hooks/useSettings';
 import Col from '../../components/ui/Flex/Col';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
+import Signout from '../../components/settings/account/Signout';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
+import DeleteAccount from '../../components/settings/account/DeleteAccount';
 import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
-import EventReminder from '../../components/settings/notifications/EventReminder';
 import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
 import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
-import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
-import Signout from '../../components/settings/account/Signout';
-import DeleteAccount from '../../components/settings/account/DeleteAccount';
-import { useState } from 'react';
 import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
+import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
+import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
+import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -41,7 +42,7 @@ const SettingsPage = () => {
           timeFormat: settings.timeFormat,
           theme: settings.theme,
           eventReminderEnabled: settings.eventReminderEnabled,
-          // activity Notification
+          activityNotificationEnabled: settings.activityNotificationEnabled,
           weekStartsOn: settings.weekStartsOn,
           weekendVisibility: settings.weekendVisibility,
         }
@@ -64,7 +65,7 @@ const SettingsPage = () => {
     setShowDeleteAccountModal(true);
   };
 
-  const clodeDeleteAccountModal = () => {
+  const closeDeleteAccountModal = () => {
     setShowDeleteAccountModal(false);
   };
 
@@ -95,9 +96,13 @@ const SettingsPage = () => {
         <Heading level={2} isUnderlined>
           {t('settings:notifications.title')}
         </Heading>
-        <EventReminder
+        <EventReminderSelector
           eventReminderEnabled={settings.eventReminderEnabled}
           onChange={settings.setEventReminderEnabled}
+        />
+        <ActivityNotification
+          activityNotificationEnabled={settings.activityNotificationEnabled}
+          onChange={settings.setActivityNotificationEnabled}
         />
       </Col>
       <Col>
@@ -131,7 +136,7 @@ const SettingsPage = () => {
       </Col>
 
       {showDeleteAccountModal && (
-        <DeleteAccountModal onClose={clodeDeleteAccountModal} />
+        <DeleteAccountModal onClose={closeDeleteAccountModal} />
       )}
     </>
   );

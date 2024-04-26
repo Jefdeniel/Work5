@@ -5,9 +5,10 @@ interface Props {
   onChange: (value: boolean) => void;
 }
 
-const EventReminder = ({ eventReminderEnabled, onChange }: Props) => {
-  const handleSwitchChange = (value: boolean) => {
+const EventReminderSelector = ({ eventReminderEnabled, onChange }: Props) => {
+  const handleEventReminderChange = (value: boolean) => {
     onChange(value);
+    console.log('Event reminder enabled:', value);
   };
 
   return (
@@ -15,9 +16,9 @@ const EventReminder = ({ eventReminderEnabled, onChange }: Props) => {
       title="Event Reminder"
       description="Enable event reminders"
       checked={eventReminderEnabled}
-      onChange={handleSwitchChange}
+      onChange={handleEventReminderChange}
     />
   );
 };
 
-export default EventReminder;
+export default EventReminderSelector;

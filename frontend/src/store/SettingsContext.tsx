@@ -16,6 +16,10 @@ interface SettingsContextType {
   setWeekendVisibility: (weekendVisibility: boolean) => void;
   eventReminderEnabled?: boolean;
   setEventReminderEnabled: (eventReminderEnabled: boolean) => void;
+  activityNotificationEnabled?: boolean;
+  setActivityNotificationEnabled: (
+    activityNotificationEnabled: boolean
+  ) => void;
 }
 
 export const SettingsContext = createContext<SettingsContextType>({
@@ -33,6 +37,8 @@ export const SettingsContext = createContext<SettingsContextType>({
   setWeekendVisibility: () => {},
   eventReminderEnabled: true,
   setEventReminderEnabled: () => {},
+  activityNotificationEnabled: true,
+  setActivityNotificationEnabled: () => {},
 });
 
 export const SettingsContextProvider = ({
@@ -51,6 +57,8 @@ export const SettingsContextProvider = ({
   const [weekStartsOn, setWeekStartsOn] = useState<number>(1);
   const [weekendVisibility, setWeekendVisibility] = useState<boolean>(true);
   const [eventReminderEnabled, setEventReminderEnabled] = useState(true);
+  const [activityNotificationEnabled, setActivityNotificationEnabled] =
+    useState(true);
 
   useEffect(() => {
     void i18n.changeLanguage(language);
@@ -71,6 +79,8 @@ export const SettingsContextProvider = ({
     setWeekendVisibility,
     eventReminderEnabled,
     setEventReminderEnabled,
+    activityNotificationEnabled,
+    setActivityNotificationEnabled,
   };
 
   return (
