@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import LanguageSelector from '../../components/settings/LanguageSelector';
 import Button from '../../components/ui/Button/Button';
+import BackButton from '../../components/ui/Button/BackButton';
 import useSetTitle from '../../hooks/setTitle';
 import useFetch from '../../hooks/useFetch';
 import { useSettings } from '../../hooks/useSettings';
@@ -34,10 +35,6 @@ const SettingsPage = () => {
     <>
       <Heading level={1}>{t('settings:general.title')}</Heading>
 
-      <Button className={`btn btn--primary`}>
-        TEST
-      </Button>
-
       <LanguageSelector
         onChange={settings.setLanguage}
         initialLanguage={settings.language}
@@ -46,7 +43,6 @@ const SettingsPage = () => {
       <Row alignItems="end" justifyContent="end">
         <Button
           icon={<img src={saveIcon} alt="menu" />}
-          isOutline={false}
           text={t('settings:save')}
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={handleSaveSettings}
