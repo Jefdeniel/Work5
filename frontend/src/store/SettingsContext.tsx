@@ -14,27 +14,25 @@ interface SettingsContextType {
   setWeekStartsOn: (weekStartsOn: number) => void;
   weekendVisibility?: boolean;
   setWeekendVisibility: (weekendVisibility: boolean) => void;
+  eventReminderEnabled?: boolean;
+  setEventReminderEnabled: (eventReminderEnabled: boolean) => void;
 }
 
 export const SettingsContext = createContext<SettingsContextType>({
   language: 'nl',
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setLanguage: () => {},
   selectedTimezone: 'UTC',
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setSelectedTimezone: () => {},
   timeFormat: '24h',
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTimeFormat: () => {},
   theme: 'light',
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: () => {},
   weekStartsOn: 1,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setWeekStartsOn: () => {},
   weekendVisibility: true,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setWeekendVisibility: () => {},
+  eventReminderEnabled: true,
+  setEventReminderEnabled: () => {},
 });
 
 export const SettingsContextProvider = ({
@@ -52,6 +50,7 @@ export const SettingsContextProvider = ({
   const [theme, setTheme] = useState<string>('light');
   const [weekStartsOn, setWeekStartsOn] = useState<number>(1);
   const [weekendVisibility, setWeekendVisibility] = useState<boolean>(true);
+  const [eventReminderEnabled, setEventReminderEnabled] = useState(true);
 
   useEffect(() => {
     void i18n.changeLanguage(language);
@@ -70,6 +69,8 @@ export const SettingsContextProvider = ({
     setWeekStartsOn,
     weekendVisibility,
     setWeekendVisibility,
+    eventReminderEnabled,
+    setEventReminderEnabled,
   };
 
   return (

@@ -40,9 +40,10 @@ const SettingsPage = () => {
           selectedTimezone: settings.selectedTimezone,
           timeFormat: settings.timeFormat,
           theme: settings.theme,
-          // event reminder
+          eventReminderEnabled: settings.eventReminderEnabled,
           // activity Notification
           weekStartsOn: settings.weekStartsOn,
+          weekendVisibility: settings.weekendVisibility,
         }
       );
 
@@ -94,7 +95,10 @@ const SettingsPage = () => {
         <Heading level={2} isUnderlined>
           {t('settings:notifications.title')}
         </Heading>
-        <EventReminder />
+        <EventReminder
+          eventReminderEnabled={settings.eventReminderEnabled}
+          onChange={settings.setEventReminderEnabled}
+        />
       </Col>
       <Col>
         <Heading level={2} isUnderlined>

@@ -1,12 +1,21 @@
 import Switch from '../../ui/Switch/Switch';
 
-const EventReminder = () => {
+interface Props {
+  eventReminderEnabled: boolean;
+  onChange: (value: boolean) => void;
+}
+
+const EventReminder = ({ eventReminderEnabled, onChange }: Props) => {
+  const handleSwitchChange = (value: boolean) => {
+    onChange(value);
+  };
+
   return (
     <Switch
       title="Event Reminder"
       description="Enable event reminders"
-      checked={true}
-      onChange={() => {}}
+      checked={eventReminderEnabled}
+      onChange={handleSwitchChange}
     />
   );
 };

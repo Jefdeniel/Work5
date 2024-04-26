@@ -1,24 +1,17 @@
-import React from 'react';
 import Col from '../Flex/Col';
 import Row from '../Flex/Row';
+import './Switch.css';
 
 interface Props {
   title?: string;
   description?: string;
   checked: boolean;
   onChange: (value: boolean) => void;
-  isRound?: boolean;
 }
 
-const Switch: React.FC<Props> = ({
-  title,
-  description,
-  checked,
-  onChange,
-  isRound,
-}) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.checked);
+const Switch = ({ title, description, checked, onChange }: Props) => {
+  const handleChange = () => {
+    onChange(!checked);
   };
 
   return (
