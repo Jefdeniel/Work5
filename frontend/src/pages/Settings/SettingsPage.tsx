@@ -33,6 +33,11 @@ const SettingsPage = () => {
   return (
     <>
       <Heading level={1}>{t('settings:general.title')}</Heading>
+
+      <Button className={`btn btn--primary`}>
+        TEST
+      </Button>
+
       <LanguageSelector
         onChange={settings.setLanguage}
         initialLanguage={settings.language}

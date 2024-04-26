@@ -52,6 +52,8 @@ module.exports = {
       },
       padding: {
         base: '1.5rem',
+        btnX: '1.125rem',
+        btnY: '0.563rem',
       },
       spacing: {
         xs: '.625rem',

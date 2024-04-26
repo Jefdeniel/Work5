@@ -1,6 +1,10 @@
 @import '../../../App.css';
 
-.button-main {
+.btn {
+  @apply px-btnX py-btnY bg-red-600;
+}
+
+/*.button-main {
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -98,13 +102,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
+}*/
+
 /* TODO: fix duplicated code */
-@screen desktop {
+/*@screen desktop {
   .button-main {
     font-size: smaller;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
+}*/

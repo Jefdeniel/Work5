@@ -75,7 +75,7 @@ const Button = ({
   const button = (
     <button
       type={type}
-      className={getButtonClasses()}
+      className={`${getButtonClasses()} btn`}
       style={style}
       color={color}
       onMouseEnter={handleMouseEnter}
