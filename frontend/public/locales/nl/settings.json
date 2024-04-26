@@ -22,12 +22,15 @@
     "activityNotificationDescription": "Ontvang meldingen voor activiteiten"
   },
   "agendaView": {
+    "title": "Agendaweergave",
     "weekStartPreference": "Voorkeur voor weekstart",
     "weekStartPreferenceDescription": "Specificeer de voorkeur voor de start van de week",
     "sunday": "Zondag",
     "monday": "Maandag",
     "weekendVisibilityToggle": "Zichtbaarheid van weekenden wisselen",
-    "weekendVisibilityToggleDescription": "Wissel de zichtbaarheid van weekenden"
+    "weekendVisibilityToggleDescription": "Wissel de zichtbaarheid van weekenden",
+    "show": "Weergeven",
+    "dontShow": "Niet weergeven"
   },
   "account": {
     "title": "Account",

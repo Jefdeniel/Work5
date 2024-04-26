@@ -16,7 +16,7 @@ interface Props {
   meta?: FieldMetaState<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
-  defaultValue?: string | boolean;
+  defaultValue?: string | boolean | Object;
 }
 
 const Select = ({

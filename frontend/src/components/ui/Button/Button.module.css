@@ -28,47 +28,49 @@
 }
 
 .button-default {
-  background-color: $main-color;
-  color: white;
-  border: 1px solid $main-color;
+  background-color: white;
+  color: black;
+  margin-top: 25px;
+  border: 1px solid gray;
 
   &:hover {
-    background-color: darken($main-color, 10%);
-    border-color: darken($main-color, 10%);
+    background-color: #333;
+    border-color: #333;
+    color: white;
   }
 }
 
 .button-danger {
-  background-color: $danger-color;
+  background-color: red;
   color: white;
-  border: 1px solid $danger-color;
+  border: 1px solid red;
 
   &:hover {
-    background-color: darken($danger-color, 10%);
-    border-color: darken($danger-color, 10%);
+    background-color: #cc0000;
+    border-color: #cc0000;
   }
 }
 
 .button-danger-outline {
   background-color: white;
-  color: $danger-color;
-  border: 1px solid $danger-color;
+  color: red;
+  border: 1px solid red;
 
   &:hover {
-    background-color: darken($danger-color, 10%);
-    border-color: darken($danger-color, 10%);
+    background-color: #cc0000;
+    border-color: #cc0000;
     color: white;
   }
 }
 
 .button-default-outline {
   background-color: white;
-  color: $main-color;
-  border: 1px solid $main-color;
+  color: gray;
+  border: 1px solid gray;
 
   &:hover {
-    background-color: darken($main-color, 10%);
-    border-color: darken($main-color, 10%);
+    background-color: #333;
+    border-color: #333;
     color: white;
   }
 }
@@ -99,7 +101,7 @@
     text-overflow: ellipsis;
   }
 }
-/* TODO: fix duplicated code */
+
 @screen desktop {
   .button-main {
     font-size: smaller;

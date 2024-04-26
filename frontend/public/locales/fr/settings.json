@@ -22,12 +22,15 @@
     "activityNotificationDescription": "Recevoir des notifications pour les activités"
   },
   "agendaView": {
+    "title": "Vue d'agenda",
     "weekStartPreference": "Préférence de début de semaine",
     "weekStartPreferenceDescription": "Spécifiez la préférence de début de semaine",
     "sunday": "Dimanche",
     "monday": "Lundi",
     "weekendVisibilityToggle": "Basculer la visibilité du week-end",
-    "weekendVisibilityToggleDescription": "Basculer la visibilité des week-ends"
+    "weekendVisibilityToggleDescription": "Basculer la visibilité des week-ends",
+    "show": "Afficher",
+    "dontShow": "Ne pas afficher"
   },
   "account": {
     "title": "Compte",
