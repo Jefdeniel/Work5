@@ -56,7 +56,7 @@ const AgendaLayout = ({ title }: Props) => {
             }}
           />
         </div>
-        <div className="top-navigation">
+        <div>
           <Outlet />
         </div>
       </div>

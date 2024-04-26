@@ -1,8 +1,9 @@
 import './button.css';
+import { Spinner } from '../Loading/Sp
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
-  // isLoading?: boolean;
+  isLoading?: boolean;
   icon?: React.ReactNode;
   text?: string;
   className?: string;
@@ -10,14 +11,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
 }
 
-const Button = ({
-  text,
-  className,
-  onClick,
-}: Props) => {
+const Button = ({ type, isLoading, icon, text, className, onClick }: Props) => {
   const button = (
-    <button className={`button ${className}`} onClick={onClick}>
+    <button type={type} className={`button ${className}`} onClick={onClick}>
       {text}
+      <div>
+        {icon && <span className="button-icon">{icon}</span>}
+        {text && !isLoading && <span>{text}</span>}
+        {isLoading && <Spinner animation="border" size="sm" />}
+      </div>
     </button>
   );
 
@@ -26,77 +28,8 @@ const Button = ({
 
 export default Button;
 
-// interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-//   type?: 'button' | 'submit' | 'reset';
-//   color?: string;
-//   isOutline?: boolean;
-//   isBlock?: boolean;
-//   // isLoading?: boolean;
-//   isDanger?: boolean;
-//   isSmall?: boolean;
-//   icon?: React.ReactNode;
-//   text?: string;
-//   style?: React.CSSProperties;
-//   className?: string;
-//   disabled?: boolean;
-//   onClick?: () => void;
-//   children?: React.ReactNode;
-// }
 
-// const Button = ({
-//   type,
-//   color,
-//   isOutline,
-//   isBlock,
-//   // isLoading,
-//   isDanger,
-//   isSmall,
-//   icon,
-//   text,
-//   style,
-//   className,
-//   disabled,
-//   onClick,
-//   children,
-//   ...rest
-// }: Props) => {
-//   const getButtonClasses = () => {
-//     const classes = [];
 
-//     classes.push(styles['button-main']);
-
-//     if (isOutline) {
-//       classes.push(
-//         isDanger
-//           ? styles['button-danger-outline']
-//           : styles['button-default-outline']
-//       );
-//     } else {
-//       classes.push(
-//         isDanger ? styles['button-danger'] : styles['button-default']
-//       );
-//     }
-
-//     classes.push(isSmall ? styles['button-small'] : '');
-//     classes.push(color ? styles[`button-${color}`] : '');
-//     classes.push(className);
-
-//     return classes.join(' ');
-//   };
-
-//   const handleMouseEnter = (e: { currentTarget: HTMLButtonElement }) => {
-//     const { currentTarget } = e;
-//     currentTarget.classList.add(
-//       isDanger ? styles['button-danger-hover'] : styles['button-default-hover']
-//     );
-//   };
-
-//   const handleMouseLeave = (e: { currentTarget: HTMLButtonElement }) => {
-//     const { currentTarget } = e;
-//     currentTarget.classList.remove(
-//       isDanger ? styles['button-danger-hover'] : styles['button-default-hover']
-//     );
-//   };
 
 //   const button = (
 //     <button

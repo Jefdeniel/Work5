@@ -39,21 +39,6 @@ const Login = () => {
       });
   };
 
-  // const whoami = (): void => {
-  //   fetch('/api/whoami', {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data: { username: string }) => {
-  //       console.log('Logged in as: ', data.username);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setState((prevState) => ({
       ...prevState,
@@ -128,26 +113,36 @@ const Login = () => {
   // };
 
   return (
-    <>
-      <div className="container mx-auto my-auto flex flex-row justify-center items-center">
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <div style={{ flex: 1, backgroundColor: '#f2f2f2' }}></div>
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <form onSubmit={login}>
           <input
             type="text"
             placeholder="Username"
             value={state.username}
             onChange={handleUsernameChange}
+            style={{ marginBottom: '10px' }}
           />
           <input
             type="password"
             placeholder="Password"
             value={state.password}
             onChange={handlePasswordChange}
+            style={{ marginBottom: '10px' }}
           />
           <button type="submit">Login</button>
+          {state.error && <p style={{ color: 'red' }}>{state.error}</p>}
         </form>
-        <p>{state.error && <small>{state.error}</small>}</p>
       </div>
-    </>
+    </div>
   );
 };
 

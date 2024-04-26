@@ -9,6 +9,8 @@ import CustomizePage from './pages/CustomizePage.tsx';
 import NotificationPage from './pages/NotificationPage.tsx';
 import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage.tsx';
+import Login from './pages/Login.tsx';
+import AccountLayout from './layout/AccountLayout.tsx';
 
 function App() {
   const { i18n } = useTranslation();
@@ -26,22 +28,30 @@ function App() {
     //     </Route>
     //   )}
     // </Routes>
-    <Routes>
-      <Route element={<Layout title="Agenda" />}>
-        <Route path="/" element={<Navigate to="/" replace />} />
-        {/* Settings */}
-        <Route index path="/settings" element={<SettingsPage />} />
-        <Route index path="/notifications" element={<NotificationPage />} />
-        <Route index path="/sharing-hub" element={<SharingHubPage />} />
-        <Route index path="/customize-agenda" element={<CustomizePage />} />
-      </Route>
-      <Route element={<AgendaLayout title="Agenda" />}>
-        {/* Agenda */}
-        <Route path="agenda">
-          <Route path="create" element={<CreateAgenda />} />
+    <>
+      <Routes>
+        <Route element={<AccountLayout />}>
+          <Route index path="/" element={<Login />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+      <Routes>
+        <Route element={<Layout title="Agenda" />}>
+          <Route path="/" element={<Navigate to="/" replace />} />
+          {/* Settings */}
+          <Route index path="/settings" element={<SettingsPage />} />
+          <Route index path="/notifications" element={<NotificationPage />} />
+          <Route index path="/sharing-hub" element={<SharingHubPage />} />
+          <Route index path="/customize-agenda" element={<CustomizePage />} />
+        </Route>
+        <Route element={<AgendaLayout title="Agenda" />}>
+          {/* Agenda */}
+          <Route path="agenda">
+            <Route path="create" element={<CreateAgenda />} />
+          </Route>
+        </Route>
+      </Routes>
+    </>
   );
 }
 
