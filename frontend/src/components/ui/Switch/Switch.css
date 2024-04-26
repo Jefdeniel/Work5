@@ -1,0 +1,29 @@
+.switch-label {
+  @apply inline-block;
+  position: relative;
+  width: 40px;
+  height: 20px;
+}
+
+.switch-label input {
+  display: none;
+}
+
+.switch-slider {
+  @apply absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-gray-300 rounded-full transition;
+}
+
+.switch-slider:before {
+  @apply absolute block left-0.5 bottom-0.5 w-4 h-4 bg-white rounded-full transition;
+  content: '';
+}
+
+.switch-label input:checked + .switch-slider {
+  @apply bg-sa_primary-400;
+}
+
+.switch-label input:checked + .switch-slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
