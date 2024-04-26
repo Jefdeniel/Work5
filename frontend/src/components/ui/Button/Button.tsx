@@ -1,5 +1,5 @@
 import './button.css';
-import { Spinner } from '../Loading/Sp
+import Spinner from '../Loading/Spinner';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
@@ -18,7 +18,7 @@ const Button = ({ type, isLoading, icon, text, className, onClick }: Props) => {
       <div>
         {icon && <span className="button-icon">{icon}</span>}
         {text && !isLoading && <span>{text}</span>}
-        {isLoading && <Spinner animation="border" size="sm" />}
+        {isLoading && <Spinner />}
       </div>
     </button>
   );
@@ -27,32 +27,3 @@ const Button = ({ type, isLoading, icon, text, className, onClick }: Props) => {
 };
 
 export default Button;
-
-
-
-
-//   const button = (
-//     <button
-//       type={type}
-//       className={`${getButtonClasses()} btn`}
-//       style={style}
-//       // color={color}
-//       onMouseEnter={handleMouseEnter}
-//       onMouseLeave={handleMouseLeave}
-//       onClick={onClick}
-//       disabled={disabled}
-//       {...rest}
-//     >
-//       <div className={styles['button-content']}>
-//         {icon && <span className={styles['button-icon']}>{icon}</span>}
-//         {/* {text && !isLoading && <span>{text}</span>} */}
-//         {/* {isLoading && <Spinner animation="border" size="sm" />} */}
-//         {children}
-//       </div>
-//     </button>
-//   );
-
-//   return button;
-// };
-
-// export default Button;

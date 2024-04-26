@@ -125,6 +125,7 @@ const SettingsPage = () => {
       </Col>
       <Col justifySelf="end">
         <Button
+          className=" btn--primary"
           icon={<img src={saveIcon} alt="menu" />}
           text={t('settings:save')}
           type="submit"

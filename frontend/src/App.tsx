@@ -29,12 +29,12 @@ function App() {
     //   )}
     // </Routes>
     <>
-      <Routes>
+      {/* <Routes>
         <Route element={<AccountLayout />}>
           <Route index path="/" element={<Login />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-      </Routes>
+      </Routes> */}
       <Routes>
         <Route element={<Layout title="Agenda" />}>
           <Route path="/" element={<Navigate to="/" replace />} />
