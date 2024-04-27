@@ -1,26 +1,24 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import saveIcon from '/icons/menu.svg';
-
-import useFetch from '../../hooks/useFetch';
 import useSetTitle from '../../hooks/setTitle';
+import useFetch from '../../hooks/useFetch';
 import { useSettings } from '../../hooks/useSettings';
 
-import Col from '../../components/ui/Flex/Col';
-import Button from '../../components/ui/Button/Button';
-import Heading from '../../components/ui/Heading/Heading';
-import Signout from '../../components/settings/account/Signout';
-import ThemeSelector from '../../components/settings/general/ThemeSelector';
 import DeleteAccount from '../../components/settings/account/DeleteAccount';
-import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
-import LanguageSelector from '../../components/settings/general/LanguageSelector';
-import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
-import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
+import Signout from '../../components/settings/account/Signout';
 import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
+import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
-import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
+import LanguageSelector from '../../components/settings/general/LanguageSelector';
+import ThemeSelector from '../../components/settings/general/ThemeSelector';
+import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
+import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
 import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
+import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
+import Button from '../../components/ui/Button/Button';
+import Col from '../../components/ui/Flex/Col';
+import Heading from '../../components/ui/Heading/Heading';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -125,8 +123,7 @@ const SettingsPage = () => {
       </Col>
       <Col justifySelf="end">
         <Button
-          icon={<img src={saveIcon} alt="menu" />}
-          isOutline={false}
+          className="btn--primary"
           text={t('settings:save')}
           type="submit"
           onClick={handleSaveSettings}

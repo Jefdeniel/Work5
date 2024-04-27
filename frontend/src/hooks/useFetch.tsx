@@ -3,15 +3,6 @@ import { useState } from 'react';
 import { Config } from '../Config';
 import useAuth from './useAuth';
 
-let QUEUE_COUNTER = 0;
-
-const delayFetch = (url: string, options: RequestInit & { delay: number }) =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(fetch(url, options));
-    }, options.delay);
-  });
-
 const useFetch = (
   method: 'POST' | 'GET' | 'DELETE' | 'PUT',
   requestArray: string[]
@@ -33,11 +24,8 @@ const useFetch = (
       '/'
     )}?${new URLSearchParams(parametersToAdd).toString()}`;
 
-    QUEUE_COUNTER++;
-
     try {
-      const response = await delayFetch(url, {
-        delay: QUEUE_COUNTER * 500,
+      const response = await fetch(url, {
         method: method || 'GET',
         headers: {
           accept: 'application/json',
@@ -57,8 +45,6 @@ const useFetch = (
       });
 
       setIsLoading(false);
-
-      QUEUE_COUNTER--;
 
       return response as Response;
     } catch (error: any) {

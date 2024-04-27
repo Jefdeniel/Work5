@@ -1,0 +1,79 @@
+/* buttons are filled ones, buttons--secondary are bordered */
+.button {
+  @apply text-headingThree px-btnX py-btnY rounded-base cursor-pointer;
+  transition: all 0.15s ease-in-out;
+
+  &.button--primary {
+    @apply font-bold bg-sa_primary-300 text-sa_bright;
+  }
+
+  &.button--secondary {
+    @apply text-sa_primary-300 border-2 border-sa_primary-300;
+  }
+
+  &.button--success {
+    @apply font-bold bg-sa_secondary-100 text-sa_bright;
+  }
+
+  &.button--danger {
+    @apply font-bold bg-sa_error-100 text-sa_bright;
+  }
+
+  &.button--secondary-danger {
+    @apply text-sa_error-100 border-2 border-sa_error-100;
+  }
+
+  &.button--dark {
+    @apply font-bold bg-sa_dark text-sa_bright;
+  }
+
+  &.button--secondary-dark {
+    @apply inline-flex items-center gap-1 text-sa_dark border-2 border-sa_dark;
+
+    & .button__icon {
+      transform: scale(0.6);
+    }
+  }
+
+  &.button--disabled {
+    @apply font-bold bg-sa_primary-200 text-sa_bright;
+  }
+
+  &.button--secondary-disabled {
+    @apply text-sa_primary-200 border-2 border-sa_primary-200;
+  }
+}
+
+.button:hover {
+  &.button--primary {
+    @apply bg-sa_primary-400;
+  }
+
+  &.button--secondary {
+    @apply text-sa_bright bg-sa_primary-400 border-sa_primary-400;
+  }
+
+  &.button--success {
+    @apply bg-sa_secondary-200;
+  }
+
+  &.button--danger {
+    @apply bg-sa_error-200;
+  }
+
+  &.button--secondary-danger {
+    @apply text-sa_bright bg-sa_error-100 border-sa_error-100;
+  }
+
+  &.button--dark {
+    @apply bg-sa_primary-200;
+  }
+
+  &.button--disabled {
+    @apply bg-sa_dark;
+  }
+
+  &.button--secondary-disabled {
+    @apply text-sa_bright bg-sa_primary-200 border-sa_primary-200;
+  }
+}
