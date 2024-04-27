@@ -1,18 +1,16 @@
 import './button.css';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  linkTo?: string;
   text?: string;
   className?: string;
 }
 
 const BackButton = ({
-  linkTo,
   text,
   className,
 }: Props) => {
   const button = (
-    <a href={linkTo || '/'}
+    <button
       className={`button button--secondary-dark ${className}`}
       onClick={() => {
         window.history.back();
@@ -23,7 +21,7 @@ const BackButton = ({
       <span>
         {text}
       </span>
-    </a>
+    </button>
   );
 
   return button;

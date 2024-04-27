@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../ui/Button/Button';
+import BackButton from '../../ui/Button/BackButton';
 import IconButton from '../../ui/IconButton/IconButton';
 import Logo from '../../ui/Logo';
 import DetailedItem from './DetailedItem';
@@ -92,14 +92,7 @@ const DetailedNavigation = ({
         </div>
 
         <div>
-          <Button
-            icon={<img src="/icons/back.svg" alt="home" />}
-            onClick={() => {
-              window.history.back();
-            }}
-            text={t('general:buttons.back')}
-            style={{ marginTop: 10 }}
-          />
+          <BackButton text={t('general:buttons.back')}></BackButton>
         </div>
 
         <img
