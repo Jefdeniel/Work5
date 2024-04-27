@@ -21,7 +21,7 @@
     "i18next-http-backend": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "luxon": "^3.4.4",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-dom": "^18.2.0",
     "react-final-form": "^6.5.9",
     "react-i18next": "^14.1.1",
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@eslint/js": "^9.1.1",
     "@types/node": "^20.9.0",
-    "@types/react": "^18.02.79",
+    "@types/react": "^18.3.1",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
