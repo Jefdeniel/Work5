@@ -16,7 +16,7 @@
     "axios": "^1.6.8",
     "cssnano": "^6.1.2",
     "final-form": "^4.20.4",
-    "i18next": "^23.11.2",
+    "i18next": "^23.11.3",
     "i18next-browser-languagedetector": "^7.2.1",
     "i18next-http-backend": "^2.5.1",
     "jwt-decode": "^4.0.0",
