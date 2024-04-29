@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import Col from '../../ui/Flex/Col';
-import Row from '../../ui/Flex/Row';
-import Button from '../../ui/Button/Button';
 import useAuth from '../../../hooks/useAuth';
 import useFetch from '../../../hooks/useFetch';
+import Button from '../../ui/Button/Button';
+import { Col, Row } from 'react-bootstrap';
 
 const Signout = () => {
   const { t } = useTranslation(['settings']);
@@ -19,7 +18,7 @@ const Signout = () => {
   };
 
   return (
-    <Row justifyContent="between">
+    <Row>
       <Col>
         <span className="title">{t('settings:account.SignOut')}</span>
         <small className="description">
@@ -27,9 +26,12 @@ const Signout = () => {
         </small>
       </Col>
       <Col>
-        <Button isDanger={true} onClick={handleSignout}>
-          {t('settings:account.SignOut')}
-        </Button>
+        <Button
+          isDanger={true}
+          isOutline={true}
+          text={t('settings:account.SignOut')}
+          onClick={handleSignout}
+        />
       </Col>
     </Row>
   );

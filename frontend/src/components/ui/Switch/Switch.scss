@@ -1,5 +1,5 @@
 .switch-label {
-  @apply inline-block;
+  display: block;
   position: relative;
   width: 40px;
   height: 20px;
@@ -10,16 +10,32 @@
 }
 
 .switch-slider {
-  @apply absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-gray-300 rounded-full transition;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
 }
 
 .switch-slider:before {
-  @apply absolute block left-0.5 bottom-0.5 w-4 h-4 bg-white rounded-full transition;
+  position: absolute;
+  display: block;
+  left: 0.5px;
+  bottom: 0.5px;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
   content: '';
 }
 
 .switch-label input:checked + .switch-slider {
-  @apply bg-sa_primary-400;
+  background-color: #2196f3;
 }
 
 .switch-label input:checked + .switch-slider:before {

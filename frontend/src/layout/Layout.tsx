@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import DetailedNavigation from '../components/layout/Navigation/DetailedNavigation';
 import NavigationTop from '../components/layout/Navigation/NavigationTop';
-import './Layout.css';
+import './Layout.scss';
+import { Container, Row } from 'react-bootstrap';
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ const Layout = ({ title }: Props) => {
     }
   };
   return (
-    <div className="flex flex-row p-0" style={{ minHeight: '100%' }}>
+    <div className="d-flex flex-row p-0" style={{ minHeight: '100%' }}>
       <DetailedNavigation
         title={title}
         isMenuBroken={isMenuBroken}
@@ -32,10 +33,11 @@ const Layout = ({ title }: Props) => {
         setIsMenuBroken={setIsMenuBroken}
         onMenuClose={handleMenuClose}
       />
-      <div
-        className="container-fluid p-0"
+      <Container
+        fluid
         style={{
           height: '100vh',
+          backgroundColor: 'white',
           display: 'flex',
           flexDirection: 'column',
           width: '100%',
@@ -44,7 +46,7 @@ const Layout = ({ title }: Props) => {
           padding: 0,
         }}
       >
-        <div className="flex-row top-navigation border-bottom">
+        <Row className="flex-row top-navigation border-bottom">
           <NavigationTop
             title={title}
             onMenuClose={() => {
@@ -55,11 +57,11 @@ const Layout = ({ title }: Props) => {
               }
             }}
           />
-        </div>
-        <div className="top-navigation">
+        </Row>
+        <Row className="top-navigation">
           <Outlet />
-        </div>
-      </div>
+        </Row>
+      </Container>
     </div>
   );
 };

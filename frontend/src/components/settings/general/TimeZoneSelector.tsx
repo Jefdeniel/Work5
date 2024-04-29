@@ -40,8 +40,8 @@ const TimeZoneSelector = ({
 
   return (
     <Select
-      title={t('settings:general.language')}
-      description={t('settings:general.languageDescription')}
+      title={t('settings:general.timeZone')}
+      description={t('settings:general.timeZoneDescription')}
       defaultValue={initialTimeZone}
       onChange={onTimeZoneSelectionChange}
       options={options}

@@ -5,10 +5,10 @@ import useSetTitle from '../../hooks/setTitle';
 import useFetch from '../../hooks/useFetch';
 import { useSettings } from '../../hooks/useSettings';
 
+import { Row } from 'react-bootstrap';
 import DeleteAccount from '../../components/settings/account/DeleteAccount';
 import Signout from '../../components/settings/account/Signout';
 import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
-import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
@@ -17,8 +17,10 @@ import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector
 import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
 import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import Button from '../../components/ui/Button/Button';
-import Col from '../../components/ui/Flex/Col';
 import Heading from '../../components/ui/Heading/Heading';
+import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
+import { Field, Form } from 'react-final-form';
+import Validators from '../../utils/Validators';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -56,7 +58,6 @@ const SettingsPage = () => {
   };
 
   // modals
-
   const openDeleteAccountModal = () => {
     setShowDeleteAccountModal(true);
   };
@@ -67,72 +68,154 @@ const SettingsPage = () => {
 
   return (
     <>
-      <Col>
-        <Heading level={2} isUnderlined>
-          {t('settings:general.title')}
-        </Heading>
-        <LanguageSelector
-          onChange={settings.setLanguage}
-          initialLanguage={settings.language}
-        />
-        <TimeZoneSelector
-          onChange={settings.setSelectedTimezone}
-          initialTimeZone={settings.selectedTimezone}
-        />
-        <TimeFormatSelector
-          onChange={settings.setTimeFormat}
-          initialTimeFormat={settings.timeFormat}
-        />
-        <ThemeSelector
-          onChange={settings.setTheme}
-          initialTheme={settings.theme}
-        />
-      </Col>
-      <Col>
-        <Heading level={2} isUnderlined>
-          {t('settings:notifications.title')}
-        </Heading>
-        <EventReminderSelector
-          eventReminderEnabled={settings.eventReminderEnabled}
-          onChange={settings.setEventReminderEnabled}
-        />
-        <ActivityNotification
-          activityNotificationEnabled={settings.activityNotificationEnabled}
-          onChange={settings.setActivityNotificationEnabled}
-        />
-      </Col>
-      <Col>
-        <Heading level={2} isUnderlined>
-          {t('settings:agendaView.title')}
-        </Heading>
-        <WeekStartsOnSelector
-          onChange={settings.setWeekStartsOn}
-          initialWeekStartsOn={settings.weekStartsOn}
-        />
-        <WeekendVisbilityOnSelector
-          onChange={settings.setWeekendVisibility}
-          initialWeekendVisibility={settings.weekendVisibility}
-        />
-      </Col>
-      <Col>
-        <Heading level={2} isUnderlined>
-          {t('settings:account.title')}
-          <Signout />
-          <DeleteAccount onClick={openDeleteAccountModal} />
-        </Heading>
-      </Col>
-      <Col justifySelf="end">
-        <Button
-          className="btn--primary"
-          text={t('settings:save')}
-          type="submit"
-          onClick={handleSaveSettings}
-        />
-      </Col>
+      <Form
+        onSubmit={handleSaveSettings}
+        initialValues={settings}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Row>
+              <Heading
+                level={2}
+                isUnderlined
+                className="border-bottom pb-4 mb-4"
+              >
+                {t('settings:general.title')}
+              </Heading>
+              <Field name="language" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <LanguageSelector
+                    {...input}
+                    meta={meta}
+                    onChange={input.onChange}
+                    initialLanguage={settings.language}
+                  />
+                )}
+              </Field>
+              <Field name="selectedTimezone" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <TimeZoneSelector
+                    {...input}
+                    meta={meta}
+                    onChange={input.onChange}
+                    initialTimeZone={settings.selectedTimezone}
+                  />
+                )}
+              </Field>
+              <Field name="timeFormat" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <TimeFormatSelector
+                    {...input}
+                    meta={meta}
+                    onChange={input.onChange}
+                    initialTimeFormat={settings.timeFormat}
+                  />
+                )}
+              </Field>
+              <Field name="theme" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <ThemeSelector
+                    {...input}
+                    meta={meta}
+                    onChange={input.onChange}
+                    initialTheme={settings.theme}
+                  />
+                )}
+              </Field>
+            </Row>
 
-      {showDeleteAccountModal && (
-        <DeleteAccountModal onClose={closeDeleteAccountModal} />
-      )}
+            <Row>
+              <Heading
+                level={2}
+                isUnderlined
+                className="border-bottom pb-4 mb-4"
+              >
+                {t('settings:notifications.title')}
+              </Heading>
+              <Field
+                name="eventReminderEnabled"
+                validate={Validators.required()}
+              >
+                {({ input }) => (
+                  <EventReminderSelector
+                    {...input}
+                    eventReminderEnabled={settings.eventReminderEnabled}
+                    onChange={settings.setEventReminderEnabled}
+                  />
+                )}
+              </Field>
+              <Field
+                name="activityNotificationEnabled"
+                validate={Validators.required()}
+              >
+                {({ input }) => (
+                  <ActivityNotification
+                    {...input}
+                    activityNotificationEnabled={
+                      settings.activityNotificationEnabled
+                    }
+                    onChange={settings.setActivityNotificationEnabled}
+                  />
+                )}
+              </Field>
+            </Row>
+
+            <Row>
+              <Heading
+                level={2}
+                isUnderlined
+                className="border-bottom pb-4 mb-4"
+              >
+                {t('settings:agendaView.title')}
+              </Heading>
+              <Field name="weekStartsOn" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <WeekStartsOnSelector
+                    {...input}
+                    meta={meta}
+                    onChange={settings.setWeekStartsOn}
+                    initialWeekStartsOn={settings.weekStartsOn}
+                  />
+                )}
+              </Field>
+              <Field name="weekendVisibility" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <WeekendVisbilityOnSelector
+                    {...input}
+                    meta={meta}
+                    onChange={settings.setWeekendVisibility}
+                    initialWeekendVisibility={settings.weekendVisibility}
+                  />
+                )}
+              </Field>
+            </Row>
+
+            <Row>
+              <Heading
+                level={2}
+                isUnderlined
+                className="border-bottom pb-4 mb-4"
+              >
+                {t('settings:account.title')}
+              </Heading>
+              <Signout />
+              <DeleteAccount onClick={openDeleteAccountModal} />
+            </Row>
+
+            <Row>
+              <Button
+                className="btn--primary"
+                text={t('settings:save')}
+                type="submit"
+                onClick={handleSaveSettings}
+              />
+            </Row>
+
+            {showDeleteAccountModal && (
+              <DeleteAccountModal onClose={closeDeleteAccountModal} />
+            )}
+          </form>
+        )}
+      />
     </>
   );
 };

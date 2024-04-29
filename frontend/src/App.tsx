@@ -1,7 +1,7 @@
 import { Settings } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import AgendaLayout from './layout/AgendaLayout';
 import Layout from './layout/Layout';
 import CreateAgenda from './pages/Agenda/CreateAgenda.tsx';
