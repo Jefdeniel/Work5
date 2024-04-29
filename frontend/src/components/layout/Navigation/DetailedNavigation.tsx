@@ -7,6 +7,7 @@ import Logo from '../../ui/Logo';
 import DetailedItem from './DetailedItem';
 
 import './navigation.css';
+import { Col, Row } from 'react-bootstrap';
 
 interface MenuItem {
   link: string;
@@ -79,17 +80,17 @@ const DetailedNavigation = ({
         }}
         className={`sidebar`}
       >
-        <div className="d-flex flex-row justify-content-between my-4">
-          <div className="d-flex flex-col">
+        <Row className="d-flex flex-row justify-content-between my-4">
+          <Col>
             <Link to="/">
               <Logo width={isMenuCollapsed ? '50px' : '75px'} height="50px" />
             </Link>
-          </div>
+          </Col>
           <IconButton
             icon={<img src="/icons/settings.svg" alt="close" />}
             onClick={() => navigate('/settings')}
           />
-        </div>
+        </Row>
 
         <div>
           <BackButton text={t('general:buttons.back')}></BackButton>
@@ -105,8 +106,8 @@ const DetailedNavigation = ({
         <Menu
           menuItemStyles={{
             button: ({ active }) => ({
-              color: active ? 'white' : 'black',
-              backgroundColor: active ? 'black' : 'white',
+              color: active ? 'black' : 'gray',
+              backgroundColor: active ? 'black' : 'transparent',
               padding: '10px 15px',
               marginLeft: 10,
               marginRight: 10,

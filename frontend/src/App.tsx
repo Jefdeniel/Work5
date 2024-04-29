@@ -1,7 +1,7 @@
 import { Settings } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import AgendaLayout from './layout/AgendaLayout';
 import Layout from './layout/Layout';
 import CreateAgenda from './pages/Agenda/CreateAgenda.tsx';
@@ -9,8 +9,6 @@ import CustomizePage from './pages/CustomizePage.tsx';
 import NotificationPage from './pages/NotificationPage.tsx';
 import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage.tsx';
-import Login from './pages/Login.tsx';
-import AccountLayout from './layout/AccountLayout.tsx';
 
 function App() {
   const { i18n } = useTranslation();

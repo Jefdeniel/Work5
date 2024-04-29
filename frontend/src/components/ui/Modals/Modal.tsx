@@ -1,5 +1,6 @@
 import Heading from '../Heading/Heading';
 import IconButton from '../IconButton/IconButton';
+import { Modal as BootstrapModal, Col } from 'react-bootstrap';
 
 interface Props {
   title?: string;
@@ -27,17 +28,6 @@ const Modal = ({
 }: Props) => {
   if (!show) return null;
 
-  const MODAL_SIZE =
-    size === 's'
-      ? 'w-2/12'
-      : size === 'sm'
-        ? 'w-4/12'
-        : size === 'lg'
-          ? 'w-6/12'
-          : size === 'xl'
-            ? 'w-8/12'
-            : 'w-4/12';
-
   const ICON = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -56,29 +46,31 @@ const Modal = ({
   );
 
   return (
-    <div
+    <BootstrapModal
+      id="modal"
+      show={show}
+      onHide={onClose}
+      size={size as 'sm' | 'lg' | 'xl'}
       onClick={onClose}
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity"
+      fullscreen={fullscreen ? fullscreen : undefined}
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className={`relative bg-white rounded-lg shadow-lg ${MODAL_SIZE} ${fullscreen ? 'w-screen h-screen' : ''}`}
-      >
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <div>
-            <Heading level={3} className={isDanger ? 'text-red-500' : ''}>
-              {title}
-            </Heading>
-            {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+      <BootstrapModal.Header className="mt-2 py-3 px-4">
+        <Col>
+          <Heading level={3} className={isDanger ? 'text-red-500' : ''}>
+            {title}
+            {subtitle && <Heading level={6}>{subtitle}</Heading>}
+          </Heading>
+          <div className="text-end pe-1 text-muted">
+            <IconButton icon={ICON} onClick={onClose}></IconButton>
           </div>
-          <IconButton icon={ICON} onClick={onClose}></IconButton>
-        </div>
-        <div className="p-4">
-          {message && <p className="text-sm mb-3 text-gray-500">{message}</p>}
-          {children}
-        </div>
+        </Col>
+      </BootstrapModal.Header>
+
+      <div className="p-4">
+        {message && <p>{message}</p>}
+        {children}
       </div>
-    </div>
+    </BootstrapModal>
   );
 };
 

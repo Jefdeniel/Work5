@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { FieldMetaState } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 import ErrorText from '../ErrorText/ErrorText';
-import './Input.css';
+import './Input.scss';
 
 interface Props {
   title?: string;

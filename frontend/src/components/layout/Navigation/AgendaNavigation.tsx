@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../ui/Logo';
 import IconButton from '../../ui/IconButton/IconButton';
 import AgendaItem from './AgendaItem';
+import { Col, Row } from 'react-bootstrap';
 
 interface MenuItem {
   link: string;
@@ -73,17 +74,17 @@ const AgendaNavigation = ({
           borderRight: '1px solid rgba(0, 0, 0, 0.1)',
         }}
       >
-        <div className="d-flex flex-row justify-content-between my-4">
-          <div className="d-flex flex-col">
+        <Row>
+          <Col>
             <Link to="/">
               <Logo width={isMenuCollapsed ? '50px' : '75px'} height="50px" />
             </Link>
-          </div>
+          </Col>
           <IconButton
             icon={<img src="/icons/settings.svg" alt="close" />}
             onClick={() => navigate('/settings')}
           />
-        </div>
+        </Row>
 
         <Menu
           menuItemStyles={{

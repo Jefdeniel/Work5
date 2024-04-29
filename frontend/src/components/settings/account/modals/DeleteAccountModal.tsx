@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import Button from '../../../ui/Button/Button';
 import Modal from '../../../ui/Modals/Modal';
-import Row from '../../../ui/Flex/Row';
+import { Row } from 'react-bootstrap';
 
 interface Props {
   onClose: () => void;
@@ -21,7 +21,7 @@ const DeleteAccountModal = ({ onClose }: Props) => {
       onClose={onClose}
     >
       <Row justifyContent="end">
-        <Button onClick={handleLogout} isDanger={true} isOutline={true}>
+        <Button onClick={handleLogout} isOutline={true}>
           {t('settings:account.deleteAccount')}
         </Button>
       </Row>

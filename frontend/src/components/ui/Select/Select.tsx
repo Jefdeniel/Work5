@@ -1,9 +1,8 @@
-import { useTranslation } from 'react-i18next';
+import { Col, Row } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 import ErrorText from '../ErrorText/ErrorText';
-import './Select.css';
-import Row from '../Flex/Row';
-import Col from '../Flex/Col';
+import './Select.scss';
 
 interface Props {
   title?: string;
@@ -31,36 +30,42 @@ const Select = ({
   const isNotValid = meta?.error?.[0] && meta.touched;
 
   return (
-    <Row justifyContent="between">
-      <Col>
-        <span className="title">{title}</span>
-        <small className="description">{description}</small>
-      </Col>
-      <label>
-        <select
-          className={`form-select mb-2 my-1 ${isNotValid ? 'is-invalid' : ''}`}
-          {...rest}
-        >
-          {options?.map((option) => (
-            <option
-              key={option.title}
-              value={option.value}
-              selected={defaultValue === option.value}
-            >
-              {option.title}
-            </option>
-          ))}
-        </select>
+    <label>
+      <Row>
+        <Col>
+          <Row className="d-flex flex-row align-items-center">
+            <span className="title">{title}</span>
+          </Row>
+          <Row className="d-flex flex-row align-items-center">
+            <small className="description">{description}</small>
+          </Row>
+        </Col>
+        <Col sm={12} md={6} className="d-flex flex-col">
+          <select
+            className={`form-select mb-2 my-1 ${isNotValid ? 'is-invalid' : ''}`}
+            {...rest}
+          >
+            {options?.map((option) => (
+              <option
+                key={option.title}
+                value={option.value}
+                selected={defaultValue === option.value}
+              >
+                {option.title}
+              </option>
+            ))}
+          </select>
 
-        {isNotValid && (
-          <ErrorText>
-            {t(`general:fields.validators.${meta.error[0]}`, {
-              value: meta.error[1],
-            })}
-          </ErrorText>
-        )}
-      </label>
-    </Row>
+          {isNotValid && (
+            <ErrorText>
+              {t(`general:fields.validators.${meta.error[0]}`, {
+                value: meta.error[1],
+              })}
+            </ErrorText>
+          )}
+        </Col>
+      </Row>
+    </label>
   );
 };
 

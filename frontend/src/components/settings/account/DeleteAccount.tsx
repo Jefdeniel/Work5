@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import Col from '../../ui/Flex/Col';
-import Row from '../../ui/Flex/Row';
 import Button from '../../ui/Button/Button';
+import { Col, Row } from 'react-bootstrap';
 
 const DeleteAccount = ({ onClick }: { onClick: () => void }) => {
   const { t } = useTranslation(['settings']);
 
   return (
-    <Row justifyContent="between">
+    <Row className="d-flex flex-row justify-content-between ">
       <Col>
         <span className="title">{t('settings:account.deleteAccount')}</span>
         <small className="description">
@@ -15,7 +14,7 @@ const DeleteAccount = ({ onClick }: { onClick: () => void }) => {
         </small>
       </Col>
       <Col>
-        <Button isDanger={true} isOutline={true} onClick={onClick}>
+        <Button isOutline={true} onClick={onClick}>
           {t('settings:account.deleteAccount')}
         </Button>
       </Col>

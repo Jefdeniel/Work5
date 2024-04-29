@@ -1,6 +1,6 @@
-import Col from '../Flex/Col';
-import Row from '../Flex/Row';
-import './Switch.css';
+import { Col, Row } from 'react-bootstrap';
+import './Switch.scss';
+
 interface Props {
   title?: string;
   description?: string;
@@ -14,26 +14,32 @@ const Switch = ({ title, description, checked, onChange }: Props) => {
   };
 
   return (
-    <>
-      <Row justifyContent="between">
-        <Col>
-          <span className="title">{title}</span>
-          <small className="description">{description}</small>
-        </Col>
-        <Col>
-          <label className="switch-label">
-            <input
-              id="switch"
-              type="checkbox"
-              className="peer sr-only"
-              checked={checked}
-              onChange={handleChange}
-            />
-            <span className="switch-slider"></span>
-          </label>
-        </Col>
-      </Row>
-    </>
+    <Row className="d-flex flex-row justify-content-between ">
+      <Col>
+        <Row>
+          <Col className="d-flex flex-row align-items-center">
+            <span className="title">{title}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="d-flex flex-row align-items-center">
+            <small className="description">{description}</small>
+          </Col>
+        </Row>
+      </Col>
+      <Col className="d-flex flex-row align-items-center justify-content-end">
+        <label className="switch-label">
+          <input
+            id="switch"
+            type="checkbox"
+            className="form-control"
+            checked={checked}
+            onChange={handleChange}
+          />
+          <span className="switch-slider"></span>
+        </label>
+      </Col>
+    </Row>
   );
 };
 

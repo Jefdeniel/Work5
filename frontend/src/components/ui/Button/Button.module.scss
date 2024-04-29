@@ -1,0 +1,70 @@
+@import '../../../App.scss';
+
+.button-main {
+  border: none;
+  border-radius: map-get($br, --sm);
+  cursor: pointer;
+  height: 60px;
+  transition:
+    border-color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+
+  &:disabled {
+    background-color: map-get($colors, --sa-bright);
+    border: 1px solid map-get($colors, --sa-dark);
+    color: map-get($colors, --sa-dark);
+
+    &:hover {
+      background-color: map-get($colors, --sa-bright);
+      border: 1px solid map-get($colors, --sa-dark);
+      color: map-get($colors, --sa-dark);
+    }
+  }
+}
+
+.button-default {
+  &:hover {
+    background-color: map-get($colors, --sa-primary-100);
+    color: map-get($colors, --sa-dark);
+  }
+}
+
+.button-danger {
+  &:hover {
+    background-color: map-get($colors, --sa-error-100);
+    color: map-get($colors, --sa-dark);
+  }
+}
+
+.button-danger-outline {
+  &:hover {
+    border-color: map-get($colors, --sa-error-100);
+    color: map-get($colors, --sa-error-100);
+  }
+}
+
+.button-default-outline {
+  &:hover {
+    border-color: map-get($colors, --sa-primary-100);
+    color: map-get($colors, --sa-primary-100);
+  }
+}
+
+.button-icon {
+  margin-right: map-get($spacing, --space-xs);
+  display: flex;
+  align-items: center;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+.button-small {
+  height: 40px;
+  padding: map-get($spacing, --space-xs) map-get($spacing, --space-sm);
+}

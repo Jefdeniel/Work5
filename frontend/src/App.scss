@@ -1,0 +1,180 @@
+$colors: (
+  --sa-primary-100: 'hsla(231, 36%, 78%, 100)',
+  --sa-primary-200: 'hsla(238, 11%, 61%, 100)',
+  --sa-primary-300: 'hsla(223, 100%, 63%, 100)',
+  --sa-secondary-100: 'hsla(141, 70%, 51%, 100)',
+  --sa-secondary-200: 'hsla(141, 70%, 36%, 100)',
+  --sa-secondary-300: 'hsla(141, 70%, 21%, 100)',
+  --sa-error-100: 'hsla(0, 100%, 63%, 100)',
+  --sa-error-200: 'hsla(5, 88%, 30%, 100)',
+  --sa-error-300: 'hsla(0, 100%, 15%, 100)',
+  --sa-bright: 'hsla(0, 0%, 99%, 100)',
+  --sa-dark: 'hsla(220, 53%, 15%, 100)',
+);
+
+$fw: (
+  --thin: 100,
+  --light: 300,
+  --regular: 400,
+  --medium: 500,
+  --semi-bold: 600,
+  --bold: 700,
+  --extra-bold: 800,
+  --black: 900,
+);
+
+$br: (
+  --sm: 0.25rem,
+  --md: 0.5rem,
+  --lg: 1rem,
+  --xl: 2rem,
+);
+
+$spacing: (
+  --space-xxs: 0.25rem,
+  --space-xs: 0.5rem,
+  --space-sm: 1rem,
+  --space-md: 1.5rem,
+  --space-lg: 2rem,
+  --space-xl: 3rem,
+  --space-xxl: 4rem,
+);
+
+/* For browsers that support clamp  */
+@supports (font-size: clamp(1rem, 1vi, 1rem)) {
+  :root {
+    --fs-sm: clamp(0.8rem, 0.34vi + 0.71rem, 0.99rem);
+    --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+    --fs-md: clamp(1.25rem, 0.32vi + 1.17rem, 1.43rem);
+    --fs-lg: clamp(1.56rem, 0.27vi + 1.5rem, 1.71rem);
+    --fs-xl: clamp(1.95rem, 0.18vi + 1.91rem, 2.05rem);
+    --fs-xxl: clamp(2.44rem, 0.04vi + 2.43rem, 2.46rem);
+    --fs-xxxl: clamp(3.05rem, -0.18vi + 3.1rem, 2.95rem);
+  }
+}
+
+/* For browsers that don't support clamp */
+@supports not (font-size: clamp(1rem, 1vi, 1rem)) {
+  :root {
+    --fs-sm: 0.8rem;
+    --fs-base: 1rem;
+    --fs-md: 1.25rem;
+    --fs-lg: 1.56rem;
+    --fs-xl: 1.95rem;
+    --fs-xxl: 2.44rem;
+    --fs-xxxl: 3.05rem;
+  }
+  @media screen and (min-width: 1280px) {
+    :root {
+      --fs-sm: 0.99rem;
+      --fs-base: 1.19rem;
+      --fs-md: 1.43rem;
+      --fs-lg: 1.71rem;
+      --fs-xl: 2.05rem;
+      --fs-xxl: 2.46rem;
+      --fs-xxxl: 2.95rem;
+    }
+  }
+}
+
+/* Fonts loading */
+@font-face {
+  font-family: 'Rubik';
+  src:
+    url('./rubik-regular.woff2') format('woff2'),
+    url('./rubik-regular.woff') format('woff');
+  font-style: normal;
+  font-weight: map-get($fw, --regular);
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src:
+    url('./rubik-bold.woff2') format('woff2'),
+    url('./rubik-bold.woff') format('woff');
+  font-style: normal;
+  font-weight: map-get($fw, --bold);
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    url('./lato-light.woff2') format('woff2'),
+    url('./lato-light.woff') format('woff');
+  font-style: normal;
+  font-weight: map-get($fw, --light);
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    url('./lato-regular.woff2') format('woff2'),
+    url('./lato-regular.woff') format('woff');
+  font-style: normal;
+  font-weight: map-get($fw, --regular);
+}
+
+@font-face {
+  font-family: 'Lato';
+  src:
+    url('./lato-bold.woff2') format('woff2'),
+    url('./lato-bold.woff') format('woff');
+  font-style: normal;
+  font-weight: map-get($fw, --bold);
+}
+
+// font family
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--fs-base);
+  color: var(--primary);
+}
+
+// mixins
+$monitor: '(min-width: 1201px)';
+$desktop: '(min-width: 1024px)';
+$tablet: '(min-width: 768px) and (max-width: 1023px)';
+$mobile: '(max-width: 767px)';
+
+@mixin screen($sizes...) {
+  @each $size in $sizes {
+    @if $size == monitors {
+      @media only screen and #{$monitor} {
+        @content;
+      }
+    } @else if $size == desktop {
+      @media only screen and #{$desktop} {
+        @content;
+      }
+    } @else if $size == tablet {
+      @media only screen and #{$tablet} {
+        @content;
+      }
+    } @else if $size == mobile {
+      @media only screen and #{$mobile} {
+        @content;
+      }
+    } @else {
+      @media only screen and #{$size} {
+        @content;
+      }
+    }
+  }
+}
+
+/* Other general styling */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

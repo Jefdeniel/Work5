@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import AgendaNavigation from '../components/layout/Navigation/AgendaNavigation';
 import NavigationTop from '../components/layout/Navigation/NavigationTop';
-import './Layout.css';
+import './Layout.scss';
+import { Container, Row } from 'react-bootstrap';
 
 interface Props {
   title: string;
@@ -22,7 +23,7 @@ const AgendaLayout = ({ title }: Props) => {
     }
   };
   return (
-    <div className="flex flex-row p-0" style={{ minHeight: '100%' }}>
+    <div className="d-flex flex-row p-0" style={{ minHeight: '100%' }}>
       <AgendaNavigation
         title={title}
         isMenuBroken={isMenuBroken}
@@ -32,7 +33,7 @@ const AgendaLayout = ({ title }: Props) => {
         setIsMenuBroken={setIsMenuBroken}
         onMenuClose={handleMenuClose}
       />
-      <div
+      <Container
         className="container-fluid p-0"
         style={{
           height: '100vh',
@@ -44,7 +45,7 @@ const AgendaLayout = ({ title }: Props) => {
           padding: 0,
         }}
       >
-        <div className="flex-row top-navigation border-bottom">
+        <Row className="top-navigation border-bottom">
           <NavigationTop
             title={title}
             onMenuClose={() => {
@@ -55,11 +56,11 @@ const AgendaLayout = ({ title }: Props) => {
               }
             }}
           />
-        </div>
-        <div>
+        </Row>
+        <Row>
           <Outlet />
-        </div>
-      </div>
+        </Row>
+      </Container>
     </div>
   );
 };

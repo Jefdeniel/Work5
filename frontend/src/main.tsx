@@ -1,17 +1,14 @@
 import React from 'react';
-import App from './App';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import './App.scss';
+import App from './App.tsx';
 import LoadingScreen from './components/ui/Loading/LoadingScreen';
 import './i18n.js';
-import './index.css';
-
 import { SettingsContextProvider } from './store/SettingsContext.js';
 
-import { createRoot } from 'react-dom/client';
-
 // as per docs, createRoot is the new way to render in React 18
-const root = createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <SettingsContextProvider>
