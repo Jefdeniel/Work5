@@ -1,19 +1,19 @@
+import { Container } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
+import '../App.scss';
 
 // USED FOR LOGIN AND REGISTER
 const AccountLayout = () => {
   return (
-    // <div className="container"> fix this with bootstrap or tailwind
-    <div
-      className="container mx-auto my-auto flex justify-center items-center"
+    <Container
+      className="container flex justify-center items-center"
       style={{
         height: '100vh',
-        backgroundColor: 'white',
       }}
-      // fluid
+      fluid
     >
       <Outlet />
-    </div>
+    </Container>
   );
 };
 

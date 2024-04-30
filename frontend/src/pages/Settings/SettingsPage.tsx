@@ -186,11 +186,7 @@ const SettingsPage = () => {
             </Row>
 
             <Row>
-              <Button
-                className="btn--primary"
-                text={t('settings:save')}
-                type="submit"
-              />
+              <Button text={t('settings:save')} type="submit" />
             </Row>
 
             {showDeleteAccountModal && (

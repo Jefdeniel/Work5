@@ -11,6 +11,7 @@ import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage.tsx';
 import AccountLayout from './layout/AccountLayout.tsx';
 import Login from './pages/Login.tsx';
+import Register from './pages/Register.tsx';
 
 function App() {
   const { i18n } = useTranslation();
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route element={<AccountLayout />}>
           <Route index path="/" element={<Login />} />
+          <Route index path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
