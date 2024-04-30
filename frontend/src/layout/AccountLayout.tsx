@@ -6,7 +6,7 @@ import '../App.scss';
 const AccountLayout = () => {
   return (
     <Container
-      className="container flex justify-center items-center"
+      className="flex justify-center items-center"
       style={{
         height: '100vh',
       }}

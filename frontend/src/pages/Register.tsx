@@ -7,6 +7,7 @@ import Heading from '../components/ui/Heading/Heading';
 import Input from '../components/ui/Input/Input';
 import useFetch from '../hooks/useFetch';
 import Validators from '../utils/Validators';
+import Logo from '../components/ui/Logo';
 
 const Register = () => {
   const { t } = useTranslation(['auth']);
@@ -18,9 +19,16 @@ const Register = () => {
     register();
     toast.success(t('auth:register.success'));
   };
+
+  const handleLogin = () => {
+    window.location.href = '/login';
+  };
+
   return (
     <Row className="h-100 align-items-center justify-content-center m-3">
-      <Col sm={12} md={6} className="d-none d-lg-block"></Col>
+      <Col sm={12} md={6} className="h-100 d-none d-lg-block d-flex ">
+        <Logo width="75px" height="75px" />
+      </Col>
       <Col
         sm={12}
         md={6}
@@ -122,7 +130,14 @@ const Register = () => {
                   />
                 )}
               </Field>
-              <Button type="submit">{t('auth:register.register')}</Button>
+              <Col>
+                <Button type="submit" className="mx-2">
+                  {t('auth:register.register')}
+                </Button>
+                <Button type="button" isOutline={true} onClick={handleLogin}>
+                  {t('auth:register.login')}
+                </Button>
+              </Col>
             </form>
           )}
         ></Form>
