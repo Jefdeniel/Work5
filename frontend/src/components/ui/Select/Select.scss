@@ -1,22 +1,26 @@
-.form-select {
+@import '../../../App.scss';
+
+.form-control {
   height: 50px;
-  width: 100%;
-  padding: 0 15px;
-  background-color: white;
-  border: 1px solid black;
+  width: auto;
+  background-color: map-get($colors, --white);
+  border: 1px solid map-get($colors, --sa-dark);
+
+  @include screen(mobile) {
+    width: 100%;
+  }
 
   &:focus {
     outline: none;
-    border-color: #64748b;
-  }
-
-  & .select-option {
-    color: black;
+    border-color: map-get($colors, --primary);
   }
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: map-get($fw, --bold);
+}
+
+.description {
+  font-size: var(--fs-sm);
+  color: map-get($colors, --sa-gray-100) !important;
 }

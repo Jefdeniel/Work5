@@ -6,9 +6,11 @@ import useFetch from '../../hooks/useFetch';
 import { useSettings } from '../../hooks/useSettings';
 
 import { Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
 import DeleteAccount from '../../components/settings/account/DeleteAccount';
 import Signout from '../../components/settings/account/Signout';
 import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
+import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
@@ -18,8 +20,6 @@ import ActivityNotification from '../../components/settings/notifications/Activi
 import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
-import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
-import { Field, Form } from 'react-final-form';
 import Validators from '../../utils/Validators';
 
 const SettingsPage = () => {
@@ -73,15 +73,11 @@ const SettingsPage = () => {
         initialValues={settings}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Row>
-              <Heading
-                level={2}
-                isUnderlined
-                className="border-bottom pb-4 mb-4"
-              >
+            <Row sm={12} md={6}>
+              <Heading level={2} isUnderlined>
                 {t('settings:general.title')}
               </Heading>
-              <Field name="language" validate={Validators.required()}>
+              <Field name="language" validate={Validators.compose()}>
                 {({ input, meta }) => (
                   <LanguageSelector
                     {...input}
@@ -124,11 +120,7 @@ const SettingsPage = () => {
             </Row>
 
             <Row>
-              <Heading
-                level={2}
-                isUnderlined
-                className="border-bottom pb-4 mb-4"
-              >
+              <Heading level={2} isUnderlined>
                 {t('settings:notifications.title')}
               </Heading>
               <Field
@@ -160,11 +152,7 @@ const SettingsPage = () => {
             </Row>
 
             <Row>
-              <Heading
-                level={2}
-                isUnderlined
-                className="border-bottom pb-4 mb-4"
-              >
+              <Heading level={2} isUnderlined className="border-bottom">
                 {t('settings:agendaView.title')}
               </Heading>
               <Field name="weekStartsOn" validate={Validators.required()}>
@@ -190,11 +178,7 @@ const SettingsPage = () => {
             </Row>
 
             <Row>
-              <Heading
-                level={2}
-                isUnderlined
-                className="border-bottom pb-4 mb-4"
-              >
+              <Heading level={2} isUnderlined>
                 {t('settings:account.title')}
               </Heading>
               <Signout />
@@ -206,7 +190,6 @@ const SettingsPage = () => {
                 className="btn--primary"
                 text={t('settings:save')}
                 type="submit"
-                onClick={handleSaveSettings}
               />
             </Row>
 

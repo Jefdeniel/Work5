@@ -18,6 +18,7 @@ const DeleteAccountModal = ({ onClose }: Props) => {
       message={t('settings:account.deleteAccountDescription')}
       show={true}
       isDanger={true}
+      size="xl"
       onClose={onClose}
     >
       <Row justifyContent="end">

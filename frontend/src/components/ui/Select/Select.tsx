@@ -31,7 +31,7 @@ const Select = ({
 
   return (
     <label>
-      <Row>
+      <Row className="d-flex flex-row ">
         <Col>
           <Row className="d-flex flex-row align-items-center">
             <span className="title">{title}</span>
@@ -40,9 +40,9 @@ const Select = ({
             <small className="description">{description}</small>
           </Row>
         </Col>
-        <Col sm={12} md={6} className="d-flex flex-col">
+        <Col sm={12} md={6} className="d-flex flex-col justify-content-end">
           <select
-            className={`form-select mb-2 my-1 ${isNotValid ? 'is-invalid' : ''}`}
+            className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
             {...rest}
           >
             {options?.map((option) => (
