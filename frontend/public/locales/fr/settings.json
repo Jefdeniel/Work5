@@ -37,6 +37,10 @@
     "SignOut": "Déconnexion",
     "SignOutDescription": "Se déconnecter du compte",
     "deleteAccount": "Supprimer le compte",
-    "deleteAccountDescription": "Supprimer le compte"
+    "deleteAccountDescription": "Supprimer le compte",
+    "alreadyHaveAccount": "Vous avez déjà un compte?",
+    "createAccount": "Créer un compte",
+    "email": "Email",
+    "password": "Mot de passe"
   }
 }

@@ -37,6 +37,10 @@
     "SignOut": "Sign Out",
     "SignOutDescription": "Sign out of the account",
     "deleteAccount": "Delete Account",
-    "deleteAccountDescription": "Delete the account, this is a permanent action."
+    "deleteAccountDescription": "Delete the account, this is a permanent action.",
+    "alreadyHaveAccount": "Already have an account?",
+    "createAccount": "Create Account",
+    "email": "Email",
+    "password": "Password"
   }
 }
