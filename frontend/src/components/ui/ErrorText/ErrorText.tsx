@@ -4,7 +4,7 @@ interface Props {
 
 const ErrorText = ({ children, ...rest }: Props) => {
   return (
-    <small className="text-red-600" {...rest}>
+    <small className="text-danger" {...rest}>
       {children}
     </small>
   );
