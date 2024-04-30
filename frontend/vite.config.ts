@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/',
   build: {
-    outDir: 'frontend/dist',
+    outDir: 'dist',
     target: 'esnext',
   },
 });
