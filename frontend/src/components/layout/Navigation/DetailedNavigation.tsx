@@ -5,8 +5,6 @@ import BackButton from '../../ui/Button/BackButton';
 import IconButton from '../../ui/IconButton/IconButton';
 import Logo from '../../ui/Logo';
 import DetailedItem from './DetailedItem';
-
-import './navigation.css';
 import { Col, Row } from 'react-bootstrap';
 
 interface MenuItem {
