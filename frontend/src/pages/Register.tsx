@@ -10,15 +10,16 @@ import Validators from '../utils/Validators';
 
 const Register = () => {
   const { t } = useTranslation(['auth']);
-  const handleRegister = () => {
-    toast.success(t('auth:register.success'));
-  };
 
   // request to backend to register user
   const { fetchData: register } = useFetch('POST', ['register']);
 
+  const handleRegister = () => {
+    register();
+    toast.success(t('auth:register.success'));
+  };
   return (
-    <Row className="h-100">
+    <Row className="h-100 align-items-center justify-content-center m-3">
       <Col sm={12} md={6} className="d-none d-lg-block"></Col>
       <Col
         sm={12}
