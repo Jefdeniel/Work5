@@ -32,7 +32,9 @@
     "react-router-dom": "^6.23.0",
     "react-select": "^5.8.0",
     "react-timezone-select": "^3.2.3",
+    "react-toastify": "^10.0.5",
     "sass": "^1.75.0",
+    "toastify-react": "^4.3.1",
     "ts-luxon": "^4.5.2",
     "universal-cookie": "^7.1.4"
   },
