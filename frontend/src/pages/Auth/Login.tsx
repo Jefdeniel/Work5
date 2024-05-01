@@ -1,12 +1,12 @@
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import Cookies from 'universal-cookie';
-import Button from '../components/ui/Button/Button';
-import Heading from '../components/ui/Heading/Heading';
-import Input from '../components/ui/Input/Input';
-import Validators from '../utils/Validators';
+import Button from '../../components/ui/Button/Button';
+import Heading from '../../components/ui/Heading/Heading';
+import Input from '../../components/ui/Input/Input';
+import Validators from '../../utils/Validators';
 import { useTranslation } from 'react-i18next';
-import Logo from '../components/ui/Logo';
+import Logo from '../../components/ui/Logo';
 
 const Login = () => {
   const { t } = useTranslation('auth');
