@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import ColorPicker from '../components/agenda/notifications/ColorPicker/ColorPicker';
-import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
+import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Colors } from '../@types/Colors';
+import ColorPicker from '../components/agenda/notifications/ColorPicker/ColorPicker';
+import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
 
 const NotificationPage = () => {
   const [yourColor, setYourColor] = useState<string>(Colors.Primary300);

@@ -9,9 +9,6 @@ import CustomizePage from './pages/CustomizePage.tsx';
 import NotificationPage from './pages/NotificationPage.tsx';
 import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage.tsx';
-import AccountLayout from './layout/AccountLayout.tsx';
-import Login from './pages/Auth/Login.tsx';
-import Register from './pages/Auth/Register.tsx';
 
 function App() {
   const { i18n } = useTranslation();

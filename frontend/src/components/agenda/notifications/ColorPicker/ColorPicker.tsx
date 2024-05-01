@@ -4,11 +4,11 @@ import { TwitterPicker, ColorResult } from 'react-color';
 
 interface ColorPickerProps {
   color?: string;
-  title: string;
+  title?: string;
   onChange?: (color: string) => void;
 }
 
-const ColorPicker = ({ color, title, onChange }: ColorPickerProps) => {
+const ColorPicker = ({ color, onChange }: ColorPickerProps) => {
   const handleColorChange = (colorResult: ColorResult) => {
     const selectedColor = colorResult.hex;
     if (onChange) {
