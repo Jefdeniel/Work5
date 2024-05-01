@@ -2,12 +2,12 @@ import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import Button from '../components/ui/Button/Button';
-import Heading from '../components/ui/Heading/Heading';
-import Input from '../components/ui/Input/Input';
-import useFetch from '../hooks/useFetch';
-import Validators from '../utils/Validators';
-import Logo from '../components/ui/Logo';
+import Button from '../../components/ui/Button/Button';
+import Heading from '../../components/ui/Heading/Heading';
+import Input from '../../components/ui/Input/Input';
+import useFetch from '../../hooks/useFetch';
+import Validators from '../../utils/Validators';
+import Logo from '../../components/ui/Logo';
 
 const Register = () => {
   const { t } = useTranslation(['auth']);

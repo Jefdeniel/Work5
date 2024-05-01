@@ -1,0 +1,9 @@
+{
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "description": "Greifen Sie auf alle Benachrichtigungen an einem Ort zu. Um eine Benachrichtigung zu löschen, klicken Sie einfach darauf und es erscheint eine Löschtaste.",
+    "clickOnCircle": "Sie können die Farben ändern, indem Sie auf den Kreis klicken.",
+    "fromOthers": "Von anderen",
+    "forYou": "Für dich"
+  }
+}
