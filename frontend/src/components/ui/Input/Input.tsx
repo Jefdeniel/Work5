@@ -35,12 +35,23 @@ const Input = ({
 }: Props) => {
   const { t } = useTranslation(['general']);
   const isNotValid = meta?.error?.[0] && meta.touched;
+  const [isFocused, setIsFocused] = React.useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleLoseFocus = () => {
+    setIsFocused(false);
+  };
 
   return (
-    <div className={disableSpacing ? '' : 'my-1'}>
+    <div
+      className={`full-input ${disableSpacing ? '' : 'my-sm'} ${isFocused ? 'input--focused' : ''}`}
+    >
       {title && (
-        <label>
-          <span className="title">{title}</span>
+        <label className={`title ${isFocused ? 'small-text' : ''}`}>
+          {title}
         </label>
       )}
 
@@ -53,6 +64,8 @@ const Input = ({
             value={defaultValue}
             placeholder={defaultValue}
             disabled={disabled}
+            onFocus={handleFocus}
+            onBlur={handleLoseFocus}
             onChange={onChange}
             {...rest}
           />
