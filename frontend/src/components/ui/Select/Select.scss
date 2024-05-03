@@ -3,8 +3,8 @@
 .form-control {
   height: 50px;
   width: auto;
-  background-color: map-get($colors, --white);
-  border: 1px solid map-get($colors, --sa-dark);
+  background-color: var(--white);
+  border: 1px solid var(--sa-dark);
 
   @include screen(mobile) {
     width: 100%;
@@ -12,15 +12,15 @@
 
   &:focus {
     outline: none;
-    border-color: map-get($colors, --primary);
+    border-color: var(--primary);
   }
 }
 
 .title {
-  font-weight: map-get($fw, --bold);
+  font-weight: var(--bold);
 }
 
 .description {
   font-size: var(--fs-sm);
-  color: map-get($colors, --sa-gray-100) !important;
+  color: var(--sa-gray-100) !important;
 }
