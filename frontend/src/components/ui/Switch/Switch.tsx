@@ -36,7 +36,7 @@ const Switch = ({ title, description, checked, onChange }: Props) => {
             checked={checked}
             onChange={handleChange}
           />
-          <span className="switch-slider"></span>
+          <div className="switch-slider"></div>
         </label>
       </Col>
     </Row>
