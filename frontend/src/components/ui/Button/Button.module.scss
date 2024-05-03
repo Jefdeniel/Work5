@@ -2,7 +2,7 @@
 
 .button-main {
   border: none;
-  border-radius: map-get($br, --sm);
+  border-radius: var(--sm);
   cursor: pointer;
   height: 60px;
   transition:
@@ -11,48 +11,48 @@
     color 0.2s ease-in-out;
 
   &:disabled {
-    background-color: map-get($colors, --sa-bright);
-    border: 1px solid map-get($colors, --sa-dark);
-    color: map-get($colors, --sa-dark);
+    background-color: var(--sa-bright);
+    border: 1px solid var(--sa-dark);
+    color: var(--sa-dark);
 
     &:hover {
-      background-color: map-get($colors, --sa-bright);
-      border: 1px solid map-get($colors, --sa-dark);
-      color: map-get($colors, --sa-dark);
+      background-color: var(--sa-bright);
+      border: 1px solid var(--sa-dark);
+      color: var(--sa-dark);
     }
   }
 }
 
 .button-default {
   &:hover {
-    background-color: map-get($colors, --sa-primary-100);
-    color: map-get($colors, --sa-dark);
+    background-color: var(--sa-primary-100);
+    color: var(--sa-dark);
   }
 }
 
 .button-danger {
   &:hover {
-    background-color: map-get($colors, --sa-error-100);
-    color: map-get($colors, --sa-dark);
+    background-color: var(--sa-error-100);
+    color: var(--sa-dark);
   }
 }
 
 .button-danger-outline {
   &:hover {
-    border-color: map-get($colors, --sa-error-100);
-    color: map-get($colors, --sa-error-100);
+    border-color: var(--sa-error-100);
+    color: var(--sa-error-100);
   }
 }
 
 .button-default-outline {
   &:hover {
-    border-color: map-get($colors, --sa-primary-100);
-    color: map-get($colors, --sa-primary-100);
+    border-color: var(--sa-primary-100);
+    color: var(--sa-primary-100);
   }
 }
 
 .button-icon {
-  margin-right: map-get($spacing, --space-xs);
+  margin-right: var(--space-xs);
   display: flex;
   align-items: center;
 }
@@ -66,5 +66,5 @@
 
 .button-small {
   height: 40px;
-  padding: map-get($spacing, --space-xs) map-get($spacing, --space-sm);
+  padding: var(--space-xs) var(--space-sm);
 }
