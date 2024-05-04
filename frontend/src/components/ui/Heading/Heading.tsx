@@ -1,4 +1,4 @@
-import './Heading.scss'
+import './Heading.scss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   level: number;
