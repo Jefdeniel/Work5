@@ -25,11 +25,11 @@ class Event(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     creator = models.ForeignKey(User, related_name="events", on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     calendar = models.ForeignKey(
         Calendar, related_name="events", on_delete=models.CASCADE, blank=True, null=True
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "events"

@@ -1,8 +1,7 @@
-"""
-URL configuration for backend project.
+"""django_rest_swagger URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+    https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -17,24 +16,38 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import render
-from rest_framework import routers
-from calendar_app import views
 
-# WARNING: after changes, you need to restart the server ⚠️
+from django.conf.urls.static import static
+from rest_framework_swagger.views import get_swagger_view
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
+from django.conf import settings
 
-router = routers.DefaultRouter()
-router.register(r"events", views.EventView, "event")
-router.register(r"reminders", views.ReminderView, "reminder")
-router.register(r"calendars", views.CalendarView, "calendar")
+# Define schema view for Swagger
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Smart Agenda API",
+        default_version="v1",
+        description="A simple Django API to manage your agenda",
+        terms_of_service="https://www.example.com/terms/",
+        contact=openapi.Contact(email="contact@example.com"),
+        license=openapi.License(name="Awesome License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
-
-def index_view(request):
-    return render(request, "dist/index.html")
-
-
+# Define URL patterns
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include("calendar_app.urls")),
-    path("", index_view, name="index"),
+    path("", include("calendar_app.urls")),
+    path(
+        "docs/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
 ]
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

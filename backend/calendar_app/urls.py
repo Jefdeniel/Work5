@@ -1,39 +1,18 @@
-"""
-URL configuration for backend project.
+from .views import (
+    CalendarMethod,
+    EventMethod,
+)
+from rest_framework.routers import DefaultRouter
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+router = DefaultRouter()
+router.register("calendar", CalendarMethod, basename="calendar")
+router.register("event", EventMethod, basename="event")
+urlpatterns = router.urls
 
-from django.contrib import admin
-from django.urls import path, include
-from django.shortcuts import render
-from rest_framework import routers
-from . import views
-
-# WARNING: after changes, you need to restart the server ⚠️
-
-router = routers.DefaultRouter()
-router.register(r"events", views.EventView, "event")
-router.register(r"reminders", views.ReminderView, "reminder")
-router.register(r"calendars", views.CalendarView, "calendar")
-
-urlpatterns = [
-    # path("api/get_calendars/", views.get_calendars),
-    # path("events/", views.EventView.as_view(), name="event"),
-    # path("get_calendars/", views.get_calendars),
-    path("login/", views.login_view, name="api_login"),
-    path("logout/", views.logout_view, name="api_logout"),
-    path("session/", views.session_view, name="api_session"),
-    path("whoami/", views.whoami_view, name="api_whoami"),
-]
+# urlpatterns = [
+#     path("hello/", views.hello_world, name="hello-world"),
+#     path("login/", views.login_view, name="api_login"),
+#     path("logout/", views.logout_view, name="api_logout"),
+#     path("session/", views.session_view, name="api_session"),
+#     path("whoami/", views.whoami_view, name="api_whoami"),
+# ]
