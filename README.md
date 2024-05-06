@@ -11,10 +11,15 @@
 - Django
 - Please use Black formatter to format the code. You can find it [here](https://code.visualstudio.com/docs/python/formatting).
 
+### Managing Dependencies
+
+- Freeze your current dependencies to get them from requirements.txt file: `pip freeze > requirements.txt`
+- Install dependencies after freeze: `pip install -r requirements.txt`
+
 ### DB
 
 - Make sure your virtual environment is active with `pipenv shell` (run from root).
-- Build with yarn into frontend.
+- Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
 - After making changes, such as adding models, re-run `python manage.py makemigrations calendar_app`.
 
 ### How to start
