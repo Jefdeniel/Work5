@@ -1,17 +1,17 @@
 @import '../../../App.scss';
 
 .form-control {
-  height: 60px;
-  border-radius: 7px;
-  border: 1px solid #d2d5db;
+  height: 50px;
+  border: 1px solid var(--sa-primary-100);
+  border-radius: var(--br-base);
 
   &:focus {
     outline: none;
-    border-color: #64748b;
+    border-color: var(--sa-primary-200);
   }
 
   & .select-option {
-    color: black;
+    color: var(--sa-dark);
   }
 
   &.small {
@@ -20,23 +20,40 @@
 
   &.textarea {
     height: 150px;
-    border-radius: 7px;
-    border: 1px solid #d2d5db;
+    border-radius: var(--br-base);
+    border: 1px solid var(--sa-primary-100);
   }
 }
 
 .disabled {
-  background-color: #d2d5db;
-  color: #64748b;
+  background-color: var(--sa-primary-100);
+  color: var(--sa-primary-200);
   cursor: not-allowed;
   opacity: 0.5;
 }
 
+.full-input {
+  &.input--focused .title {
+    font-size: 0.938rem;
+    font-weight: var(--fw-regular);
+    color: var(--sa-primary-200);
+    transform: translateX(-20%) translateY(-50%);
+  }
+
+  & .title {
+    background-color: var(--sa-bright);
+    position: relative;
+    z-index: 50;
+    transition: all .2s ease-in-out;
+    transform: translateX(30%) translateY(50%);
+  }
+}
+
 .title {
-  color: black;
+  color: var(--sa-dark);
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  padding: 0 var(--p-lg);
 }
 
 .input-with-icon {

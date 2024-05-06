@@ -1,3 +1,5 @@
+import './Heading.scss';
+
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   level: number;
   isUnderlined?: boolean;
