@@ -1,10 +1,12 @@
 from .views import (
     CalendarMethod,
+    EventMethod,
 )
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register("calendar", CalendarMethod, basename="calendar")
+router.register("event", EventMethod, basename="event")
 urlpatterns = router.urls
 
 # urlpatterns = [
