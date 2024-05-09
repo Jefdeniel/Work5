@@ -2,67 +2,66 @@
 
 :root {
   /* Colors */
-  --sa-primary-100: hsla(231, 36%, 78%, 100);
-  --sa-primary-200: hsla(238, 11%, 61%, 100);
-  --sa-primary-300: hsla(223, 100%, 63%, 100);
-  --sa-secondary-100: hsla(141, 70%, 51%, 100);
-  --sa-secondary-200: hsla(141, 70%, 36%, 100);
-  --sa-secondary-300: hsla(141, 70%, 21%, 100);
-  --sa-error-100: hsla(0, 100%, 63%, 100);
-  --sa-error-200: hsla(5, 88%, 30%, 100);
-  --sa-error-300: hsla(0, 100%, 15%, 100);
-  --sa-gray-100: #9191A6;
+  --sa-primary-100: hsla(219, 100%, 96%, 100);
+  --sa-primary-200: hsla(219, 100%, 87%, 100);
+  --sa-primary-300: hsla(217, 100%, 78%, 100);
+  --sa-primary-400: hsla(219, 100%, 67%, 100);
+  --sa-primary-500-base: hsla(223, 100%, 63%, 100);
+  --sa-primary-700: hsla(230, 84%, 48%, 100);
+  --sa-primary-950: hsla(233, 63%, 21%, 100);
+  --sa-success-100: hsla(140, 100%, 92%, 100);
+  --sa-success-300: hsla(141, 100%, 85%, 100);
+  --sa-success-500-base: hsla(141, 88%, 56%, 100);
+  --sa-success-600: hsla(142, 98%, 36%, 100);
+  --sa-error-100: hsla(6, 100%, 94%, 100);
+  --sa-error-300: hsla(5, 98%, 82%, 100);
+  --sa-error-500-base: hsla(5, 88%, 57%, 100);
+  --sa-error-700: hsla(5, 77%, 42%, 100);
   --sa-bright: hsla(0, 0%, 100%, 100);
+  --sa-grey: hsla(231, 36%, 78%, 100);
   --sa-dark: hsla(240, 3%, 12%, 100);
-  /* Font size */
-  --fs-h1: 1.75rem;
-  --fs-h2: 1.125rem;
-  --fs-highlight: 0.875rem;
-  --fs-read: 0.875rem;
-  --fs-small: 0.813rem;
   /* Font weight */
   --fw-light: 300;
   --fw-regular: 400;
   --fw-bold: 700;
   /* Border radius */
-  --br-base: 8px;
+  --br-base: 0.5rem;
   --br-full: 9999px;
   /* Padding */
-  --p-xxs: 4px;
-  --p-xs: 9px;
-  --p-sm: 10px;
-  --p-lg: 18px;
+  --p-xxs: 0.25rem;
+  --p-xs: 0.563rem;
+  --p-sm: 0.625rem;
+  --p-lg: 1.125rem;
   /* Spacing */
+  --sp-xxs: 0.4rem;
   --sp-xs: 0.5rem;
   --sp-sm: 1rem;
   --sp-base: 1.5rem;
   --sp-lg: 2rem;
+  --sp-xl: 3.6rem;
 }
 
 /* For browsers that support clamp  */
 @supports (font-size: clamp(1rem, 1vi, 1rem)) {
   :root {
-    --fs-sm: clamp(0.8rem, 0.34vi + 0.71rem, 0.99rem);
-    --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
-    --fs-md: clamp(1.25rem, 0.32vi + 1.17rem, 1.43rem);
-    --fs-lg: clamp(1.56rem, 0.27vi + 1.5rem, 1.71rem);
-    --fs-xl: clamp(1.95rem, 0.18vi + 1.91rem, 2.05rem);
-    --fs-xxl: clamp(2.44rem, 0.04vi + 2.43rem, 2.46rem);
-    --fs-xxxl: clamp(3.05rem, -0.18vi + 3.1rem, 2.95rem);
+    --fs-small: clamp(0.813rem, 0.34vi + 0.71rem, 0.813rem);
+    --fs-read: clamp(0.875rem, 0.34vi + 0.91rem, 0.938rem);
+    --fs-head-sm: clamp(0.875rem, 0.32vi + 1.17rem, 1rem);
+    --fs-head-md: clamp(1.125rem, 0.27vi + 1.5rem, 1.625rem);
+    --fs-head-lg: clamp(1.75rem, 0.18vi + 1.91rem, 2.25rem);
   }
 }
 
 /* For browsers that don't support clamp */
 @supports not (font-size: clamp(1rem, 1vi, 1rem)) {
   :root {
-    --fs-sm: 0.8rem;
-    --fs-base: 1rem;
-    --fs-md: 1.25rem;
-    --fs-lg: 1.56rem;
-    --fs-xl: 1.95rem;
-    --fs-xxl: 2.44rem;
-    --fs-xxxl: 3.05rem;
+    --fs-small: 0.813rem;
+    --fs-read: 0.875rem;
+    --fs-head-sm: 0.875rem;
+    --fs-head-md: 1.125rem;
+    --fs-head-lg: 1.75rem;
   }
+
   @media screen and (min-width: 1280px) {
     :root {
       --fs-sm: 0.99rem;
@@ -210,6 +209,26 @@ ul {
 }
 
 /* Some general classes */
+.heading {
+  &.heading--sm {
+    font-family: 'Lato', sans-serif !important;
+    font-size: var(--fs-head-sm);
+    font-weight: var(--fw-bold);
+  }
+
+  &.heading--md {
+    font-family: 'Rubik', sans-serif;
+    font-size: var(--fs-head-md);
+    font-style: normal;
+    font-weight: var(--bold);
+  }
+
+  &.heading--lg {
+    font-family: 'Rubik', sans-serif;
+    font-size: var(--fs-head-lg);
+  }
+}
+
 .small-text {
   font-size: 15px;
   color: var(--sa-error-200);
@@ -222,4 +241,12 @@ ul {
 .my-sm {
   margin-top: var(--sp-sm);
   margin-bottom: var(--sp-sm);
+}
+
+.mb-base {
+  margin-bottom: var(--sp-base);
+}
+
+.mb-large {
+  margin-bottom: var(--sp-lg);
 }
