@@ -1,3 +1,5 @@
+import './logo.scss';
+
 interface LogoProps {
   width: string;
   height: string;
