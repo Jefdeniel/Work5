@@ -1,6 +1,30 @@
 @import '../../../App.scss';
 
-.button-main {
+.btn {
+  padding: 5rem 2rem;
+  border-radius: var(--br-base) !important;
+  display: flex !important;
+  align-items: center;
+  gap: var(--sp-xxs);
+  transition: all .2s ease-in-out;
+
+  &.btn--bordered {
+    color: var(--sa-primary-950);
+    border: 1.5px solid var(--sa-primary-950);
+  }
+
+  &.btn.btn--bordered:hover,
+  &.btn.btn--bordered:focus {
+    border: 1.5px solid var(--sa-primary-950);
+  }
+
+  & .btn__icon {
+    display: block;
+    transform: scale(0.6);
+  }
+}
+
+/*.button-main {
   border: none;
   border-radius: var(--sm);
   cursor: pointer;
@@ -67,4 +91,4 @@
 .button-small {
   height: 40px;
   padding: var(--space-xs) var(--space-sm);
-}
+}*/
