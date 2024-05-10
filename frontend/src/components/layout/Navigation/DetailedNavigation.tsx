@@ -44,7 +44,6 @@ const menuItems: MenuItem[] = [
     ),
     label: 'general:navigation.notifications',
   },
-
   {
     link: '/sharing-hub',
     icon: (
@@ -91,9 +90,13 @@ const DetailedNavigation = ({
   const navigate = useNavigate();
   const { t } = useTranslation(['general']);
 
-  const menuWidth = isMenuToggled ? '315px' + 'px' : 'auto';
   const handleOnClickMenu = (link: string) => {
     navigate(link);
+    isMenuBroken && setIsMenuToggled(false);
+  };
+
+  const handleSettingsClick = () => {
+    navigate('/settings');
     isMenuBroken && setIsMenuToggled(false);
   };
 
@@ -106,7 +109,7 @@ const DetailedNavigation = ({
         onBreakPoint={setIsMenuBroken}
         breakPoint="md"
         backgroundColor="white"
-        width={menuWidth}
+        width="250px"
         style={{
           borderRight: '1px solid var(--sa-grey)',
         }}
@@ -125,15 +128,12 @@ const DetailedNavigation = ({
           <Col className={`d-flex justify-content-end`}>
             <IconButton
               icon={<img src="/icons/settings.svg" alt="close" />}
-              onClick={() => navigate('/settings')}
+              onClick={handleSettingsClick}
             />
           </Col>
         </Row>
 
-        <BackButton
-          text={t('general:buttons.back')}
-          className={`mb-base`}
-        ></BackButton>
+        <BackButton text={t('general:buttons.back')} className={`mb-base`} />
 
         <span className={`heading heading--md sidebar__agenda-title`}>
           Agenda name
