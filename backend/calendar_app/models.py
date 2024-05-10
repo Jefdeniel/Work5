@@ -2,11 +2,20 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 
 class CustomUser(AbstractUser):
+    class Role(models.TextChoices):
+        ADMIN = "ADMIN", _("Admin")
+        EDITOR = "EDITOR", _("Editor")
+        VIEWER = "VIEWER", _("Viewer")
+
     birthday = models.DateField(_("birthday"), blank=True, null=True)
     avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
+    role = models.CharField(
+        max_length=50, choices=Role.choices, default=Role.VIEWER, verbose_name=_("role")
+    )
 
     class Meta:
         db_table = "custom_user"
@@ -18,6 +27,12 @@ class Calendar(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     img = models.ImageField(upload_to="calendar_images/", blank=True, null=True)
+    owner = models.ForeignKey(
+        get_user_model(),
+        related_name="calendars",
+        on_delete=models.CASCADE,
+        null=True,  # DELETE THIS LINE
+    )
     date_start = models.DateTimeField(blank=True, null=True)
     date_stop = models.DateTimeField(blank=True, null=True)
 
