@@ -1,13 +1,13 @@
 from django.contrib import admin
 from .models import (
-    User,
+    CustomUser,
+    Calendar,
     CalendarUser,
     Event,
     Reminder,
-    Calendar,
-    UserSettings,
     Label,
     Notification,
+    UserSettings,
 )
 
 
@@ -27,9 +27,9 @@ class EventAdmin(admin.ModelAdmin):
         "start_time",
         "end_time",
         "creator",
+        "calendar",
         "created_at",
         "updated_at",
-        "calendar",
     )
 
 
@@ -45,10 +45,10 @@ class ReminderAdmin(admin.ModelAdmin):
 
 class UserAdmin(admin.ModelAdmin):
     list_display = (
-        "firstname",
-        "lastname",
+        "username",
         "email",
-        "password",
+        "first_name",
+        "last_name",
         "birthday",
         "avatar",
     )
@@ -57,7 +57,7 @@ class UserAdmin(admin.ModelAdmin):
 class CalendarUserAdmin(admin.ModelAdmin):
     list_display = (
         "user",
-        "agenda",
+        "calendar",
         "created_at",
     )
 
@@ -91,7 +91,7 @@ class UserSettingsAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(CustomUser, UserAdmin)
 admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(CalendarUser, CalendarUserAdmin)
 admin.site.register(Event, EventAdmin)
