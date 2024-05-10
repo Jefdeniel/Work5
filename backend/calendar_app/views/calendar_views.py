@@ -1,63 +1,61 @@
-# from .utils import access_token_IsAuthenticated
+from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
 from ..models import Calendar
 from ..serializers import CalendarSerializer
 
 
-# Calendars
+class CalendarViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing calendars.
+    """
 
-
-class CalendarMethod(viewsets.ModelViewSet):
-    queryset = Calendar.objects.all()
+    queryset = Calendar.objects.all().prefetch_related(
+        "events"
+    )  # Assuming a relationship to events
     serializer_class = CalendarSerializer
 
     def list(self, request, *args, **kwargs):
-        data = list(Calendar.objects.all().values())
-        return Response(data)
+        # Utilizes the serializer for proper data representation
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
     def retrieve(self, request, *args, **kwargs):
-        data = list(Calendar.objects.filter(id=kwargs["pk"]).values())
-        return Response(data)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
-        calendar_serializer_data = CalendarSerializer(data=request.data)
-        if calendar_serializer_data.is_valid():
-            calendar_serializer_data.save()
-            status_code = status.HTTP_201_CREATED
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(
-                {"message": "Calendar created successfully"}, status=status_code
+                {"message": "Calendar created successfully", "data": serializer.data},
+                status=status.HTTP_201_CREATED,
             )
-        else:
-            status_code = status.HTTP_400_BAD_REQUEST
-            return Response(
-                {"message": "Please fill the details data"}, status=status_code
-            )
-
-    def destroy(self, request, *args, **kwargs):
-        calendar_data = Calendar.objects.get(id=kwargs["pk"])
-        if calendar_data:
-            calendar_data.delete()
-            status_code = status.HTTP_204_NO_CONTENT
-            return Response(
-                {"message": "Calendar deleted successfully"}, status=status_code
-            )
-        else:
-            status_code = status.HTTP_400_BAD_REQUEST
-            return Response({"message": "Calendar not found"}, status=status_code)
+        return Response(
+            {"message": "Validation failed", "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     def update(self, request, *args, **kwargs):
-        calendar_data = Calendar.objects.get(id=kwargs["pk"])
-        calendar_serializer_data = CalendarSerializer(calendar_data, data=request.data)
-        if calendar_serializer_data.is_valid():
-            calendar_serializer_data.save()
-            status_code = status.HTTP_200_OK
+        partial = kwargs.pop("partial", False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        if serializer.is_valid():
+            serializer.save()
             return Response(
-                {"message": "Calendar updated successfully"}, status=status_code
+                {"message": "Calendar updated successfully", "data": serializer.data}
             )
-        else:
-            status_code = status.HTTP_400_BAD_REQUEST
-            return Response(
-                {"message": "Please fill the details data"}, status=status_code
-            )
+        return Response(
+            {"message": "Validation failed", "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(
+            {"message": "Calendar deleted successfully"},
+            status=status.HTTP_204_NO_CONTENT,
+        )

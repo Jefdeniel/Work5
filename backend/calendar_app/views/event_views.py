@@ -1,41 +1,48 @@
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.response import Response
-from rest_framework import viewsets
+from django.shortcuts import get_object_or_404
 from ..models import Event
 from ..serializers import EventSerializer
 
 
-class EventMethod(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    # Hergebruik van de create-methode uit de EventSerializer
     def create(self, request, *args, **kwargs):
-        event_serializer_data = EventSerializer(data=request.data)
-        if event_serializer_data.is_valid():
-            event_serializer_data.save()
-            status_code = status.HTTP_201_CREATED
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(
-                {"message": "Event created successfully"}, status=status_code
+                {"message": "Event created successfully", "data": serializer.data},
+                status=status.HTTP_201_CREATED,
             )
         else:
-            status_code = status.HTTP_400_BAD_REQUEST
             return Response(
-                {"message": "Please fill the details data"}, status=status_code
+                {
+                    "message": "Please fill the details data",
+                    "errors": serializer.errors,
+                },
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
-    # Hergebruik van de update-methode uit de EventSerializer
     def update(self, request, *args, **kwargs):
-        event_data = Event.objects.get(id=kwargs["pk"])
-        event_serializer_data = EventSerializer(event_data, data=request.data)
-        if event_serializer_data.is_valid():
-            event_serializer_data.save()
-            status_code = status.HTTP_200_OK
+        partial = kwargs.pop("partial", False)
+        instance = get_object_or_404(Event, pk=kwargs.get("pk"))
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        if serializer.is_valid():
+            serializer.save()
             return Response(
-                {"message": "Event updated successfully"}, status=status_code
+                {"message": "Event updated successfully", "data": serializer.data}
             )
-        else:
-            status_code = status.HTTP_400_BAD_REQUEST
-            return Response(
-                {"message": "Please fill the details data"}, status=status_code
-            )
+        return Response(
+            {"message": "Please fill the details data", "errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        instance = get_object_or_404(Event, pk=kwargs.get("pk"))
+        instance.delete()
+        return Response(
+            {"message": "Event deleted successfully"}, status=status.HTTP_204_NO_CONTENT
+        )
