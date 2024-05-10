@@ -51,7 +51,7 @@ class Event(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     creator = models.ForeignKey(
-        CustomUser, related_name="events", on_delete=models.CASCADE
+        CustomUser, related_name="user_events", on_delete=models.CASCADE
     )
     calendar = models.ForeignKey(
         Calendar, related_name="events", on_delete=models.CASCADE, blank=True, null=True
