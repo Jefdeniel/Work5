@@ -1,5 +1,5 @@
 import { Spinner } from 'react-bootstrap';
-import styles from './Button.module.scss';
+import './Button.scss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
@@ -33,58 +33,18 @@ const Button = ({
   children,
   ...rest
 }: Props) => {
-  const getButtonClasses = () => {
-    const classes = [];
-
-    classes.push(styles['button-main']);
-
-    if (isOutline) {
-      classes.push(
-        isDanger
-          ? styles['button-danger-outline']
-          : styles['button-default-outline']
-      );
-    } else {
-      classes.push(
-        isDanger ? styles['button-danger'] : styles['button-default']
-      );
-    }
-
-    classes.push(isSmall ? styles['button-small'] : '');
-    classes.push(color ? styles[`button-${color}`] : '');
-    classes.push(className);
-
-    return classes.join(' ');
-  };
-
-  const handleMouseEnter = (e: { currentTarget: HTMLButtonElement }) => {
-    const { currentTarget } = e;
-    currentTarget.classList.add(
-      isDanger ? styles['button-danger-hover'] : styles['button-default-hover']
-    );
-  };
-
-  const handleMouseLeave = (e: { currentTarget: HTMLButtonElement }) => {
-    const { currentTarget } = e;
-    currentTarget.classList.remove(
-      isDanger ? styles['button-danger-hover'] : styles['button-default-hover']
-    );
-  };
-
   const button = (
     <button
       type={type}
-      className={getButtonClasses()}
+      className={`button ${className}`}
       style={style}
       color={color}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onClick={onClick}
       disabled={disabled}
       {...rest}
     >
-      <div className={styles['button-content']}>
-        {icon && <span className={styles['button-icon']}>{icon}</span>}
+      <div className={`button-content`}>
+        {icon && <span className={`button-icon`}>{icon}</span>}
         {text && !isLoading && <span>{text}</span>}
         {isLoading && <Spinner animation="border" size="sm" />}
         {children}

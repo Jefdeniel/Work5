@@ -30,8 +30,6 @@ const AgendaItem = ({
     <MenuItem
       style={{
         backgroundColor: 'white',
-        margin: '16px 12px',
-        padding: '12px 8px',
         ...{ style },
       }}
       icon={icon}

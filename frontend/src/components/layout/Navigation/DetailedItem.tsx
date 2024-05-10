@@ -28,12 +28,10 @@ const DetailedItem = ({
 
   return (
     <MenuItem
-      style={{
-        backgroundColor: 'white',
-        margin: '16px 12px',
-        padding: '12px 8px',
-        ...{ style },
-      }}
+      // style={{
+      //   backgroundColor: 'white',
+      //   ...{ style },
+      // }}
       icon={icon}
       onClick={handleOnClick}
       active={isActive}

@@ -73,7 +73,7 @@ const SettingsPage = () => {
         initialValues={settings}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Row sm={12} md={6}>
+            <Row>
               <Heading level={2} isUnderlined>
                 {t('settings:general.title')}
               </Heading>
