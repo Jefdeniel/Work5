@@ -1,2 +1,2 @@
-from .calendar_views import CalendarViewset
+from .calendar_views import CalendarViewSet
 from .event_views import EventViewSet

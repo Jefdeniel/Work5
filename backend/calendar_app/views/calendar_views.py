@@ -4,7 +4,7 @@ from ..models import Calendar
 from ..serializers import CalendarSerializer
 
 
-class CalendarViewset(viewsets.ModelViewSet):
+class CalendarViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing calendars.
     """
