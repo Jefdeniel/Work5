@@ -13,7 +13,6 @@ const Signout = () => {
 
   const handleSignout = async () => {
     auth.logout();
-
     await logout({});
   };
 

@@ -11,7 +11,7 @@ import Logo from '../../components/ui/Logo';
 const Login = () => {
   const { t } = useTranslation('auth');
   const onLoginHandler = async (values: any) => {
-    const response = await fetch('http://localhost:8000/api/auth/login', {
+    const response = await fetch('http://127.0.0.1:8000/api-token-auth/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,8 +54,8 @@ const Login = () => {
               <Field
                 name="password"
                 validate={Validators.compose(
-                  Validators.required(),
-                  Validators.password()
+                  Validators.required()
+                  // Validators.password()
                 )}
               >
                 {({ input, meta }) => (
