@@ -23,19 +23,22 @@ class CalendarSerializer(serializers.ModelSerializer):
     )
 
     created_at = serializers.DateTimeField(
-        read_only=True, help_text="Timestamp when the event was created"
+        read_only=True, help_text="Timestamp when the calendar was created"
     )
     updated_at = serializers.DateTimeField(
-        read_only=True, help_text="Timestamp when the event was last updated"
+        read_only=True, help_text="Timestamp when the calendar was last updated"
     )
 
     class Meta:
         model = Calendar
         fields = (
+            "id",
             "title",
             "description",
             "img",
             "date_start",
             "date_stop",
+            "created_at",
+            "updated_at",
         )
         read_only_fields = ("id", "created_at", "updated_at")
