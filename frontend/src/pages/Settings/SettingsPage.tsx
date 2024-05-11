@@ -73,7 +73,7 @@ const SettingsPage = () => {
         initialValues={settings}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Row>
+            <Row className={`settings-block`}>
               <Heading level={2} isUnderlined>
                 {t('settings:general.title')}
               </Heading>
@@ -119,7 +119,7 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <Row>
+            <Row className={`settings-block`}>
               <Heading level={2} isUnderlined>
                 {t('settings:notifications.title')}
               </Heading>
@@ -151,7 +151,7 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <Row>
+            <Row className={`settings-block`}>
               <Heading level={2} isUnderlined className="border-bottom">
                 {t('settings:agendaView.title')}
               </Heading>
@@ -177,16 +177,25 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <Row>
+            <Row className={`settings-block`}>
               <Heading level={2} isUnderlined>
                 {t('settings:account.title')}
               </Heading>
-              <Signout />
-              <DeleteAccount onClick={openDeleteAccountModal} />
+
+              <Signout className={`btn btn--danger`} />
+
+              <DeleteAccount
+                className={`btn btn--bordered-danger`}
+                onClick={openDeleteAccountModal}
+              />
             </Row>
 
-            <Row>
-              <Button text={t('settings:save')} type="submit" />
+            <Row className={`mt-large`}>
+              <Button
+                className={`btn--success`}
+                text={t('settings:save')}
+                type="submit"
+              />
             </Row>
 
             {showDeleteAccountModal && (
