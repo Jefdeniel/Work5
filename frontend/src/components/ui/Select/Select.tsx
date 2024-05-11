@@ -30,8 +30,8 @@ const Select = ({
   const isNotValid = meta?.error?.[0] && meta.touched;
 
   return (
-    <label>
-      <Row className="d-flex flex-row ">
+    <div>
+      <Row className="full-select d-flex flex-row gap-2">
         <Col>
           <Row className="d-flex flex-row align-items-center">
             <span className="title">{title}</span>
@@ -40,7 +40,7 @@ const Select = ({
             <small className="description">{description}</small>
           </Row>
         </Col>
-        <Col sm={12} md={6} className="d-flex flex-col justify-content-end">
+        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
           <select
             className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
             {...rest}
@@ -65,7 +65,7 @@ const Select = ({
           )}
         </Col>
       </Row>
-    </label>
+    </div>
   );
 };
 

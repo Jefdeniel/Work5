@@ -19,7 +19,7 @@ export default function Heading({
     const classes = [];
 
     if (isUnderlined) {
-      classes.push('underline');
+      classes.push('underline mb-base');
     }
 
     classes.push(className);

@@ -3,7 +3,7 @@
 .form-control {
   height: 50px;
   width: auto;
-  background-color: var(--white);
+  background-color: var(--sa-bright);
   border: 1px solid var(--sa-dark);
 
   @include screen(mobile) {
@@ -12,15 +12,21 @@
 
   &:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--sa-primary-500-base);
   }
 }
 
-.title {
-  font-weight: var(--bold);
+.full-select {
+  margin-bottom: var(--sp-base);
+  
+  & .title {
+    font-weight: var(--fw-bold);
+    color: var(--sa-primary-500-base);
+  }
+
+  & .form-control {
+    color: var(--sa-primary-950);
+    border-color: var(--sa-primary-950);
+  }
 }
 
-.description {
-  font-size: var(--fs-small);
-  color: var(--sa-primary-300) !important;
-}
