@@ -7,25 +7,55 @@ import Input from '../../components/ui/Input/Input';
 import Validators from '../../utils/Validators';
 import { useTranslation } from 'react-i18next';
 import Logo from '../../components/ui/Logo';
+import useAuth from '../../hooks/useAuth';
+import { FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
+import useFetch from '../../hooks/useFetch';
 
 const Login = () => {
   const { t } = useTranslation('auth');
-  const onLoginHandler = async (values: any) => {
-    const response = await fetch('http://127.0.0.1:8000/api-token-auth/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    });
+  const auth = useAuth();
 
-    if (response.ok) {
-      const data = await response.json();
-      const cookies = new Cookies();
-      cookies.set('token', data.token, { path: '/' });
-      window.location.href = '/';
-    }
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const { fetchData: postLogin } = useFetch('POST', ['login']);
+
+  const onLoginHandler = async (event: FormEvent) => {
+    event.preventDefault();
+
+    postLogin({ username, password })
+      .then((response) => {
+        if (!response.ok) {
+          toast.error('Invalid credentials');
+          return null;
+        }
+
+        return response.json();
+      })
+      .then((token) => {
+        if (token) {
+          auth.login(token);
+        }
+      });
   };
+
+  // const onLoginHandler = async (values: any) => {
+  //   const response = await fetch('http://127.0.0.1:8000/api-token-auth/', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(values),
+  //   });
+
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     const cookies = new Cookies();
+  //     cookies.set('token', data.token, { path: '/' });
+  //     window.location.href = '/';
+  //   }
+  // };
 
   const handleRegister = () => {
     window.location.href = '/register';

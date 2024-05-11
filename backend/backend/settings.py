@@ -78,15 +78,15 @@ SWAGGER_SETTINGS = {
 }
 ROOT_URLCONF = "backend.urls"  # correct path
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
-    ],
-}
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": [
+#         "rest_framework.authentication.SessionAuthentication",
+#         "rest_framework.authentication.TokenAuthentication",
+#     ],
+#     "DEFAULT_PERMISSION_CLASSES": [
+#         "rest_framework.permissions.IsAuthenticated",
+#     ],
+# }
 
 TEMPLATES = [
     {
@@ -170,11 +170,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS settings for allowing requests from FRONTEND
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "http://localhost:5177"]
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://localhost:5177",
+    "http://localhost:8000",
+]
 
 # If you host your front-end and back-end at different hosts, you should configure the CORS settings to make the front-end is able to access the resources of the back-end
-CORS_ALLOWED_ORIGINS = ["http://localhost:5177"]
 CORS_ALLOW_CREDENTIALS = True
 
 # Security settings

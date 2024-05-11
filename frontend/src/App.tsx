@@ -12,6 +12,7 @@ import SharingHubPage from './pages/SharingHubPage';
 import useAuth from './hooks/useAuth';
 import AccountLayout from './layout/AccountLayout';
 import Login from './pages/Auth/Login';
+import Agenda from './pages/Agenda/Agenda';
 
 function App() {
   const { i18n } = useTranslation();
@@ -19,27 +20,40 @@ function App() {
   const auth = useAuth();
 
   return (
+    // <Routes>
+    //   {auth.isLoggedIn ? (
+    //     <>
+    //       <Route path="/" element={<Layout title="Agenda" />}>
+    //         <Route index element={<SettingsPage />} />
+    //         <Route path="settings" element={<SettingsPage />} />
+    //         <Route path="notifications" element={<NotificationPage />} />
+    //         <Route path="sharing-hub" element={<SharingHubPage />} />
+    //         <Route path="customize-agenda" element={<CustomizePage />} />
+    //       </Route>
+    //       <Route path="/agenda" element={<AgendaLayout title="Agenda" />}>
+    //         <Route path="create" element={<CreateAgenda />} />
+    //       </Route>
+    //     </>
+    //   ) : (
+    //     // If the user is not logged in, render the login page
+    //     <Route path="/" element={<AccountLayout />}>
+    //       <Route index element={<Login />} />
+    //       <Route path="*" element={<Navigate to="/" replace />} />
+    //     </Route>
+    //   )}
+    // </Routes>
     <Routes>
-      {auth.isLoggedIn ? (
-        <>
-          <Route path="/" element={<Layout title="Agenda" />}>
-            <Route index element={<SettingsPage />} />
-            <Route path="settings" element={<SettingsPage />} />
-            <Route path="notifications" element={<NotificationPage />} />
-            <Route path="sharing-hub" element={<SharingHubPage />} />
-            <Route path="customize-agenda" element={<CustomizePage />} />
-          </Route>
-          <Route path="/agenda" element={<AgendaLayout title="Agenda" />}>
-            <Route path="create" element={<CreateAgenda />} />
-          </Route>
-        </>
-      ) : (
-        // If the user is not logged in, render the login page
-        <Route path="/" element={<AccountLayout />}>
-          <Route index element={<Login />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      )}
+      <Route path="/" element={<Layout title="Agenda" />}>
+        <Route index element={<SettingsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="notifications" element={<NotificationPage />} />
+        <Route path="sharing-hub" element={<SharingHubPage />} />
+        <Route path="customize-agenda" element={<CustomizePage />} />
+      </Route>
+      <Route path="/calendar" element={<AgendaLayout title="Agenda" />}>
+        <Route path="overview" element={<Agenda />} />
+        <Route path="create" element={<CreateAgenda />} />
+      </Route>
     </Routes>
   );
 }
