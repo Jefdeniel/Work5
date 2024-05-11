@@ -3,6 +3,9 @@ import { Col, Row } from 'react-bootstrap';
 import { Colors } from '../@types/Colors';
 import ColorPicker from '../components/agenda/notifications/ColorPicker/ColorPicker';
 import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
+import Button from '../components/ui/Button/Button';
+import Heading from '../components/ui/Heading/Heading';
+import NotificationCard from '../components/ui/NotificationCard/NotificationCard';
 
 const NotificationPage = () => {
   const [yourColor, setYourColor] = useState<string>(Colors.Primary300);
@@ -23,39 +26,72 @@ const NotificationPage = () => {
   };
 
   return (
-    <>
-      <p>Notification Page</p>
-      <Row className="align-items-start">
-        <Col>
-          <CircleWithTitle
-            color={yourColor}
-            title="Your Color"
-            onClick={() => setYourColorPickerVisible(true)}
-          />
-          {yourColorPickerVisible && (
-            <ColorPicker
+    <div>
+      <Heading
+        className={`clr-primary mb-small`}
+        children="Notifications"
+        level={1}
+      />
+
+      <p className={`mb-large`}>
+        Access all notifications in one place. To delete a notification, simply
+        click on it and a delete button will appear.
+      </p>
+
+      <div className={`mb-xlarge`}>
+        <span className={`mb-small`}>
+          You can edit the colors by clicking on the color circle.
+        </span>
+
+        <Row className={`notifications-top`}>
+          <Col xs={12} sm={6} className={`mb-large d-flex gap-base`}>
+            <CircleWithTitle
               color={yourColor}
-              title="Select Your Color"
-              onChange={handleYourColorChange}
+              title="Your Color"
+              onClick={() => setYourColorPickerVisible(true)}
             />
-          )}
-        </Col>
-        <Col>
-          <CircleWithTitle
-            color={otherColor}
-            title="Other Color"
-            onClick={() => setOtherColorPickerVisible(true)}
-          />
-          {otherColorPickerVisible && (
-            <ColorPicker
+            {yourColorPickerVisible && (
+              <ColorPicker
+                color={yourColor}
+                title="Select Your Color"
+                onChange={handleYourColorChange}
+              />
+            )}
+
+            <CircleWithTitle
               color={otherColor}
-              title="Select Other Color"
-              onChange={handleOtherColorChange}
+              title="Other Color"
+              onClick={() => setOtherColorPickerVisible(true)}
             />
-          )}
-        </Col>
-      </Row>
-    </>
+            {otherColorPickerVisible && (
+              <ColorPicker
+                color={otherColor}
+                title="Select Other Color"
+                onChange={handleOtherColorChange}
+              />
+            )}
+          </Col>
+
+          <Col className={`mb-large d-flex justify-content-end`}>
+            <Button
+              isBig={true}
+              className={`btn--bordered-danger`}
+              text="Delete"
+            />
+          </Col>
+        </Row>
+      </div>
+
+      <section>
+        <NotificationCard
+          title="Person created the event “Easter party with family” on
+            26/04/24"
+            timeFrom='3 PM'
+            timeTo='4 PM'
+          isNew={true}
+        />
+      </section>
+    </div>
   );
 };
 
