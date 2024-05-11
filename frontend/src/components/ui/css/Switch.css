@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--sa-primary-100);
+  background-color: var(--sa-primary-300);
   border-radius: var(--br-full);
   transition: 0.4s;
 }
@@ -35,7 +35,7 @@
 }
 
 .switch-label input:checked + .switch-slider {
-  background-color: var(--sa-primary-300);
+  background-color: var(--sa-primary-500-base);
 }
 
 .switch-label input:checked + .switch-slider:before {
