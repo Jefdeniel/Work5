@@ -25,12 +25,13 @@
   --fw-regular: 400;
   --fw-bold: 700;
   /* Border radius */
-  --br-base: 0.5rem;
+  --br-base: .5rem;
   --br-full: 9999px;
   /* Padding */
   --p-xxs: 0.25rem;
   --p-xs: 0.563rem;
   --p-sm: 0.625rem;
+  --p-md: 0.75rem;
   --p-lg: 1.125rem;
   /* Spacing */
   --sp-xxs: 0.4rem;
@@ -124,7 +125,7 @@
 body {
   font-family: 'Lato', sans-serif;
   font-size: var(--fs-base);
-  color: var(--sa-dark);
+  color: var(--sa-primary-950);
 }
 
 h1,
@@ -199,6 +200,10 @@ code {
     monospace;
 }
 
+span {
+  display: block;
+}
+
 button {
   padding: 0;
 }
@@ -243,6 +248,10 @@ ul {
   margin-bottom: var(--sp-sm);
 }
 
+.mb-small {
+  margin-bottom: var(--sp-xs);
+}
+
 .mb-base {
   margin-bottom: var(--sp-base);
 }
@@ -255,10 +264,22 @@ ul {
   margin-bottom: var(--sp-lg);
 }
 
+.mb-xlarge {
+  margin-bottom: var(--sp-xl);
+}
+
 .clr-primary {
   color: var(--sa-primary-500-base);
 }
 
+.gap-base {
+  gap: var(--sp-sm);
+}
+
 .settings-block > div:last-child {
   margin-bottom: var(--sp-sm);
+}
+
+.notifications-top {
+  border-bottom: 1px solid var(--sa-primary-200);
 }
