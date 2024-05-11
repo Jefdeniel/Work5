@@ -1,7 +1,7 @@
 @import '../../../App.scss';
 
 .btn {
-  padding: var(--p-xxs) var(--p-lg) !important;
+  padding: var(--p-xs) var(--p-lg) !important;
   border-radius: var(--br-base) !important;
   display: inline-block;
   transition: all 0.2s ease-in-out;
@@ -95,10 +95,6 @@
       display: block;
       transform: scale(0.6);
     }
-  }
-
-  & .btn__content {
-    padding: var(--p-xs) var(--p-lg);
   }
 
   & .btn__text {
