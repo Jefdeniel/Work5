@@ -1,94 +1,107 @@
 @import '../../../App.scss';
 
 .btn {
-  padding: 5rem 2rem;
+  padding: var(--p-xxs) var(--p-lg) !important;
   border-radius: var(--br-base) !important;
-  display: flex !important;
-  align-items: center;
-  gap: var(--sp-xxs);
-  transition: all .2s ease-in-out;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+
+  &.btn--primary {
+    color: var(--sa-bright);
+    background-color: var(--sa-primary-500-base);
+
+    &:hover,
+    &:focus {
+      color: var(--sa-bright);
+      background-color: var(--sa-primary-700);
+    }
+  }
+
+  &.btn--bordered-primary {
+    font-weight: var(--fw-bold);
+    color: var(--sa-primary-500-base);
+    border: 1px solid var(--sa-primary-500-base);
+
+    &:hover,
+    &:focus {
+      color: var(--sa-primary-500-base);
+      background-color: var(--sa-primary-200);
+    }
+  }
+
+  &.btn--success {
+    font-weight: var(--fw-bold);
+    color: var(--sa-bright);
+    background-color: var(--sa-success-500-base);
+
+    &:hover,
+    &:focus {
+      color: var(--sa-bright);
+      background-color: var(--sa-success-600);
+    }
+  }
+
+  &.btn--bordered-success {
+    font-weight: var(--fw-bold);
+    color: var(--sa-success-500-base);
+    border: 1px solid var(--sa-success-500-base);
+
+    &:hover,
+    &:focus {
+      color: var(--sa-success-500-base);
+      background-color: var(--sa-success-100);
+    }
+  }
+
+  &.btn--danger {
+    color: var(--sa-bright);
+    background-color: var(--sa-error-500-base);
+
+    &:hover,
+    &:focus {
+      color: var(--sa-bright);
+      background-color: var(--sa-error-700);
+    }
+  }
+
+  &.btn--bordered-danger {
+    font-weight: var(--fw-bold);
+    color: var(--sa-error-500-base);
+    border: 1px solid var(--sa-error-500-base);
+
+    &:hover,
+    &:focus {
+      color: var(--sa-error-500-base);
+      background-color: var(--sa-error-100);
+    }
+  }
 
   &.btn--bordered {
     color: var(--sa-primary-950);
     border: 1.5px solid var(--sa-primary-950);
-  }
 
-  &.btn.btn--bordered:hover,
-  &.btn.btn--bordered:focus {
-    border: 1.5px solid var(--sa-primary-950);
-  }
-
-  & .btn__icon {
-    display: block;
-    transform: scale(0.6);
-  }
-}
-
-/*.button-main {
-  border: none;
-  border-radius: var(--sm);
-  cursor: pointer;
-  height: 60px;
-  transition:
-    border-color 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    color 0.2s ease-in-out;
-
-  &:disabled {
-    background-color: var(--sa-bright);
-    border: 1px solid var(--sa-dark);
-    color: var(--sa-dark);
-
-    &:hover {
-      background-color: var(--sa-bright);
-      border: 1px solid var(--sa-dark);
-      color: var(--sa-dark);
+    &:hover,
+    &:focus {
+      border: 1.5px solid var(--sa-primary-950);
     }
   }
-}
 
-.button-default {
-  &:hover {
-    background-color: var(--sa-primary-100);
-    color: var(--sa-dark);
+  &.btn--icon {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xxs);
+
+    & .btn__icon {
+      display: block;
+      transform: scale(0.6);
+    }
+  }
+
+  & .btn__content {
+    padding: var(--p-xs) var(--p-lg);
+  }
+
+  & .btn__text {
+    color: var(--sa-primary-950);
   }
 }
-
-.button-danger {
-  &:hover {
-    background-color: var(--sa-error-100);
-    color: var(--sa-dark);
-  }
-}
-
-.button-danger-outline {
-  &:hover {
-    border-color: var(--sa-error-100);
-    color: var(--sa-error-100);
-  }
-}
-
-.button-default-outline {
-  &:hover {
-    border-color: var(--sa-primary-100);
-    color: var(--sa-primary-100);
-  }
-}
-
-.button-icon {
-  margin-right: var(--space-xs);
-  display: flex;
-  align-items: center;
-}
-
-.button-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: fit-content;
-}
-
-.button-small {
-  height: 40px;
-  padding: var(--space-xs) var(--space-sm);
-}*/

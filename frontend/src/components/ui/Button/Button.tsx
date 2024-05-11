@@ -36,14 +36,14 @@ const Button = ({
   const button = (
     <button
       type={type}
-      className={`button ${className}`}
+      className={`btn ${className}`}
       style={style}
       color={color}
       onClick={onClick}
       disabled={disabled}
       {...rest}
     >
-      <div className={`button-content`}>
+      <div className={`btn__content`}>
         {icon && <span className={`button-icon`}>{icon}</span>}
         {text && !isLoading && <span>{text}</span>}
         {isLoading && <Spinner animation="border" size="sm" />}

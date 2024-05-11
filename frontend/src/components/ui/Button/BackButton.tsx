@@ -8,7 +8,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const BackButton = ({ text, className }: Props) => {
   const button = (
     <button
-      className={`btn btn--bordered ${className}`}
+      className={`btn btn--icon btn--bordered ${className}`}
       onClick={() => {
         window.history.back();
       }}
@@ -26,7 +26,7 @@ const BackButton = ({ text, className }: Props) => {
         />
       </svg>
 
-      <span className="pl-2">{text}</span>
+      <span className="pl-2 btn__text">{text}</span>
     </button>
   );
 
