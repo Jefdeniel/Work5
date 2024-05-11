@@ -11996,7 +11996,7 @@ textarea.form-control-lg {
   --p-xxs: 0.25rem;
   --p-xs: 0.563rem;
   --p-sm: 0.625rem;
-  --p-md: 0.75rem;
+  --p-md: 0.75rem
   --p-lg: 1.125rem;
   /* Spacing */
   --sp-xxs: 0.4rem;
@@ -12195,4 +12195,31 @@ ul {
 
 .notifications-top {
   border-bottom: 1px solid var(--sa-primary-200);
-}/*# sourceMappingURL=App.css.map */
+}
+
+.card {
+  padding: var(--sp-base) var(--sp-lg);
+  position: relative;
+}
+.card .message-text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+}
+.card .card__title {
+  color: var(--sa-primary-500-base);
+  margin-bottom: var(--sp-sm);
+}
+.card .card__time {
+  width: 25% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-xxs);
+}
+.card .card__time .card__time-line {
+  width: 2px;
+  height: 16px;
+  background-color: var(--sa-primary-500-base);
+}/*# sourceMappingURL=Card.css.map */
