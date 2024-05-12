@@ -10,8 +10,6 @@ import { Field, Form } from 'react-final-form';
 import DeleteAccount from '../../components/settings/account/DeleteAccount';
 import Signout from '../../components/settings/account/Signout';
 import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
-import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
-import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
 import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
@@ -21,6 +19,8 @@ import EventReminderSelector from '../../components/settings/notifications/Event
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
 import Validators from '../../utils/Validators';
+import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
+import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -153,7 +153,7 @@ const SettingsPage = () => {
 
             <Row>
               <Heading level={2} isUnderlined className="border-bottom">
-                {t('settings:agendaView.title')}
+                {t('settings:calendarView.title')}
               </Heading>
               <Field name="weekStartsOn" validate={Validators.required()}>
                 {({ input, meta }) => (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import AgendaNavigation from '../components/layout/Navigation/AgendaNavigation';
+import CalendarNavigation from '../components/layout/Navigation/CalendarNavigation';
 import NavigationTop from '../components/layout/Navigation/NavigationTop';
 import './Layout.scss';
 import { Container, Row } from 'react-bootstrap';
@@ -9,8 +9,8 @@ interface Props {
   title: string;
 }
 
-// USER FOR AGENDA SIDEBAR
-const AgendaLayout = ({ title }: Props) => {
+// USER FOR CALENDAR SIDEBAR
+const CalendarLayout = ({ title }: Props) => {
   const [isMenuBroken, setIsMenuBroken] = useState(false);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -24,7 +24,7 @@ const AgendaLayout = ({ title }: Props) => {
   };
   return (
     <div className="d-flex flex-row p-0" style={{ minHeight: '100%' }}>
-      <AgendaNavigation
+      <CalendarNavigation
         title={title}
         isMenuBroken={isMenuBroken}
         isMenuCollapsed={isMenuCollapsed}
@@ -65,4 +65,4 @@ const AgendaLayout = ({ title }: Props) => {
   );
 };
 
-export default AgendaLayout;
+export default CalendarLayout;

@@ -21,7 +21,7 @@
     "activityNotification": "Notification d'activité",
     "activityNotificationDescription": "Recevoir des notifications pour les activités"
   },
-  "agendaView": {
+  "calendarView": {
     "title": "Vue d'agenda",
     "weekStartPreference": "Préférence de début de semaine",
     "weekStartPreferenceDescription": "Spécifiez la préférence de début de semaine",

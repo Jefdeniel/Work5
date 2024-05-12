@@ -21,8 +21,8 @@
     "activityNotification": "Aktivitätsbenachrichtigung",
     "activityNotificationDescription": "Erhalten Sie Benachrichtigungen für Aktivitäten"
   },
-  "agendaView": {
-    "title": "Agenda-Ansicht",
+  "calendarView": {
+    "title": "Calendar-Ansicht",
     "weekStartPreference": "Wochenstartpräferenz",
     "weekStartPreferenceDescription": "Spezifizieren Sie die Wochenstartpräferenz",
     "sunday": "Sonntag",

@@ -14,11 +14,11 @@ interface Props {
 
 const OPTIONS = [
   {
-    title: 'settings:agendaView.show',
+    title: 'settings:calendarView.show',
     value: true,
   },
   {
-    title: 'settings:agendaView.dontShow',
+    title: 'settings:calendarView.dontShow',
     value: false,
   },
 ];
@@ -44,8 +44,8 @@ const WeekendVisbilityOnSelector = ({
 
   return (
     <Select
-      title={t('settings:agendaView.weekendVisibilityToggle')}
-      description={t('settings:agendaView.weekendVisibilityToggleDescription')}
+      title={t('settings:calendarView.weekendVisibilityToggle')}
+      description={t('settings:calendarView.weekendVisibilityToggleDescription')}
       defaultValue={initialDisplay}
       onChange={handleChange}
       options={translatedOptions.map((option) => ({
