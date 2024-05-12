@@ -14,11 +14,11 @@ interface Props {
 
 const OPTIONS = [
   {
-    title: 'settings:agendaView.monday',
+    title: 'settings:calendarView.monday',
     value: 1,
   },
   {
-    title: 'settings:agendaView.sunday',
+    title: 'settings:calendarView.sunday',
     value: 0,
   },
 ];
@@ -44,8 +44,8 @@ const WeekStartsOnSelector = ({
 
   return (
     <Select
-      title={t('settings:agendaView.weekStartPreference')}
-      description={t('settings:agendaView.weekStartPreferenceDescription')}
+      title={t('settings:calendarView.weekStartPreference')}
+      description={t('settings:calendarView.weekStartPreferenceDescription')}
       defaultValue={initialDisplay}
       onChange={handleChange}
       options={translatedOptions.map((option) => ({

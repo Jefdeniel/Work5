@@ -25,9 +25,9 @@ from django.conf import settings
 # Define schema view for Swagger
 schema_view = get_schema_view(
     openapi.Info(
-        title="Smart Agenda API",
+        title="Smart Calendar API",
         default_version="v1",
-        description="A simple Django API to manage your agenda",
+        description="A simple Django API to manage your Calendar",
         terms_of_service="https://www.example.com/terms/",
         contact=openapi.Contact(email="contact@example.com"),
         license=openapi.License(name="Awesome License"),

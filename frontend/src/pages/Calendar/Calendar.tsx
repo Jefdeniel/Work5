@@ -3,8 +3,8 @@ import useSetTitle from '../../hooks/setTitle';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/ui/Loading/Spinner';
 
-const Agenda = () => {
-  useSetTitle('Agenda');
+const Calendar = () => {
+  useSetTitle('Calendar');
 
   const { fetchData: getCalendars, loading: isLoading } = useFetch('GET', [
     'calendars',
@@ -30,7 +30,7 @@ const Agenda = () => {
     return <Spinner />;
   }
 
-  return <div>{!isLoading ? 'Agenda' : 'Loading...'}</div>;
+  return <div>{!isLoading ? 'Calendar' : 'Loading...'}</div>;
 };
 
-export default Agenda;
+export default Calendar;

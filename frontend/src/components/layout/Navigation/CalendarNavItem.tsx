@@ -7,10 +7,10 @@ interface Props {
   onClick: (link: string, isSubMenu?: boolean) => void;
   isSubMenu?: boolean;
   style?: React.CSSProperties;
-  children: string;
+  children?: string;
 }
 
-const DetailedItem = ({
+const CalendarNavItem = ({
   icon,
   link,
   onClick,
@@ -28,10 +28,10 @@ const DetailedItem = ({
 
   return (
     <MenuItem
-      // style={{
-      //   backgroundColor: 'white',
-      //   ...{ style },
-      // }}
+      style={{
+        backgroundColor: 'white',
+        ...{ style },
+      }}
       icon={icon}
       onClick={handleOnClick}
       active={isActive}
@@ -41,4 +41,4 @@ const DetailedItem = ({
   );
 };
 
-export default DetailedItem;
+export default CalendarNavItem;

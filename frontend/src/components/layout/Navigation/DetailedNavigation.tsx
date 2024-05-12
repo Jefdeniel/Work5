@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import BackButton from '../../ui/Button/BackButton';
 import IconButton from '../../ui/IconButton/IconButton';
 import Logo from '../../ui/Logo';
-import DetailedItem from './DetailedItem';
+import DetailedNavItem from './DetailedNavItem';
 import Calendar from '../../ui/SmallCalendar/SmallCalendar';
 import { Col, Row } from 'react-bootstrap';
 
@@ -62,7 +62,7 @@ const menuItems: MenuItem[] = [
     label: 'general:navigation.sharing-hub',
   },
   {
-    link: '/customize-agenda',
+    link: '/customize-calendar',
     icon: (
       <svg
         width="13"
@@ -135,8 +135,8 @@ const DetailedNavigation = ({
 
         <BackButton text={t('general:buttons.back')} className={`mb-base`} />
 
-        <span className={`heading heading--md sidebar__agenda-title`}>
-          Agenda name
+        <span className={`heading heading--md sidebar__calendar-title`}>
+          Calendar name
         </span>
 
         <Calendar />
@@ -158,14 +158,14 @@ const DetailedNavigation = ({
           }}
         >
           {menuItems.map(({ link, icon, label }) => (
-            <DetailedItem
+            <DetailedNavItem
               key={link}
               link={link}
               icon={icon}
               onClick={handleOnClickMenu}
             >
               {t(label.toString())}
-            </DetailedItem>
+            </DetailedNavItem>
           ))}
         </Menu>
       </Sidebar>
