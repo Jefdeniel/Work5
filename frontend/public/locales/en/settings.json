@@ -21,8 +21,8 @@
     "activityNotification": "Activity Notification",
     "activityNotificationDescription": "Receive notifications for activities"
   },
-  "agendaView": {
-    "title": "Agenda View",
+  "calendarView": {
+    "title": "Calendar View",
     "weekStartPreference": "Week Start Preference",
     "weekStartPreferenceDescription": "Specify the week start preference",
     "sunday": "Sunday",

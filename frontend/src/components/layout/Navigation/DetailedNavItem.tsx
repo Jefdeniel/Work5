@@ -7,10 +7,10 @@ interface Props {
   onClick: (link: string, isSubMenu?: boolean) => void;
   isSubMenu?: boolean;
   style?: React.CSSProperties;
-  children?: string;
+  children: string;
 }
 
-const AgendaItem = ({
+const DetailedNavItem = ({
   icon,
   link,
   onClick,
@@ -28,10 +28,6 @@ const AgendaItem = ({
 
   return (
     <MenuItem
-      style={{
-        backgroundColor: 'white',
-        ...{ style },
-      }}
       icon={icon}
       onClick={handleOnClick}
       active={isActive}
@@ -41,4 +37,4 @@ const AgendaItem = ({
   );
 };
 
-export default AgendaItem;
+export default DetailedNavItem;

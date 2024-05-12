@@ -2,7 +2,7 @@ import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../ui/Logo';
 import IconButton from '../../ui/IconButton/IconButton';
-import AgendaItem from './AgendaItem';
+import CalendarNavItem from './CalendarNavItem';
 import { Col, Row } from 'react-bootstrap';
 
 interface MenuItem {
@@ -35,12 +35,12 @@ const menuItems: MenuItem[] = [
     icon: <img src="/img/temp-nav-item.png" alt="customize" />,
   },
   {
-    link: '/agenda/create',
+    link: '/calendar/create',
     icon: <img src="/icons/plus.svg" alt="create" />,
   },
 ];
 
-const AgendaNavigation = ({
+const CalendarNavigation = ({
   isMenuBroken,
   isMenuCollapsed,
   isMenuToggled,
@@ -104,9 +104,9 @@ const AgendaNavigation = ({
             }),
           }}
         >
-          <p>Agenda list</p>
+          <p>Calendar list</p>
           {menuItems.map(({ link, icon }) => (
-            <AgendaItem
+            <CalendarNavItem
               key={link}
               link={link}
               icon={icon}
@@ -135,4 +135,4 @@ const AgendaNavigation = ({
   );
 };
 
-export default AgendaNavigation;
+export default CalendarNavigation;

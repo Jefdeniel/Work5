@@ -1,4 +1,4 @@
-# @Work5 Agenda Tool
+# @Work5 Smart Calendar Tool
 
 ## Backend
 

@@ -13,7 +13,7 @@ const Logo = ({ width, height }: LogoProps) => {
       <img
         src={logoSrc}
         style={{ width, height, objectFit: 'contain' }}
-        alt="Agenda Logo"
+        alt="Smart Calendar Logo"
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Colors } from '../@types/Colors';
-import ColorPicker from '../components/agenda/notifications/ColorPicker/ColorPicker';
+import ColorPicker from '../components/calendar/notifications/ColorPicker/ColorPicker';
 import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
 import Button from '../components/ui/Button/Button';
 import Heading from '../components/ui/Heading/Heading';
