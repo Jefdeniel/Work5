@@ -17,7 +17,6 @@ interface MenuItem {
 }
 
 interface Props {
-  title: string;
   isMenuBroken: boolean;
   isMenuCollapsed: boolean;
   isMenuToggled: boolean;
