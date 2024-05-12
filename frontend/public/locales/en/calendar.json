@@ -3,7 +3,7 @@
     "title": "Notifications",
     "description": "Access all notifications in one place. To delete a notification, simply click on it and a delete button will appear.",
     "clickOnCircle": "You can edit the colors by clicking on the circle.",
-    "fromOthers": "From others",
+    "forOthers": "From others",
     "forYou": "For you"
   }
 }

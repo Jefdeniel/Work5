@@ -3,7 +3,7 @@
     "title": "Notifications",
     "description": "Accédez à toutes les notifications en un seul endroit. Pour supprimer une notification, il suffit de cliquer dessus et un bouton de suppression apparaîtra.",
     "clickOnCircle": "Vous pouvez modifier les couleurs en cliquant sur le cercle.",
-    "fromOthers": "De la part des autres",
+    "forOthers": "De la part des autres",
     "forYou": "Pour vous"
   }
 }
