@@ -62,7 +62,7 @@ const menuItems: MenuItem[] = [
     label: 'general:navigation.sharing-hub',
   },
   {
-    link: '/customize-calendar',
+    link: '/customize',
     icon: (
       <svg
         width="13"
