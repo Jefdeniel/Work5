@@ -6,8 +6,13 @@ import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
 import Button from '../components/ui/Button/Button';
 import Heading from '../components/ui/Heading/Heading';
 import NotificationCard from '../components/ui/NotificationCard/NotificationCard';
+import { useTranslation } from 'react-i18next';
+import useSetTitle from '../hooks/setTitle';
 
 const NotificationPage = () => {
+  const { t } = useTranslation(['calendar']);
+  useSetTitle(t('calendar:notifications.title'));
+
   const [yourColor, setYourColor] = useState<string>(Colors.Primary300);
   const [otherColor, setOtherColor] = useState<string>(Colors.Error300);
   const [yourColorPickerVisible, setYourColorPickerVisible] =
@@ -29,44 +34,44 @@ const NotificationPage = () => {
     <div>
       <Heading
         className={`clr-primary mb-small`}
-        children="Notifications"
         level={1}
-      />
+      >
+        {t('calendar:notifications.title')}
+      </Heading>
 
       <p className={`mb-large`}>
-        Access all notifications in one place. To delete a notification, simply
-        click on it and a delete button will appear.
+        {t('calendar:notifications.description')}
       </p>
 
       <div className={`mb-xlarge`}>
         <span className={`mb-small`}>
-          You can edit the colors by clicking on the color circle.
+        {t('calendar:notifications.clickOnCircle')}
         </span>
 
         <Row className={`notifications-top`}>
           <Col xs={12} sm={6} className={`mb-large d-flex gap-base`}>
             <CircleWithTitle
               color={yourColor}
-              title="Your Color"
+              title={t('calendar:notifications.forYou')}
               onClick={() => setYourColorPickerVisible(true)}
             />
             {yourColorPickerVisible && (
               <ColorPicker
                 color={yourColor}
-                title="Select Your Color"
+              title={t('calendar:notifications.forYou')}
                 onChange={handleYourColorChange}
               />
             )}
 
             <CircleWithTitle
               color={otherColor}
-              title="Other Color"
+              title={t('calendar:notifications.forOthers')}
               onClick={() => setOtherColorPickerVisible(true)}
             />
             {otherColorPickerVisible && (
               <ColorPicker
                 color={otherColor}
-                title="Select Other Color"
+                title={t('calendar:notifications.forOthers')}
                 onChange={handleOtherColorChange}
               />
             )}

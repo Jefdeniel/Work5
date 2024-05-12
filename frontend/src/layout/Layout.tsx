@@ -5,12 +5,8 @@ import NavigationTop from '../components/layout/Navigation/NavigationTop';
 import './Layout.scss';
 import { Container, Row } from 'react-bootstrap';
 
-interface Props {
-  title: string;
-}
-
 // USER FOR DETAILED SIDEBAR
-const Layout = ({ title }: Props) => {
+const Layout = () => {
   const [isMenuBroken, setIsMenuBroken] = useState(false);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -25,7 +21,6 @@ const Layout = ({ title }: Props) => {
   return (
     <div className="d-flex flex-row p-0" style={{ minHeight: '100%' }}>
       <DetailedNavigation
-        title={title}
         isMenuBroken={isMenuBroken}
         isMenuCollapsed={isMenuCollapsed}
         isMenuToggled={isMenuToggled}
@@ -48,7 +43,6 @@ const Layout = ({ title }: Props) => {
       >
         <Row className="flex-row top-navigation border-bottom">
           <NavigationTop
-            title={title}
             onMenuClose={() => {
               if (isMenuBroken) {
                 setIsMenuToggled((prev) => !prev);
