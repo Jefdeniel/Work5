@@ -19,7 +19,7 @@ export default function Heading({
     const classes = [];
 
     if (isUnderlined) {
-      classes.push('underline');
+      classes.push('underline mb-base');
     }
 
     classes.push(className);
@@ -29,7 +29,7 @@ export default function Heading({
   switch (level) {
     case 1:
       return (
-        <h1 style={style} className={`heading heading--sm ${getClasses()}`}>
+        <h1 style={style} className={`heading heading--lg ${getClasses()}`}>
           {children}
         </h1>
       );
@@ -41,7 +41,7 @@ export default function Heading({
       );
     case 3:
       return (
-        <h3 style={style} className={`heading heading--lg ${getClasses()}`}>
+        <h3 style={style} className={`heading heading--sm ${getClasses()}`}>
           {children}
         </h3>
       );

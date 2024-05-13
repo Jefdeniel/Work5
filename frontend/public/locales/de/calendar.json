@@ -1,0 +1,16 @@
+{
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "description": "Greifen Sie auf alle Benachrichtigungen an einem Ort zu. Um eine Benachrichtigung zu löschen, klicken Sie einfach darauf und es erscheint eine Löschtaste.",
+    "clickOnCircle": "Sie können die Farben ändern, indem Sie auf den Kreis klicken.",
+    "forOthers": "Von anderen",
+    "forYou": "Für dich"
+  },
+  "sharing-hub": {
+    "title": "Freigabezentrum",
+    "description": "Verwalten Sie, wie Ihre Daten geteilt und integriert werden. Greifen Sie auf Einstellungen und Optionen für das Teilen von Informationen mit anderen Benutzern oder Diensten zu.",
+    "usersInAgenda": "Benutzer in der Agenda",
+    "exportAgendaAs": "Agenda exportieren als",
+    "integrateExternal": "Externe Dienste integrieren"
+  }
+}

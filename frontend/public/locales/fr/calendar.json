@@ -1,0 +1,16 @@
+{
+  "notifications": {
+    "title": "Notifications",
+    "description": "Accédez à toutes les notifications en un seul endroit. Pour supprimer une notification, cliquez simplement dessus et un bouton de suppression apparaîtra.",
+    "clickOnCircle": "Vous pouvez changer les couleurs en cliquant sur le cercle.",
+    "forOthers": "Des autres",
+    "forYou": "Pour toi"
+  },
+  "sharing-hub": {
+    "title": "Centre de partage",
+    "description": "Gérez la manière dont vos données sont partagées et intégrées. Accédez aux paramètres et options pour partager des informations avec d'autres utilisateurs ou services.",
+    "usersInAgenda": "Utilisateurs dans l'agenda",
+    "exportAgendaAs": "Exporter l'agenda comme",
+    "integrateExternal": "Intégrer des services externes"
+  }
+}

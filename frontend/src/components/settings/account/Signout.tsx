@@ -4,7 +4,11 @@ import useFetch from '../../../hooks/useFetch';
 import Button from '../../ui/Button/Button';
 import { Col, Row } from 'react-bootstrap';
 
-const Signout = () => {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+}
+
+const Signout = ({ className }: Props) => {
   const { t } = useTranslation(['settings']);
   const auth = useAuth();
 
@@ -17,15 +21,19 @@ const Signout = () => {
   };
 
   return (
-    <Row>
+    <Row className={`mb-base`}>
       <Col>
-        <span className="title">{t('settings:account.SignOut')}</span>
+        <span className="heading heading--sm clr-primary d-block">
+          {t('settings:account.SignOut')}
+        </span>
         <small className="description">
           {t('settings:account.SignOutDescription')}
         </small>
       </Col>
-      <Col>
+
+      <Col className={`d-flex justify-content-end`}>
         <Button
+          className={`${className}`}
           isDanger={true}
           isOutline={true}
           text={t('settings:account.SignOut')}

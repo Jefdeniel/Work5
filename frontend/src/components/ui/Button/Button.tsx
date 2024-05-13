@@ -9,6 +9,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   isDanger?: boolean;
   isSmall?: boolean;
+  isBig?: boolean;
   icon?: React.ReactNode;
   text?: string;
   style?: React.CSSProperties;
@@ -24,6 +25,7 @@ const Button = ({
   isLoading,
   isDanger,
   isSmall,
+  isBig,
   icon,
   text,
   style,
@@ -36,14 +38,14 @@ const Button = ({
   const button = (
     <button
       type={type}
-      className={`button ${className}`}
-      style={style}
+      className={`btn ${className}`}
+      style={isBig ? { width: '100%', ...style } : style}
       color={color}
       onClick={onClick}
       disabled={disabled}
       {...rest}
     >
-      <div className={`button-content`}>
+      <div className={`btn__content`}>
         {icon && <span className={`button-icon`}>{icon}</span>}
         {text && !isLoading && <span>{text}</span>}
         {isLoading && <Spinner animation="border" size="sm" />}

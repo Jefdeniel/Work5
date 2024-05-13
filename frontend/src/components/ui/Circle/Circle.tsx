@@ -1,4 +1,10 @@
-const Circle = ({ color, onClick }: { color: string; onClick: () => void }) => {
+interface Props {
+  color: string;
+  onClick?: () => void;
+  children?: 
+}
+
+const Circle = ({ color, onClick }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

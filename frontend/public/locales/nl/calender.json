@@ -1,9 +1,0 @@
-{
-  "notifications": {
-    "title": "Meldingen",
-    "description": "Toegang tot alle meldingen op één plek. Om een melding te verwijderen, klik er gewoon op en er verschijnt een verwijderknop.",
-    "clickOnCircle": "U kunt de kleuren bewerken door op de cirkel te klikken.",
-    "fromOthers": "Van anderen",
-    "forYou": "Voor jou"
-  }
-}
