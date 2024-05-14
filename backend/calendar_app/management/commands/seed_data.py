@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from faker import Faker
 import random
 from django.utils import timezone
+from datetime import *
 from django.contrib.auth.hashers import make_password
 from calendar_app.models import (
     CustomUser,
