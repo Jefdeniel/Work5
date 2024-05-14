@@ -1,5 +1,6 @@
 import { Spinner } from 'react-bootstrap';
 import './Button.scss';
+import Badge from '../Badge/Badge';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
@@ -15,6 +16,8 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   style?: React.CSSProperties;
   className?: string;
   onClick?: () => void;
+  notification?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Button = ({
@@ -32,20 +35,21 @@ const Button = ({
   className,
   disabled,
   onClick,
+  notification,
   children,
   ...rest
 }: Props) => {
   const button = (
     <button
-      type={type}
+      type={type || 'button'}
       className={`btn ${className}`}
       style={isBig ? { width: '100%', ...style } : style}
-      color={color}
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
       {...rest}
     >
-      <div className={`btn__content`}>
+      <div className="btn__content">
+        {notification && <span className="notification">{notification}</span>}
         {icon}
         {text && !isLoading && <span>{text}</span>}
         {isLoading && <Spinner animation="border" size="sm" />}
