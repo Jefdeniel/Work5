@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import useSetTitle from '../../hooks/setTitle';
 import useFetch from '../../hooks/useFetch';
+import useSetTitle from '../../hooks/setTitle';
 import { useSettings } from '../../hooks/useSettings';
 
 import { Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import DeleteAccount from '../../components/settings/account/DeleteAccount';
-import Signout from '../../components/settings/account/Signout';
-import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
-import LanguageSelector from '../../components/settings/general/LanguageSelector';
-import ThemeSelector from '../../components/settings/general/ThemeSelector';
-import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
-import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
-import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
-import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
+import Validators from '../../utils/Validators';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
-import Validators from '../../utils/Validators';
+import Signout from '../../components/settings/account/Signout';
+import DeleteAccount from '../../components/settings/account/DeleteAccount';
+import ThemeSelector from '../../components/settings/general/ThemeSelector';
+import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
+import LanguageSelector from '../../components/settings/general/LanguageSelector';
+import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
 import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
+import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
+import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
+import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
