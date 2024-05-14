@@ -41,6 +41,7 @@ const useFetch = (
               }
             : {}),
         },
+        credentials: 'include', // include when using cookies/sessions
         ...(method !== 'GET' &&
           method !== 'DELETE' &&
           body && { body: useContentType ? JSON.stringify(body) : body }),
