@@ -26,14 +26,14 @@ const SharingHubPage = () => {
         <ul className={`d-flex align-items-center gap-3`}>
           <li>
             {/* To change */}
-            <Icon src="/icons/user-profile.svg" alt="" />
+            <Icon src="/icons/user-profile.svg" alt="User avatar icon" />
           </li>
 
           <li>
             <Button
               className={`btn--primary`}
               text="invite"
-              icon={<Icon src="/icons/plus-bright.svg" alt="" />}
+              icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
             />
           </li>
         </ul>
