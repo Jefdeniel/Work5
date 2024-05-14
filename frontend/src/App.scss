@@ -27,7 +27,7 @@
   /* Border radius */
   --br-base: 0.5rem;
   --br-lg: 1rem;
-  --br-full: 9999px;
+  --br-full: 100%;
   /* Padding */
   --p-xxs: 0.25rem;
   --p-xs: 0.563rem;
@@ -184,6 +184,12 @@ $mobile: '(max-width: 767px)';
       }
     }
   }
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Basic configuration */
