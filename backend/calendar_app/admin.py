@@ -72,8 +72,12 @@ class LabelAdmin(admin.ModelAdmin):
 class NotificationAdmin(admin.ModelAdmin):
     list_display = (
         "title",
+        "user",
+        "is_new",
         "date_start",
         "date_stop",
+        "created_at",
+        "updated_at",
     )
 
 

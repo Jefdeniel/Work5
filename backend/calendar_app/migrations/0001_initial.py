@@ -267,8 +267,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("title", models.CharField(max_length=255)),
-                ("date_start", models.DateTimeField()),
-                ("date_stop", models.DateTimeField()),
                 (
                     "user",
                     models.ForeignKey(
@@ -277,6 +275,11 @@ class Migration(migrations.Migration):
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
+                ("date_start", models.DateTimeField()),
+                ("date_stop", models.DateTimeField()),
+                ("is_new", models.BooleanField()),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
                 "db_table": "notifications",
