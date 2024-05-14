@@ -5,7 +5,7 @@ from ..models import Event, CustomUser, Calendar
 
 
 class EventSerializer(serializers.ModelSerializer):
-    creator = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+    owner = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
     calendar = serializers.PrimaryKeyRelatedField(
         queryset=Calendar.objects.all(), allow_null=True, required=False
     )
@@ -18,7 +18,7 @@ class EventSerializer(serializers.ModelSerializer):
             "description",
             "start_time",
             "end_time",
-            "creator",
+            "owner",
             "calendar",
             "created_at",
             "updated_at",

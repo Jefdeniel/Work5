@@ -50,7 +50,7 @@ class Event(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    creator = models.ForeignKey(
+    owner = models.ForeignKey(
         CustomUser, related_name="user_events", on_delete=models.CASCADE
     )
     calendar = models.ForeignKey(
@@ -115,6 +115,9 @@ class Notification(models.Model):
     title = models.CharField(max_length=255)
     date_start = models.DateTimeField()
     date_stop = models.DateTimeField()
+    user = models.ForeignKey(
+        CustomUser, related_name="notifications", on_delete=models.CASCADE
+    )
 
     class Meta:
         db_table = "notifications"

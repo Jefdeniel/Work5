@@ -26,7 +26,7 @@ class EventAdmin(admin.ModelAdmin):
         "description",
         "start_time",
         "end_time",
-        "creator",
+        "owner",
         "calendar",
         "created_at",
         "updated_at",

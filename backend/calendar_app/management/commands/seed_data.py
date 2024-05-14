@@ -74,7 +74,7 @@ class Command(BaseCommand):
                 start_time=start_time,
                 end_time=start_time + timezone.timedelta(hours=2),
                 calendar=random.choice(calendars),
-                creator=random.choice(users),
+                owner=random.choice(users),
             )
 
         events = list(Event.objects.all())
@@ -107,13 +107,14 @@ class Command(BaseCommand):
                 date_stop=fake.date_time_this_year(
                     before_now=False, after_now=True, tzinfo=timezone.utc
                 ),
+                user=random.choice(users),
             )
 
         # Create UserSettings for each user
         for user in users:
             UserSettings.objects.create(
                 user=user,
-                language=fake.language_code(),
+                language=fake.random.choice(["en", "nl", "fr", "de"]),
                 time_zone=fake.timezone(),
                 time_format=random.choice(["12h", "24h"]),
                 theme=random.choice(["dark", "light"]),
