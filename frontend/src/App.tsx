@@ -11,6 +11,7 @@ import CustomizePage from './pages/CustomizePage';
 import NotificationPage from './pages/NotificationPage';
 import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const { i18n } = useTranslation();
@@ -18,12 +19,13 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout title="Calendar" />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<SettingsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="notifications" element={<NotificationPage />} />
         <Route path="sharing-hub" element={<SharingHubPage />} />
         <Route path="customize" element={<CustomizePage />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
       <Route path="/calendar" element={<CalendarLayout title="Calendar" />}>
         <Route path="overview" element={<Calendar />} />
