@@ -1,6 +1,5 @@
 import { Spinner } from 'react-bootstrap';
 import './Button.scss';
-import Badge from '../Badge/Badge';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';

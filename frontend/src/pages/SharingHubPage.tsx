@@ -1,14 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import useSetTitle from '../hooks/setTitle';
 import { Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import Heading from '../components/ui/Heading/Heading';
-import Button from '../components/ui/Button/Button';
-import Icon from '../components/ui/Icon/Icon';
 import ActionButtonList from '../components/ui/List/ActionButtonList';
 import {
   EXPORT_AGENDA_ITEMS,
   EXTERNAL_SERVICES_ITEMS,
 } from '../constants/sharing-hub';
+import useSetTitle from '../hooks/setTitle';
 
 const SharingHubPage = () => {
   const { t } = useTranslation(['calendar']);
