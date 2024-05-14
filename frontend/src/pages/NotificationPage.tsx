@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+
 import { Colors } from '../@types/Colors';
-import ColorPicker from '../components/calendar/notifications/ColorPicker/ColorPicker';
-import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
+import useSetTitle from '../hooks/setTitle';
+
 import Button from '../components/ui/Button/Button';
 import Heading from '../components/ui/Heading/Heading';
-import NotificationCard from '../components/ui/NotificationCard/NotificationCard';
-import { useTranslation } from 'react-i18next';
-import useSetTitle from '../hooks/setTitle';
+import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
+import NotificationList from '../components/calendar/notifications/NotificationList';
+import ColorPicker from '../components/calendar/notifications/ColorPicker/ColorPicker';
 
 const NotificationPage = () => {
   const { t } = useTranslation(['calendar']);
@@ -32,20 +34,15 @@ const NotificationPage = () => {
 
   return (
     <div>
-      <Heading
-        className={`clr-primary mb-small`}
-        level={1}
-      >
+      <Heading className={`clr-primary mb-small`} level={1}>
         {t('calendar:notifications.title')}
       </Heading>
 
-      <p className={`mb-large`}>
-        {t('calendar:notifications.description')}
-      </p>
+      <p className={`mb-large`}>{t('calendar:notifications.description')}</p>
 
       <div className={`mb-xlarge`}>
         <span className={`mb-small`}>
-        {t('calendar:notifications.clickOnCircle')}
+          {t('calendar:notifications.clickOnCircle')}
         </span>
 
         <Row className={`notifications-top`}>
@@ -58,7 +55,7 @@ const NotificationPage = () => {
             {yourColorPickerVisible && (
               <ColorPicker
                 color={yourColor}
-              title={t('calendar:notifications.forYou')}
+                title={t('calendar:notifications.forYou')}
                 onChange={handleYourColorChange}
               />
             )}
@@ -86,16 +83,7 @@ const NotificationPage = () => {
           </Col>
         </Row>
       </div>
-
-      <section>
-        <NotificationCard
-          title="Person created the event “Easter party with family” on
-            26/04/24"
-            timeFrom='3 PM'
-            timeTo='4 PM'
-          isNew={true}
-        />
-      </section>
+      <NotificationList />
     </div>
   );
 };
