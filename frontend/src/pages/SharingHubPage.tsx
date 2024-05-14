@@ -3,11 +3,7 @@ import useSetTitle from '../hooks/setTitle';
 import { Row } from 'react-bootstrap';
 import Heading from '../components/ui/Heading/Heading';
 import Button from '../components/ui/Button/Button';
-import IconPlus from '../components/ui/Icon/IconPlus';
-import IconProfileImage from '../components/ui/Icon/IconProfileImage';
-import IconSlack from '../components/ui/Icon/Logo/IconSlack';
-import IconTeams from '../components/ui/Icon/Logo/IconTeams';
-import IconApple from '../components/ui/Icon/Logo/IconApple';
+import Icon from '../components/ui/Icon/Icon';
 
 const SharingHubPage = () => {
   const { t } = useTranslation(['calendar']);
@@ -30,26 +26,14 @@ const SharingHubPage = () => {
         <ul className={`d-flex align-items-center gap-3`}>
           <li>
             {/* To change */}
-            <IconProfileImage />
-          </li>
-
-          <li>
-            {/* To change */}
-            <IconProfileImage />
-          </li>
-
-          <li>
-            {/* To change */}
-            <IconProfileImage />
+            <Icon src="/icons/user-profile.svg" alt="" />
           </li>
 
           <li>
             <Button
               className={`btn--primary`}
               text="invite"
-              icon={
-                <IconPlus pathFill="var(--sa-bright)" width={10} height={10} />
-              }
+              icon={<Icon src="/icons/plus-bright.svg" alt="" />}
             />
           </li>
         </ul>
@@ -81,7 +65,7 @@ const SharingHubPage = () => {
             <Button
               className={`btn--primary`}
               text="Slack"
-              icon={<IconSlack pathFill="var(--sa-bright)" />}
+              icon={<Icon src="/icons/slack.svg" alt="Slack logo" />}
             />
           </li>
 
@@ -89,7 +73,7 @@ const SharingHubPage = () => {
             <Button
               className={`btn--primary`}
               text="Microsoft Teams"
-              icon={<IconTeams pathFill="var(--sa-bright)" />}
+              icon={<Icon src="/icons/teams.svg" alt="Microsoft Teams logo" />}
             />
           </li>
 
@@ -97,7 +81,7 @@ const SharingHubPage = () => {
             <Button
               className={`btn--primary`}
               text="Apple Agenda"
-              icon={<IconApple pathFill="var(--sa-bright)" />}
+              icon={<Icon src="/icons/apple.svg" alt="Apple Agenda logo" />}
             />
           </li>
         </ul>
