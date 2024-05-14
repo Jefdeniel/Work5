@@ -6,7 +6,7 @@ import './Layout.scss';
 import { Container, Row } from 'react-bootstrap';
 
 interface Props {
-  title: string;
+  title?: string;
 }
 
 // USER FOR CALENDAR SIDEBAR
