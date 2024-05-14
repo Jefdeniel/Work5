@@ -1,5 +1,27 @@
 # @Work5 Smart Calendar Tool
 
+## Frontend
+
+### Start the frontend locally
+
+Start with executing the following command in the terminal:
+
+```
+yarn && yarn start
+```
+
+### Building for production
+
+Note: Building first is important, otherwise you will have crashes when starting up the backend server.
+
+```
+yarn build
+
+- https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
+- - https://stackoverflow.com/questions/49966547/pip-10-0-1-warning-consider-adding-this-directory-to-path-or
+
+```
+
 ## Backend
 
 ### Requirements
@@ -18,35 +40,19 @@
 
 ### DB
 
-- Make sure your virtual environment is active with `pipenv shell` (run from root).
-- After making changes, such as adding models, re-run `python manage.py makemigrations calendar_app`.
-- Seed `python manage.py seed_data`
 - Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
 
 ### How to start
 
-- Create new migration: `python manage.py makemigrations`
-- Apply migration to update database schema: `python manage.py migrate`.
-- Start the server: `python manage.py runserver`.
-- Admin dashboard: `http://localhost:8000/admin`
-- API: `http://localhost:8000/api`
+1. Make sure your virtual environment is active with `pipenv shell` (run from root).
+2. Create new migration: `python manage.py makemigrations`
+   1. After making changes, such as adding models, re-run `python manage.py makemigrations calendar_app`
+3. Apply migration to update database schema: `python manage.py migrate`
+4. Seed: `python manage.py seed_data`
+5. Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
 
-## Frontend
+6. Start the server: `python manage.py runserver`
+   1. Admin dashboard: `http://localhost:8000/admin`
+   2. API: `http://localhost:8000/api`
 
-### Start the frontend locally
-
-Start with executing the following command in the terminal:
-
-```
-yarn && yarn start
-```
-
-### Building for production
-
-```
-yarn build
-
-- https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-- - https://stackoverflow.com/questions/49966547/pip-10-0-1-warning-consider-adding-this-directory-to-path-or
-
-```
+Resetting your database, redo migrations and seed at once with `python manage.py reset_and_migrate_seed` from backend folder
