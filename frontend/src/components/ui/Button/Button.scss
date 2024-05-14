@@ -100,4 +100,14 @@
   & .btn__text {
     color: var(--sa-primary-950);
   }
+
+  & .btn__content {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+  }
+
+  & .icon {
+    height: 14px;
+  }
 }

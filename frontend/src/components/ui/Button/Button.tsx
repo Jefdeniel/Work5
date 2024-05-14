@@ -46,7 +46,7 @@ const Button = ({
       {...rest}
     >
       <div className={`btn__content`}>
-        {icon && <span className={`button-icon`}>{icon}</span>}
+        {icon}
         {text && !isLoading && <span>{text}</span>}
         {isLoading && <Spinner animation="border" size="sm" />}
         {children}
