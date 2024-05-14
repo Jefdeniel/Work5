@@ -4,6 +4,7 @@ import Heading from '../components/ui/Heading/Heading';
 import ActionButtonList from '../components/ui/List/ActionButtonList';
 import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
 import useSetTitle from '../hooks/setTitle';
+import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
 
 const ProfilePage = () => {
   const { t } = useTranslation(['calendar']);
@@ -11,6 +12,7 @@ const ProfilePage = () => {
 
   return (
     <>
+      <ProfilePageHeader />
       <Row>
         <Col>
           <Heading level={1} className="clr-primary mb-small">
@@ -22,7 +24,10 @@ const ProfilePage = () => {
 
       <Row className="mb-large">
         <Heading level={3}>{t('calendar:profile.changeOptions')}</Heading>
-        <ActionButtonList items={CHANGE_OPTIONS_ITEMS} />
+        <ActionButtonList
+          items={CHANGE_OPTIONS_ITEMS}
+          className="btn--primary"
+        />
       </Row>
 
       <Row className="mb-large">
@@ -33,7 +38,10 @@ const ProfilePage = () => {
 
       <Row>
         <Heading level={3}>{t('calendar:profile.connectAccounts')}</Heading>
-        <ActionButtonList items={CONNECT_ITEMS} isOutline={true} />
+        <ActionButtonList
+          items={CONNECT_ITEMS}
+          className="btn--bordered-primary"
+        />
       </Row>
     </>
   );

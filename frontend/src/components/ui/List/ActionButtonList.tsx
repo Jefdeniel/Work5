@@ -9,23 +9,22 @@ interface ActionItem {
 
 interface Props {
   items: ActionItem[];
-  isOutline?: boolean;
+  className?: string;
 }
 
-const ActionButtonList = ({ items, isOutline }: Props) => {
+const ActionButtonList = ({ items, className }: Props) => {
   return (
     <>
       {items.map((item, index) => (
         <Col xs="auto" key={index}>
           <Button
-            className="btn--primary mt-2"
+            className={`${className} mt-2`}
             text={item.label}
             icon={
               item.iconSrc ? (
                 <img src={item.iconSrc} alt={item.label} />
               ) : undefined
             }
-            isOutline={isOutline}
             onClick={item.onClick}
           />
         </Col>
