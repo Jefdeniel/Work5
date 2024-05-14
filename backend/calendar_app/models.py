@@ -113,11 +113,14 @@ class Label(models.Model):
 
 class Notification(models.Model):
     title = models.CharField(max_length=255)
-    date_start = models.DateTimeField()
-    date_stop = models.DateTimeField()
     user = models.ForeignKey(
         CustomUser, related_name="notifications", on_delete=models.CASCADE
     )
+    date_start = models.DateTimeField()
+    date_stop = models.DateTimeField()
+    is_new = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "notifications"

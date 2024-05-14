@@ -19,10 +19,9 @@
 ### DB
 
 - Make sure your virtual environment is active with `pipenv shell` (run from root).
-- Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
 - After making changes, such as adding models, re-run `python manage.py makemigrations calendar_app`.
 - Seed `python manage.py seed_data`
-  `
+- Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
 
 ### How to start
 

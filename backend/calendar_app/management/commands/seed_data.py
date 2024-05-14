@@ -1,7 +1,8 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 import random
-from django.utils import timezone
+from django.utils import timezone as dj_timezone
+from datetime import datetime, timedelta, timezone
 from django.contrib.auth.hashers import make_password
 from calendar_app.models import (
     CustomUser,
@@ -13,6 +14,8 @@ from calendar_app.models import (
     Notification,
     UserSettings,
 )
+
+# python manage.py seed_data
 
 
 class Command(BaseCommand):
@@ -40,7 +43,7 @@ class Command(BaseCommand):
                     before_now=True, after_now=False, tzinfo=timezone.utc
                 ),
                 birthday=fake.date_of_birth(
-                    tzinfo=None, minimum_age=18, maximum_age=90
+                    tzinfo=timezone.utc, minimum_age=18, maximum_age=90
                 ),
                 avatar=fake.image_url(),
                 role=random.choice(["ADMIN", "EDITOR", "VIEWER"]),
@@ -72,7 +75,7 @@ class Command(BaseCommand):
                 title=fake.sentence(nb_words=6),
                 description=fake.text(),
                 start_time=start_time,
-                end_time=start_time + timezone.timedelta(hours=2),
+                end_time=start_time + timedelta(hours=2),
                 calendar=random.choice(calendars),
                 owner=random.choice(users),
             )
@@ -89,9 +92,10 @@ class Command(BaseCommand):
 
         # Create 100 CalendarUsers
         for _ in range(100):
-            CalendarUser.objects.create(
-                user=random.choice(users), calendar=random.choice(calendars)
-            )
+            user = random.choice(users)
+            calendar = random.choice(calendars)
+            if not CalendarUser.objects.filter(user=user, calendar=calendar).exists():
+                CalendarUser.objects.create(user=user, calendar=calendar)
 
         # Create 100 Labels
         for _ in range(100):
@@ -101,20 +105,21 @@ class Command(BaseCommand):
         for _ in range(100):
             Notification.objects.create(
                 title=fake.sentence(),
+                user=random.choice(users),
                 date_start=fake.date_time_this_year(
                     before_now=True, after_now=False, tzinfo=timezone.utc
                 ),
                 date_stop=fake.date_time_this_year(
                     before_now=False, after_now=True, tzinfo=timezone.utc
                 ),
-                user=random.choice(users),
+                is_new=fake.boolean(),
             )
 
         # Create UserSettings for each user
         for user in users:
             UserSettings.objects.create(
                 user=user,
-                language=fake.random.choice(["en", "nl", "fr", "de"]),
+                language=random.choice(["en", "nl", "fr", "de"]),
                 time_zone=fake.timezone(),
                 time_format=random.choice(["12h", "24h"]),
                 theme=random.choice(["dark", "light"]),
