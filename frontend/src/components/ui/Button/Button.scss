@@ -106,4 +106,8 @@
     align-items: center;
     gap: var(--sp-xs);
   }
+
+  & .icon {
+    height: 14px;
+  }
 }
