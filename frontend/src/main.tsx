@@ -17,9 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <SettingsContextProvider>
         <React.Suspense fallback={<LoadingScreen />}>
-          <SSRProvider>
-            <App />
-          </SSRProvider>
+          <App />
         </React.Suspense>
         <ToastContainer
           position="bottom-right"
