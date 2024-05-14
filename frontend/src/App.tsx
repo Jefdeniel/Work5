@@ -1,8 +1,7 @@
 import { Settings } from 'luxon';
 import { useTranslation } from 'react-i18next';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import useAuth from './hooks/useAuth';
 import CalendarLayout from './layout/CalendarLayout';
 import Layout from './layout/Layout';
 import Calendar from './pages/Calendar/Calendar';
@@ -19,17 +18,20 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<SettingsPage />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="notifications" element={<NotificationPage />} />
-        <Route path="sharing-hub" element={<SharingHubPage />} />
-        <Route path="customize" element={<CustomizePage />} />
+      <Route element={<Layout />}>
+        <Route path="/" element={<Navigate to="/calendar/create" replace />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
-      <Route path="/calendar" element={<CalendarLayout title="Calendar" />}>
-        <Route path="overview" element={<Calendar />} />
-        <Route path="create" element={<CreateCalendar />} />
+      {/* Calendars */}
+      <Route element={<CalendarLayout />}>
+        <Route path="calendar">
+          <Route path="overview" element={<Calendar />} />
+          <Route path="create" element={<CreateCalendar />} />
+          <Route path="notifications" element={<NotificationPage />} />
+          <Route path="sharing-hub" element={<SharingHubPage />} />
+          <Route path="customize" element={<CustomizePage />} />
+        </Route>
       </Route>
     </Routes>
   );
