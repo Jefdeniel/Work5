@@ -42,5 +42,11 @@
     "createAccount": "Konto erstellen",
     "email": "Email",
     "password": "Passwort"
+  },
+  "profile": {
+    "title": "Passen Sie Ihr Profil an",
+    "changeOptions": "Ändern Sie Ihre Anmeldeinformationen",
+    "calendars": "Kalender",
+    "connectAccounts": "Konten verbinden"
   }
 }

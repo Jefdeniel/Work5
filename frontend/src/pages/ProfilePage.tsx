@@ -7,37 +7,34 @@ import useSetTitle from '../hooks/setTitle';
 import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
 
 const ProfilePage = () => {
-  const { t } = useTranslation(['calendar']);
-  useSetTitle(t('calendar:profile.title'));
+  const { t } = useTranslation(['settings']);
+  useSetTitle(t('settings:profile.title'));
 
   return (
     <>
       <ProfilePageHeader />
-      <Row>
-        <Col>
-          <Heading level={1} className="clr-primary mb-small">
-            {t('calendar:profile.title')}
-          </Heading>
-          <p className="mb-large">{t('calendar:profile.description')}</p>
-        </Col>
+      <Row className="mb-large mt-1">
+        <Heading level={1} className="clr-primary mt-large mb-large">
+          {t('settings:profile.title')}
+        </Heading>
       </Row>
 
-      <Row className="mb-large">
-        <Heading level={3}>{t('calendar:profile.changeOptions')}</Heading>
+      <Row className="mb-large mt-1">
+        <Heading level={3}>{t('settings:profile.changeOptions')}</Heading>
         <ActionButtonList
           items={CHANGE_OPTIONS_ITEMS}
           className="btn--primary"
         />
       </Row>
 
-      <Row className="mb-large">
+      <Row className="mb-large mt-1">
         <Col>
-          <Heading level={3}>{t('calendar:profile.agendas')}</Heading>
+          <Heading level={3}>{t('settings:profile.calendars')}</Heading>
         </Col>
       </Row>
 
       <Row>
-        <Heading level={3}>{t('calendar:profile.connectAccounts')}</Heading>
+        <Heading level={3}>{t('settings:profile.connectAccounts')}</Heading>
         <ActionButtonList
           items={CONNECT_ITEMS}
           className="btn--bordered-primary"

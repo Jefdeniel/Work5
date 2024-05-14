@@ -42,5 +42,11 @@
     "createAccount": "Account aanmaken",
     "email": "E-mail",
     "password": "Wachtwoord"
+  },
+  "profile": {
+    "title": "Pas je profiel aan",
+    "changeOptions": "Wijzig je logingegevens",
+    "calendars": "Kalenders",
+    "connectAccounts": "Verbind accounts"
   }
 }

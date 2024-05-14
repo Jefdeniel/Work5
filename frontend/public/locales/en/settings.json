@@ -42,5 +42,11 @@
     "createAccount": "Create Account",
     "email": "Email",
     "password": "Password"
+  },
+  "profile": {
+    "title": "Customize your profile",
+    "changeOptions": "Change your login information",
+    "calendars": "Calendars",
+    "connectAccounts": "Connect Accounts"
   }
 }
