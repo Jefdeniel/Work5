@@ -10,7 +10,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isDanger?: boolean;
   isSmall?: boolean;
   isBig?: boolean;
-  icon?: React.ReactNode | (() => JSX.Element);
+  icon?: React.ReactNode;
   text?: string;
   style?: React.CSSProperties;
   className?: string;
