@@ -18,22 +18,22 @@ export const CHANGE_OPTIONS_ITEMS: actionItem[] = [
 export const CONNECT_ITEMS: actionItem[] = [
   {
     onClick: () => console.log('Slack'),
-    iconSrc: '/icons/plus.svg',
+    iconSrc: '/icons/companies/slack.svg',
     label: 'Slack',
   },
   {
     onClick: () => console.log('Google Calendar'),
-    iconSrc: '/icons/plus.svg',
+    iconSrc: '/icons/companies/google.svg',
     label: 'Google Calendar',
   },
   {
     onClick: () => console.log('Outlook'),
-    iconSrc: '/icons/plus.svg',
+    iconSrc: '/icons/companies/outlook.svg',
     label: 'Outlook',
   },
   {
     onClick: () => console.log('Apple Calendar'),
-    iconSrc: '/icons/plus.svg',
+    iconSrc: '/icons/companies/apple.svg',
     label: 'Apple Calendar',
   },
 ];
