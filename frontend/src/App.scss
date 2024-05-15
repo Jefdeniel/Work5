@@ -18,7 +18,7 @@
   --sa-error-500-base: hsla(5, 88%, 57%, 100);
   --sa-error-700: hsla(5, 77%, 42%, 100);
   --sa-bright: hsla(0, 0%, 100%, 100);
-  --sa-grey: hsla(231, 36%, 78%, 100);
+  --sa-grey: hsla(231, 36%, 83%, 100);
   --sa-dark: hsla(240, 3%, 12%, 100);
   /* Font weight */
   --fw-light: 300;
@@ -213,6 +213,33 @@ ul {
   padding: 0;
 }
 
+/* Screen reader classes */
+.sr-only {
+	border: 0 !important;
+	clip: rect(1px, 1px, 1px, 1px) !important;
+	-webkit-clip-path: inset(50%) !important;
+		clip-path: inset(50%) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+	white-space: nowrap !important;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+	clip: auto !important;
+	-webkit-clip-path: none !important;
+		clip-path: none !important;
+	height: auto !important;
+	margin: auto !important;
+	overflow: visible !important;
+	width: auto !important;
+	white-space: normal !important;
+}
+
 /* Some general classes */
 .heading {
   &.heading--sm {
@@ -248,6 +275,10 @@ ul {
   margin-bottom: var(--sp-sm);
 }
 
+.mt-large {
+  margin-top: var(--sp-lg);
+}
+
 .mb-small {
   margin-bottom: var(--sp-xs);
 }
@@ -256,9 +287,6 @@ ul {
   margin-bottom: var(--sp-base);
 }
 
-.mt-large {
-  margin-top: var(--sp-lg);
-}
 
 .mb-large {
   margin-bottom: var(--sp-lg);
