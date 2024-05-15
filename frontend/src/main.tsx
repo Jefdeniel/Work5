@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import './App.scss';
 import App from './App.tsx';
