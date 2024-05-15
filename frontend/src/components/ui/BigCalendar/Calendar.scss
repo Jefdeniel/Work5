@@ -1,0 +1,130 @@
+.full-calendar {
+  width: 100%;
+  height: 75vh;
+  margin-top: 5rem;
+
+  & .rbc-events-container {
+    margin: 0;
+  }
+
+  & .rbc-header {
+    font-size: var(--fs-read);
+    font-weight: var(--fw-regular);
+    color: var(--sa-primary-300);
+    border: none;
+  }
+
+  & .rbc-toolbar {
+    flex-direction: row;
+    position: relative;
+
+    & .rbc-toolbar-label {
+      font-size: var(--fs-head-lg);
+      font-weight: var(--fw-bold);
+      text-align: left;
+      padding-left: 0;
+      margin-top: 2px;
+    }
+
+    & .rbc-btn-group:first-child {
+      position: absolute;
+      left: 0;
+      transform: translateY(-65px);
+
+      & button {
+        color: var(--sa-primary-950);
+        border: 1px solid var(--sa-primary-950);
+
+        &:hover:not(.rbc-active),
+        &:focus:not(.rbc-active) {
+          background-color: var(--sa-primary-100);
+        }
+      }
+    }
+
+    & .rbc-btn-group:last-child {
+      & button {
+        color: var(--sa-primary-500-base);
+        border-color: var(--sa-primary-500-base);
+
+        &.rbc-active {
+          color: var(--sa-bright);
+          background-color: var(--sa-primary-500-base);
+        }
+
+        &:hover:not(.rbc-active),
+        &:focus:not(.rbc-active) {
+          background-color: var(--sa-primary-100);
+        }
+      }
+
+      & button:first-child {
+        border-radius: var(--br-base) 0 0 var(--br-base);
+      }
+
+      & button:last-child {
+        border-radius: 0 var(--br-base) var(--br-base) 0;
+        margin-left: -1px;
+      }
+    }
+  }
+
+  & .rbc-month-view {
+    border-color: var(--sa-grey);
+    margin-top: 3rem;
+    position: relative;
+
+    & .rbc-month-header {
+      position: absolute;
+      width: 100%;
+      transform: translateY(-35px);
+    }
+  }
+
+  & .rbc-month-row + .rbc-month-row {
+    border-top: 1px solid var(--sa-grey);
+  }
+
+  & .rbc-day-bg + .rbc-day-bg {
+    border-left: 1px solid var(--sa-grey);
+  }
+
+  & .rbc-date-cell {
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  & .rbc-button-link {
+    padding: var(--p-xxs) var(--p-xs);
+  }
+
+  & .rbc-today {
+    background: none;
+  }
+
+  & .rbc-now button {
+    font-weight: var(--fw-bold);
+    color: var(--sa-bright);
+    background-color: var(--sa-primary-500-base);
+    border-radius: var(--br-base);
+    margin-bottom: var(--sp-xxs);
+  }
+
+  & .rbc-today {
+    font-weight: var(--fw-bold);
+    color: var(--sa-primary-950);
+  }
+
+  & .rbc-off-range-bg {
+    background: none;
+  }
+
+  & .rbc-off-range {
+    color: var(--sa-primary-300);
+  }
+
+  & .rbc-current-time-indicator {
+    height: 3px;
+    background-color: var(--sa-primary-500-base);
+  }
+}
