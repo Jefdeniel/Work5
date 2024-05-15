@@ -24,8 +24,6 @@ const useFetch = (
       '/'
     )}?${new URLSearchParams(parametersToAdd).toString()}`;
 
-    console.log(Config.apiBaseUrl);
-
     try {
       const response = await fetch(url, {
         method: method || 'GET',
