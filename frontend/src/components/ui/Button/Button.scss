@@ -3,8 +3,21 @@
 .btn {
   padding: var(--p-xs) var(--p-lg) !important;
   border-radius: var(--br-base) !important;
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s ease-in-out;
+
+  .notification {
+    position: absolute;
+    top: -20px;
+    right: -15px;
+    border-radius: var(--br-circle);
+    padding: var(--p-xs);
+    font-size: var(--fs-sm);
+    z-index: 1;
+  }
 
   &.btn--primary {
     color: var(--sa-bright);

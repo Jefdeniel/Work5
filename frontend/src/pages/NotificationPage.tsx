@@ -10,6 +10,7 @@ import Heading from '../components/ui/Heading/Heading';
 import CircleWithTitle from '../components/ui/Circle/CircleWithTitle';
 import NotificationList from '../components/calendar/notifications/NotificationList';
 import ColorPicker from '../components/calendar/notifications/ColorPicker/ColorPicker';
+import Badge from '../components/ui/Badge/Badge';
 
 const NotificationPage = () => {
   const { t } = useTranslation(['calendar']);
@@ -75,11 +76,14 @@ const NotificationPage = () => {
           </Col>
 
           <Col className={`mb-large d-flex justify-content-end`}>
-            <Button
-              isBig={true}
-              className={`btn--bordered-danger`}
-              text="Delete"
-            />
+            <div>
+              <Button
+                isBig={true}
+                className={`btn--bordered-danger`}
+                text="Delete"
+                notification={<Badge color="red">2</Badge>}
+              />
+            </div>
           </Col>
         </Row>
       </div>

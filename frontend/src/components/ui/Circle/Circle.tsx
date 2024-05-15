@@ -1,7 +1,7 @@
 interface Props {
   color: string;
   onClick?: () => void;
-  children?: 
+  children?: React.ReactNode;
 }
 
 const Circle = ({ color, onClick }: Props) => {

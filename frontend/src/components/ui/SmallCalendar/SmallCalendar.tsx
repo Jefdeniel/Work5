@@ -10,8 +10,7 @@ interface Props {
 }
 
 const SmallCalendar = ({ className }: Props) => {
-  const [value, onChange] = useState<Date | DateRange>(new Date());
-
+  const [value, onChange] = useState<Date | DateRange>(new Date()); // i dont get this?
 
   const handleChange = (date: Date | DateRange) => {
     // TODO: Show day data on the right when clicking on a day

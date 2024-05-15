@@ -27,7 +27,7 @@ interface Props {
 
 const menuItems: MenuItem[] = [
   {
-    link: '/notifications',
+    link: '/calendar/notifications',
     icon: (
       <svg
         width="13"
@@ -44,7 +44,7 @@ const menuItems: MenuItem[] = [
     label: 'general:navigation.notifications',
   },
   {
-    link: '/sharing-hub',
+    link: '/calendar/sharing-hub',
     icon: (
       <svg
         width="15"
@@ -61,7 +61,7 @@ const menuItems: MenuItem[] = [
     label: 'general:navigation.sharing-hub',
   },
   {
-    link: '/customize',
+    link: '/calendar/customize',
     icon: (
       <svg
         width="13"
