@@ -31,7 +31,7 @@ function App() {
           <Route path="notifications" element={<NotificationPage />} />
           <Route path="sharing-hub" element={<SharingHubPage />} />
           <Route path="customize" element={<CustomizePage />} />
-        </Route> 
+        </Route>
       </Route>
     </Routes>
   );
