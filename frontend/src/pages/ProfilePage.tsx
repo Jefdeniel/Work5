@@ -13,13 +13,8 @@ const ProfilePage = () => {
   return (
     <>
       <ProfilePageHeader />
-      <Row className="mb-large mt-1">
-        <Heading level={1} className="clr-primary mt-large mb-large">
-          {t('settings:profile.title')}
-        </Heading>
-      </Row>
 
-      <Row className="mb-large mt-1">
+      <Row className="mb-large mt-5">
         <Heading level={3}>{t('settings:profile.changeOptions')}</Heading>
         <ActionButtonList
           items={CHANGE_OPTIONS_ITEMS}
