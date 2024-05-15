@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import useSetTitle from '../../hooks/setTitle';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/ui/Loading/Spinner';
+import { Col, Row } from 'react-bootstrap';
+import Heading from '../../components/ui/Heading/Heading';
+import BigCalendar from '../../components/ui/BigCalendar/BigCalendar';
 
 const Calendar = () => {
   useSetTitle('Calendar');
@@ -30,7 +33,30 @@ const Calendar = () => {
     return <Spinner />;
   }
 
-  return <div>{!isLoading ? 'Calendar' : 'Loading...'}</div>;
+  return (
+    <>
+      <div>{!isLoading ? '' : 'Loading...'}</div>
+
+      <Row className={`mb-xlarge`}>
+        <Col>
+          <Heading className={`sr-only`} level={1}>
+            Calendar page
+          </Heading>
+        </Col>
+
+        <Col className={`d-flex justify-content-end`}>
+          <ul className={`d-flex gap-3`}>
+            <li>Person</li>
+            <li>Person</li>
+            <li>Person</li>
+            <li>Person</li>
+          </ul>
+        </Col>
+      </Row>
+
+      <BigCalendar defaultView="week" views={['day', 'week', 'month']} />
+    </>
+  );
 };
 
 export default Calendar;
