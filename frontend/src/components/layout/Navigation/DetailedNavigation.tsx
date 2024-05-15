@@ -107,10 +107,10 @@ const DetailedNavigation = ({
         onBackdropClick={() => setIsMenuToggled(false)}
         onBreakPoint={setIsMenuBroken}
         breakPoint="md"
-        backgroundColor="white"
+        backgroundColor="var(--sa-bright)"
         width="250px"
         style={{
-          borderRight: '1px solid var(--sa-grey)',
+          borderRight: '1px solid var(--sa-primary-200)',
         }}
         className={`sidebar`}
       >
@@ -126,7 +126,7 @@ const DetailedNavigation = ({
 
           <Col className={`d-flex justify-content-end`}>
             <IconButton
-              icon={<img src="/icons/settings.svg" alt="close" />}
+              icon={<img src="/icons/settings.svg" alt="Close icon" />}
               onClick={handleSettingsClick}
             />
           </Col>

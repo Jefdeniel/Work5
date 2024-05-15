@@ -1,9 +1,9 @@
 import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../ui/Logo';
 import IconButton from '../../ui/IconButton/IconButton';
 import CalendarNavItem from './CalendarNavItem';
 import { Col, Row } from 'react-bootstrap';
+import Logo from '../../ui/Logo';
 
 interface MenuItem {
   link: string;
@@ -55,6 +55,11 @@ const CalendarNavigation = ({
     isMenuBroken && setIsMenuToggled(false);
   };
 
+  const handleSettingsClick = () => {
+    navigate('/settings');
+    isMenuBroken && setIsMenuToggled(false);
+  };
+
   // TODO: fix this
   const onLogout = () => {
     console.log('logout');
@@ -68,22 +73,28 @@ const CalendarNavigation = ({
         onBackdropClick={() => setIsMenuToggled(false)}
         onBreakPoint={setIsMenuBroken}
         breakPoint="md"
-        backgroundColor="white"
+        backgroundColor="var(--sa-bright)"
         width="250px"
         style={{
-          borderRight: '1px solid rgba(0, 0, 0, 0.1)',
+          borderRight: '1px solid var(--sa-primary-200)',
         }}
       >
-        <Row>
+        <Row className="mb-large">
           <Col>
             <Link to="/">
-              <Logo width={isMenuCollapsed ? '50px' : '75px'} height="50px" />
+              <Logo
+                width={isMenuCollapsed ? '50px' : '50px'}
+                height={isMenuCollapsed ? '50px' : '50px'}
+              />
             </Link>
           </Col>
-          <IconButton
-            icon={<img src="/icons/settings.svg" alt="close" />}
-            onClick={() => navigate('/settings')}
-          />
+
+          <Col className={`d-flex justify-content-end`}>
+            <IconButton
+              icon={<img src="/icons/settings.svg" alt="Close icon" />}
+              onClick={handleSettingsClick}
+            />
+          </Col>
         </Row>
 
         <Menu
