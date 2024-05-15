@@ -9,7 +9,7 @@ interface Props {
 const CalendarCard = ({ img, name, peopleAvatars }: Props) => {
   return (
     <div className="calendar-card">
-      <img src={img} alt={`Thumbnail picture of "${name}" calendar`} />
+      <img src={img} alt={`thumbnail picture of "${name}" calendar`} />
 
       <div className="calendar-card__content">
         <span className="heading heading--md">{name}</span>
