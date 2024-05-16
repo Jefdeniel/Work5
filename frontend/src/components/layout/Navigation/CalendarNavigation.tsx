@@ -9,6 +9,7 @@ import Icon from '../../ui/Icon/Icon';
 import { useTranslation } from 'react-i18next';
 import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
 import { PlusIcon } from '../../ui/Icon/SvgIcons';
+import SearchBar from '../../ui/SearchBar/SearchBar';
 
 const menuItems: MenuItem[] = [
   {
@@ -76,6 +77,10 @@ const CalendarNavigation = ({
               onClick={handleSettingsClick}
             />
           </Col>
+        </Row>
+
+        <Row className={`mb-large`}>
+          <SearchBar />
         </Row>
 
         <Row>
