@@ -22,7 +22,10 @@ function App() {
     <Routes>
       {/* Main layout for general pages */}
       <Route element={<Layout />}>
-        <Route path="/" element={<Navigate to="/calendar/create" replace />} />
+        <Route
+          path="/"
+          element={<Navigate to="/calendar/overview" replace />}
+        />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
