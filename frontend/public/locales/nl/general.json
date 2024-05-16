@@ -1,8 +1,10 @@
 {
   "navigation": {
+    "title": "Kalenders",
     "notifications": "Notificaties",
     "sharing-hub": "Sharing hub",
-    "customize": "Aanpassen"
+    "customize": "Aanpassen",
+    "create": "Nieuwe kalender"
   },
   "buttons": {
     "save": "Opslaan",
