@@ -1,0 +1,14 @@
+.search-bar {
+    & .search-bar__input {
+        max-width: 100%;
+        color: var(--sa-primary-950);
+        background-color: var(--sa-primary-100);
+        padding: var(--p-sm) var(--p-lg);
+        border: none;
+        border-radius: var(--br-base);
+
+        &::placeholder {
+            color: var(--sa-primary-400);
+        }
+    }
+}
