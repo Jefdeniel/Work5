@@ -1,25 +1,43 @@
 import './CalendarCard.scss';
+import Icon from '../../ui/Icon/Icon';
+import IconButton from '../../ui/IconButton/IconButton';
 
 interface Props {
   img: string;
   name: string;
-  peopleAvatars: string[];
+  userImgSrc: string;
+  userImgAlt: string;
 }
 
-const CalendarCard = ({ img, name, peopleAvatars }: Props) => {
+const CalendarCard = ({ img, name, userImgSrc, userImgAlt }: Props) => {
   return (
     <div className="calendar-card">
-      <img src={img} alt={`thumbnail picture of "${name}" calendar`} />
+      <img
+        className={`calendar-card__img`}
+        src={img}
+        alt={`thumbnail picture of "${name}" calendar`}
+      />
 
       <div className="calendar-card__content">
-        <span className="heading heading--md">{name}</span>
+        <span className="heading heading--sm calendar-card__title">{name}</span>
 
-        <div className="calendar-card__avatars">
-          {peopleAvatars.map((avatar, index) => (
-            <img key={index} src={avatar} alt="avatar" />
-          ))}
-        </div>
+        <ul className={`calendar-card__user-list`}>
+          <li>
+            <Icon src={userImgSrc} alt={userImgAlt} />
+          </li>
+        </ul>
       </div>
+
+      <IconButton
+        icon={
+          <Icon
+            className={`calendar-card__options`}
+            src="/icons/modify.svg"
+            alt="chevron right icon"
+          />
+        }
+        onClick={() => console.log('modify calendar')}
+      />
     </div>
   );
 };

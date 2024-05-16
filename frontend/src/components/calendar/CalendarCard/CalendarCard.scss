@@ -1,1 +1,42 @@
-.calendar-card {}
+.calendar-card {
+  border-radius: var(--br-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+
+  & .calendar-card__img {
+    max-width: 4rem;
+    height: 66px;
+    object-fit: cover;
+  }
+
+  & .calendar-card__content {
+    padding: var(--p-xs) var(--p-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xs);
+
+    & .calendar-card__title {
+      max-width: 6rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & .calendar-card__user-list {
+        margin: 0;
+    }
+
+    & .calendar-card__user-list img {
+        width: 28px;
+        height: 28px;
+        object-fit: cover;
+    }
+  }
+
+  & .icon-button {
+    margin-top: var(--sp-xxs);
+    align-self: flex-start;
+  }
+}
