@@ -25,16 +25,19 @@
   --fw-light: 300;
   --fw-regular: 400;
   --fw-bold: 700;
+
   /* Border radius */
   --br-base: 0.5rem;
   --br-lg: 1rem;
   --br-full: 9999px;
+
   /* Padding */
   --p-xxs: 0.25rem;
   --p-xs: 0.563rem;
   --p-sm: 0.625rem;
   --p-md: 0.75rem;
   --p-lg: 1.125rem;
+
   /* Spacing */
   --sp-xxs: 0.4rem;
   --sp-xs: 0.5rem;
@@ -307,6 +310,10 @@ ul {
   color: var(--sa-primary-500-base);
 }
 
+.clr-primary-300 {
+  color: var(--sa-primary-300);
+}
+
 .gap-base {
   gap: var(--sp-sm);
 }
@@ -321,4 +328,9 @@ ul {
 
 .ps-menu-label {
   margin-top: 3px;
+}
+
+/* Some specific classes */
+.last-menu-item {
+  color: red;
 }
