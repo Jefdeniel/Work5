@@ -11,7 +11,11 @@ import Calendar from '../../ui/SmallCalendar/SmallCalendar';
 import { MenuItem, SideBarProps } from '../../../@types/Nav';
 import './navigation.scss';
 import Icon from '../../ui/Icon/Icon';
-import { CustomizeIcon, NotificationIcon, SharingHubIcon } from '../../ui/Icon/SvgIcons';
+import {
+  CustomizeIcon,
+  NotificationIcon,
+  SharingHubIcon,
+} from '../../ui/Icon/SvgIcons';
 
 const menuItems: MenuItem[] = [
   {
@@ -78,7 +82,7 @@ const DetailedNavigation = ({
 
           <Col className={`d-flex justify-content-end`}>
             <IconButton
-              icon={<Icon src="/icons/settings.svg" alt="Close icon" />}
+              icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
               onClick={handleSettingsClick}
             />
           </Col>
