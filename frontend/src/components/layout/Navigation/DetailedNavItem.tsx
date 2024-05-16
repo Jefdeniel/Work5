@@ -31,6 +31,7 @@ const DetailedNavItem = ({
       icon={icon}
       onClick={handleOnClick}
       active={isActive}
+      style={style}
     >
       {children}
     </MenuItem>

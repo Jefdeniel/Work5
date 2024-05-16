@@ -1,0 +1,44 @@
+@import '../../../App.scss';
+
+.badge {
+  padding: var(--p-xs) var(--p-sm);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  border-radius: var(--br-full);
+  text-align: center;
+  height: var(10px);
+  width: var(10px);
+}
+
+.bg-primary {
+  background-color: var(--sa-primary-500-base);
+  color: var(--sa-bright);
+}
+.bg-secondary {
+  background-color: var(--sa-grey);
+  color: var(--sa-dark);
+}
+.bg-success {
+  background-color: var(--sa-success-500-base);
+  color: var(--sa-bright);
+}
+.bg-danger {
+  background-color: var(--sa-error-500-base);
+  color: var(--sa-bright);
+}
+.bg-warning {
+  background-color: var(--sa-primary-300);
+  color: var(--sa-dark);
+}
+.bg-info {
+  background-color: var(--sa-primary-200);
+  color: var(--sa-dark);
+}
+.bg-light {
+  background-color: var(--sa-bright);
+  color: var(--sa-dark);
+}
+.bg-dark {
+  background-color: var(--sa-primary-950);
+  color: var(--sa-bright);
+}

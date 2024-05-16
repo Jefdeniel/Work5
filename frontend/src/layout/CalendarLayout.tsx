@@ -45,7 +45,7 @@ const CalendarLayout = ({ title }: Props) => {
           padding: 0,
         }}
       >
-        <Row className="top-navigation border-bottom">
+        <Row className="flex-row top-navigation border-bottom">
           <NavigationTop
             title={title}
             onMenuClose={() => {
@@ -57,7 +57,7 @@ const CalendarLayout = ({ title }: Props) => {
             }}
           />
         </Row>
-        <Row>
+        <Row className="top-navigation">
           <Outlet />
         </Row>
       </Container>
