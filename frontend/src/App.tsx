@@ -32,8 +32,10 @@ function App() {
 
       {/* Calendar specific routes with CalendarLayout */}
       <Route path="/calendar" element={<CalendarLayout />}>
-        <Route path="overview" element={<Calendar />} />
         <Route path="create" element={<CreateCalendar />} />
+      </Route>
+      <Route path="/calendar" element={<Layout />}>
+        <Route path="overview" element={<Calendar />} />
       </Route>
 
       {/* Account specific routes under /calendar but using a different layout */}
