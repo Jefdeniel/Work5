@@ -4,35 +4,20 @@ import IconButton from '../../ui/IconButton/IconButton';
 import CalendarNavItem from './CalendarNavItem';
 import { Col, Row } from 'react-bootstrap';
 import Logo from '../../ui/Logo';
-
-interface MenuItem {
-  link: string;
-  icon: React.ReactNode;
-  label?: string;
-}
-
-interface Props {
-  title: string;
-  isMenuBroken: boolean;
-  isMenuCollapsed: boolean;
-  isMenuToggled: boolean;
-  setIsMenuToggled: (value: boolean) => void;
-  setIsMenuBroken: (value: boolean) => void;
-  onMenuClose: () => void;
-}
+import { MenuItem, SideBarProps } from '../../../@types/Nav';
 
 const menuItems: MenuItem[] = [
   {
     link: '/test',
-    icon: <img src="/img/temp-nav-item.png" alt="notifications" />,
+    icon: <img src="/img/temp-nav-item.png" alt="agenda1" />,
   },
   {
     link: '/test2',
-    icon: <img src="/img/temp-nav-item.png" alt="sharing-hub" />,
+    icon: <img src="/img/temp-nav-item.png" alt="agenda2" />,
   },
   {
     link: '/test3',
-    icon: <img src="/img/temp-nav-item.png" alt="customize" />,
+    icon: <img src="/img/temp-nav-item.png" alt="agenda3" />,
   },
   {
     link: '/calendar/create',
@@ -46,7 +31,7 @@ const CalendarNavigation = ({
   isMenuToggled,
   setIsMenuToggled,
   setIsMenuBroken,
-}: Props) => {
+}: SideBarProps) => {
   const navigate = useNavigate();
 
   const menuWidth = isMenuToggled ? menuItems.length * 75 + 'px' : 'auto';
@@ -78,6 +63,7 @@ const CalendarNavigation = ({
         style={{
           borderRight: '1px solid var(--sa-primary-200)',
         }}
+        className={`sidebar`}
       >
         <Row className="mb-large">
           <Col>
@@ -100,22 +86,19 @@ const CalendarNavigation = ({
         <Menu
           menuItemStyles={{
             button: ({ active }) => ({
-              color: active ? 'black' : 'gray',
-              backgroundColor: active ? 'rgba(0, 0, 0, 0.1)' : 'white',
-              padding: '10px 15px',
-              marginLeft: 10,
-              marginRight: 10,
-              marginTop: 5,
-              marginBottom: 5,
-              borderRadius: 7,
+              fontWeight: active ? 'bold' : 'normal',
+              color: active
+                ? 'var(--sa-primary-500-base)'
+                : 'var(--sa-primary-950)',
+              borderLeft: active ? '12px solid' : 'none',
+              borderRadius: 'var(--br-base)',
               height: 40,
               '&:hover': {
-                backgroundColor: active ? 'black' : 'rgba(0, 0, 0, 0.1)',
+                backgroundColor: active ? 'none' : 'var(--sa-primary-100)',
               },
             }),
           }}
         >
-          <p>Calendar list</p>
           {menuItems.map(({ link, icon }) => (
             <CalendarNavItem
               key={link}
@@ -134,13 +117,7 @@ const CalendarNavigation = ({
             display: 'flex',
             justifyContent: isMenuToggled ? 'space-between' : 'center',
           }}
-        >
-          <IconButton
-            icon={<img src="/icons/logout.svg" alt="logout" />}
-            onClick={onLogout}
-            style={{ marginLeft: isMenuToggled ? 0 : 15 }}
-          />
-        </div>
+        ></div>
       </Sidebar>
     </>
   );

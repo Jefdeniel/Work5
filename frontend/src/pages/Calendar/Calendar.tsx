@@ -4,7 +4,7 @@ import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/ui/Loading/Spinner';
 import { Col, Row } from 'react-bootstrap';
 import Heading from '../../components/ui/Heading/Heading';
-import BigCalendar from '../../components/ui/BigCalendar/BigCalendar';
+import BigCalendar from '../../components/calendar/BigCalendar/BigCalendar';
 
 const Calendar = () => {
   useSetTitle('Calendar');
