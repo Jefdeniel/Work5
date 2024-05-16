@@ -8,16 +8,14 @@ import { MenuItem, SideBarProps } from '../../../@types/Nav';
 import Icon from '../../ui/Icon/Icon';
 import { useTranslation } from 'react-i18next';
 import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
+import { PlusIcon } from '../../ui/Icon/SvgIcons';
 
 const menuItems: MenuItem[] = [
   {
-    link: '/test',
-    icon: <img src="/img/temp-nav-item.png" alt="agenda1" />,
-  },
-  {
     link: '/calendar/create',
-    icon: <img src="/icons/plus.svg" alt="create" />,
+    icon: <PlusIcon />,
     label: 'general:navigation.create',
+    className: 'create-calendar',
   },
 ];
 
@@ -100,7 +98,6 @@ const CalendarNavigation = ({
               color: active
                 ? 'var(--sa-primary-500-base)'
                 : 'var(--sa-primary-950)',
-              borderLeft: active ? '12px solid' : 'none',
               borderRadius: 'var(--br-base)',
               height: 40,
               '&:hover': {
@@ -109,14 +106,16 @@ const CalendarNavigation = ({
             }),
           }}
         >
-          {menuItems.map(({ link, icon }, index) => (
+          {menuItems.map(({ link, icon, className, label }) => (
             <CalendarNavItem
               key={link}
               link={link}
               icon={icon}
-              className={index === menuItems.length - 1 ? 'last-menu-item' : ''}
+              className={className}
               onClick={handleOnClickMenu}
-            />
+            >
+              {t(label.toString())}
+            </CalendarNavItem>
           ))}
         </Menu>
         <div

@@ -52,6 +52,7 @@ const Register = () => {
                     {({ input, meta }) => (
                       <Input
                         {...input}
+                        // meta for form errors
                         meta={meta}
                         onChange={input.onChange}
                         placeholder={t('auth:register.firstName')}

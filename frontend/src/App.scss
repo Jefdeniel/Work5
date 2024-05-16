@@ -331,6 +331,31 @@ ul {
 }
 
 /* Some specific classes */
-.last-menu-item {
-  color: red;
+.create-calendar {
+  &:hover .ps-menu-icon {
+    background-color: var(--sa-primary-400);
+
+    & path {
+      fill: var(--sa-bright);
+    }
+  }
+
+  & .ps-menu-icon {
+    min-width: 4rem;
+    max-width: 4rem;
+    height: 66px;
+    border: 1px solid var(--sa-primary-400);
+    border-top-left-radius: var(--br-lg);
+    border-bottom-left-radius: var(--br-lg);
+    transition: all .2s ease-in-out;
+
+    & svg {
+      margin-top: -5px;
+    }
+  }
+
+  & .ps-menu-label {
+    padding: var(--p-lg) var(--p-lg);
+    margin: 0;
+  }
 }

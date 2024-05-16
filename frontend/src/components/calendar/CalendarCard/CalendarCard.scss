@@ -8,6 +8,8 @@
   & .calendar-card__img {
     max-width: 4rem;
     height: 66px;
+    border-top-left-radius: var(--br-lg);
+    border-bottom-left-radius: var(--br-lg);
     object-fit: cover;
   }
 
