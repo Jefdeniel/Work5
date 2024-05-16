@@ -5,6 +5,9 @@ import CalendarNavItem from './CalendarNavItem';
 import { Col, Row } from 'react-bootstrap';
 import Logo from '../../ui/Logo';
 import { MenuItem, SideBarProps } from '../../../@types/Nav';
+import Icon from '../../ui/Icon/Icon';
+import { useTranslation } from 'react-i18next';
+import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
 
 const menuItems: MenuItem[] = [
   {
@@ -12,16 +15,9 @@ const menuItems: MenuItem[] = [
     icon: <img src="/img/temp-nav-item.png" alt="agenda1" />,
   },
   {
-    link: '/test2',
-    icon: <img src="/img/temp-nav-item.png" alt="agenda2" />,
-  },
-  {
-    link: '/test3',
-    icon: <img src="/img/temp-nav-item.png" alt="agenda3" />,
-  },
-  {
     link: '/calendar/create',
     icon: <img src="/icons/plus.svg" alt="create" />,
+    label: 'general:navigation.create',
   },
 ];
 
@@ -33,6 +29,7 @@ const CalendarNavigation = ({
   setIsMenuBroken,
 }: SideBarProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation(['general']);
 
   const menuWidth = isMenuToggled ? menuItems.length * 75 + 'px' : 'auto';
   const handleOnClickMenu = (link: string) => {
@@ -77,11 +74,24 @@ const CalendarNavigation = ({
 
           <Col className={`d-flex justify-content-end`}>
             <IconButton
-              icon={<img src="/icons/settings.svg" alt="Close icon" />}
+              icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
               onClick={handleSettingsClick}
             />
           </Col>
         </Row>
+
+        <Row>
+          <span className={`heading heading--sm clr-primary-300 mb-base`}>
+            {t('general:navigation.title'.toString())}
+          </span>
+        </Row>
+
+        <CalendarCard
+          img="/img/test-img.jpg"
+          name="Work / Business"
+          userImgSrc="/icons/user-profile.svg"
+          userImgAlt="User profile icon"
+        />
 
         <Menu
           menuItemStyles={{
@@ -99,11 +109,12 @@ const CalendarNavigation = ({
             }),
           }}
         >
-          {menuItems.map(({ link, icon }) => (
+          {menuItems.map(({ link, icon }, index) => (
             <CalendarNavItem
               key={link}
               link={link}
               icon={icon}
+              className={index === menuItems.length - 1 ? 'last-menu-item' : ''}
               onClick={handleOnClickMenu}
             />
           ))}
