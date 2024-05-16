@@ -51,6 +51,33 @@ class Command(BaseCommand):
 
         users = list(CustomUser.objects.all())
 
+        # Create admin user for myself
+
+        # Ensure a specific user 'jefdeniel' always exists and is an admin
+        user_jefdeniel, created = CustomUser.objects.get_or_create(
+            username="jefdeniel",
+            defaults={
+                "password": make_password("admin"),
+                "last_login": dj_timezone.now(),
+                "is_superuser": True,
+                "first_name": "Jef",
+                "last_name": "Deniel",
+                "email": "jefdeniel@example.com",
+                "is_staff": True,
+                "is_active": True,
+                "date_joined": dj_timezone.now(),
+                "birthday": datetime(1985, 6, 15, tzinfo=timezone.utc),
+                "avatar": fake.image_url(),
+                "role": "ADMIN",
+            },
+        )
+        if created:
+            self.stdout.write(self.style.SUCCESS(f"Admin user 'jefdeniel' created."))
+        else:
+            self.stdout.write(
+                self.style.SUCCESS(f"Admin user 'jefdeniel' already exists.")
+            )
+
         # Create 100 Calendars
         for _ in range(100):
             Calendar.objects.create(
