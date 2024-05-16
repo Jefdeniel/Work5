@@ -223,29 +223,29 @@ ul {
 
 /* Screen reader classes */
 .sr-only {
-	border: 0 !important;
-	clip: rect(1px, 1px, 1px, 1px) !important;
-	-webkit-clip-path: inset(50%) !important;
-		clip-path: inset(50%) !important;
-	height: 1px !important;
-	margin: -1px !important;
-	overflow: hidden !important;
-	padding: 0 !important;
-	position: absolute !important;
-	width: 1px !important;
-	white-space: nowrap !important;
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
 }
 
 .sr-only-focusable:focus,
 .sr-only-focusable:active {
-	clip: auto !important;
-	-webkit-clip-path: none !important;
-		clip-path: none !important;
-	height: auto !important;
-	margin: auto !important;
-	overflow: visible !important;
-	width: auto !important;
-	white-space: normal !important;
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  width: auto !important;
+  white-space: normal !important;
 }
 
 /* Some general classes */
@@ -295,7 +295,6 @@ ul {
   margin-bottom: var(--sp-base);
 }
 
-
 .mb-large {
   margin-bottom: var(--sp-lg);
 }
@@ -318,4 +317,8 @@ ul {
 
 .notifications-top {
   border-bottom: 1px solid var(--sa-primary-200);
+}
+
+.ps-menu-label {
+  margin-top: 3px;
 }
