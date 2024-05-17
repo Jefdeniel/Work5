@@ -21,19 +21,14 @@ const useFetch = (
   ): Promise<Response> => {
     setIsLoading(true);
 
-    const parametersToAdd = params ? params : body;
-    const url = `${Config.apiBaseUrl}/${requestArray.join(
-      '/'
-    )}?${new URLSearchParams(parametersToAdd).toString()}`;
+    const url = `${Config.apiBaseUrl}/${requestArray.join('/')}?${new URLSearchParams(params).toString()}`;
 
     try {
       const response = await fetch(url, {
-        method: method || 'GET',
+        method,
         headers: {
           accept: 'application/json',
-          ...(useContentType && {
-            'Content-Type': 'application/json',
-          }),
+          ...(useContentType && { 'Content-Type': 'application/json' }),
           ...(auth.token && { Authorization: `Bearer ${auth.token}` }),
           ...(customAuthorizationToken && {
             Authorization: `Bearer ${customAuthorizationToken}`,
@@ -48,15 +43,11 @@ const useFetch = (
 
       setIsLoading(false);
 
-      return response as Response;
+      return response;
     } catch (error: any) {
       setIsLoading(false);
-
-      return new Promise(() => {
-        return {
-          status: 500,
-          statusText: error.message,
-        };
+      return new Response(JSON.stringify({ message: error.message }), {
+        status: 500,
       });
     }
   };

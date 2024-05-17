@@ -1,10 +1,10 @@
-import { jwtDecode } from 'jwt-decode';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   getLocalstorageItem,
   removeLocalstorageItem,
   setLocalstorageItem,
 } from '../service/LocalStorageService';
+import { jwtDecode } from 'jwt-decode';
 
 interface JwtToken {
   sub: string;
@@ -14,23 +14,26 @@ interface JwtToken {
 }
 
 interface AuthContextType {
-  token: string;
-  id: string;
+  token: string | null;
+  id: string | null;
   isLoggedIn: boolean;
   login: (token: string) => void;
   logout: () => void;
 }
 
 const AuthContext = React.createContext<AuthContextType>({
-  token: '',
-  id: '',
+  token: null,
+  id: null,
   isLoggedIn: false,
   login: () => {},
   logout: () => {},
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const AuthContextProvider = ({ children }: { children: any }) => {
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [token, setToken] = useState<string | null>(
     getLocalstorageItem('token')
   );
@@ -39,14 +42,13 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
 
   const isLoggedIn = () => {
     return (
-      !!token && new Date(jwtDecode<JwtToken>(token).exp * 1000) > new Date()
+      token && new Date(jwtDecode<JwtToken>(token).exp * 1000) > new Date()
     );
   };
 
   const loginHandler = (token: string) => {
-    const strippedToken = token.replaceAll('"', ''); // i think the error is here
-    setToken(strippedToken);
-    setLocalstorageItem('token', strippedToken);
+    setToken(token);
+    setLocalstorageItem('token', token);
   };
 
   const logoutHandler = () => {
@@ -54,10 +56,18 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
     removeLocalstorageItem('token');
   };
 
+  useEffect(() => {
+    if (token) {
+      if (!isLoggedIn()) {
+        logoutHandler();
+      }
+    }
+  }, [token]);
+
   const contextValue: AuthContextType = {
-    token: token!,
-    id: getUserId()!,
-    isLoggedIn: isLoggedIn(),
+    token,
+    id: getUserId() || null,
+    isLoggedIn: isLoggedIn() || false,
     login: loginHandler,
     logout: logoutHandler,
   };

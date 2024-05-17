@@ -1,25 +1,21 @@
+import React, { useState, useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
-import Validators from '../../utils/Validators';
-import { useTranslation } from 'react-i18next';
 import Logo from '../../components/ui/Logo';
-import useAuth from '../../hooks/useAuth';
-import { FormEvent, useState } from 'react';
-import { toast } from 'react-toastify';
 import useFetch from '../../hooks/useFetch';
-import { useNavigate } from 'react-router-dom';
+import Validators from '../../utils/Validators';
+import AuthContext from '../../store/AuthContext';
 
 const Login = () => {
   const { t } = useTranslation('auth');
-  const auth = useAuth();
+  const authContext = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
 
   const { fetchData: postLogin } = useFetch('POST', ['api/token/']);
 
@@ -34,32 +30,24 @@ const Login = () => {
       );
 
       if (!response.ok) {
-        const errorData = await response.json();
         toast.error('Invalid credentials');
-        console.error(errorData);
         return;
       }
 
-      const token = await response.json();
-      if (token) {
-        auth.login(token);
+      const tokenData = await response.json();
+      if (tokenData && tokenData.access) {
+        authContext.login(tokenData.access);
         toast.success('Login successful!');
-        setEmail(email);
-        setPassword(password);
-        console.log(auth);
-        console.log(token);
+        navigate('/');
       }
     } catch (error) {
       toast.error('An error occurred. Please try again.');
-      console.error(error);
     }
   };
 
   const handleRegister = () => {
-    window.location.href = '/register';
+    navigate('/register');
   };
-
-  console.log(auth.isLoggedIn);
 
   return (
     <Row className="h-100 align-items-center justify-content-center m-3">
@@ -83,10 +71,7 @@ const Login = () => {
               </Field>
               <Field
                 name="password"
-                validate={Validators.compose(
-                  Validators.required()
-                  // Validators.password()
-                )}
+                validate={Validators.compose(Validators.required())}
               >
                 {({ input, meta }) => (
                   <Input
