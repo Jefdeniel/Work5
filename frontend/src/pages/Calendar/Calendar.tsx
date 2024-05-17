@@ -7,6 +7,7 @@ import Heading from '../../components/ui/Heading/Heading';
 import BigCalendar from '../../components/calendar/BigCalendar/BigCalendar';
 import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
 import Icon from '../../components/ui/Icon/Icon';
+import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
 
 const Calendar = () => {
   useSetTitle('Calendar');
@@ -32,7 +33,7 @@ const Calendar = () => {
   }, []);
 
   if (isLoading) {
-    return <Spinner />;
+    return <LoadingScreen />;
   }
 
   const calendarUsers = [
@@ -44,7 +45,7 @@ const Calendar = () => {
 
   return (
     <>
-      <div>{!isLoading ? '' : <Spinner />}</div>
+      <div>{!isLoading ? '' : <LoadingScreen />}</div>
 
       <Row className={`mb-xlarge`}>
         <Col xs={6}>
