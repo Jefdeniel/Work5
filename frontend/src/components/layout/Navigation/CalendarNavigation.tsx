@@ -20,6 +20,9 @@ const menuItems: MenuItem[] = [
   },
 ];
 
+//TODO Test loop for user avatars in calendar card
+const userAvatars = ['/icons/user-profile.svg', ''];
+
 const CalendarNavigation = ({
   isMenuBroken,
   isMenuCollapsed,
@@ -85,21 +88,20 @@ const CalendarNavigation = ({
 
         <Row>
           <span className={`heading heading--sm clr-primary-300 mb-base`}>
-            {t('general:navigation.title'.toString())}
+            {t('general:navigation.title')}
           </span>
         </Row>
 
         <CalendarCard
           img="/img/test-img.jpg"
           name="Work / Business"
-          userImgSrc="/icons/user-profile.svg"
-          userImgAlt="User profile icon"
+          userAvatars={userAvatars}
         />
 
         <Menu
           menuItemStyles={{
             button: ({ active }) => ({
-              fontWeight: active ? 'bold' : 'normal',
+              fontWeight: active ? 'var(--fw-bold)' : 'var(--fw-regular)',
               color: active
                 ? 'var(--sa-primary-500-base)'
                 : 'var(--sa-primary-950)',
