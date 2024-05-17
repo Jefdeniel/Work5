@@ -44,7 +44,7 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
   };
 
   const loginHandler = (token: string) => {
-    const strippedToken = token.replaceAll('"', '');
+    const strippedToken = token.replaceAll('"', ''); // i think the error is here
     setToken(strippedToken);
     setLocalstorageItem('token', strippedToken);
   };
