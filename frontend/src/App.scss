@@ -18,23 +18,26 @@
   --sa-error-500-base: hsla(5, 88%, 57%, 100);
   --sa-error-700: hsla(5, 77%, 42%, 100);
   --sa-bright: hsla(0, 0%, 100%, 100);
-  --sa-grey: hsla(231, 36%, 78%, 100);
+  --sa-grey: hsla(231, 36%, 83%, 100);
   --sa-dark: hsla(240, 3%, 12%, 100);
 
   /* Font weight */
   --fw-light: 300;
   --fw-regular: 400;
   --fw-bold: 700;
+
   /* Border radius */
   --br-base: 0.5rem;
   --br-lg: 1rem;
   --br-full: 9999px;
+
   /* Padding */
   --p-xxs: 0.25rem;
   --p-xs: 0.563rem;
   --p-sm: 0.625rem;
   --p-md: 0.75rem;
   --p-lg: 1.125rem;
+
   /* Spacing */
   --sp-xxs: 0.4rem;
   --sp-xs: 0.5rem;
@@ -221,6 +224,33 @@ ul {
   padding: 0;
 }
 
+/* Screen reader classes */
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  width: auto !important;
+  white-space: normal !important;
+}
+
 /* Some general classes */
 .heading {
   &.heading--sm {
@@ -256,16 +286,16 @@ ul {
   margin-bottom: var(--sp-sm);
 }
 
+.mt-large {
+  margin-top: var(--sp-lg);
+}
+
 .mb-small {
   margin-bottom: var(--sp-xs);
 }
 
 .mb-base {
   margin-bottom: var(--sp-base);
-}
-
-.mt-large {
-  margin-top: var(--sp-lg);
 }
 
 .mb-large {
@@ -280,6 +310,10 @@ ul {
   color: var(--sa-primary-500-base);
 }
 
+.clr-primary-300 {
+  color: var(--sa-primary-300);
+}
+
 .gap-base {
   gap: var(--sp-sm);
 }
@@ -290,4 +324,38 @@ ul {
 
 .notifications-top {
   border-bottom: 1px solid var(--sa-primary-200);
+}
+
+.ps-menu-label {
+  margin-top: 3px;
+}
+
+/* Some specific classes */
+.create-calendar {
+  &:hover .ps-menu-icon {
+    background-color: var(--sa-primary-400);
+
+    & path {
+      fill: var(--sa-bright);
+    }
+  }
+
+  & .ps-menu-icon {
+    min-width: 4rem;
+    max-width: 4rem;
+    height: 66px;
+    border: 1px solid var(--sa-primary-400);
+    border-top-left-radius: var(--br-lg);
+    border-bottom-left-radius: var(--br-lg);
+    transition: all 0.2s ease-in-out;
+
+    & svg {
+      margin-top: -5px;
+    }
+  }
+
+  & .ps-menu-label {
+    padding: var(--p-lg) var(--p-lg);
+    margin: 0;
+  }
 }

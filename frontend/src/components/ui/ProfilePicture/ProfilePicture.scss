@@ -1,0 +1,13 @@
+.profile-picture__img {
+  border-radius: var(--br-full);
+
+  &.profile-picture--small {
+    width: 28px;
+    height: 28px;
+  }
+
+  &.profile-picture--large {
+    width: 56px;
+    height: 56px;
+  }
+}

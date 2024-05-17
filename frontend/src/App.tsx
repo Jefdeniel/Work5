@@ -22,15 +22,20 @@ function App() {
     <Routes>
       {/* Main layout for general pages */}
       <Route element={<Layout />}>
-        <Route path="/" element={<Navigate to="/calendar/create" replace />} />
+        <Route
+          path="/"
+          element={<Navigate to="/calendar/overview" replace />}
+        />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
 
       {/* Calendar specific routes with CalendarLayout */}
       <Route path="/calendar" element={<CalendarLayout />}>
-        <Route path="overview" element={<Calendar />} />
         <Route path="create" element={<CreateCalendar />} />
+      </Route>
+      <Route path="/calendar" element={<Layout />}>
+        <Route path="overview" element={<Calendar />} />
       </Route>
 
       {/* Account specific routes under /calendar but using a different layout */}

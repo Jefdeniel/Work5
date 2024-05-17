@@ -1,44 +1,27 @@
 import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../ui/Logo';
 import IconButton from '../../ui/IconButton/IconButton';
 import CalendarNavItem from './CalendarNavItem';
 import { Col, Row } from 'react-bootstrap';
-
-interface MenuItem {
-  link: string;
-  icon: React.ReactNode;
-  label?: string;
-}
-
-interface Props {
-  title: string;
-  isMenuBroken: boolean;
-  isMenuCollapsed: boolean;
-  isMenuToggled: boolean;
-  setIsMenuToggled: (value: boolean) => void;
-  setIsMenuBroken: (value: boolean) => void;
-  onMenuClose: () => void;
-}
+import Logo from '../../ui/Logo';
+import { MenuItem, SideBarProps } from '../../../@types/Nav';
+import Icon from '../../ui/Icon/Icon';
+import { useTranslation } from 'react-i18next';
+import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
+import { PlusIcon } from '../../ui/Icon/SvgIcons';
+import Input from '../../ui/Input/Input';
 
 const menuItems: MenuItem[] = [
   {
-    link: '/test',
-    icon: <img src="/img/temp-nav-item.png" alt="notifications" />,
-  },
-  {
-    link: '/test2',
-    icon: <img src="/img/temp-nav-item.png" alt="sharing-hub" />,
-  },
-  {
-    link: '/test3',
-    icon: <img src="/img/temp-nav-item.png" alt="customize" />,
-  },
-  {
     link: '/calendar/create',
-    icon: <img src="/icons/plus.svg" alt="create" />,
+    icon: <PlusIcon />,
+    label: 'general:navigation.create',
+    className: 'create-calendar',
   },
 ];
+
+//TODO Test loop for user avatars in calendar card
+const userAvatars = ['/icons/user-profile.svg', ''];
 
 const CalendarNavigation = ({
   isMenuBroken,
@@ -46,8 +29,9 @@ const CalendarNavigation = ({
   isMenuToggled,
   setIsMenuToggled,
   setIsMenuBroken,
-}: Props) => {
+}: SideBarProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation(['general']);
 
   const menuWidth = isMenuToggled ? menuItems.length * 75 + 'px' : 'auto';
   const handleOnClickMenu = (link: string) => {
@@ -55,10 +39,17 @@ const CalendarNavigation = ({
     isMenuBroken && setIsMenuToggled(false);
   };
 
+  const handleSettingsClick = () => {
+    navigate('/settings');
+    isMenuBroken && setIsMenuToggled(false);
+  };
+
   // TODO: fix this
   const onLogout = () => {
     console.log('logout');
   };
+
+  let searchPlaceholder = t('general:navigation.search');
 
   return (
     <>
@@ -68,50 +59,72 @@ const CalendarNavigation = ({
         onBackdropClick={() => setIsMenuToggled(false)}
         onBreakPoint={setIsMenuBroken}
         breakPoint="md"
-        backgroundColor="white"
+        backgroundColor="var(--sa-bright)"
         width="250px"
         style={{
-          borderRight: '1px solid rgba(0, 0, 0, 0.1)',
+          borderRight: '1px solid var(--sa-primary-200)',
         }}
+        className={`sidebar`}
       >
-        <Row>
+        <Row className="mb-large">
           <Col>
             <Link to="/">
-              <Logo width={isMenuCollapsed ? '50px' : '75px'} height="50px" />
+              <Logo
+                width={isMenuCollapsed ? '50px' : '50px'}
+                height={isMenuCollapsed ? '50px' : '50px'}
+              />
             </Link>
           </Col>
-          <IconButton
-            icon={<img src="/icons/settings.svg" alt="close" />}
-            onClick={() => navigate('/settings')}
-          />
+
+          <Col className={`d-flex justify-content-end`}>
+            <IconButton
+              icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
+              onClick={handleSettingsClick}
+            />
+          </Col>
         </Row>
+
+        <Row className={`mb-large`}>
+          <Input isSearch type="search" placeholder={searchPlaceholder} />
+        </Row>
+
+        <Row>
+          <span className={`heading heading--sm clr-primary-300 mb-base`}>
+            {t('general:navigation.title')}
+          </span>
+        </Row>
+
+        <CalendarCard
+          img="/img/test-img.jpg"
+          name="Work / Business"
+          userAvatars={userAvatars}
+        />
 
         <Menu
           menuItemStyles={{
             button: ({ active }) => ({
-              color: active ? 'black' : 'gray',
-              backgroundColor: active ? 'rgba(0, 0, 0, 0.1)' : 'white',
-              padding: '10px 15px',
-              marginLeft: 10,
-              marginRight: 10,
-              marginTop: 5,
-              marginBottom: 5,
-              borderRadius: 7,
+              fontWeight: active ? 'var(--fw-bold)' : 'var(--fw-regular)',
+              color: active
+                ? 'var(--sa-primary-500-base)'
+                : 'var(--sa-primary-950)',
+              borderRadius: 'var(--br-base)',
               height: 40,
               '&:hover': {
-                backgroundColor: active ? 'black' : 'rgba(0, 0, 0, 0.1)',
+                backgroundColor: active ? 'none' : 'var(--sa-primary-100)',
               },
             }),
           }}
         >
-          <p>Calendar list</p>
-          {menuItems.map(({ link, icon }) => (
+          {menuItems.map(({ link, icon, className, label }) => (
             <CalendarNavItem
               key={link}
               link={link}
               icon={icon}
+              className={className}
               onClick={handleOnClickMenu}
-            />
+            >
+              {t(label.toString())}
+            </CalendarNavItem>
           ))}
         </Menu>
         <div
@@ -123,13 +136,7 @@ const CalendarNavigation = ({
             display: 'flex',
             justifyContent: isMenuToggled ? 'space-between' : 'center',
           }}
-        >
-          <IconButton
-            icon={<img src="/icons/logout.svg" alt="logout" />}
-            onClick={onLogout}
-            style={{ marginLeft: isMenuToggled ? 0 : 15 }}
-          />
-        </div>
+        ></div>
       </Sidebar>
     </>
   );

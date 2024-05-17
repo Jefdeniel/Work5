@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 interface Props {
   icon: React.ReactNode;
   link: string;
+  className?: string;
   onClick: (link: string, isSubMenu?: boolean) => void;
   isSubMenu?: boolean;
   style?: React.CSSProperties;
@@ -13,6 +14,7 @@ interface Props {
 const CalendarNavItem = ({
   icon,
   link,
+  className,
   onClick,
   isSubMenu,
   style,
@@ -33,6 +35,7 @@ const CalendarNavItem = ({
         ...{ style },
       }}
       icon={icon}
+      className={className}
       onClick={handleOnClick}
       active={isActive}
     >

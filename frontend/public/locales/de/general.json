@@ -1,8 +1,11 @@
 {
   "navigation": {
+    "title": "Kalenderliste",
     "notifications": "Benachrichtigungen",
     "sharing-hub": "Freigabe-Hub",
-    "customize": "Anpassen"
+    "customize": "Anpassen",
+    "create": "Erstelle neu",
+    "search": "Kalender durchsuchen"
   },
   "buttons": {
     "save": "Speichern",

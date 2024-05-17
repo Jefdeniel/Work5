@@ -1,8 +1,11 @@
 {
   "navigation": {
+    "title": "Liste de calendrier",
     "notifications": "Notifications",
     "sharing-hub": "Hub de partage",
-    "customize": "Personnaliser"
+    "customize": "Personnaliser",
+    "create": "Créer nouveau",
+    "search": "Rechercher calendrier"
   },
   "buttons": {
     "save": "Enregistrer",
