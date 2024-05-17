@@ -51,34 +51,17 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",  # should be as high as possible, especially before CommonMiddleware    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-SWAGGER_SETTINGS = {
-    "exclude_namespaces": [],  # List URL namespaces to ignore
-    "SECURITY_DEFINITIONS": {
-        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
-    },
-    "api_version": "0.1",
-    "api_path": "/",
-    "enabled_methods": [
-        "get",
-        "post",
-        "put",
-        "patch",
-        "delete",
-    ],
-    "api_key": "",  # An API key
-    "is_authenticated": True,  # Set to True to enforce user authentication,
-    "is_superuser": True,  # Set to True to enforce admin only access
-}
+
 ROOT_URLCONF = "backend.urls"
 
 REST_FRAMEWORK = {
@@ -87,7 +70,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,  # Not sure if this is needed
@@ -111,6 +94,7 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 WSGI_APPLICATION = "backend.wsgi.application"
 
 
@@ -157,13 +141,19 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/ CHECK THIS
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
 STATIC_ROOT = BASE_DIR.joinpath("static")
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR.joinpath("media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -186,18 +176,8 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ALLOW_CREDENTIALS = True
 
 # Security settings
-CSRF_COOKIE_SAMESITE = "Strict"
-SESSION_COOKIE_SANME_SITE = "Strict"
 FILE_UPLOAD_PERMISSIONS = 0o644
 
 # PRODUCTION: SET TO TRUE
 # CSRF_COOKY_HTTPONLY = False
 # SESSION_COOKIE_HTTPONLY = True
-
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:5177",
-    "http://localhost:8000",
-]

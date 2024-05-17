@@ -9,6 +9,7 @@ from .models import (
     Notification,
     UserSettings,
 )
+from django.apps import AppConfig
 
 
 class CalendarAdmin(admin.ModelAdmin):
@@ -102,3 +103,7 @@ admin.site.register(Reminder, ReminderAdmin)
 admin.site.register(Label, LabelAdmin)
 admin.site.register(UserSettings, UserSettingsAdmin)
 admin.site.register(Notification, NotificationAdmin)
+
+
+class CalendarAppConfig(AppConfig):
+    name = "calendar_app"
