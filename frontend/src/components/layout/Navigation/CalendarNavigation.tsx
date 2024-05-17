@@ -50,6 +50,8 @@ const CalendarNavigation = ({
     console.log('logout');
   };
 
+  let searchPlaceholder = t('general:navigation.search');
+
   return (
     <>
       <Sidebar
@@ -84,13 +86,7 @@ const CalendarNavigation = ({
         </Row>
 
         <Row className={`mb-large`}>
-          <SearchBar />
-
-          <Input
-            type="search"
-            placeholder="Search"
-            className="search-input"
-          />
+          <Input isSearch type="search" placeholder={searchPlaceholder} />
         </Row>
 
         <Row>
