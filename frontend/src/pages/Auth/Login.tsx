@@ -11,55 +11,55 @@ import useAuth from '../../hooks/useAuth';
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 import useFetch from '../../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { t } = useTranslation('auth');
   const auth = useAuth();
+  const navigate = useNavigate();
 
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const { fetchData: postLogin } = useFetch('POST', ['login']);
+  const { fetchData: postLogin } = useFetch('POST', ['api/token/']);
 
-  const onLoginHandler = async (event: FormEvent) => {
-    event.preventDefault();
-
-    postLogin({ username, password })
-      .then((response) => {
-        if (!response.ok) {
-          toast.error('Invalid credentials');
-          return null;
+  const onLoginHandler = async (values) => {
+    try {
+      const response = await postLogin(
+        {},
+        {
+          email: values.email,
+          password: values.password,
         }
+      );
 
-        return response.json();
-      })
-      .then((token) => {
-        if (token) {
-          auth.login(token);
-        }
-      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        toast.error('Invalid credentials');
+        console.error(errorData);
+        return;
+      }
+
+      const token = await response.json();
+      if (token) {
+        auth.login(token);
+        toast.success('Login successful!');
+        setEmail(email);
+        setPassword(password);
+        console.log(auth);
+        console.log(token);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+      console.error(error);
+    }
   };
-
-  // const onLoginHandler = async (values: any) => {
-  //   const response = await fetch('http://127.0.0.1:8000/api-token-auth/', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(values),
-  //   });
-
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const cookies = new Cookies();
-  //     cookies.set('token', data.token, { path: '/' });
-  //     window.location.href = '/';
-  //   }
-  // };
 
   const handleRegister = () => {
     window.location.href = '/register';
   };
+
+  console.log(auth.isLoggedIn);
 
   return (
     <Row className="h-100 align-items-center justify-content-center m-3">
@@ -71,13 +71,13 @@ const Login = () => {
           {({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <Heading level={2}>{t('auth:login.login')}</Heading>
-              <Field name="username" validate={Validators.required()}>
+              <Field name="email" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <Input
                     {...input}
                     meta={meta}
                     type="text"
-                    placeholder={t('auth:login.username')}
+                    placeholder={t('auth:login.email')}
                   />
                 )}
               </Field>
