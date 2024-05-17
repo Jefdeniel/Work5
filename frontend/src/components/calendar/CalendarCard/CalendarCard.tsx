@@ -1,15 +1,15 @@
 import './CalendarCard.scss';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
+import ProfilePicture from '../../ui/ProfilePicture/ProfilePicture';
 
 interface Props {
   img: string;
   name: string;
-  userImgSrc: string;
-  userImgAlt: string;
+  userAvatars?: string[];
 }
 
-const CalendarCard = ({ img, name, userImgSrc, userImgAlt }: Props) => {
+const CalendarCard = ({ img, name, userAvatars }: Props) => {
   return (
     <div className="calendar-card">
       <img
@@ -22,9 +22,15 @@ const CalendarCard = ({ img, name, userImgSrc, userImgAlt }: Props) => {
         <span className="heading heading--sm calendar-card__title">{name}</span>
 
         <ul className={`calendar-card__user-list`}>
-          <li>
-            <Icon src={userImgSrc} alt={userImgAlt} />
-          </li>
+          {userAvatars.map((avatar, index) => (
+            <li key={index}>
+              {avatar ? (
+                <ProfilePicture isSmall src={avatar} alt="User profile image" />
+              ) : (
+                <Icon src="/icons/user-profile.svg" alt="User profile icon" />
+              )}
+            </li>
+          ))}
         </ul>
       </div>
 

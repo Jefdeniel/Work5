@@ -27,13 +27,20 @@
     }
 
     & .calendar-card__user-list {
-        margin: 0;
+      margin: 0;
+      display: flex;
+      gap: var(--sp-xs);
+
+      & .icon {
+        width: 28px;
+        height: 28px;
+      }
     }
 
     & .calendar-card__user-list img {
-        width: 28px;
-        height: 28px;
-        object-fit: cover;
+      width: 28px;
+      height: 28px;
+      object-fit: cover;
     }
   }
 
