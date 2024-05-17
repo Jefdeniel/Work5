@@ -1,4 +1,4 @@
-import './Card.scss';
+import './EventCard.scss';
 
 interface Props {
   title: string;
