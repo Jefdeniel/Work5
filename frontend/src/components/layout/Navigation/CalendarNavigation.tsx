@@ -9,7 +9,6 @@ import Icon from '../../ui/Icon/Icon';
 import { useTranslation } from 'react-i18next';
 import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
 import { PlusIcon } from '../../ui/Icon/SvgIcons';
-import SearchBar from '../../ui/SearchBar/SearchBar';
 import Input from '../../ui/Input/Input';
 
 const menuItems: MenuItem[] = [
