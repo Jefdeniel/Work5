@@ -72,8 +72,6 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,  # Not sure if this is needed
 }
 
 TEMPLATES = [
@@ -173,6 +171,11 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 # If you host your front-end and back-end at different hosts, you should configure the CORS settings to make the front-end is able to access the resources of the back-end
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5177",
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
 # Security settings
@@ -184,4 +187,6 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:5177",
+    "http://localhost:8000",
 ]

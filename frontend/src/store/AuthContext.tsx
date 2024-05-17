@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import React, { useEffect, useState } from 'react';
+import useFetch from '../hooks/useFetch';
 import {
   getLocalstorageItem,
   removeLocalstorageItem,
   setLocalstorageItem,
 } from '../service/LocalStorageService';
-import { jwtDecode } from 'jwt-decode';
 
 interface JwtToken {
   sub: string;
@@ -17,8 +18,9 @@ interface AuthContextType {
   token: string | null;
   id: string | null;
   isLoggedIn: boolean;
-  login: (token: string) => void;
+  login: (token: string, refreshToken: string) => void;
   logout: () => void;
+  refreshToken: () => Promise<void>;
 }
 
 const AuthContext = React.createContext<AuthContextType>({
@@ -27,6 +29,7 @@ const AuthContext = React.createContext<AuthContextType>({
   isLoggedIn: false,
   login: () => {},
   logout: () => {},
+  refreshToken: async () => {},
 });
 
 export const AuthContextProvider = ({
@@ -46,21 +49,48 @@ export const AuthContextProvider = ({
     );
   };
 
-  const loginHandler = (token: string) => {
+  const loginHandler = (token: string, refreshToken: string) => {
     setToken(token);
     setLocalstorageItem('token', token);
+    setLocalstorageItem('refresh_token', refreshToken);
   };
 
   const logoutHandler = () => {
     setToken(null);
     removeLocalstorageItem('token');
+    removeLocalstorageItem('refresh_token');
+  };
+
+  const { fetchData: refreshTheToken } = useFetch('GET', [
+    'api/token/refresh/',
+  ]);
+
+  const refreshToken = async () => {
+    try {
+      const refreshToken = getLocalstorageItem('refresh_token');
+      console.log(refreshToken);
+
+      if (!refreshToken) {
+        logoutHandler();
+        return;
+      }
+      const response = await refreshTheToken({}, { refresh: refreshToken });
+
+      if (response.status === 200) {
+        const newToken = await response.json();
+        setToken(newToken);
+        setLocalstorageItem('token', newToken);
+      } else {
+        logoutHandler();
+      }
+    } catch (error) {
+      logoutHandler();
+    }
   };
 
   useEffect(() => {
-    if (token) {
-      if (!isLoggedIn()) {
-        logoutHandler();
-      }
+    if (token && !isLoggedIn()) {
+      refreshToken();
     }
   }, [token]);
 
@@ -70,6 +100,7 @@ export const AuthContextProvider = ({
     isLoggedIn: isLoggedIn() || false,
     login: loginHandler,
     logout: logoutHandler,
+    refreshToken,
   };
 
   return (

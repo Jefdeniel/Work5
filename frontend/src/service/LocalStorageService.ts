@@ -1,26 +1,29 @@
-export const getLocalstorageItem = (key: string) => {
+// service/LocalStorageService.ts
+export const getLocalstorageItem = (key: string): string | null => {
   try {
-    return window && window.localStorage && window.localStorage.getItem(key);
+    const item = window.localStorage.getItem(key);
+    console.log(`Retrieved ${key} from localStorage: `, item);
+    return item;
   } catch (error) {
+    console.error(`Error retrieving ${key} from localStorage`, error);
     return null;
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setLocalstorageItem = (key: string, value: any) => {
+export const setLocalstorageItem = (key: string, value: any): void => {
   try {
-    return (
-      window && window.localStorage && window.localStorage.setItem(key, value)
-    );
+    window.localStorage.setItem(key, value);
+    console.log(`Stored ${key} in localStorage: `, value);
   } catch (error) {
-    return null;
+    console.error(`Error storing ${key} in localStorage`, error);
   }
 };
 
-export const removeLocalstorageItem = (key: string) => {
+export const removeLocalstorageItem = (key: string): void => {
   try {
-    return window && window.localStorage && window.localStorage.removeItem(key);
+    window.localStorage.removeItem(key);
+    console.log(`Removed ${key} from localStorage`);
   } catch (error) {
-    return null;
+    console.error(`Error removing ${key} from localStorage`, error);
   }
 };

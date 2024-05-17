@@ -7,27 +7,49 @@ import { Row } from 'react-bootstrap';
 
 const NotificationList = () => {
   const [notifications, setNotifications] = useState([]);
-  const { fetchData: getNotifications } = useFetch('GET', ['notifications']);
+  const { fetchData: getNotifications } = useFetch('GET', [
+    'api/notifications/',
+  ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getNotifications()
       .then((response) => {
         if (!response.ok) {
-          toast.error('Failed to fetch notifications');
-          return null;
+          throw new Error('Failed to fetch notifications');
         }
         return response.json();
       })
       .then((data) => {
-        if (data) {
+        console.log('Received data:', data); // Log the data to understand its structure
+        if (Array.isArray(data)) {
           setNotifications(data);
+        } else {
+          throw new Error('Received data is not an array');
         }
       })
       .catch((error) => {
         console.error('Error fetching notifications:', error);
+        setError(error.message);
         toast.error('Error fetching notifications');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <p> loading</p>;
+  }
+
+  if (error) {
+    return <h1>Error: {error}</h1>;
+  }
+
+  if (notifications.length === 0) {
+    return <h1>No notifications: length 0</h1>;
+  }
 
   return (
     <Row>
@@ -45,7 +67,7 @@ const NotificationList = () => {
             title={notification.title}
             timeFrom={notificationStart}
             timeTo={notificationStop}
-            isNew={notification.isNew} // TODO: Implement logic (with passing states and pushing to db ) for new notifications
+            isNew={notification.isNew} // TODO: Implement logic (with passing states and pushing to db) for new notifications
           />
         );
       })}
