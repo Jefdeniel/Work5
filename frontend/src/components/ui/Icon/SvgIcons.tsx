@@ -1,10 +1,6 @@
 import './Icon.scss';
 
-interface Props {
-  className?: string;
-}
-
-const NotificationIcon = ({ className }: Props) => {
+const NotificationIcon = ({ className }: { className?: string }) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -22,7 +18,7 @@ const NotificationIcon = ({ className }: Props) => {
   );
 };
 
-const SharingHubIcon = ({ className }: Props) => {
+const SharingHubIcon = ({ className }: { className?: string }) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -40,7 +36,7 @@ const SharingHubIcon = ({ className }: Props) => {
   );
 };
 
-const CustomizeIcon = ({ className }: Props) => {
+const CustomizeIcon = ({ className }: { className?: string }) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -58,7 +54,7 @@ const CustomizeIcon = ({ className }: Props) => {
   );
 };
 
-const PlusIcon = ({ className }: Props) => {
+const PlusIcon = ({ className }: { className?: string }) => {
   return (
     <div className={`${className}`}>
       <svg
