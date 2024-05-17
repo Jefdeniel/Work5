@@ -63,9 +63,12 @@ MIDDLEWARE = [
 
 SWAGGER_SETTINGS = {
     "exclude_namespaces": [],  # List URL namespaces to ignore
-    "api_version": "0.1",  # Specify your API's version
-    "api_path": "/",  # Specify the path to your API not a root level
-    "enabled_methods": [  # Specify which methods to enable in Swagger UI
+    "SECURITY_DEFINITIONS": {
+        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
+    },
+    "api_version": "0.1",
+    "api_path": "/",
+    "enabled_methods": [
         "get",
         "post",
         "put",
@@ -73,20 +76,22 @@ SWAGGER_SETTINGS = {
         "delete",
     ],
     "api_key": "",  # An API key
-    "is_authenticated": False,  # Set to True to enforce user authentication,
-    "is_superuser": False,  # Set to True to enforce admin only access
+    "is_authenticated": True,  # Set to True to enforce user authentication,
+    "is_superuser": True,  # Set to True to enforce admin only access
 }
-ROOT_URLCONF = "backend.urls"  # correct path
+ROOT_URLCONF = "backend.urls"
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework.authentication.SessionAuthentication",
-#         "rest_framework.authentication.TokenAuthentication",
-#     ],
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         "rest_framework.permissions.IsAuthenticated",
-#     ],
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,  # Not sure if this is needed
+}
 
 TEMPLATES = [
     {
@@ -141,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "calendar_app.CustomUser"
+AUTH_USER_MODEL = "calendar_app.CustomUser"  # Custom user model
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -158,6 +163,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/ CHECK THIS
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR.joinpath("static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -182,7 +188,16 @@ CORS_ALLOW_CREDENTIALS = True
 # Security settings
 CSRF_COOKIE_SAMESITE = "Strict"
 SESSION_COOKIE_SANME_SITE = "Strict"
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # PRODUCTION: SET TO TRUE
 # CSRF_COOKY_HTTPONLY = False
 # SESSION_COOKIE_HTTPONLY = True
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5177",
+    "http://localhost:8000",
+]

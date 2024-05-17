@@ -1,32 +1,35 @@
-from rest_framework import status
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.views import ObtainAuthToken
-from django.contrib.auth import authenticate, login, logout
+from rest_framework import permissions
+from rest_framework.views import APIView
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
-class CustomAuthToken(ObtainAuthToken):
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(
-            data=request.data, context={"request": request}
-        )
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data["user"]
-        token, created = Token.objects.get_or_create(user=user)
-        return Response(
-            {"token": token.key, "user_id": user.pk, "username": user.username}
-        )
+class SignUpView(APIView):
+    permission_classes = (permissions.AllowAny,)
 
+    @ensure_csrf_cookie
+    def post(self, request, format=None):
+        data = self.request.data
 
-@api_view(["POST"])
-def logout_view(request):
-    if not request.user.is_authenticated:
-        return Response(
-            {"error": "You are not logged in"}, status=status.HTTP_400_BAD_REQUEST
-        )
-    # Safely handle the case where the token does not exist
-    if hasattr(request.user, "auth_token"):
-        request.user.auth_token.delete()
-    logout(request)
-    return Response({"message": "Logged out successfully."})
+        name = data["name"]
+        email = data["email"]
+        password = data["password"]
+        password2 = data["password2"]
+
+        if password == password2:
+            if User.objects.filter(email=email).exists():
+                return Response({"error": "Email already exists"})
+            else:
+                if len(password) < 6:
+                    return Response({"error": "Password must be at least 6 characters"})
+                else:
+                    user = User.objects.create_user(
+                        email=email, password=password, name=name
+                    )
+                    user.save()
+                    return Response({"success": "User created successfully"})
+        else:
+            return Response({"error": "Passwords do not match"})

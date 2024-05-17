@@ -6,16 +6,17 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = "__all__"
+        read_only_fields = [
+            "date_joined",
+            "last_login",
+        ]  # This should be a list or tuple
         extra_kwargs = {
             "password": {"write_only": True},
-            "date_joined": {"read_only": True},
-            "last_login": {"read_only": True},
         }
 
     def create(self, validated_data):
         user = CustomUser(
             email=validated_data["email"],
-            username=validated_data["username"],
         )
         user.set_password(validated_data["password"])
         user.save()
