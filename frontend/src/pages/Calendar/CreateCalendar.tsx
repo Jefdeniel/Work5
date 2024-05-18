@@ -11,10 +11,7 @@ const CreateCalendar = () => {
     <div>
       <Heading level={1} title="Create Calendar" className={`clr-primary`} />
 
-      <form
-        action="#"
-        className={`d-flex flex-column align-items-start gap-5`}
-      >
+      <form action="#" className={`d-flex flex-column align-items-start gap-5`}>
         <section>
           <Heading level={2} children="General" className={`heading--sm`} />
 
