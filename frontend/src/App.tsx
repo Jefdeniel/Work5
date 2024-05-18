@@ -20,7 +20,7 @@ function App() {
   const { i18n } = useTranslation();
   Settings.defaultLocale = i18n.language;
 
-  console.log(auth);
+  // console.log(auth);
 
   return (
     <Routes>

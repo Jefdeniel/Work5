@@ -1,47 +1,41 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '../../components/ui/Button/Button';
-import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
 import Logo from '../../components/ui/Logo';
+import useAuth from '../../hooks/useAuth';
 import useFetch from '../../hooks/useFetch';
+import Heading from '../../components/ui/Heading/Heading';
 import Validators from '../../utils/Validators';
-import AuthContext from '../../store/AuthContext';
+import { Field, Form } from 'react-final-form';
 
 const Login = () => {
   const { t } = useTranslation('auth');
-  const authContext = useContext(AuthContext);
+  const auth = useAuth();
   const navigate = useNavigate();
 
-  const { fetchData: postLogin } = useFetch('POST', ['api/token/']);
+  // Assuming useFetch hook supports passing data in the request body
+  const { fetchData: postLogin } = useFetch('POST', ['token/']);
 
-  const onLoginHandler = async (values) => {
-    try {
-      const response = await postLogin(
-        {},
-        {
-          email: values.email,
-          password: values.password,
-        }
-      );
+  const onLoginHandler = async (values: {
+    email: string;
+    password: string;
+  }) => {
+    const response = await postLogin({}, values);
 
-      if (!response.ok) {
-        toast.error('Invalid credentials');
-        return;
-      }
+    if (!response.ok) {
+      toast.error(t('auth:login.invalidCredentials'));
+      return null;
+    }
 
-      const tokenData = await response.json();
-      if (tokenData && tokenData.access) {
-        authContext.login(tokenData.access);
-        toast.success('Login successful!');
-        navigate('/');
-      }
-    } catch (error) {
-      toast.error('An error occurred. Please try again.');
+    const token = await response.json();
+
+    if (token) {
+      auth.login(token.access, token.refresh);
+      navigate('/calendar/notifications');
     }
   };
 
@@ -51,12 +45,13 @@ const Login = () => {
 
   return (
     <Row className="h-100 align-items-center justify-content-center m-3">
-      <Col sm={12} md={6} className="h-100 d-none d-lg-block d-flex ">
+      <Col sm={12} md={6} className="h-100 d-none d-lg-block d-flex">
         <Logo width="75px" height="75px" />
       </Col>
       <Col className="d-flex flex-row align-items-center justify-content-center">
-        <Form onSubmit={onLoginHandler}>
-          {({ handleSubmit }) => (
+        <Form
+          onSubmit={onLoginHandler}
+          render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <Heading level={2}>{t('auth:login.login')}</Heading>
               <Field name="email" validate={Validators.required()}>
@@ -65,7 +60,7 @@ const Login = () => {
                     {...input}
                     meta={meta}
                     type="text"
-                    placeholder={t('auth:login.email')}
+                    placeholder={t('auth:login.username')}
                   />
                 )}
               </Field>
@@ -84,14 +79,16 @@ const Login = () => {
                 )}
               </Field>
 
-              <Button type="submit">{t('auth:login.login')}</Button>
+              <Button className="btn--primary" type="submit">
+                {t('auth:login.login')}
+              </Button>
               <br />
               <Button onClick={handleRegister}>
                 {t('auth:register.title')}
               </Button>
             </form>
           )}
-        </Form>
+        />
       </Col>
     </Row>
   );

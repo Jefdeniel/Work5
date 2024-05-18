@@ -4,30 +4,31 @@ import NotificationCard from './NotificationCard/NotificationCard';
 import useFetch from '../../../hooks/useFetch';
 import { DateTime } from 'luxon';
 import { Row } from 'react-bootstrap';
+import LoadingScreen from '../../ui/Loading/Spinner';
+import useAuth from '../../../hooks/useAuth';
 
 const NotificationList = () => {
   const [notifications, setNotifications] = useState([]);
-  const { fetchData: getNotifications } = useFetch('GET', [
-    'api/notifications/',
-  ]);
+  const { fetchData: getNotifications } = useFetch('GET', ['notifications/']);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const auth = useAuth();
+  console.log('Auth:', auth.user_id);
 
   useEffect(() => {
     getNotifications()
       .then((response) => {
-        if (!response.ok) {
+        console.log('Response log:', response);
+        if (response.ok) {
+          return response.json();
+        } else {
           throw new Error('Failed to fetch notifications');
         }
-        return response.json();
       })
       .then((data) => {
-        console.log('Received data:', data); // Log the data to understand its structure
-        if (Array.isArray(data)) {
-          setNotifications(data);
-        } else {
-          throw new Error('Received data is not an array');
-        }
+        console.log('Fetched Data:', data); // Log fetched data for further inspection
+        setNotifications(data);
       })
       .catch((error) => {
         console.error('Error fetching notifications:', error);
@@ -40,7 +41,7 @@ const NotificationList = () => {
   }, []);
 
   if (loading) {
-    return <p> loading</p>;
+    return <LoadingScreen />;
   }
 
   if (error) {

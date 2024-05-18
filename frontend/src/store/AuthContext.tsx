@@ -10,13 +10,13 @@ import {
 interface JwtToken {
   sub: string;
   unique_name: string;
-  Id: string;
+  user_id: string;
   exp: number;
 }
 
 interface AuthContextType {
   token: string | null;
-  id: string | null;
+  user_id: string | null;
   isLoggedIn: boolean;
   login: (token: string, refreshToken: string) => void;
   logout: () => void;
@@ -25,7 +25,7 @@ interface AuthContextType {
 
 const AuthContext = React.createContext<AuthContextType>({
   token: null,
-  id: null,
+  user_id: null,
   isLoggedIn: false,
   login: () => {},
   logout: () => {},
@@ -41,9 +41,10 @@ export const AuthContextProvider = ({
     getLocalstorageItem('token')
   );
 
-  const getUserId = () => token && jwtDecode<JwtToken>(token).Id;
+  const getUserId = () => token && jwtDecode<JwtToken>(token).user_id;
 
   const isLoggedIn = () => {
+    // here is the problem with the token expiration (logging out)
     return (
       token && new Date(jwtDecode<JwtToken>(token).exp * 1000) > new Date()
     );
@@ -65,15 +66,11 @@ export const AuthContextProvider = ({
     'api/token/refresh/',
   ]);
 
+  // check for problem here
   const refreshToken = async () => {
     try {
       const refreshToken = getLocalstorageItem('refresh_token');
-      console.log(refreshToken);
 
-      if (!refreshToken) {
-        logoutHandler();
-        return;
-      }
       const response = await refreshTheToken({}, { refresh: refreshToken });
 
       if (response.status === 200) {
@@ -96,7 +93,7 @@ export const AuthContextProvider = ({
 
   const contextValue: AuthContextType = {
     token,
-    id: getUserId() || null,
+    user_id: getUserId() || null,
     isLoggedIn: isLoggedIn() || false,
     login: loginHandler,
     logout: logoutHandler,

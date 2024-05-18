@@ -9,7 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './App.scss';
 import App from './App.tsx';
 import { SettingsContextProvider } from './store/SettingsContext.js';
-import LoadingScreen from './components/ui/Logo/LoadingScreen.tsx';
+import LoadingScreen from './components/ui/Loading/LoadingScreen.tsx';
 import { AuthContextProvider } from './store/AuthContext.tsx';
 
 // as per docs, createRoot is the new way to render in React 18
