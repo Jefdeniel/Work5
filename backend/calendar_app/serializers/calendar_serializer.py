@@ -21,7 +21,6 @@ class CalendarSerializer(serializers.ModelSerializer):
         allow_null=True,
         help_text="End date of the calendar (format: YYYY-MM-DDTHH:MM:SS.sssZ)",
     )
-
     created_at = serializers.DateTimeField(
         read_only=True, help_text="Timestamp when the calendar was created"
     )
@@ -41,4 +40,8 @@ class CalendarSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
-        read_only_fields = ("id", "created_at", "updated_at")
+        read_only_fields = (
+            "id",
+            "created_at",
+            "updated_at",
+        )
