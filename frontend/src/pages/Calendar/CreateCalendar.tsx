@@ -1,40 +1,57 @@
-import { Row, Col } from 'react-bootstrap';
 import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
 import useSetTitle from '../../hooks/setTitle';
 import Icon from '../../components/ui/Icon/Icon';
 import Button from '../../components/ui/Button/Button';
+import { useTranslation } from 'react-i18next';
 
 const CreateCalendar = () => {
-  useSetTitle('CreateCalendar');
+  const { t } = useTranslation(['calendar']);
+  useSetTitle(t('calendar-create.title'));
+
   return (
     <div>
-      <Heading level={1} title="Create Calendar" className={`clr-primary`} />
+      <Heading
+        level={1}
+        title=""
+        className={`heading--lg clr-primary mb-base`}
+      />
 
-      <form
-        action="#"
-        className={`d-flex flex-column align-items-start gap-5`}
-      >
+      <form action="#" className={`d-flex flex-column align-items-start gap-5`}>
         <section>
-          <Heading level={2} children="General" className={`heading--sm`} />
+          <Heading
+            level={2}
+            children={t('calendar-create.general')}
+            className={`heading--sm clr-primary-400 mb-small-neg`}
+          />
 
-          <Input title="Calendar Name" />
+          <Input title={t('calendar-create.name-input')} />
 
-          <Input title="Calendar Description" />
+          <Input
+            isBig
+            title={t('calendar-create.description-input')}
+            className={`mb-large`}
+          />
 
           <div className={`d-flex align-items-center gap-3`}>
             <Icon src="/icons/add-image.svg" alt="Add image icon" />
 
-            <Button className="btn--primary" text="Change image" />
+            <Button
+              className="btn--primary"
+              text={t('calendar-create.change-img-btn')}
+            />
           </div>
         </section>
 
         <section>
-          <Heading level={2} children="People" className={`heading--sm`} />
+          <Heading
+            level={2}
+            children={t('calendar-create.people')}
+            className={`heading--sm clr-primary-400 mb-small`}
+          />
 
-          <span>
-            Invite others to collaborate on a shared agenda for collective time
-            management.
+          <span className={`mb-base`}>
+            {t('calendar-create.people-description')}
           </span>
 
           <div className={`d-flex align-items-center gap-3`}>
@@ -43,31 +60,39 @@ const CreateCalendar = () => {
             <Button
               className="btn--primary"
               icon={<Icon src="/icons/plus.svg " alt="" />}
-              text="Change image"
+              text={t('calendar-create.invite-btn')}
             />
           </div>
         </section>
 
         <section>
-          <Heading level={2} children="Date range" className={`heading--sm`} />
+          <Heading
+            level={2}
+            children={t('calendar-create.date-range')}
+            className={`heading--sm clr-primary-400 mb-small`}
+          />
 
-          <span>
-            For temporal agenda&apos;s (projects for example), choose YES and
-            you can define the start + end dates for it. For normal ones, just
-            keep it at NO.
+          <span className={`mb-base`}>
+            {t('calendar-create.date-range-description')}
           </span>
 
           {/* Need to be checkboxes */}
           <div className={`d-flex align-items-center gap-3`}>
-            <Button className="btn--primary text-uppercase" text="No" />
+            <Button
+              className="btn--primary text-uppercase"
+              text={t('calendar-create.no')}
+            />
 
-            <Button className="btn--primary text-uppercase" text="Yes" />
+            <Button
+              className="btn--primary text-uppercase"
+              text={t('calendar-create.yes')}
+            />
           </div>
         </section>
 
         <Button
           type="submit"
-          text="Create Calendar"
+          text={t('calendar-create.title')}
           icon={<Icon src="/icons/plus.svg " alt="" />}
           className="btn--success inline-block"
         />

@@ -294,6 +294,10 @@ ul {
   margin-bottom: var(--sp-xs);
 }
 
+.mb-small-neg {
+  margin-bottom: calc(var(--sp-sm) * -1);
+}
+
 .mb-base {
   margin-bottom: var(--sp-base);
 }
@@ -308,6 +312,10 @@ ul {
 
 .clr-primary {
   color: var(--sa-primary-500-base);
+}
+
+.clr-primary-400 {
+  color: var(--sa-primary-400);
 }
 
 .clr-primary-300 {

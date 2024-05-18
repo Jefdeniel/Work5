@@ -33,6 +33,10 @@
 }
 
 .full-input {
+  &.full-input--big {
+    width: 150%;
+  }
+
   &.input--focused .title {
     font-size: 0.938rem;
     font-weight: var(--fw-regular);
@@ -46,7 +50,7 @@
     position: relative;
     z-index: 50;
     transition: all .2s ease-in-out;
-    transform: translateX(30%) translateY(50%);
+    transform: translateY(50%);
   }
 }
 
@@ -54,7 +58,8 @@
   color: var(--sa-dark);
   font-size: 16px;
   font-weight: 700;
-  padding: 0 var(--p-lg);
+  padding: 0 var(--p-md);
+  margin: 0 var(--sp-base);
 }
 
 .input-with-icon {

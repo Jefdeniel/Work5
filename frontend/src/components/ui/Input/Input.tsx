@@ -5,6 +5,7 @@ import ErrorText from '../ErrorText/ErrorText';
 import './Input.scss';
 
 interface Props {
+  className?: string;
   title?: string;
   meta?: FieldMetaState<any>;
   isTextArea?: boolean;
@@ -12,6 +13,7 @@ interface Props {
   disableErrorText?: boolean;
   defaultValue?: string;
   isSmall?: boolean;
+  isBig?: boolean;
   isSearch?: boolean;
   disabled?: boolean;
   onChange?: (
@@ -22,6 +24,7 @@ interface Props {
 }
 
 const Input = ({
+  className,
   title,
   meta,
   isTextArea,
@@ -29,6 +32,7 @@ const Input = ({
   disableErrorText,
   defaultValue,
   isSmall,
+  isBig,
   isSearch,
   disabled,
   onChange,
@@ -49,7 +53,7 @@ const Input = ({
 
   return (
     <div
-      className={`full-input ${disableSpacing ? '' : 'my-sm'} ${isFocused ? 'input--focused' : ''}`}
+      className={`full-input ${disableSpacing ? '' : 'my-sm'} ${isFocused ? 'input--focused' : ''} ${isBig ? 'full-input--big' : ''} ${className}`}
     >
       {title && (
         <label className={`title ${isFocused ? 'small-text' : ''}`}>
