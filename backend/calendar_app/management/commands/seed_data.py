@@ -25,28 +25,47 @@ class Command(BaseCommand):
         fake = Faker()
         self.stdout.write("Seeding data...")
 
+        # Ensure a specific user 'jefdeniel' always exists and is an admin
+        user_jefdeniel, created = CustomUser.objects.get_or_create(
+            email="jefdeniel@icloud.com",
+            defaults={
+                "password": make_password("admin"),
+                "last_login": dj_timezone.now(),
+                "is_superuser": True,
+                "first_name": "Jef",
+                "last_name": "Deniel",
+                "is_staff": True,
+                "is_active": True,
+                "birthday": datetime(1985, 6, 15, tzinfo=timezone.utc),
+                "avatar": fake.image_url(),
+                "role": "ADMIN",
+            },
+        )
+        if created:
+            self.stdout.write(self.style.SUCCESS(f"Admin user 'jefdeniel' created."))
+        else:
+            self.stdout.write(
+                self.style.SUCCESS(f"Admin user 'jefdeniel' already exists.")
+            )
+
         # Create 100 CustomUsers
         for _ in range(100):
             CustomUser.objects.create(
                 password=make_password("defaultpassword"),
-                last_login=fake.date_time_this_year(
-                    before_now=True, after_now=False, tzinfo=timezone.utc
-                ),
-                is_superuser=False,
-                username=fake.user_name(),
                 first_name=fake.first_name(),
+                is_superuser=False,
                 last_name=fake.last_name(),
-                email=fake.email(),
+                role=random.choice(["ADMIN", "EDITOR", "VIEWER"]),
+                email=fake.unique.email(),
                 is_staff=False,
                 is_active=True,
-                date_joined=fake.date_time_this_year(
-                    before_now=True, after_now=False, tzinfo=timezone.utc
-                ),
                 birthday=fake.date_of_birth(
                     tzinfo=timezone.utc, minimum_age=18, maximum_age=90
                 ),
                 avatar=fake.image_url(),
-                role=random.choice(["ADMIN", "EDITOR", "VIEWER"]),
+                last_login=fake.date_time_this_year(
+                    before_now=True, after_now=False, tzinfo=timezone.utc
+                ),
             )
 
         users = list(CustomUser.objects.all())

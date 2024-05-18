@@ -20,7 +20,8 @@ await i18n
   .use(Backend)
   .init({
     // Enable debug mode unless in production
-    debug: process.env.NODE_ENV !== 'production',
+    // debug: process.env.NODE_ENV !== 'production',
+    debug: false,
     fallbackLng: 'en',
     ns: 'external',
     defaultNS: 'external',
