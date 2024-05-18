@@ -12,6 +12,7 @@ interface Props {
   disableErrorText?: boolean;
   value?: string;
   isSmall?: boolean;
+  isSearch?: boolean;
   disabled?: boolean;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,6 +29,7 @@ const Input = ({
   disableErrorText,
   value,
   isSmall,
+  isSearch,
   disabled,
   onChange,
   icon,
@@ -55,13 +57,16 @@ const Input = ({
         </label>
       )}
 
-      <div className="input-with-icon">
+      <div className={`input-with-icon ${isSearch ? 'search-bar' : ''}`}>
         {!isTextArea ? (
           <input
-            className={`form-control ${isNotValid ? 'is-invalid' : ''} ${
-              isSmall ? 'small' : ''
-            } ${disabled ? 'disabled' : ''}`}
-            value={value} // Use value instead of defaultValue
+            className={`form-control 
+            ${isNotValid ? 'is-invalid' : ''} 
+            ${isSmall ? 'small' : ''} 
+            ${disabled ? 'disabled' : ''}
+            ${isSearch ? 'search-bar__input' : ''}`}
+            value={defaultValue}
+            placeholder={defaultValue}
             disabled={disabled}
             onFocus={handleFocus}
             onBlur={handleLoseFocus}

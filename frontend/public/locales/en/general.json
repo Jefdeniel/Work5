@@ -1,8 +1,11 @@
 {
   "navigation": {
+    "title": "Calendar list",
     "notifications": "Notifications",
     "sharing-hub": "Sharing hub",
-    "customize": "Customize"
+    "customize": "Customize",
+    "create": "Create new",
+    "search": "Search calendar"
   },
   "buttons": {
     "save": "Save",

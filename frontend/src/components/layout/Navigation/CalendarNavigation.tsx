@@ -5,25 +5,23 @@ import CalendarNavItem from './CalendarNavItem';
 import { Col, Row } from 'react-bootstrap';
 import Logo from '../../ui/Logo';
 import { MenuItem, SideBarProps } from '../../../@types/Nav';
+import Icon from '../../ui/Icon/Icon';
+import { useTranslation } from 'react-i18next';
+import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
+import { PlusIcon } from '../../ui/Icon/SvgIcons';
+import Input from '../../ui/Input/Input';
 
 const menuItems: MenuItem[] = [
   {
-    link: '/test',
-    icon: <img src="/img/temp-nav-item.png" alt="agenda1" />,
-  },
-  {
-    link: '/test2',
-    icon: <img src="/img/temp-nav-item.png" alt="agenda2" />,
-  },
-  {
-    link: '/test3',
-    icon: <img src="/img/temp-nav-item.png" alt="agenda3" />,
-  },
-  {
     link: '/calendar/create',
-    icon: <img src="/icons/plus.svg" alt="create" />,
+    icon: <PlusIcon />,
+    label: 'general:navigation.create',
+    className: 'create-calendar',
   },
 ];
+
+//TODO Test loop for user avatars in calendar card
+const userAvatars = ['/icons/user-profile.svg', ''];
 
 const CalendarNavigation = ({
   isMenuBroken,
@@ -33,6 +31,7 @@ const CalendarNavigation = ({
   setIsMenuBroken,
 }: SideBarProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation(['general']);
 
   const menuWidth = isMenuToggled ? menuItems.length * 75 + 'px' : 'auto';
   const handleOnClickMenu = (link: string) => {
@@ -49,6 +48,8 @@ const CalendarNavigation = ({
   const onLogout = () => {
     console.log('logout');
   };
+
+  let searchPlaceholder = t('general:navigation.search');
 
   return (
     <>
@@ -77,20 +78,35 @@ const CalendarNavigation = ({
 
           <Col className={`d-flex justify-content-end`}>
             <IconButton
-              icon={<img src="/icons/settings.svg" alt="Close icon" />}
+              icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
               onClick={handleSettingsClick}
             />
           </Col>
         </Row>
 
+        <Row className={`mb-large`}>
+          <Input isSearch type="search" placeholder={searchPlaceholder} />
+        </Row>
+
+        <Row>
+          <span className={`heading heading--sm clr-primary-300 mb-base`}>
+            {t('general:navigation.title')}
+          </span>
+        </Row>
+
+        <CalendarCard
+          img="/img/test-img.jpg"
+          name="Work / Business"
+          userAvatars={userAvatars}
+        />
+
         <Menu
           menuItemStyles={{
             button: ({ active }) => ({
-              fontWeight: active ? 'bold' : 'normal',
+              fontWeight: active ? 'var(--fw-bold)' : 'var(--fw-regular)',
               color: active
                 ? 'var(--sa-primary-500-base)'
                 : 'var(--sa-primary-950)',
-              borderLeft: active ? '12px solid' : 'none',
               borderRadius: 'var(--br-base)',
               height: 40,
               '&:hover': {
@@ -99,13 +115,16 @@ const CalendarNavigation = ({
             }),
           }}
         >
-          {menuItems.map(({ link, icon }) => (
+          {menuItems.map(({ link, icon, className, label }) => (
             <CalendarNavItem
               key={link}
               link={link}
               icon={icon}
+              className={className}
               onClick={handleOnClickMenu}
-            />
+            >
+              {t(label.toString())}
+            </CalendarNavItem>
           ))}
         </Menu>
         <div

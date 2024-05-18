@@ -2,6 +2,7 @@ export interface MenuItem {
   link: string;
   icon?: React.ReactNode;
   label?: string;
+  className?: string;
 }
 
 export interface SideBarProps {
