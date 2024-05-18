@@ -10,6 +10,7 @@ interface Props {
   isTextArea?: boolean;
   disableSpacing?: boolean;
   disableErrorText?: boolean;
+  defaultValue?: string;
   value?: string;
   isSmall?: boolean;
   isSearch?: boolean;
@@ -27,6 +28,7 @@ const Input = ({
   isTextArea,
   disableSpacing,
   disableErrorText,
+  defaultValue,
   value,
   isSmall,
   isSearch,

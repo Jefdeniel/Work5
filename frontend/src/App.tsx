@@ -15,6 +15,7 @@ import NotificationPage from './pages/NotificationPage';
 import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage';
 import AccountLayout from './layout/AccountLayout';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const auth = useAuth();
@@ -25,23 +26,25 @@ function App() {
 
   return (
     <Routes>
-      {/* Main layout for general pages */}
-      <Route element={<Layout />}>
-        <Route
-          path="/"
-          element={<Navigate to="/calendar/overview" replace />}
-        />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="settings" element={<SettingsPage />} />
-      </Route>
+      {auth.isLoggedIn ? (
+        <>
+          {/* Main layout for general pages */}
+          <Route element={<Layout />}>
+            <Route
+              path="/"
+              element={<Navigate to="/calendar/overview" replace />}
+            />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
 
-      {/* Calendar specific routes with CalendarLayout */}
-      <Route path="/calendar" element={<CalendarLayout />}>
-        <Route path="create" element={<CreateCalendar />} />
-      </Route>
-      <Route path="/calendar" element={<Layout />}>
-        <Route path="overview" element={<Calendar />} />
-      </Route>
+          {/* Calendar specific routes with CalendarLayout */}
+          <Route path="/calendar" element={<CalendarLayout />}>
+            <Route path="create" element={<CreateCalendar />} />
+          </Route>
+          <Route path="/calendar" element={<Layout />}>
+            <Route path="overview" element={<Calendar />} />
+          </Route>
 
           {/* Account specific routes under /calendar but using a different layout */}
           <Route path="/calendar/notifications" element={<Layout />}>
