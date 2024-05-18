@@ -4,7 +4,7 @@ import NotificationCard from './NotificationCard/NotificationCard';
 import useFetch from '../../../hooks/useFetch';
 import { DateTime } from 'luxon';
 import { Row } from 'react-bootstrap';
-import LoadingScreen from '../../ui/Loading/Spinner';
+import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import useAuth from '../../../hooks/useAuth';
 
 const NotificationList = () => {
