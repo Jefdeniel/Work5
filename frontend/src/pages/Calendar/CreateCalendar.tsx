@@ -76,16 +76,17 @@ const CreateCalendar = () => {
             {t('calendar-create.date-range-description')}
           </span>
 
-          {/* Need to be checkboxes */}
+          {/* Need to be fixed */}
           <div className={`d-flex align-items-center gap-3`}>
-            <Button
-              className="btn--primary text-uppercase"
-              text={t('calendar-create.no')}
+            <Input
+              defaultValue={t('calendar-create.no')}
+              type="radio"
+              className={`form-radio`}
             />
-
-            <Button
-              className="btn--primary text-uppercase"
-              text={t('calendar-create.yes')}
+            <Input
+              defaultValue={t('calendar-create.yes')}
+              type="radio"
+              className={`form-radio`}
             />
           </div>
         </section>
