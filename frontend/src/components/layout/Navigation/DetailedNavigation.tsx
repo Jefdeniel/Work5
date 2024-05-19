@@ -68,7 +68,7 @@ const DetailedNavigation = ({
         style={{
           borderRight: '1px solid var(--sa-primary-200)',
         }}
-        className={`sidebar`}
+        className={`sidebar d-flex flex-column justify-content-center`}
       >
         <Row className="mb-large">
           <Col>
@@ -81,16 +81,19 @@ const DetailedNavigation = ({
           </Col>
 
           <Col className={`d-flex justify-content-end`}>
-            <IconButton
-              icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
-              onClick={handleSettingsClick}
-            />
+            {!isMenuCollapsed && (
+              <IconButton
+                icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
+                onClick={handleSettingsClick}
+              />
+            )}
           </Col>
         </Row>
 
-        <BackButton text={t('general:buttons.back')} className={`mb-base`} />
-
-        <Calendar />
+        {!isMenuCollapsed && (
+          <BackButton text={t('general:buttons.back')} className={`mb-base`} />
+        )}
+        {!isMenuCollapsed && <Calendar />}
 
         <Menu
           menuItemStyles={{

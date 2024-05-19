@@ -51,42 +51,28 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",  # should be as high as possible, especially before CommonMiddleware    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-SWAGGER_SETTINGS = {
-    "exclude_namespaces": [],  # List URL namespaces to ignore
-    "api_version": "0.1",  # Specify your API's version
-    "api_path": "/",  # Specify the path to your API not a root level
-    "enabled_methods": [  # Specify which methods to enable in Swagger UI
-        "get",
-        "post",
-        "put",
-        "patch",
-        "delete",
-    ],
-    "api_key": "",  # An API key
-    "is_authenticated": False,  # Set to True to enforce user authentication,
-    "is_superuser": False,  # Set to True to enforce admin only access
-}
-ROOT_URLCONF = "backend.urls"  # correct path
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework.authentication.SessionAuthentication",
-#         "rest_framework.authentication.TokenAuthentication",
-#     ],
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         "rest_framework.permissions.IsAuthenticated",
-#     ],
-# }
+ROOT_URLCONF = "backend.urls"
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+}
 
 TEMPLATES = [
     {
@@ -106,6 +92,7 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 WSGI_APPLICATION = "backend.wsgi.application"
 
 
@@ -141,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "calendar_app.CustomUser"
+AUTH_USER_MODEL = "calendar_app.CustomUser"  # Custom user model
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -152,12 +139,19 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/ CHECK THIS
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
+STATIC_ROOT = BASE_DIR.joinpath("static")
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR.joinpath("media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -177,12 +171,22 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 # If you host your front-end and back-end at different hosts, you should configure the CORS settings to make the front-end is able to access the resources of the back-end
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5177",
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
 # Security settings
-CSRF_COOKIE_SAMESITE = "Strict"
-SESSION_COOKIE_SANME_SITE = "Strict"
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # PRODUCTION: SET TO TRUE
 # CSRF_COOKY_HTTPONLY = False
 # SESSION_COOKIE_HTTPONLY = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5177",
+    "http://localhost:8000",
+]
