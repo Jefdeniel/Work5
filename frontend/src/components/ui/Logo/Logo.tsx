@@ -3,13 +3,14 @@ import './logo.scss';
 interface LogoProps {
   width: string;
   height: string;
+  className?: string;
 }
 
-const Logo = ({ width, height }: LogoProps) => {
+const Logo = ({ width, height, className }: LogoProps) => {
   const logoSrc = '/logo.jpg';
 
   return (
-    <div className="logo">
+    <div className={`logo ${className}`}>
       <img
         src={logoSrc}
         style={{ width, height, objectFit: 'contain' }}
