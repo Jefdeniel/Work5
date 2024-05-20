@@ -18,12 +18,12 @@ class CalendarViewSet(viewsets.ModelViewSet):
         # Utilizes the serializer for proper data representation
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -45,7 +45,8 @@ class CalendarViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"message": "Calendar updated successfully", "data": serializer.data}
+                {"message": "Calendar updated successfully", "data": serializer.data},
+                status=status.HTTP_200_OK,
             )
         return Response(
             {"message": "Validation failed", "errors": serializer.errors},
@@ -54,8 +55,13 @@ class CalendarViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.delete()
+        if instance:
+            instance.delete()
+            return Response(
+                {"message": "Calendar deleted successfully"},
+                status=status.HTTP_204_NO_CONTENT,
+            )
         return Response(
-            {"message": "Calendar deleted successfully"},
-            status=status.HTTP_204_NO_CONTENT,
+            {"message": "Calendar not found"},
+            status=status.HTTP_404_NOT_FOUND,
         )
