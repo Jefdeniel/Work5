@@ -4,14 +4,14 @@ import { ITimezone, ITimezoneOption } from 'react-timezone-select';
 interface SettingsContextType {
   language?: string;
   setLanguage: (lang: string) => void;
-  selectedTimezone?: string | ITimezoneOption;
-  setSelectedTimezone: (selectedTimezone: string) => void;
+  timezone?: string | ITimezoneOption;
+  setTimezone: (selectedTimezone: string) => void;
   timeFormat?: string;
   setTimeFormat: (timeFormat: string) => void;
   theme?: string;
   setTheme: (theme: string) => void;
-  weekStartsOn?: number;
-  setWeekStartsOn: (weekStartsOn: number) => void;
+  weekStartsOn?: string;
+  setWeekStartsOn: (weekStartsOn: string) => void;
   weekendVisibility?: boolean;
   setWeekendVisibility: (weekendVisibility: boolean) => void;
   eventReminderEnabled?: boolean;
@@ -25,13 +25,13 @@ interface SettingsContextType {
 export const SettingsContext = createContext<SettingsContextType>({
   language: 'nl',
   setLanguage: () => {},
-  selectedTimezone: 'UTC',
-  setSelectedTimezone: () => {},
+  timezone: 'UTC',
+  setTimezone: () => {},
   timeFormat: '24h',
   setTimeFormat: () => {},
   theme: 'light',
   setTheme: () => {},
-  weekStartsOn: 1,
+  weekStartsOn: 'Monday',
   setWeekStartsOn: () => {},
   weekendVisibility: true,
   setWeekendVisibility: () => {},
@@ -48,13 +48,12 @@ export const SettingsContextProvider = ({
 }) => {
   const { i18n } = useTranslation();
   const [language, setLanguage] = useState<string>(i18n.language || 'nl');
-  // initial timezone is the timezone of the user's browser
-  const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(
+  const [timezone, setTimezone] = useState<ITimezone>(
     Intl.DateTimeFormat().resolvedOptions().timeZone
-  );
+  ); // initial timezone is the timezone of the user's browser
   const [timeFormat, setTimeFormat] = useState<string>('24h');
   const [theme, setTheme] = useState<string>('light');
-  const [weekStartsOn, setWeekStartsOn] = useState<number>(1);
+  const [weekStartsOn, setWeekStartsOn] = useState<string>('Monday');
   const [weekendVisibility, setWeekendVisibility] = useState<boolean>(true);
   const [eventReminderEnabled, setEventReminderEnabled] = useState(true);
   const [activityNotificationEnabled, setActivityNotificationEnabled] =
@@ -67,8 +66,8 @@ export const SettingsContextProvider = ({
   const contextValue: SettingsContextType = {
     language,
     setLanguage,
-    selectedTimezone,
-    setSelectedTimezone,
+    timezone,
+    setTimezone,
     timeFormat,
     setTimeFormat,
     theme,
