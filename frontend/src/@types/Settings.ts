@@ -7,3 +7,14 @@ export interface AccountSettings {
   newPassword: string;
   repeatNewPassword: string;
 }
+
+export interface UserSettings {
+  language: string;
+  timezone: string;
+  timeFormat: string;
+  theme: string;
+  weekStartsOn: string;
+  weekendVisibility: boolean;
+  eventReminderEnabled: boolean;
+  activityNotificationEnabled: boolean;
+}
