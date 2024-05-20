@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
         # Create 100 CustomUsers
         for _ in range(100):
-            CustomUser.objects.create(
+            user = CustomUser.objects.create(
                 password=make_password("defaultpassword"),
                 first_name=fake.first_name(),
                 is_superuser=False,
@@ -66,6 +66,20 @@ class Command(BaseCommand):
                 last_login=fake.date_time_this_year(
                     before_now=True, after_now=False, tzinfo=timezone.utc
                 ),
+            )
+            # Create UserSettings for each user if it doesn't already exist
+            UserSettings.objects.get_or_create(
+                user=user,
+                defaults={
+                    "language": "en",  # default language
+                    "time_zone": "UTC",  # default time zone
+                    "time_format": "24h",  # default time format
+                    "theme": "light",  # default theme
+                    "event_reminder": True,  # default event reminder
+                    "activity_notifications": True,  # default activity notifications
+                    "week_start_day": "Monday",  # default week start day
+                    "weekend_visibility": True,  # default weekend visibility
+                },
             )
 
         users = list(CustomUser.objects.all())
@@ -132,20 +146,6 @@ class Command(BaseCommand):
                     before_now=False, after_now=True, tzinfo=timezone.utc
                 ),
                 is_new=fake.boolean(),
-            )
-
-        # Create UserSettings for each user
-        for user in users:
-            UserSettings.objects.create(
-                user=user,
-                language=random.choice(["en", "nl", "fr", "de"]),
-                time_zone=fake.timezone(),
-                time_format=random.choice(["12h", "24h"]),
-                theme=random.choice(["dark", "light"]),
-                event_reminder=random.choice([True, False]),
-                activity_notifications=random.choice([True, False]),
-                week_start_day=random.choice(["Monday", "Sunday"]),
-                weekend_visibility=random.choice([True, False]),
             )
 
         self.stdout.write(
