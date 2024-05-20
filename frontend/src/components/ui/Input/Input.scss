@@ -2,8 +2,13 @@
 
 .form-control {
   height: 50px;
-  border: 1px solid var(--sa-primary-100);
+  border: 1px solid var(--sa-primary-950) !important;
   border-radius: var(--br-base);
+
+  &::placeholder {
+    font-size: var(--fs-small);
+    color: var(--sa-primary-400) !important;
+  }
 
   &:focus {
     outline: none;
