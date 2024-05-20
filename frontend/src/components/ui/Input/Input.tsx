@@ -12,7 +12,6 @@ interface Props {
   disableSpacing?: boolean;
   disableErrorText?: boolean;
   defaultValue?: string;
-  value?: string;
   isSmall?: boolean;
   isBig?: boolean;
   isSearch?: boolean;
@@ -32,7 +31,6 @@ const Input = ({
   disableSpacing,
   disableErrorText,
   defaultValue,
-  value,
   isSmall,
   isBig,
   isSearch,
@@ -84,7 +82,7 @@ const Input = ({
             className={`form-control textarea ${isNotValid ? 'is-invalid' : ''} ${
               isSmall ? 'small' : ''
             } ${disabled ? 'disabled' : ''}`}
-            value={value} // Use value instead of defaultValue
+            value={defaultValue}
             onChange={onChange}
             {...rest}
           />
