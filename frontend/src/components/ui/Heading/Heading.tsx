@@ -29,19 +29,19 @@ export default function Heading({
   switch (level) {
     case 1:
       return (
-        <h1 style={style} className={`heading heading--lg ${getClasses()}`}>
+        <h1 style={style} className={`heading ${getClasses()}`}>
           {children}
         </h1>
       );
     case 2:
       return (
-        <h2 style={style} className={`heading heading--md ${getClasses()}`}>
+        <h2 style={style} className={`heading ${getClasses()}`}>
           {children}
         </h2>
       );
     case 3:
       return (
-        <h3 style={style} className={`heading heading--sm ${getClasses()}`}>
+        <h3 style={style} className={`heading ${getClasses()}`}>
           {children}
         </h3>
       );

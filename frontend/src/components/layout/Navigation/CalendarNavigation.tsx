@@ -45,9 +45,9 @@ const CalendarNavigation = ({
   };
 
   // TODO: fix this
-  const onLogout = () => {
-    console.log('logout');
-  };
+  // const onLogout = () => {
+  //   console.log('logout');
+  // };
 
   let searchPlaceholder = t('general:navigation.search');
 
@@ -77,16 +77,19 @@ const CalendarNavigation = ({
           </Col>
 
           <Col className={`d-flex justify-content-end`}>
-            <IconButton
-              icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
-              onClick={handleSettingsClick}
-            />
+            {!isMenuCollapsed && (
+              <IconButton
+                icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
+                onClick={handleSettingsClick}
+              />
+            )}
           </Col>
         </Row>
-
-        <Row className={`mb-large`}>
-          <Input isSearch type="search" placeholder={searchPlaceholder} />
-        </Row>
+        {!isMenuCollapsed && (
+          <Row className={`mb-large`}>
+            <Input isSearch type="search" placeholder={searchPlaceholder} />
+          </Row>
+        )}
 
         <Row>
           <span className={`heading heading--sm clr-primary-300 mb-base`}>

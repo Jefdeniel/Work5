@@ -1,4 +1,18 @@
 {
+  "calendar-create": {
+    "title": "Créer un calendrier",
+    "general": "Général",
+    "name-input": "Nom du calendrier",
+    "description-input": "Descriptif du calendrier",
+    "change-img-btn": "Changer l'image",
+    "people": "Personnes",
+    "people-description": "Invitez les autres à collaborer sur un programme commun de gestion collective du temps.",
+    "invite-btn": "Inviter",
+    "date-range": "Plage de dates",
+    "date-range-description": "Pour les agendas temporels (projets par exemple), choisissez OUI et vous pourrez en définir les dates de début + fin. Pour les normaux, gardez-le simplement sur NON.",
+    "no": "NON",
+    "yes": "OUI"
+  },
   "notifications": {
     "title": "Notifications",
     "description": "Accédez à toutes les notifications en un seul endroit. Pour supprimer une notification, cliquez simplement dessus et un bouton de suppression apparaîtra.",

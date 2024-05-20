@@ -25,10 +25,15 @@ const Register = () => {
   };
 
   return (
-    <Row className="h-100 align-items-center justify-content-center m-3">
-      <Col sm={12} md={6} className="h-100 d-none d-lg-block d-flex ">
-        <Logo width="75px" height="75px" />
+    <Row className="h-100 align-items-center justify-content-center">
+      <Col
+        sm={12}
+        md={6}
+        className="bg-primary-light h-100 d-none d-lg-block d-flex "
+      >
+        <Logo width="50px" height="50px" className={`mt-xsmall`} />
       </Col>
+
       <Col
         sm={12}
         md={6}
@@ -37,8 +42,11 @@ const Register = () => {
         <Form
           onSubmit={handleRegister}
           render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <Heading level={2}>{t('auth:register.title')}</Heading>
+            <form onSubmit={handleSubmit} className="d-flex flex-column gap-1">
+              <Heading level={2} className={`heading--lg fw-bold clr-primary`}>
+                {t('auth:register.title')}
+              </Heading>
+
               <Row>
                 <Col sm={12} md={6}>
                   <Field
@@ -52,6 +60,7 @@ const Register = () => {
                     {({ input, meta }) => (
                       <Input
                         {...input}
+                        title={t('auth:register.firstName')}
                         meta={meta}
                         onChange={input.onChange}
                         placeholder={t('auth:register.firstName')}
@@ -59,6 +68,7 @@ const Register = () => {
                     )}
                   </Field>
                 </Col>
+
                 <Col sm={12} md={6}>
                   <Field
                     name="lastName"
@@ -71,6 +81,7 @@ const Register = () => {
                     {({ input, meta }) => (
                       <Input
                         {...input}
+                        title={t('auth:register.lastName')}
                         meta={meta}
                         onChange={input.onChange}
                         placeholder={t('auth:register.lastName')}
@@ -79,6 +90,7 @@ const Register = () => {
                   </Field>
                 </Col>
               </Row>
+
               <Field
                 name="email"
                 validate={Validators.compose(
@@ -89,6 +101,7 @@ const Register = () => {
                 {({ input, meta }) => (
                   <Input
                     {...input}
+                    title={t('auth:register.email')}
                     meta={meta}
                     type="email"
                     onChange={input.onChange}
@@ -96,6 +109,7 @@ const Register = () => {
                   />
                 )}
               </Field>
+
               <Field
                 name="password"
                 validate={Validators.compose(
@@ -106,6 +120,7 @@ const Register = () => {
                 {({ input, meta }) => (
                   <Input
                     {...input}
+                    title={t('auth:register.password')}
                     meta={meta}
                     type="password"
                     onChange={input.onChange}
@@ -113,6 +128,7 @@ const Register = () => {
                   />
                 )}
               </Field>
+
               <Field
                 name="repeatPassword"
                 validate={Validators.compose(
@@ -123,21 +139,39 @@ const Register = () => {
                 {({ input, meta }) => (
                   <Input
                     {...input}
+                    title={t('auth:register.repeatPassword')}
                     meta={meta}
                     type="password"
                     onChange={input.onChange}
                     placeholder={t('auth:register.repeatPassword')}
+                    className={`mb-xlarge`}
                   />
                 )}
               </Field>
-              <Col>
-                <Button type="submit" className="mx-2">
-                  {t('auth:register.register')}
-                </Button>
-                <Button type="button" isOutline={true} onClick={handleLogin}>
-                  {t('auth:register.login')}
-                </Button>
-              </Col>
+
+              <Row className={`px-3 d-flex gap-4`}>
+                <Col className={`p-0`}>
+                  <Button
+                    isBig
+                    type="submit"
+                    className="btn--primary d-flex justify-content-center"
+                  >
+                    {t('auth:register.register')}
+                  </Button>
+                </Col>
+
+                <Col className={`p-0`}>
+                  <Button
+                    isBig
+                    type="button"
+                    className={`btn--bordered-primary d-flex justify-content-center`}
+                    isOutline={true}
+                    onClick={handleLogin}
+                  >
+                    {t('auth:register.backToLogin')}
+                  </Button>
+                </Col>
+              </Row>
             </form>
           )}
         ></Form>

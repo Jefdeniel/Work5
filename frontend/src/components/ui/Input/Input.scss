@@ -2,8 +2,13 @@
 
 .form-control {
   height: 50px;
-  border: 1px solid var(--sa-primary-100);
+  border: 1px solid var(--sa-primary-950) !important;
   border-radius: var(--br-base);
+
+  &::placeholder {
+    font-size: var(--fs-small);
+    color: var(--sa-primary-400) !important;
+  }
 
   &:focus {
     outline: none;
@@ -33,6 +38,10 @@
 }
 
 .full-input {
+  &.full-input--big {
+    width: 150%;
+  }
+
   &.input--focused .title {
     font-size: 0.938rem;
     font-weight: var(--fw-regular);
@@ -41,11 +50,12 @@
   }
 
   & .title {
+    color: var(--sa-primary-950);
     background-color: var(--sa-bright);
     position: relative;
     z-index: 50;
     transition: all .2s ease-in-out;
-    transform: translateX(30%) translateY(50%);
+    transform: translateY(50%);
   }
 }
 
@@ -53,7 +63,8 @@
   color: var(--sa-dark);
   font-size: 16px;
   font-weight: 700;
-  padding: 0 var(--p-lg);
+  padding: 0 var(--p-md);
+  margin: 0 var(--sp-base);
 }
 
 .input-with-icon {

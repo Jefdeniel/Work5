@@ -1,4 +1,18 @@
 {
+  "calendar-create": {
+    "title": "Kalender erstellen",
+    "general": "Allgemein",
+    "name-input": "Kalendername",
+    "description-input": "Kalenderbeschreibung",
+    "change-img-btn": "Bild ändern",
+    "people": "Menschen",
+    "people-description": "Laden Sie andere ein, an einer gemeinsamen Agenda für ein gemeinsames Zeitmanagement mitzuarbeiten.",
+    "invite-btn": "Einladen",
+    "date-range": "Datumsbereich",
+    "date-range-description": "Wählen Sie für zeitlich begrenzte Agendas (z. B. Projekte) JA und Sie können das Start- und Enddatum dafür festlegen. Bei normalen Werten belassen Sie es einfach auf NEIN.",
+    "no": "NEIN",
+    "yes": "JA"
+  },
   "notifications": {
     "title": "Benachrichtigungen",
     "description": "Greifen Sie auf alle Benachrichtigungen an einem Ort zu. Um eine Benachrichtigung zu löschen, klicken Sie einfach darauf und es erscheint eine Löschtaste.",

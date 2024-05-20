@@ -1,4 +1,18 @@
 {
+  "calendar-create": {
+    "title": "Create Calendar",
+    "general": "General",
+    "name-input": "Calendar name",
+    "description-input": "Calendar description",
+    "change-img-btn": "Change image",
+    "people": "People",
+    "people-description": "Invite others to collaborate on a shared agenda for collective time management.",
+    "invite-btn": "Invite",
+    "date-range": "Date range",
+    "date-range-description": "For temporal agenda&apos;s (projects for example), choose YES and you can define the start + end dates for it. For normal ones, just keep it at NO.",
+    "no": "NO",
+    "yes": "YES"
+  },
   "notifications": {
     "title": "Notifications",
     "description": "Access all notifications in one place. To delete a notification, simply click on it and a delete button will appear.",

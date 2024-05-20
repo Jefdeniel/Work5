@@ -1,4 +1,18 @@
 {
+  "calendar-create": {
+    "title": "Kalender maken",
+    "general": "Algemeen",
+    "name-input": "Kalender naam",
+    "description-input": "Kalender beschrijving",
+    "change-img-btn": "Afbeelding wijzigen",
+    "people": "Mensen",
+    "people-description": "Nodig anderen uit om samen te werken aan een gedeelde kalendar voor collectief tijdmanagement.",
+    "invite-btn": "Nodig uit",
+    "date-range": "Datumbereik",
+    "date-range-description": "Voor tijdelijke kalenders (bijvoorbeeld projecten) kiest u JA en kunt u de start- en einddatum ervan definiëren. Voor normale, houd het gewoon op NEEN.",
+    "no": "NEEN",
+    "yes": "JA"
+  },
   "notifications": {
     "title": "Meldingen",
     "description": "Toegang tot alle meldingen op één plek. Om een melding te verwijderen, klik er gewoon op en er verschijnt een verwijderknop.",
