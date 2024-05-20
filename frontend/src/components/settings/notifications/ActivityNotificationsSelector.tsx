@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Switch from '../../ui/Switch/Switch';
+import { Col, Row } from 'react-bootstrap';
 
 interface Props {
   activityNotificationEnabled: boolean;
@@ -16,12 +17,26 @@ const ActivityNotification = ({
   };
 
   return (
-    <Switch
-      title={t('settings:notifications.activityNotification')}
-      description={t('settings:notifications.activityNotificationDescription')}
-      checked={activityNotificationEnabled}
-      onChange={handleActivityNotificationChange}
-    />
+    <Row className="d-flex flex-row justify-content-between ">
+      <Col>
+        <Col className="d-flex flex-row align-items-center">
+          <span className="title">
+            {t('settings:notifications.activityNotification')}
+          </span>
+        </Col>
+        <Col className="d-flex flex-row align-items-center">
+          <small className="description">
+            {t('settings:notifications.activityNotificationDescription')}
+          </small>
+        </Col>
+      </Col>
+      <Col>
+        <Switch
+          checked={activityNotificationEnabled}
+          onChange={handleActivityNotificationChange}
+        />
+      </Col>
+    </Row>
   );
 };
 
