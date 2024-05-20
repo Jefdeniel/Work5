@@ -13,7 +13,6 @@ const ActivityNotification = ({
   const { t } = useTranslation(['settings']);
   const handleActivityNotificationChange = (value: boolean) => {
     onChange(value);
-    console.log('Activity notification enabled:', value);
   };
 
   return (

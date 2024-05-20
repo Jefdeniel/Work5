@@ -21,21 +21,27 @@ import DeleteAccountModal from '../../components/settings/account/modals/DeleteA
 import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
+import useAuth from '../../hooks/useAuth';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:title'));
   const settings = useSettings();
+  console.log(settings);
+  const auth = useAuth();
 
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
 
   // TODO: write function in backend
-  const { fetchData: updateDeviceSettings } = useFetch('POST', ['settings']);
+  const { fetchData: updateDeviceSettings } = useFetch('POST', [
+    'user_settings',
+  ]);
   const handleSaveSettings = async () => {
     try {
       const response = await updateDeviceSettings(
         {},
         {
+          id: auth.user_id,
           language: settings.language,
           selectedTimezone: settings.selectedTimezone,
           timeFormat: settings.timeFormat,

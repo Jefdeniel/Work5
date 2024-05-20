@@ -8,7 +8,6 @@ interface Props {
 const EventReminderSelector = ({ eventReminderEnabled, onChange }: Props) => {
   const handleEventReminderChange = (value: boolean) => {
     onChange(value);
-    console.log('Event reminder enabled:', value);
   };
 
   return (
