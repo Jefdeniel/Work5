@@ -8,20 +8,35 @@ import Input from '../../components/ui/Input/Input';
 import useFetch from '../../hooks/useFetch';
 import Validators from '../../utils/Validators';
 import Logo from '../../components/ui/Logo';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const { t } = useTranslation(['auth']);
+  const navigate = useNavigate();
 
   // request to backend to register user
-  const { fetchData: register } = useFetch('POST', ['register']);
+  const { fetchData: register } = useFetch('POST', ['calendar_app', 'signup/']);
 
-  const handleRegister = () => {
-    register();
+  const handleRegister = async (values: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+    password2: string;
+  }) => {
+    const response = await register({}, values);
+
+    if (!response.ok) {
+      toast.error(t('auth:register.invalidData'));
+      return null;
+    }
+
     toast.success(t('auth:register.success'));
+    navigate('/login');
   };
 
   const handleLogin = () => {
-    window.location.href = '/login';
+    navigate('/login');
   };
 
   return (
@@ -50,7 +65,7 @@ const Register = () => {
               <Row>
                 <Col sm={12} md={6}>
                   <Field
-                    name="firstName"
+                    name="first_name"
                     validate={Validators.compose(
                       Validators.required(),
                       Validators.minLength(2),
@@ -71,7 +86,7 @@ const Register = () => {
 
                 <Col sm={12} md={6}>
                   <Field
-                    name="lastName"
+                    name="last_name"
                     validate={Validators.compose(
                       Validators.required(),
                       Validators.minLength(2),
@@ -130,7 +145,7 @@ const Register = () => {
               </Field>
 
               <Field
-                name="repeatPassword"
+                name="password2"
                 validate={Validators.compose(
                   Validators.required(),
                   Validators.password()
