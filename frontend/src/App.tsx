@@ -16,6 +16,7 @@ import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage';
 import AccountLayout from './layout/AccountLayout';
 import ProfilePage from './pages/ProfilePage';
+import Register from './pages/Auth/Register';
 
 function App() {
   const auth = useAuth();
@@ -60,6 +61,7 @@ function App() {
       ) : (
         <Route element={<AccountLayout />}>
           <Route index path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       )}
