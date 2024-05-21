@@ -65,6 +65,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "backend.urls"
 
 REST_FRAMEWORK = {
+    "DEFAULT_ROUTER_TRAILING_SLASH": False,
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
@@ -174,6 +175,7 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5177",
+    "http://localhost:8000",
 ]
 
 CORS_ALLOW_CREDENTIALS = True

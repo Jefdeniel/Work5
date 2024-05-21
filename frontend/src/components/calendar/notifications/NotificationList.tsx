@@ -9,7 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const NotificationList = () => {
   const [notifications, setNotifications] = useState([]);
-  const { fetchData: getNotifications } = useFetch('GET', ['notifications/']);
+  const { fetchData: getNotifications } = useFetch('GET', ['notifications']);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

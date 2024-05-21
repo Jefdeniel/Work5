@@ -1,16 +1,15 @@
-import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '../../components/ui/Button/Button';
+import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
 import Logo from '../../components/ui/Logo';
 import useAuth from '../../hooks/useAuth';
 import useFetch from '../../hooks/useFetch';
-import Heading from '../../components/ui/Heading/Heading';
 import Validators from '../../utils/Validators';
-import { Field, Form } from 'react-final-form';
 
 const Login = () => {
   const { t } = useTranslation('auth');
@@ -18,7 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // Assuming useFetch hook supports passing data in the request body
-  const { fetchData: postLogin } = useFetch('POST', ['token/']);
+  const { fetchData: postLogin } = useFetch('POST', ['token']);
 
   const onLoginHandler = async (values: {
     email: string;

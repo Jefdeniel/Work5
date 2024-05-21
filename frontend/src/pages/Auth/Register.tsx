@@ -15,7 +15,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   // request to backend to register user
-  const { fetchData: register } = useFetch('POST', ['signup/']);
+  const { fetchData: register } = useFetch('POST', ['signup']);
 
   const handleRegister = async (values: {
     first_name: string;

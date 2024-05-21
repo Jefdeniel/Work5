@@ -13,7 +13,7 @@ from .views.auth_views import SignUpView
 from django.conf import settings
 
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(r"users", CustomUserViewSet)
 router.register(r"calendars", CalendarViewSet)
 router.register(r"events", EventViewSet)
@@ -25,5 +25,10 @@ router.register(r"user_settings", UserSettingsViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("signup/", SignUpView.as_view(), name="signup"),
+    path("signup", SignUpView.as_view(), name="signup"),
+    # path(
+    #     "user_settings",
+    #     UserSettingsViewSet.as_view({"get": "list", "post": "create"}),
+    #     name="user_settings",
+    # ),
 ]
