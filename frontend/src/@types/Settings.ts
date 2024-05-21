@@ -1,4 +1,4 @@
-export interface Settings {}
+import { ITimezoneOption } from 'react-timezone-select';
 
 export interface AccountSettings {
   username: string;
@@ -10,11 +10,11 @@ export interface AccountSettings {
 
 export interface UserSettings {
   language: string;
-  timezone: string;
-  timeFormat: string;
+  time_zone: string | ITimezoneOption;
+  time_format: string;
   theme: string;
-  weekStartsOn: string;
-  weekendVisibility: boolean;
-  eventReminderEnabled: boolean;
-  activityNotificationEnabled: boolean;
+  week_start_day: string;
+  weekend_visibility: boolean;
+  event_reminder: boolean;
+  activity_notifications: boolean;
 }
