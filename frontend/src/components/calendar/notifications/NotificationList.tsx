@@ -16,26 +16,34 @@ const NotificationList = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    getNotifications()
-      .then((response) => {
+    console.log('useEffect called');
+    const fetchNotifications = async () => {
+      try {
+        const response = await getNotifications();
+        console.log('Response:', response);
         if (response.ok) {
-          return response.json();
+          const data = await response.json();
+          setNotifications(data);
         } else {
           throw new Error('Failed to fetch notifications');
         }
-      })
-      .then((data) => {
-        setNotifications(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching notifications:', error);
         setError(error.message);
         toast.error('Error fetching notifications');
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
-  }, []);
+      }
+    };
+
+    if (loading) {
+      fetchNotifications();
+    }
+
+    return () => {
+      console.log('Cleanup on unmount or re-run');
+    };
+  }, [loading]);
 
   if (loading) {
     return <LoadingScreen />;
