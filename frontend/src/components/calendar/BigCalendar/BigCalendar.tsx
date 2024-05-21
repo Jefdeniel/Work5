@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
 import { toast } from 'react-toastify';
 import moment from 'moment';
-import { DateTime } from 'ts-luxon';
+import { DateTime } from 'luxon';
 import withDragAndDrop, {
   withDragAndDropProps,
 } from 'react-big-calendar/lib/addons/dragAndDrop';
@@ -13,14 +13,17 @@ import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import EventCard from '../../ui/EventCard/EventCard';
 
 import './Calendar.scss';
+import { CalendarEvent } from '../../../@types/Events';
 
+// for drag and drop
 const DnDCalendar = withDragAndDrop(Calendar);
-type DnDType = CalendarProps & withDragAndDropProps;
+type DnDType = CalendarProps<CalendarEvent> &
+  withDragAndDropProps<CalendarEvent>;
 type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'>;
 
 const BigCalendar = (props: CustomCalendarProps) => {
   const localizer = momentLocalizer(moment);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
   const { fetchData: getEvents } = useFetch('GET', ['events']);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,8 +38,8 @@ const BigCalendar = (props: CustomCalendarProps) => {
         }
       })
       .then((data) => {
-        // Transform the events
-        const formattedEvents = data.map((event) => ({
+        // Transform the events to have start and end as Date objects
+        const formattedEvents = data.map((event: any) => ({
           ...event,
           start: DateTime.fromISO(event.start_time).toJSDate(),
           end: DateTime.fromISO(event.end_time).toJSDate(),
@@ -62,7 +65,7 @@ const BigCalendar = (props: CustomCalendarProps) => {
   }
 
   const components = {
-    event: ({ event }) => {
+    event: ({ event }: { event: CalendarEvent }) => {
       return <EventCard title={event.title} color={event.color} />;
     },
   };
@@ -74,6 +77,7 @@ const BigCalendar = (props: CustomCalendarProps) => {
         localizer={localizer}
         events={events}
         components={components}
+        titleAccessor={(event) => event.title}
         formats={{
           dayHeaderFormat: (date) => moment(date).format('MMMM DD yy'),
         }}
