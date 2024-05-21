@@ -1,23 +1,15 @@
-import { useTranslation } from 'react-i18next';
-import Switch from '../../ui/Switch/Switch';
 import { Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
-  activityNotificationEnabled: boolean;
-  onChange: (value: boolean) => void;
+  children: React.ReactNode;
 }
 
-const ActivityNotification = ({
-  activityNotificationEnabled,
-  onChange,
-}: Props) => {
+const ActivityNotificationSelector = ({ children }: Props) => {
   const { t } = useTranslation(['settings']);
-  const handleActivityNotificationChange = (value: boolean) => {
-    onChange(value);
-  };
 
   return (
-    <Row className="d-flex flex-row justify-content-between ">
+    <Row className="d-flex flex-row justify-content-between">
       <Col>
         <Col className="d-flex flex-row align-items-center">
           <span className="title">
@@ -30,14 +22,9 @@ const ActivityNotification = ({
           </small>
         </Col>
       </Col>
-      <Col>
-        <Switch
-          checked={activityNotificationEnabled}
-          onChange={handleActivityNotificationChange}
-        />
-      </Col>
+      <Col className="d-flex flex-row justify-content-end">{children}</Col>
     </Row>
   );
 };
 
-export default ActivityNotification;
+export default ActivityNotificationSelector;
