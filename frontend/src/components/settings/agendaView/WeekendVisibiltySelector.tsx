@@ -1,14 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { FieldMetaState } from 'react-final-form';
 import Select from '../../ui/Select/Select';
+import { Col, Row } from 'react-bootstrap';
 
 interface Props {
   initialValue?: boolean;
   value?: boolean;
-  onChange: (Theme: boolean) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (value: boolean) => void;
   meta?: FieldMetaState<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
 }
 
@@ -38,22 +37,35 @@ const WeekendVisbilityOnSelector = ({
 
   const translatedOptions = OPTIONS.map((option) => ({
     title: t(option.title),
-    value: option.value,
-    selected: option.value === value,
+    value: option.value.toString(),
+    selected: option.value.toString() === value.toString(),
   }));
 
   return (
-    <Select
-      title={t('settings:calendarView.weekendVisibilityToggle')}
-      description={t(
-        'settings:calendarView.weekendVisibilityToggleDescription'
-      )}
-      defaultValue={initialValue}
-      onChange={handleChange}
-      options={translatedOptions}
-      meta={meta}
-      {...rest}
-    />
+    <>
+      <Row className="full-select d-flex flex-row gap-2">
+        <Col>
+          <Row>
+            <span className="title">
+              {t('settings:calendarView.weekendVisibilityToggle')}
+            </span>
+            <small className="description">
+              {t('settings:calendarView.weekendVisibilityToggleDescription')}
+            </small>
+          </Row>
+        </Col>
+        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
+          <Select
+            defaultValue={initialValue}
+            value={value}
+            onChange={handleChange}
+            options={translatedOptions}
+            meta={meta}
+            {...rest}
+          />
+        </Col>
+      </Row>
+    </>
   );
 };
 
