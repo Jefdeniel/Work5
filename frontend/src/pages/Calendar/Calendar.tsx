@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import useSetTitle from '../../hooks/setTitle';
-import useFetch from '../../hooks/useFetch';
-import Spinner from '../../components/ui/Loading/Spinner';
 import { Col, Row } from 'react-bootstrap';
+import useFetch from '../../hooks/useFetch';
+
 import Heading from '../../components/ui/Heading/Heading';
 import BigCalendar from '../../components/calendar/BigCalendar/BigCalendar';
 import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
@@ -73,7 +73,11 @@ const Calendar = () => {
         </Col>
       </Row>
 
-      <BigCalendar defaultView="week" views={['day', 'week', 'month']} />
+      <BigCalendar
+        defaultView="week"
+        views={['day', 'week', 'month']}
+        timeslots={2}
+      />
     </>
   );
 };
