@@ -385,3 +385,61 @@ ul {
 .transl-50 {
   transform: translateY(45%);
 }
+
+.rbc-allday-cell {
+  display: none;
+}
+
+.rbc-time-view {
+  border: none;
+
+  & .rbc-header {
+    font-size: var(--fs-small);
+  }
+
+  & .rbc-time-header,
+  & .rbc-time-header-content {
+    margin-right: 0 !important;
+    border: none;
+  }
+
+  & .rbc-timeslot-group {
+    min-height: 58px;
+
+    & .rbc-label {
+      background-color: var(--sa-bright);
+      padding-right: var(--p-sm);
+      transform: translateY(-50%);
+    }
+  }
+
+  & .rbc-time-content {
+    padding-top: var(--p-md);
+    padding-right: 0;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+
+    /* for Chrome, Safari, and Opera */
+    &.rbc-time-content::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  & .rbc-event {
+    color: var(--sa-primary-950);
+    background: none;
+    padding: 0;
+    border: none !important;
+
+    &.rbc-selected {
+      background: none;
+      border: none !important;
+      border: 1px solid red !important;
+    }
+
+    & .rbc-event-label {
+      display: none;
+    }
+  }
+}
