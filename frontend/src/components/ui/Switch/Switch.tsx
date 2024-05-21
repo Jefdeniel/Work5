@@ -3,11 +3,13 @@ import './Switch.scss';
 interface Props {
   checked: boolean;
   onChange: (value: boolean) => void;
+  [x: string]: any;
 }
 
-const Switch = ({ checked, onChange }: Props) => {
-  const handleChange = () => {
-    onChange(!checked);
+const Switch = ({ checked, onChange, ...rest }: Props) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.checked);
+    console.log(event.target.checked);
   };
 
   return (
@@ -15,10 +17,11 @@ const Switch = ({ checked, onChange }: Props) => {
       <label className="switch-label">
         <input
           id="switch"
-          type="checkbox"
           className="form-control"
+          type="checkbox"
           checked={checked}
           onChange={handleChange}
+          {...rest}
         />
         <div className="switch-slider"></div>
       </label>
