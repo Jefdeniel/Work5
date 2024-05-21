@@ -4,6 +4,6 @@ export interface CalendarEvent {
   start: Date;
   end: Date;
   allDay: boolean;
-  isNew?: boolean;
+  is_new?: boolean;
   color?: string;
 }
