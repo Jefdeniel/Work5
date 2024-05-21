@@ -18,34 +18,34 @@ import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStart
 import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
+import { useContext } from 'react';
+import { SettingsContext } from '../../store/SettingsContext';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:title'));
-  const settings = useSettings();
-  const auth = useAuth();
+  const settings = useContext(SettingsContext);
 
+  const auth = useAuth();
   const { fetchData: updateDeviceSettings, loading: isLoading } = useFetch(
     'PUT',
-    [`user_settings/${auth.user_id}/`]
+    ['user_settings', auth.user_id]
   );
 
   const handleSaveSettings = async (values) => {
-    console.log(values);
-    console.log('start form submit');
     try {
       const response = await updateDeviceSettings(
         {},
         {
           user: auth.user_id,
           language: values.language,
-          time_zone: values.timezone,
+          time_zone: values.time_zone,
           time_format: values.time_format,
           theme: values.theme,
           event_reminder: values.event_reminder,
           activity_notifications: values.activity_notifications,
           week_start_day: values.week_start_day,
-          weekend_visibility: values.weekend_visibility ? true : false,
+          weekend_visibility: values.weekend_visibility,
         }
       );
 
@@ -65,21 +65,17 @@ const SettingsPage = () => {
     <>
       <Form
         onSubmit={handleSaveSettings}
-        initialValues={
-          settings
-            ? {
-                language: settings.language,
-                timezone: settings.timezone,
-                time_format: settings.timeFormat,
-                theme: settings.theme,
-                event_reminder: settings.eventReminderEnabled,
-                activity_notifications: settings.activityNotificationEnabled,
-                week_start_day: settings.weekStartsOn,
-                weekend_visibility: settings.weekendVisibility,
-              }
-            : {}
-        }
-        render={({ handleSubmit }) => (
+        initialValues={{
+          language: settings.language,
+          time_zone: settings.time_zone,
+          time_format: settings.time_format,
+          theme: settings.theme,
+          week_start_day: settings.week_start_day,
+          weekend_visibility: settings.weekend_visibility,
+          event_reminder: settings.event_reminder,
+          activity_notifications: settings.activity_notifications,
+        }}
+        render={({ handleSubmit, form, values }) => (
           <form onSubmit={handleSubmit}>
             <Row className="settings-block">
               <Heading level={2} isUnderlined>
@@ -91,15 +87,19 @@ const SettingsPage = () => {
                     {...input}
                     meta={meta}
                     initialValue={settings.language}
+                    value={input.value}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
-              <Field name="timezone" validate={Validators.required()}>
+              <Field name="time_zone" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <TimeZoneSelector
                     {...input}
                     meta={meta}
-                    initialValue={settings.timezone}
+                    initialValue={settings.time_zone}
+                    value={input.value}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
@@ -108,7 +108,9 @@ const SettingsPage = () => {
                   <TimeFormatSelector
                     {...input}
                     meta={meta}
-                    initialValue={settings.timeFormat}
+                    initialValue={settings.time_format}
+                    value={input.value}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
@@ -118,67 +120,16 @@ const SettingsPage = () => {
                     {...input}
                     meta={meta}
                     initialValue={settings.theme}
-                  />
-                )}
-              </Field>
-            </Row>
-
-            <Row className="settings-block">
-              <Heading level={2} isUnderlined>
-                {t('settings:notifications.title')}
-              </Heading>
-              <Field name="event_reminder" validate={Validators.required()}>
-                {({ input }) => (
-                  <EventReminderSelector
-                    {...input}
-                    eventReminderEnabled={settings.eventReminderEnabled}
-                    onChange={input.onChange}
-                  />
-                )}
-              </Field>
-              <Field
-                name="activity_notifications"
-                validate={Validators.required()}
-              >
-                {({ input }) => (
-                  <ActivityNotification
-                    {...input}
-                    activityNotificationEnabled={
-                      settings.activityNotificationEnabled
-                    }
+                    value={input.value}
                     onChange={input.onChange}
                   />
                 )}
               </Field>
             </Row>
 
-            <Row className="settings-block">
-              <Heading level={2} isUnderlined className="border-bottom">
-                {t('settings:calendarView.title')}
-              </Heading>
-              <Field name="week_start_day" validate={Validators.required()}>
-                {({ input, meta }) => (
-                  <WeekStartsOnSelector
-                    {...input}
-                    meta={meta}
-                    initialValue={settings.weekStartsOn}
-                    onChange={input.onChange}
-                  />
-                )}
-              </Field>
-              <Field name="weekend_visibility">
-                {({ input, meta }) => (
-                  <WeekendVisbilityOnSelector
-                    {...input}
-                    meta={meta}
-                    initialValue={settings.weekendVisibility}
-                    onChange={input.onChange}
-                  />
-                )}
-              </Field>
-              <button type="submit">Submit</button>
-            </Row>
-            <Row className="mt-large"></Row>
+            <Button className="btn--success" type="submit" disabled={isLoading}>
+              {t('settings:save')}
+            </Button>
           </form>
         )}
       />

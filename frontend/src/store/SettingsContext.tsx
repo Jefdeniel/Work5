@@ -1,43 +1,45 @@
 import { createContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITimezone, ITimezoneOption } from 'react-timezone-select';
+import { UserSettings } from '../@types/Settings';
+import useAuth from '../hooks/useAuth';
+import useFetch from '../hooks/useFetch';
+import AuthContext from './AuthContext';
 interface SettingsContextType {
   language?: string;
   setLanguage: (lang: string) => void;
-  timezone?: string | ITimezoneOption;
+  time_zone?: string | ITimezoneOption;
   setTimezone: (selectedTimezone: string) => void;
-  timeFormat?: string;
-  setTimeFormat: (timeFormat: string) => void;
+  time_format?: string;
+  setTimeFormat: (time_format: string) => void;
   theme?: string;
   setTheme: (theme: string) => void;
-  weekStartsOn?: string;
-  setWeekStartsOn: (weekStartsOn: string) => void;
-  weekendVisibility?: boolean;
-  setWeekendVisibility: (weekendVisibility: boolean) => void;
-  eventReminderEnabled?: boolean;
-  setEventReminderEnabled: (eventReminderEnabled: boolean) => void;
-  activityNotificationEnabled?: boolean;
-  setActivityNotificationEnabled: (
-    activityNotificationEnabled: boolean
-  ) => void;
+  week_start_day?: string;
+  setWeekStartsOn: (week_start_day: string) => void;
+  weekend_visibility?: boolean;
+  setWeekendVisibility: (weekend_visibility: boolean) => void;
+  event_reminder?: boolean;
+  setEventReminderEnabled: (event_reminder: boolean) => void;
+  activity_notifications?: boolean;
+  setActivityNotificationEnabled: (activity_notifications: boolean) => void;
 }
 
 export const SettingsContext = createContext<SettingsContextType>({
   language: 'nl',
   setLanguage: () => {},
-  timezone: 'UTC',
+  time_zone: 'UTC',
   setTimezone: () => {},
-  timeFormat: '24h',
+  time_format: '24h',
   setTimeFormat: () => {},
   theme: 'light',
   setTheme: () => {},
-  weekStartsOn: 'Monday',
+  week_start_day: 'Monday',
   setWeekStartsOn: () => {},
-  weekendVisibility: true,
+  weekend_visibility: true,
   setWeekendVisibility: () => {},
-  eventReminderEnabled: true,
+  event_reminder: true,
   setEventReminderEnabled: () => {},
-  activityNotificationEnabled: true,
+  activity_notifications: true,
   setActivityNotificationEnabled: () => {},
 });
 
@@ -46,12 +48,13 @@ export const SettingsContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const auth = useAuth();
   const { i18n } = useTranslation();
   const [language, setLanguage] = useState<string>(i18n.language || 'nl');
-  const [timezone, setTimezone] = useState<ITimezone>(
+  const [time_zone, setTimezone] = useState<ITimezone>(
     Intl.DateTimeFormat().resolvedOptions().timeZone
   ); // initial timezone is the timezone of the user's browser
-  const [timeFormat, setTimeFormat] = useState<string>('24h');
+  const [time_format, setTimeFormat] = useState<string>('24h');
   const [theme, setTheme] = useState<string>('light');
   const [weekStartsOn, setWeekStartsOn] = useState<string>('Monday');
   const [weekendVisibility, setWeekendVisibility] = useState<boolean>(true);
@@ -63,22 +66,48 @@ export const SettingsContextProvider = ({
     void i18n.changeLanguage(language);
   }, [i18n, language]);
 
+  const { fetchData: getUserSettings } = useFetch('GET', [
+    'user_settings',
+    auth.user_id,
+  ]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getUserSettings();
+
+      if (response.ok) {
+        const data = (await response.json()) as UserSettings;
+
+        setLanguage(data.language);
+        setTimezone(data.time_zone);
+        setTimeFormat(data.time_format);
+        setTheme(data.theme);
+        setWeekStartsOn(data.week_start_day);
+        setWeekendVisibility(data.weekend_visibility);
+        setEventReminderEnabled(data.event_reminder);
+        setActivityNotificationEnabled(data.activity_notifications);
+      }
+    };
+
+    language && void fetchData();
+  }, [AuthContext, language]);
+
   const contextValue: SettingsContextType = {
     language,
     setLanguage,
-    timezone,
+    time_zone,
     setTimezone,
-    timeFormat,
+    time_format,
     setTimeFormat,
     theme,
     setTheme,
-    weekStartsOn,
+    week_start_day: weekStartsOn,
     setWeekStartsOn,
-    weekendVisibility,
+    weekend_visibility: weekendVisibility,
     setWeekendVisibility,
-    eventReminderEnabled,
+    event_reminder: eventReminderEnabled,
     setEventReminderEnabled,
-    activityNotificationEnabled,
+    activity_notifications: activityNotificationEnabled,
     setActivityNotificationEnabled,
   };
 

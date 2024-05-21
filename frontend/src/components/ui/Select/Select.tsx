@@ -13,7 +13,7 @@ interface Props {
   }[];
   meta?: FieldMetaState<any>;
   [x: string]: any;
-  defaultValue?: string | boolean | Object;
+  value?: string;
 }
 
 const Select = ({
@@ -21,7 +21,7 @@ const Select = ({
   description,
   options,
   meta,
-  defaultValue,
+  value,
   ...rest
 }: Props) => {
   const { t } = useTranslation(['general']);
@@ -41,14 +41,11 @@ const Select = ({
         <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
           <select
             className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
+            value={value}
             {...rest}
           >
             {options?.map((option) => (
-              <option
-                key={option.title}
-                value={option.value}
-                // selected={defaultValue === option.value}
-              >
+              <option key={option.value} value={option.value}>
                 {option.title}
               </option>
             ))}
