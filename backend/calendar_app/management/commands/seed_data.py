@@ -72,7 +72,7 @@ class Command(BaseCommand):
                 user=user,
                 defaults={
                     "language": "en",  # default language
-                    "time_zone": "UTC",  # default time zone
+                    "time_zone": "Europe/Brussels",  # default time zone
                     "time_format": "24h",  # default time format
                     "theme": "light",  # default theme
                     "event_reminder": True,  # default event reminder

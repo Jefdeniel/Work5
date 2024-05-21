@@ -44,6 +44,7 @@ const TimeFormatSelector = ({
     <Select
       title={t('settings:general.timeFormat')}
       defaultValue={initialValue}
+      value={value}
       onChange={handleTimeFormatChange}
       description={t('settings:general.timeFormatDescription')}
       options={translatedOptions}

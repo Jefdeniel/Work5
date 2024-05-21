@@ -30,21 +30,22 @@ const ThemeSelector = ({
 }: ThemeSelectorProps) => {
   const { t } = useTranslation(['settings']);
 
-  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value);
-  };
-
   const translatedOptions = OPTIONS.map((option) => ({
     title: t(option.title),
     value: option.value,
     selected: option.value === value,
   }));
 
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(e.target.value);
+  };
+
   return (
     <Select
       title={t('settings:general.theme')}
       description={t('settings:general.themeDescription')}
       defaultValue={initialValue}
+      value={value}
       onChange={handleThemeChange}
       options={translatedOptions}
       meta={meta}

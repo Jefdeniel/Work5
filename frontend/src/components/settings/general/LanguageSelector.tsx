@@ -1,7 +1,7 @@
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
-import { AVAILABLE_LANGUAGES } from '../../../i18n.js';
-import Select from '../../ui/Select/Select.js';
+import { AVAILABLE_LANGUAGES } from '../../../i18n';
+import Select from '../../ui/Select/Select';
 
 interface LanguageSelectorProps {
   changeLanguage?: boolean;
@@ -37,6 +37,7 @@ const LanguageSelector = ({
   const options = AVAILABLE_LANGUAGES.map((language) => ({
     title: language.name,
     value: language.value,
+    selected: value === language.value,
   }));
 
   return (
@@ -44,8 +45,10 @@ const LanguageSelector = ({
       title={t('settings:general.language')}
       description={t('settings:general.languageDescription')}
       defaultValue={initialValue}
+      value={value}
       onChange={onLanguageSelectionChange}
       options={options}
+      meta={meta}
       {...rest}
     />
   );

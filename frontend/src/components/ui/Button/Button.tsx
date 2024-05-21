@@ -14,6 +14,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   style?: React.CSSProperties;
   className?: string;
+  disabled?: boolean;
   onClick?: () => void;
   notification?: React.ReactNode;
   children?: React.ReactNode;
