@@ -43,7 +43,7 @@ const LanguageSelector = ({
 
   return (
     <Row className="full-select d-flex flex-row">
-      <Col xs={12} className="mb-2">
+      <Col className="mb-2">
         <Row>
           <span className="title">{t('settings:general.language')}</span>
           <small className="description">
@@ -51,7 +51,7 @@ const LanguageSelector = ({
           </small>
         </Row>
       </Col>
-      <Col xs={12} className="d-flex flex-col justify-content-end p-0">
+      <Col className="d-flex flex-col justify-content-end p-0">
         <Select
           title={t('settings:general.language')}
           description={t('settings:general.languageDescription')}
