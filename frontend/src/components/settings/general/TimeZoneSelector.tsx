@@ -5,7 +5,7 @@ import Select from '../../ui/Select/Select';
 
 interface TimeZoneSelectorProps {
   changeTimeZone?: boolean;
-  initialTimeZone?: Object;
+  initialValue?: Object;
   value?: string | Object;
   meta?: FieldMetaState<any>;
   onChange?: (language: string) => void;
@@ -14,7 +14,7 @@ interface TimeZoneSelectorProps {
 
 const TimeZoneSelector = ({
   changeTimeZone = false,
-  initialTimeZone = 'UTC',
+  initialValue = 'UTC',
   value,
   meta,
   onChange,
@@ -27,7 +27,7 @@ const TimeZoneSelector = ({
   ) => {
     const selectedTimeZone = e.target.value;
 
-    if (selectedTimeZone !== initialTimeZone) {
+    if (selectedTimeZone !== initialValue) {
       changeTimeZone && onChange && onChange(selectedTimeZone);
     }
   };
@@ -42,9 +42,10 @@ const TimeZoneSelector = ({
     <Select
       title={t('settings:general.timeZone')}
       description={t('settings:general.timeZoneDescription')}
-      defaultValue={initialTimeZone}
+      defaultValue={initialValue}
       onChange={onTimeZoneSelectionChange}
       options={options}
+      meta={meta}
       {...rest}
     />
   );

@@ -15,7 +15,6 @@ const SmallCalendar = ({ className }: Props) => {
   const handleChange = (date: Date | DateRange) => {
     // TODO: Show day data on the right when clicking on a day
     // onChange(date);
-    console.log(date);
   };
 
   return (

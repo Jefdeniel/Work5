@@ -1,14 +1,14 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+
 from .views.calendar_views import CalendarViewSet
 from .views.event_views import EventViewSet
 from .views.label_views import LabelViewSet
 from .views.notification_views import NotificationViewSet
 from .views.reminder_views import ReminderViewSet
-from .views.settings_views import UserSettingsViewSet
+from .views.user_settings_views import UserSettingsViewSet
 from .views.user_views import CustomUserViewSet
 from .views.auth_views import SignUpView
-
 
 from django.conf import settings
 

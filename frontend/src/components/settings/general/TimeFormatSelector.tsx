@@ -3,28 +3,26 @@ import { FieldMetaState } from 'react-final-form';
 import Select from '../../ui/Select/Select';
 
 interface TimeFormatSelectorProps {
-  initialDisplay?: string;
+  initialValue?: string;
   value?: string;
   onChange: (timeFormat: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: FieldMetaState<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
 }
 
 const OPTIONS = [
   {
-    title: 'settings:general.12Hour',
     value: '12h',
+    title: 'settings:general.12Hour',
   },
   {
-    title: 'settings:general.24Hour',
     value: '24h',
+    title: 'settings:general.24Hour',
   },
 ];
 
 const TimeFormatSelector = ({
-  initialDisplay,
+  initialValue,
   value,
   onChange,
   meta,
@@ -32,26 +30,23 @@ const TimeFormatSelector = ({
 }: TimeFormatSelectorProps) => {
   const { t } = useTranslation(['settings']);
 
-  const handleTimeFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value);
-  };
-
   const translatedOptions = OPTIONS.map((option) => ({
     title: t(option.title),
     value: option.value,
     selected: option.value === value,
   }));
 
+  const handleTimeFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(e.target.value);
+  };
+
   return (
     <Select
       title={t('settings:general.timeFormat')}
-      description={t('settings:general.timeFormatDescription')}
-      defaultValue={initialDisplay}
+      defaultValue={initialValue}
       onChange={handleTimeFormatChange}
-      options={translatedOptions.map((option) => ({
-        ...option,
-        value: option.value.toString(),
-      }))}
+      description={t('settings:general.timeFormatDescription')}
+      options={translatedOptions}
       meta={meta}
       {...rest}
     />

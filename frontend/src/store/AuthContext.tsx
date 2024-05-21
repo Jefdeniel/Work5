@@ -46,7 +46,7 @@ export const AuthContextProvider = ({
   const isLoggedIn = () => {
     // here is the problem with the token expiration (logging out)
     return (
-      token && new Date(jwtDecode<JwtToken>(token).exp * 1000) > new Date()
+      !!token && new Date(jwtDecode<JwtToken>(token).exp * 1000) > new Date()
     );
   };
 
@@ -85,11 +85,12 @@ export const AuthContextProvider = ({
     }
   };
 
-  useEffect(() => {
-    if (token && !isLoggedIn()) {
-      refreshToken();
-    }
-  }, [token]);
+  // 🐛 this is the problem! Causes logout on every refresh
+  // useEffect(() => {
+  //   if (token && !isLoggedIn()) {
+  //     refreshToken();
+  //   }
+  // }, [token]);
 
   const contextValue: AuthContextType = {
     token,

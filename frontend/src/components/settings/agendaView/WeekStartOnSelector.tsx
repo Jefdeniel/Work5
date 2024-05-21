@@ -3,9 +3,9 @@ import { FieldMetaState } from 'react-final-form';
 import Select from '../../ui/Select/Select';
 
 interface Props {
-  initialDisplay?: string;
-  value?: number;
-  onChange: (Theme: number) => void;
+  initialValue?: string;
+  value?: string;
+  onChange: (Theme: string) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: FieldMetaState<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,7 +24,7 @@ const OPTIONS = [
 ];
 
 const WeekStartsOnSelector = ({
-  initialDisplay,
+  initialValue,
   value,
   onChange,
   meta,
@@ -33,20 +33,19 @@ const WeekStartsOnSelector = ({
   const { t } = useTranslation(['settings']);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(parseInt(e.target.value, 10));
+    onChange(e.target.value);
   };
 
   const translatedOptions = OPTIONS.map((option) => ({
     title: t(option.title),
     value: option.value,
-    selected: option.value === value,
   }));
 
   return (
     <Select
       title={t('settings:calendarView.weekStartPreference')}
       description={t('settings:calendarView.weekStartPreferenceDescription')}
-      defaultValue={initialDisplay}
+      defaultValue={initialValue}
       onChange={handleChange}
       options={translatedOptions.map((option) => ({
         ...option,

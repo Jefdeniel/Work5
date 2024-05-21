@@ -18,10 +18,11 @@
 
 .full-select {
   margin-bottom: var(--sp-base);
-  
+
   & .title {
     font-weight: var(--fw-bold);
     color: var(--sa-primary-500-base);
+    margin-left: 0 !important;
   }
 
   & .form-control {
@@ -29,4 +30,3 @@
     border-color: var(--sa-primary-950);
   }
 }
-

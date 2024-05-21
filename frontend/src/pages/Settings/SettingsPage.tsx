@@ -1,23 +1,20 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
+import { Row } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import useFetch from '../../hooks/useFetch';
 import useSetTitle from '../../hooks/setTitle';
-import { useSettings } from '../../hooks/useSettings';
-
-import { Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
+import { useSettings } from '../../hooks/useSettings';
+import useAuth from '../../hooks/useAuth';
 import Validators from '../../utils/Validators';
+
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
-import Signout from '../../components/settings/account/Signout';
-import DeleteAccount from '../../components/settings/account/DeleteAccount';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
 import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
 import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
 import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
-import DeleteAccountModal from '../../components/settings/account/modals/DeleteAccountModal';
 import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
@@ -26,54 +23,65 @@ const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:title'));
   const settings = useSettings();
+  const auth = useAuth();
 
-  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
+  const { fetchData: updateDeviceSettings, loading: isLoading } = useFetch(
+    'PUT',
+    [`user_settings/${auth.user_id}/`]
+  );
 
-  // TODO: write function in backend
-  const { fetchData: updateDeviceSettings } = useFetch('POST', ['settings']);
-  const handleSaveSettings = async () => {
+  const handleSaveSettings = async (values) => {
+    console.log(values);
+    console.log('start form submit');
     try {
       const response = await updateDeviceSettings(
         {},
         {
-          language: settings.language,
-          selectedTimezone: settings.selectedTimezone,
-          timeFormat: settings.timeFormat,
-          theme: settings.theme,
-          eventReminderEnabled: settings.eventReminderEnabled,
-          activityNotificationEnabled: settings.activityNotificationEnabled,
-          weekStartsOn: settings.weekStartsOn,
-          weekendVisibility: settings.weekendVisibility,
+          user: auth.user_id,
+          language: values.language,
+          time_zone: values.timezone,
+          time_format: values.time_format,
+          theme: values.theme,
+          event_reminder: values.event_reminder,
+          activity_notifications: values.activity_notifications,
+          week_start_day: values.week_start_day,
+          weekend_visibility: values.weekend_visibility ? true : false,
         }
       );
 
       if (response.ok) {
-        console.log('Settings saved');
+        toast.success(t('settings:saved'));
       } else {
+        toast.error(t('settings:failed'));
         throw new Error('Failed to save settings' + response.statusText);
       }
     } catch (error) {
+      toast.error(t('settings:failed'));
       console.error(error);
     }
-  };
-
-  // modals
-  const openDeleteAccountModal = () => {
-    setShowDeleteAccountModal(true);
-  };
-
-  const closeDeleteAccountModal = () => {
-    setShowDeleteAccountModal(false);
   };
 
   return (
     <>
       <Form
         onSubmit={handleSaveSettings}
-        initialValues={settings}
+        initialValues={
+          settings
+            ? {
+                language: settings.language,
+                timezone: settings.timezone,
+                time_format: settings.timeFormat,
+                theme: settings.theme,
+                event_reminder: settings.eventReminderEnabled,
+                activity_notifications: settings.activityNotificationEnabled,
+                week_start_day: settings.weekStartsOn,
+                weekend_visibility: settings.weekendVisibility,
+              }
+            : {}
+        }
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Row className={`settings-block`}>
+            <Row className="settings-block">
               <Heading level={2} isUnderlined>
                 {t('settings:general.title')}
               </Heading>
@@ -82,28 +90,25 @@ const SettingsPage = () => {
                   <LanguageSelector
                     {...input}
                     meta={meta}
-                    onChange={input.onChange}
-                    initialLanguage={settings.language}
+                    initialValue={settings.language}
                   />
                 )}
               </Field>
-              <Field name="selectedTimezone" validate={Validators.required()}>
+              <Field name="timezone" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <TimeZoneSelector
                     {...input}
                     meta={meta}
-                    onChange={input.onChange}
-                    initialTimeZone={settings.selectedTimezone}
+                    initialValue={settings.timezone}
                   />
                 )}
               </Field>
-              <Field name="timeFormat" validate={Validators.required()}>
+              <Field name="time_format" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <TimeFormatSelector
                     {...input}
                     meta={meta}
-                    onChange={input.onChange}
-                    initialTimeFormat={settings.timeFormat}
+                    initialValue={settings.timeFormat}
                   />
                 )}
               </Field>
@@ -112,31 +117,27 @@ const SettingsPage = () => {
                   <ThemeSelector
                     {...input}
                     meta={meta}
-                    onChange={input.onChange}
-                    initialTheme={settings.theme}
+                    initialValue={settings.theme}
                   />
                 )}
               </Field>
             </Row>
 
-            <Row className={`settings-block`}>
+            <Row className="settings-block">
               <Heading level={2} isUnderlined>
                 {t('settings:notifications.title')}
               </Heading>
-              <Field
-                name="eventReminderEnabled"
-                validate={Validators.required()}
-              >
+              <Field name="event_reminder" validate={Validators.required()}>
                 {({ input }) => (
                   <EventReminderSelector
                     {...input}
                     eventReminderEnabled={settings.eventReminderEnabled}
-                    onChange={settings.setEventReminderEnabled}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
               <Field
-                name="activityNotificationEnabled"
+                name="activity_notifications"
                 validate={Validators.required()}
               >
                 {({ input }) => (
@@ -145,62 +146,39 @@ const SettingsPage = () => {
                     activityNotificationEnabled={
                       settings.activityNotificationEnabled
                     }
-                    onChange={settings.setActivityNotificationEnabled}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
             </Row>
 
-            <Row className={`settings-block`}>
+            <Row className="settings-block">
               <Heading level={2} isUnderlined className="border-bottom">
                 {t('settings:calendarView.title')}
               </Heading>
-              <Field name="weekStartsOn" validate={Validators.required()}>
+              <Field name="week_start_day" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <WeekStartsOnSelector
                     {...input}
                     meta={meta}
-                    onChange={settings.setWeekStartsOn}
-                    initialWeekStartsOn={settings.weekStartsOn}
+                    initialValue={settings.weekStartsOn}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
-              <Field name="weekendVisibility" validate={Validators.required()}>
+              <Field name="weekend_visibility">
                 {({ input, meta }) => (
                   <WeekendVisbilityOnSelector
                     {...input}
                     meta={meta}
-                    onChange={settings.setWeekendVisibility}
-                    initialWeekendVisibility={settings.weekendVisibility}
+                    initialValue={settings.weekendVisibility}
+                    onChange={input.onChange}
                   />
                 )}
               </Field>
+              <button type="submit">Submit</button>
             </Row>
-
-            <Row className={`settings-block`}>
-              <Heading level={2} isUnderlined>
-                {t('settings:account.title')}
-              </Heading>
-
-              <Signout className={`btn btn--danger`} />
-
-              <DeleteAccount
-                className={`btn btn--bordered-danger`}
-                onClick={openDeleteAccountModal}
-              />
-            </Row>
-
-            <Row className={`mt-large`}>
-              <Button
-                className={`btn--success`}
-                text={t('settings:save')}
-                type="submit"
-              />
-            </Row>
-
-            {showDeleteAccountModal && (
-              <DeleteAccountModal onClose={closeDeleteAccountModal} />
-            )}
+            <Row className="mt-large"></Row>
           </form>
         )}
       />

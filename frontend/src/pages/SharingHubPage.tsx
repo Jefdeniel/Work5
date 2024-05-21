@@ -23,7 +23,7 @@ const SharingHubPage = () => {
 
       <Row className={`mb-large`}>
         <Heading level={3}>
-          <p>{t('calendar:sharing-hub.usersInAgenda')}</p>
+          <p>{t('calendar:sharing-hub.exportAgendaAs')}</p>
         </Heading>
         <ActionButtonList
           items={EXPORT_AGENDA_ITEMS}
@@ -33,7 +33,7 @@ const SharingHubPage = () => {
 
       <Row className={`mb-large`}>
         <Heading level={3}>
-          <p>{t('calendar:sharing-hub.exportAgendaAs')}</p>
+          <p>{t('calendar:sharing-hub.usersInAgenda')}</p>
         </Heading>
       </Row>
 

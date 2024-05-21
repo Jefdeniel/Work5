@@ -3,12 +3,10 @@ import { FieldMetaState } from 'react-final-form';
 import Select from '../../ui/Select/Select';
 
 interface ThemeSelectorProps {
-  initialDisplay?: string;
+  initialValue?: string;
   value?: string;
   onChange: (Theme: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: FieldMetaState<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
 }
 
@@ -24,7 +22,7 @@ const OPTIONS = [
 ];
 
 const ThemeSelector = ({
-  initialDisplay,
+  initialValue,
   value,
   onChange,
   meta,
@@ -46,12 +44,9 @@ const ThemeSelector = ({
     <Select
       title={t('settings:general.theme')}
       description={t('settings:general.themeDescription')}
-      defaultValue={initialDisplay}
+      defaultValue={initialValue}
       onChange={handleThemeChange}
-      options={translatedOptions.map((option) => ({
-        ...option,
-        value: option.value.toString(),
-      }))}
+      options={translatedOptions}
       meta={meta}
       {...rest}
     />

@@ -3,7 +3,7 @@ import { FieldMetaState } from 'react-final-form';
 import Select from '../../ui/Select/Select';
 
 interface Props {
-  initialDisplay?: string;
+  initialValue?: boolean;
   value?: boolean;
   onChange: (Theme: boolean) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,7 +24,7 @@ const OPTIONS = [
 ];
 
 const WeekendVisbilityOnSelector = ({
-  initialDisplay,
+  initialValue,
   value,
   onChange,
   meta,
@@ -45,13 +45,12 @@ const WeekendVisbilityOnSelector = ({
   return (
     <Select
       title={t('settings:calendarView.weekendVisibilityToggle')}
-      description={t('settings:calendarView.weekendVisibilityToggleDescription')}
-      defaultValue={initialDisplay}
+      description={t(
+        'settings:calendarView.weekendVisibilityToggleDescription'
+      )}
+      defaultValue={initialValue}
       onChange={handleChange}
-      options={translatedOptions.map((option) => ({
-        ...option,
-        value: option.value.toString(),
-      }))}
+      options={translatedOptions}
       meta={meta}
       {...rest}
     />

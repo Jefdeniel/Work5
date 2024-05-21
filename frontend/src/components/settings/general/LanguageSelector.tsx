@@ -4,8 +4,8 @@ import { AVAILABLE_LANGUAGES } from '../../../i18n.js';
 import Select from '../../ui/Select/Select.js';
 
 interface LanguageSelectorProps {
-  changeLanguageOfSystem?: boolean;
-  initialLanguage?: string;
+  changeLanguage?: boolean;
+  initialValue?: string;
   value?: string;
   meta?: FieldMetaState<any>;
   onChange?: (language: string) => void;
@@ -13,8 +13,8 @@ interface LanguageSelectorProps {
 }
 
 const LanguageSelector = ({
-  changeLanguageOfSystem,
-  initialLanguage,
+  changeLanguage,
+  initialValue,
   value,
   meta,
   onChange,
@@ -29,7 +29,7 @@ const LanguageSelector = ({
     const selectedLanguage = e.target.value;
 
     if (selectedLanguage) {
-      void (changeLanguageOfSystem && i18n.changeLanguage(selectedLanguage));
+      void (changeLanguage && i18n.changeLanguage(selectedLanguage));
       onChange && onChange(selectedLanguage);
     }
   };
@@ -37,14 +37,13 @@ const LanguageSelector = ({
   const options = AVAILABLE_LANGUAGES.map((language) => ({
     title: language.name,
     value: language.value,
-    selected: language.value === value,
   }));
 
   return (
     <Select
       title={t('settings:general.language')}
       description={t('settings:general.languageDescription')}
-      defaultValue={initialLanguage}
+      defaultValue={initialValue}
       onChange={onLanguageSelectionChange}
       options={options}
       {...rest}

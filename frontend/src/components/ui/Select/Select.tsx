@@ -11,9 +11,7 @@ interface Props {
     title: string;
     value: string;
   }[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: FieldMetaState<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
   defaultValue?: string | boolean | Object;
 }
@@ -49,7 +47,7 @@ const Select = ({
               <option
                 key={option.title}
                 value={option.value}
-                selected={defaultValue === option.value}
+                // selected={defaultValue === option.value}
               >
                 {option.title}
               </option>

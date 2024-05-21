@@ -14,12 +14,10 @@ const NotificationList = () => {
   const [error, setError] = useState(null);
 
   const auth = useAuth();
-  console.log('Auth:', auth.user_id);
 
   useEffect(() => {
     getNotifications()
       .then((response) => {
-        console.log('Response log:', response);
         if (response.ok) {
           return response.json();
         } else {
@@ -27,7 +25,6 @@ const NotificationList = () => {
         }
       })
       .then((data) => {
-        console.log('Fetched Data:', data); // Log fetched data for further inspection
         setNotifications(data);
       })
       .catch((error) => {

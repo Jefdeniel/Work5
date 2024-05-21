@@ -1,4 +1,11 @@
-@import url("../../../App.scss");
+@import url('../../../App.scss');
+
+.switch {
+  height: 50px;
+  width: auto;
+  background-color: var(--sa-bright);
+  margin-bottom: var(--sp-base);
+}
 
 .switch-label {
   position: relative;
@@ -43,4 +50,11 @@
   -webkit-transform: translateX(14px);
   -ms-transform: translateX(14px);
   transform: translateX(14px);
+}
+
+.title {
+  font-weight: var(--fw-bold);
+  color: var(--sa-primary-500-base);
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
