@@ -1,10 +1,8 @@
 import { Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import useFetch from '../../hooks/useFetch';
-import useSetTitle from '../../hooks/setTitle';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
-import { useSettings } from '../../hooks/useSettings';
 import useAuth from '../../hooks/useAuth';
 import Validators from '../../utils/Validators';
 
@@ -14,12 +12,13 @@ import ThemeSelector from '../../components/settings/general/ThemeSelector';
 import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
 import LanguageSelector from '../../components/settings/general/LanguageSelector';
 import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
-import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
 import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
-import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
-import ActivityNotification from '../../components/settings/notifications/ActivityNotificationsSelector';
+import ActivityNotificationSelector from '../../components/settings/notifications/ActivityNotificationsSelector';
 import { useContext } from 'react';
 import { SettingsContext } from '../../store/SettingsContext';
+import useSetTitle from '../../hooks/setTitle';
+import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
+import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -33,6 +32,7 @@ const SettingsPage = () => {
   );
 
   const handleSaveSettings = async (values) => {
+    console.log('Form values:', values); // Debugging
     try {
       const response = await updateDeviceSettings(
         {},
@@ -75,7 +75,7 @@ const SettingsPage = () => {
           event_reminder: settings.event_reminder,
           activity_notifications: settings.activity_notifications,
         }}
-        render={({ handleSubmit, form, values }) => (
+        render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <Row className="settings-block">
               <Heading level={2} isUnderlined>
@@ -86,7 +86,6 @@ const SettingsPage = () => {
                   <LanguageSelector
                     {...input}
                     meta={meta}
-                    initialValue={settings.language}
                     value={input.value}
                     onChange={input.onChange}
                   />
@@ -97,7 +96,6 @@ const SettingsPage = () => {
                   <TimeZoneSelector
                     {...input}
                     meta={meta}
-                    initialValue={settings.time_zone}
                     value={input.value}
                     onChange={input.onChange}
                   />
@@ -108,7 +106,6 @@ const SettingsPage = () => {
                   <TimeFormatSelector
                     {...input}
                     meta={meta}
-                    initialValue={settings.time_format}
                     value={input.value}
                     onChange={input.onChange}
                   />
@@ -119,7 +116,73 @@ const SettingsPage = () => {
                   <ThemeSelector
                     {...input}
                     meta={meta}
-                    initialValue={settings.theme}
+                    value={input.value}
+                    onChange={input.onChange}
+                  />
+                )}
+              </Field>
+            </Row>
+
+            <Row className="settings-block">
+              <Heading level={2} isUnderlined>
+                {t('settings:notifications.title')}
+              </Heading>
+              <Field name="event_reminder" type="checkbox">
+                {({ input }) => (
+                  <EventReminderSelector>
+                    <div className="form-check switch">
+                      <label className="switch-label">
+                        <input
+                          id="switch"
+                          type="checkbox"
+                          className="form-check-input"
+                          {...input}
+                        />
+                        <div className="switch-slider"></div>
+                      </label>
+                    </div>
+                  </EventReminderSelector>
+                )}
+              </Field>
+              <Field name="activity_notifications" type="checkbox">
+                {({ input }) => (
+                  <ActivityNotificationSelector>
+                    <div className="form-check switch">
+                      <label className="switch-label">
+                        <input
+                          id="switch"
+                          type="checkbox"
+                          className="form-check-input"
+                          {...input}
+                        />
+                        <div className="switch-slider"></div>
+                      </label>
+                    </div>
+                  </ActivityNotificationSelector>
+                )}
+              </Field>
+            </Row>
+
+            <Row className="settings-block">
+              <Heading level={2} isUnderlined>
+                {t('settings:general.title')}
+              </Heading>
+              <Field name="week_start_day" validate={Validators.required()}>
+                {({ input, meta }) => (
+                  <WeekStartsOnSelector
+                    {...input}
+                    meta={meta}
+                    value={input.value}
+                    onChange={input.onChange}
+                  />
+                )}
+              </Field>
+
+              <Field name="weekend_visibility">
+                {({ input, meta }) => (
+                  <WeekendVisbilityOnSelector
+                    {...input}
+                    meta={meta}
                     value={input.value}
                     onChange={input.onChange}
                   />
@@ -136,7 +199,5 @@ const SettingsPage = () => {
     </>
   );
 };
-
-// tst
 
 export default SettingsPage;

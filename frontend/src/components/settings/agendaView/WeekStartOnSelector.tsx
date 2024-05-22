@@ -1,25 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import { FieldMetaState } from 'react-final-form';
 import Select from '../../ui/Select/Select';
+import { Col, Row } from 'react-bootstrap';
 
 interface Props {
   initialValue?: string;
   value?: string;
-  onChange: (Theme: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (value: string) => void;
   meta?: FieldMetaState<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [x: string]: any;
 }
 
 const OPTIONS = [
   {
     title: 'settings:calendarView.monday',
-    value: 1,
+    value: 'Monday',
   },
   {
     title: 'settings:calendarView.sunday',
-    value: 0,
+    value: 'Sunday',
   },
 ];
 
@@ -32,28 +31,41 @@ const WeekStartsOnSelector = ({
 }: Props) => {
   const { t } = useTranslation(['settings']);
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value);
-  };
-
   const translatedOptions = OPTIONS.map((option) => ({
     title: t(option.title),
     value: option.value,
+    selected: option.value === value,
   }));
 
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(e.target.value as string);
+  };
+
   return (
-    <Select
-      title={t('settings:calendarView.weekStartPreference')}
-      description={t('settings:calendarView.weekStartPreferenceDescription')}
-      defaultValue={initialValue}
-      onChange={handleChange}
-      options={translatedOptions.map((option) => ({
-        ...option,
-        value: option.value.toString(),
-      }))}
-      meta={meta}
-      {...rest}
-    />
+    <>
+      <Row className="full-select d-flex flex-row gap-2">
+        <Col>
+          <Row>
+            <span className="title">
+              {t('settings:calendarView.weekStartPreference')}
+            </span>
+            <small className="description">
+              {t('settings:calendarView.weekStartPreferenceDescription')}
+            </small>
+          </Row>
+        </Col>
+        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
+          <Select
+            defaultValue={initialValue}
+            value={value}
+            onChange={handleChange}
+            options={translatedOptions}
+            meta={meta}
+            {...rest}
+          />
+        </Col>
+      </Row>
+    </>
   );
 };
 

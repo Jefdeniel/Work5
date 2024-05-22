@@ -5,8 +5,6 @@ import ErrorText from '../ErrorText/ErrorText';
 import './Select.scss';
 
 interface Props {
-  title?: string;
-  description?: string;
   options: {
     title: string;
     value: string;
@@ -16,50 +14,31 @@ interface Props {
   value?: string;
 }
 
-const Select = ({
-  title,
-  description,
-  options,
-  meta,
-  value,
-  ...rest
-}: Props) => {
+const Select = ({ options, meta, value, ...rest }: Props) => {
   const { t } = useTranslation(['general']);
   const isNotValid = meta?.error?.[0] && meta.touched;
 
   return (
     <div>
-      <Row className="full-select d-flex flex-row gap-2">
-        <Col>
-          <Row className="d-flex flex-row align-items-center">
-            <span className="title">{title}</span>
-          </Row>
-          <Row className="d-flex flex-row align-items-center">
-            <small className="description">{description}</small>
-          </Row>
-        </Col>
-        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
-          <select
-            className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
-            value={value}
-            {...rest}
-          >
-            {options?.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.title}
-              </option>
-            ))}
-          </select>
+      <select
+        className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
+        value={value}
+        {...rest}
+      >
+        {options?.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.title}
+          </option>
+        ))}
+      </select>
 
-          {isNotValid && (
-            <ErrorText>
-              {t(`general:fields.validators.${meta.error[0]}`, {
-                value: meta.error[1],
-              })}
-            </ErrorText>
-          )}
-        </Col>
-      </Row>
+      {isNotValid && (
+        <ErrorText>
+          {t(`general:fields.validators.${meta.error[0]}`, {
+            value: meta.error[1],
+          })}
+        </ErrorText>
+      )}
     </div>
   );
 };
