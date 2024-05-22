@@ -32,7 +32,11 @@ const NotificationCard = ({
           <NotificationCardProfileImg />
         </Col>
         <Col className={`card__time`}>
-          {isNew && <Badge color="red">NEW</Badge>}
+          {isNew && (
+            <Badge className={`message-text`} color="red">
+              NEW
+            </Badge>
+          )}
           <span>{timeFrom}</span>
           <div className={`card__time-line`}></div>
           <span>{timeTo}</span>
