@@ -7,7 +7,7 @@ import Heading from '../../components/ui/Heading/Heading';
 import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
 import Icon from '../../components/ui/Icon/Icon';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
-import DragAndDropCalendar from '../../components/calendar/BigCalendar/DragAndDrop/DragAndDrop';
+import DragAndDropCalendar from '../../components/calendar/BigCalendar/DragAndDrop/DragAndDropCalendar';
 
 const Calendar = () => {
   useSetTitle('Calendar');
