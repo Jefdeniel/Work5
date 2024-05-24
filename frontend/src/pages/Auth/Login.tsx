@@ -34,7 +34,7 @@ const Login = () => {
 
     if (token) {
       auth.login(token.access, token.refresh);
-      navigate('/calendar/notifications');
+      navigate('/calendar/overview');
     }
   };
 
