@@ -8,7 +8,7 @@ import useAuth from './hooks/useAuth';
 import CalendarLayout from './layout/CalendarLayout';
 import Layout from './layout/Layout';
 import Login from './pages/Auth/Login';
-import Calendar from './pages/Calendar/Calendar';
+import Calendar from './pages/Calendar/CalendarPage';
 import CreateCalendar from './pages/Calendar/CreateCalendar';
 import CustomizePage from './pages/CustomizePage';
 import NotificationPage from './pages/NotificationPage';
