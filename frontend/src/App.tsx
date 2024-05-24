@@ -9,7 +9,7 @@ import CalendarLayout from './layout/CalendarLayout';
 import Layout from './layout/Layout';
 import Login from './pages/Auth/Login';
 import Calendar from './pages/Calendar/CalendarPage';
-import CreateCalendar from './pages/Calendar/CreateCalendar';
+import CreateCalendar from './pages/Calendar/CreateCalendarPage';
 import CustomizePage from './pages/CustomizePage';
 import NotificationPage from './pages/NotificationPage';
 import SettingsPage from './pages/Settings/SettingsPage';

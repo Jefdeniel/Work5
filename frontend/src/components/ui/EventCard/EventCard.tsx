@@ -5,10 +5,11 @@ import './EventCard.scss';
 interface Props {
   title: string;
   color?: string;
+  onDoubleClick: () => void;
 }
 
 // Color has to be in hex format
-const EventCard = ({ title, color }: Props) => {
+const EventCard = ({ title, color, onDoubleClick }: Props) => {
   const defaultColor = ColorConversion.convertHexToRGBA('#141C57');
   const fadedDefaultColor = ColorConversion.convertHexToRGBA('#141C57', 0.15);
   const rgbaColor = color
@@ -16,7 +17,7 @@ const EventCard = ({ title, color }: Props) => {
     : fadedDefaultColor;
 
   return (
-    <div className={`event-card`} style={{ backgroundColor: rgbaColor }}>
+    <div className={`event-card`} style={{ backgroundColor: rgbaColor }} onDoubleClick={onDoubleClick}>
       <div
         className={`event-card__bar`}
         style={{
