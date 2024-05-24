@@ -1,4 +1,4 @@
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
+import { Calendar, View, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
 import useFetchedEvents from '../../../hooks/useFetchedEvents';
@@ -17,7 +17,7 @@ const initProps = {
   // Localizer is used to format dates / date localization
   localizer: localizer,
   // Views that are available to user
-  views: ['day', 'week', 'month'],
+  views: [Views.DAY, Views.WEEK, Views.MONTH],
   // Default view when comming on page
   defaultView: Views.WEEK,
   // Amount of timeslots in an hour
@@ -60,6 +60,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   return (
     <div className="full-calendar">
       <DnDCalendar
+        {...initProps}
         // Logic when selecting a time slot
         onSelectSlot={({ start, end }) => {
           onShowEventView({ start, end });
@@ -72,7 +73,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         events={events}
         style={{ width: '100%', height: '100%' }}
         // General props
-        {...initProps}
         components={components}
         selectable
       />

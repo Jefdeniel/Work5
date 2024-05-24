@@ -6,7 +6,7 @@ import BigCalendar from '../BigCalendar';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import useFetch from '../../../../hooks/useFetch';
 import { CalendarEvent } from '../../../../@types/CalendarEvents';
-/*
+
 const DragAndDropCalendar = () => {
   // Custom hook to fetch events, along with loading and error state
   const { events, loading, error } = useFetchedEvents();
@@ -62,4 +62,3 @@ const DragAndDropCalendar = () => {
 };
 
 export default DragAndDropCalendar;
-*/

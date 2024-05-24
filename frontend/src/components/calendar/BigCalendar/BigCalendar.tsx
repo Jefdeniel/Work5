@@ -17,23 +17,35 @@ import './Calendar.scss';
 const localizer = momentLocalizer(moment);
 
 // Add drag and drop functionality to the calendar
-// const DnDCalendar = withDragAndDrop(BaseCalendar);
+const DnDCalendar = withDragAndDrop(BaseCalendar);
 
 // Add TypeScript types for the calendar props
-type DnDType = CalendarProps & withDragAndDropProps;
+type DnDType = CalendarProps<CalendarEvent, object> &
+  withDragAndDropProps<CalendarEvent>;
 type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'> & {
   onShowEventView?: (event: CalendarEvent) => void;
 };
-/*
+
 const BigCalendar = (props: CustomCalendarProps) => {
   const { weekend_visibility } = useContext(SettingsContext);
   console.log(weekend_visibility);
 
   const { onShowEventView, ...restProps } = props;
 
+  const handleClick = () => {
+    // TODO: add event details view
+    console.log('Double click');
+  };
+
   const components = {
     event: ({ event }) => {
-      return <EventCard title={event.title} color={event.color} />;
+      return (
+        <EventCard
+          title={event.title}
+          color={event.color}
+          onDoubleClick={handleClick}
+        />
+      );
     },
   };
 
@@ -54,4 +66,3 @@ const BigCalendar = (props: CustomCalendarProps) => {
 };
 
 export default BigCalendar;
-*/
