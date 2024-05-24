@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import { DateTime } from 'ts-luxon';
 
-import { useFetchEvents } from '../../../hooks/UseFetchedEvents';
+import useFetchedEvents from '../../../hooks/useFetchedEvents';
 import LoadingScreen from '../../ui/Loading/LoadingScreen';
 
 import './Calendar.scss';
@@ -12,7 +12,7 @@ import './Calendar.scss';
 const localizer = momentLocalizer(moment);
 
 const BaseCalendar = (props: CalendarProps) => {
-  const { events, loading, error } = useFetchEvents();
+  const { events, loading, error } = useFetchedEvents();
 
   if (loading) {
     return <LoadingScreen />;

@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
 
-import { useFetchEvents } from '../../../../hooks/UseFetchedEvents';
+import useFetchedEvents from '../../../../hooks/useFetchedEvents';
 import BigCalendar from '../BigCalendar';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 
 const DragAndDropCalendar = () => {
   // Custom hook to fetch events, along with loading and error state
-  const { events, loading, error } = useFetchEvents();
+  const { events, loading, error } = useFetchedEvents();
   // State to manage the calendar events
   const [calendarEvents, setCalendarEvents] = useState(events);
 

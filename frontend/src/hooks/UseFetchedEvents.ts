@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { DateTime } from 'ts-luxon';
 import useFetch from './useFetch';
 
-export const useFetchEvents = () => {
+const useFetchedEvents = () => {
   const [events, setEvents] = useState([]);
   const { fetchData: getEvents } = useFetch('GET', ['events']);
   const [loading, setLoading] = useState(true);
@@ -38,3 +38,5 @@ export const useFetchEvents = () => {
 
   return { events, loading, error };
 };
+
+export default useFetchedEvents;
