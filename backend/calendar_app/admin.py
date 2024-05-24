@@ -5,9 +5,9 @@ from .models import (
     CalendarUser,
     Event,
     EventOccurrence,
-    Reminder,
     Notification,
     UserSettings,
+    Reminder,
     Category,
 )
 from django.apps import AppConfig
@@ -63,7 +63,7 @@ class EventOccurrenceAdmin(admin.ModelAdmin):
 
 
 class ReminderAdmin(admin.ModelAdmin):
-    list_display = ("event", "time", "user", "created_at", "updated_at")
+    list_display = ("event", "message", "time", "user", "created_at", "updated_at")
     search_fields = ("event__title", "user__email")
     list_filter = ("event", "user")
 

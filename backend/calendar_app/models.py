@@ -11,6 +11,10 @@ from datetime import timedelta, date
 import calendar as cal
 from django.core.exceptions import ValidationError
 
+# import logging
+
+# logger = logging.getLogger(__name__)
+
 
 class userAccountManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
@@ -165,13 +169,13 @@ class Event(models.Model):
     recurrence_frequency = models.CharField(
         max_length=10,
         choices=[
-            ("NONE", "None"),
-            ("DAILY", "Daily"),
-            ("WEEKLY", "Weekly"),
-            ("BIWEEKLY", "Biweekly"),
-            ("MONTHLY", "Monthly"),
-            ("QUARTERLY", "Quarterly"),
-            ("YEARLY", "Yearly"),
+            ("NONE", "none"),
+            ("DAILY", "daily"),
+            ("WEEKLY", "weekly"),
+            ("BIWEEKLY", "biweekly"),
+            ("MONTHLY", "monthly"),
+            ("QUARTERLY", "quarterly"),
+            ("YEARLY", "yearly"),
         ],
         blank=True,
         null=True,
@@ -253,6 +257,7 @@ class Event(models.Model):
 
 
 class Reminder(models.Model):
+    message = models.CharField(max_length=255)
     event = models.ForeignKey(Event, related_name="reminders", on_delete=models.CASCADE)
     time = models.DateTimeField()
     user = models.ForeignKey(
@@ -273,6 +278,10 @@ class CalendarUser(models.Model):
     )
     calendar = models.ForeignKey(
         Calendar, on_delete=models.CASCADE, related_name="calendar_users"
+    )
+    role = models.CharField(
+        max_length=50,
+        choices=[("ADMIN", "Admin"), ("EDITOR", "Editor"), ("VIEWER", "Viewer")],
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -305,7 +314,9 @@ class UserSettings(models.Model):
     time_zone = models.CharField(max_length=50)
     time_format = models.CharField(max_length=50)
     theme = models.CharField(max_length=50)
+    # Reminders for own events
     event_reminder = models.BooleanField(default=False)
+    # Notifications by others
     activity_notifications = models.BooleanField(default=False)
     week_start_day = models.CharField(max_length=50)
     weekend_visibility = models.BooleanField(default=False)

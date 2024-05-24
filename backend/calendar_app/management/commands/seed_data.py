@@ -14,6 +14,8 @@ from calendar_app.models import (
     Notification,
     UserSettings,
 )
+from django.db import IntegrityError, DatabaseError
+from django.core.exceptions import ValidationError
 
 # python manage.py seed_data
 
@@ -85,7 +87,7 @@ class Command(BaseCommand):
                     is_superuser=False,
                     last_name=fake.last_name(),
                     role=random.choice(["ADMIN", "EDITOR", "VIEWER"]),
-                    email=fake.unique.email(),
+                    email=fake.email(),
                     is_staff=False,
                     is_active=True,
                     birthday=fake.date_of_birth(
@@ -180,22 +182,34 @@ class Command(BaseCommand):
         for i in range(100):
             try:
                 start_time = fake.future_datetime(end_date="+30d", tzinfo=timezone.utc)
-                is_recurring = False
-                recurrence_frequency = None
-                recurrence_interval = random.randint(1, 5) if is_recurring else 1
-                recurrence_end_date = (
-                    fake.date_time_this_year(
-                        before_now=False, after_now=True, tzinfo=timezone.utc
+                end_time = start_time + timedelta(hours=random.randint(1, 4))
+                if end_time <= start_time:
+                    end_time = start_time + timedelta(hours=1)
+
+                is_recurring = random.choice([True, False])
+                if is_recurring:
+                    recurrence_frequency = random.choice(
+                        ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"]
                     )
-                    if is_recurring
-                    else None
-                )
+                    if recurrence_frequency == "WEEKLY":
+                        recurrence_days_of_week = ",".join(["TUE", "FRI"])
+                    else:
+                        recurrence_days_of_week = None
+                    recurrence_interval = 1  # Reset recurrence_interval when recurring
+                    recurrence_end_date = fake.future_datetime(
+                        end_date="+1y", tzinfo=timezone.utc
+                    )
+                else:
+                    recurrence_frequency = None
+                    recurrence_interval = 1
+                    recurrence_days_of_week = None
+                    recurrence_end_date = None
 
                 Event.objects.create(
                     title=fake.sentence(nb_words=6),
                     description=fake.text(),
                     start_time=start_time,
-                    end_time=start_time + timedelta(hours=2),
+                    end_time=end_time,
                     calendar=random.choice(calendars),
                     owner=random.choice(users),
                     category=random.choice(categories),
@@ -208,54 +222,65 @@ class Command(BaseCommand):
                     recurrence_frequency=recurrence_frequency,
                     recurrence_end_date=recurrence_end_date,
                     recurrence_interval=recurrence_interval,
+                    recurrence_days_of_week=recurrence_days_of_week,
                 )
                 self.stdout.write(self.style.SUCCESS(f"Created event {i + 1}/100"))
+            except ValidationError as e:
+                self.stdout.write(
+                    self.style.ERROR(f"ValidationError creating event {i + 1}: {e}")
+                )
+            except IntegrityError as e:
+                self.stdout.write(
+                    self.style.ERROR(f"IntegrityError creating event {i + 1}: {e}")
+                )
+            except DatabaseError as e:
+                self.stdout.write(
+                    self.style.ERROR(f"DatabaseError creating event {i + 1}: {e}")
+                )
             except Exception as e:
                 self.stdout.write(
                     self.style.ERROR(f"Error creating event {i + 1}: {e}")
                 )
 
-        events = list(Event.objects.all())
-        self.stdout.write(self.style.SUCCESS("100 events created."))
+            events = list(Event.objects.all())
+            self.stdout.write(self.style.SUCCESS("100 events created."))
 
-        # Ensure there are events before creating reminders
-        if not events:
-            self.stdout.write(self.style.ERROR("No events available for reminders"))
-        else:
-            # Create 100 Reminders
-            self.stdout.write("Creating 100 reminders...")
-            for i in range(100):
-                try:
-                    Reminder.objects.create(
-                        event=random.choice(events),
-                        time=fake.future_datetime(end_date="+30d", tzinfo=timezone.utc),
-                        user=random.choice(users),
-                    )
-                    self.stdout.write(
-                        self.style.SUCCESS(f"Created reminder {i + 1}/100")
-                    )
-                except Exception as e:
-                    self.stdout.write(
-                        self.style.ERROR(f"Error creating reminder {i + 1}: {e}")
-                    )
+        # Create 100 Reminders
+        self.stdout.write("Creating 100 reminders...")
+        for i in range(100):
+            try:
+                Reminder.objects.create(
+                    message=fake.sentence(nb_words=5),
+                    event=random.choice(events),
+                    time=fake.future_datetime(end_date="+30d", tzinfo=timezone.utc),
+                    user=random.choice(users),
+                )
+                self.stdout.write(self.style.SUCCESS(f"Created reminder {i + 1}/100"))
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"Error creating reminder {i + 1}: {e}")
+                )
 
-            self.stdout.write(self.style.SUCCESS("100 reminders created."))
+        self.stdout.write(self.style.SUCCESS("100 reminders created."))
 
-        # Create 100 CalendarUsers
+        # Create 100 CalendarUser relationships
         self.stdout.write("Creating 100 calendar-user relationships...")
         for i in range(100):
             try:
                 user = random.choice(users)
                 calendar = random.choice(calendars)
-                if not CalendarUser.objects.filter(
-                    user=user, calendar=calendar
-                ).exists():
-                    CalendarUser.objects.create(user=user, calendar=calendar)
-                    self.stdout.write(
-                        self.style.SUCCESS(
-                            f"Created calendar-user relationship {i + 1}/100"
-                        )
+
+                # Use get_or_create to ensure uniqueness
+                CalendarUser.objects.get_or_create(
+                    user=user,
+                    calendar=calendar,
+                    defaults={"role": random.choice(["ADMIN", "EDITOR", "VIEWER"])},
+                )
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"Created calendar-user relationship {i + 1}/100"
                     )
+                )
             except Exception as e:
                 self.stdout.write(
                     self.style.ERROR(
@@ -264,7 +289,7 @@ class Command(BaseCommand):
                 )
 
         self.stdout.write(
-            self.style.SUCCESS("100 calendar-user relationships created.")
+            self.style.SUCCESS("Calendar-user relationships creation completed.")
         )
 
         # Create 100 Notifications
@@ -272,15 +297,21 @@ class Command(BaseCommand):
         for i in range(100):
             try:
                 Notification.objects.create(
-                    title=fake.sentence(),
                     user=random.choice(users),
+                    title=fake.sentence(nb_words=10),
                     date_start=fake.date_time_this_year(
                         before_now=True, after_now=False, tzinfo=timezone.utc
                     ),
                     date_stop=fake.date_time_this_year(
                         before_now=False, after_now=True, tzinfo=timezone.utc
                     ),
-                    is_new=fake.boolean(),
+                    is_new=random.choice([True, False]),
+                    created_at=fake.date_time_this_year(
+                        before_now=True, after_now=False, tzinfo=timezone.utc
+                    ),
+                    updated_at=fake.date_time_this_year(
+                        before_now=False, after_now=True, tzinfo=timezone.utc
+                    ),
                 )
                 self.stdout.write(
                     self.style.SUCCESS(f"Created notification {i + 1}/100")
@@ -290,8 +321,6 @@ class Command(BaseCommand):
                     self.style.ERROR(f"Error creating notification {i + 1}: {e}")
                 )
 
-        self.stdout.write(
-            self.style.SUCCESS(
-                "Successfully seeded the database with 100 items per model."
-            )
-        )
+        self.stdout.write(self.style.SUCCESS("100 notifications created."))
+
+        self.stdout.write(self.style.SUCCESS("Data seeding completed successfully!"))
