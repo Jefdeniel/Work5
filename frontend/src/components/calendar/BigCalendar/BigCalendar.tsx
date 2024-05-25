@@ -1,37 +1,83 @@
+import { useEffect, useState } from 'react';
 import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
+import { toast } from 'react-toastify';
 import moment from 'moment';
+import { DateTime } from 'luxon';
+import withDragAndDrop, {
+  withDragAndDropProps,
+} from 'react-big-calendar/lib/addons/dragAndDrop';
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
+
+import useFetch from '../../../hooks/useFetch';
+import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import EventCard from '../../ui/EventCard/EventCard';
 
 import './Calendar.scss';
+import { CalendarEvent } from '../../../@types/Events';
 
-const BigCalendar = (props: Omit<CalendarProps, 'localizer'>) => {
+// for drag and drop
+const DnDCalendar = withDragAndDrop(Calendar);
+type DnDType = CalendarProps<CalendarEvent> &
+  withDragAndDropProps<CalendarEvent>;
+type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'>;
+
+const BigCalendar = (props: CustomCalendarProps) => {
   const localizer = momentLocalizer(moment);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const { fetchData: getEvents } = useFetch('GET', ['events']);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const events = [
-    {
-      start: moment('2024-05-15T10:00:00').toDate(),
-      end: moment('2024-05-15T11:00:00').toDate(),
-      title: 'Meeting with John',
-    },
-    {
-      start: moment('2024-05-21T14:00:00').toDate(),
-      end: moment('2024-05-21T19:30:00').toDate(),
-      title: 'Something else',
-    },
-  ];
+  useEffect(() => {
+    getEvents()
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to fetch events');
+        }
+      })
+      .then((data) => {
+        // Transform the events to have start and end as Date objects
+        const formattedEvents = data.map((event: any) => ({
+          ...event,
+          start: DateTime.fromISO(event.start_time).toJSDate(),
+          end: DateTime.fromISO(event.end_time).toJSDate(),
+        }));
+        setEvents(formattedEvents);
+      })
+      .catch((error) => {
+        console.error('Error fetching events:', error);
+        setError(error.message);
+        toast.error('Error fetching events');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <h1>Error: {error}</h1>;
+  }
 
   const components = {
-    event: (props) => {
-      return null;
+    event: ({ event }: { event: CalendarEvent }) => {
+      return <EventCard title={event.title} color={event.color} />;
     },
   };
 
   return (
-    <div className={`full-calendar`}>
-      <Calendar
+    <div className="full-calendar">
+      <DnDCalendar
         {...props}
         localizer={localizer}
         events={events}
         components={components}
+        titleAccessor={(event) => event.title}
         formats={{
           dayHeaderFormat: (date) => moment(date).format('MMMM DD yy'),
         }}

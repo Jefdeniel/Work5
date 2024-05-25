@@ -1,0 +1,18 @@
+.event-card {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 100%;
+  border-radius: var(--br-base);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  & .event-card__title {
+    padding: var(--p-sm) var(--p-md);
+  }
+
+  & .event-card__bar {
+    height: 100%;
+    min-height: 44px;
+  }
+}

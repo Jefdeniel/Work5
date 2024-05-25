@@ -8,19 +8,22 @@ import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import useAuth from '../../../hooks/useAuth';
 
 const NotificationList = () => {
-  const [notifications, setNotifications] = useState([]);
+  const { user_id } = useAuth();
+
   const { fetchData: getNotifications } = useFetch('GET', ['notifications']);
+  const { fetchData: putNotification } = useFetch('PUT', [
+    'notifications',
+    user_id,
+  ]);
+
+  const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const auth = useAuth();
-
   useEffect(() => {
-    console.log('useEffect called');
     const fetchNotifications = async () => {
       try {
         const response = await getNotifications();
-        console.log('Response:', response);
         if (response.ok) {
           const data = await response.json();
           setNotifications(data);
@@ -36,14 +39,35 @@ const NotificationList = () => {
       }
     };
 
-    if (loading) {
-      fetchNotifications();
-    }
+    fetchNotifications();
+  }, []);
 
-    return () => {
-      console.log('Cleanup on unmount or re-run');
+  const handleNewStatus = async (notificationId) => {
+    console.log('handleNewStatus called');
+    const notification = notifications.find((n) => n.id === notificationId);
+    if (!notification) return;
+
+    const updatedNotification = {
+      ...notification,
+      is_new: !notification.is_new,
     };
-  }, [loading]);
+
+    try {
+      const response = await putNotification({}, updatedNotification);
+      if (response.ok) {
+        setNotifications((prevNotifications) =>
+          prevNotifications.map((n) =>
+            n.id === notificationId ? updatedNotification : n
+          )
+        );
+      } else {
+        throw new Error('Failed to update notification');
+      }
+    } catch (error) {
+      console.error('Error updating notification:', error);
+      toast.error('Error updating notification');
+    }
+  };
 
   if (loading) {
     return <LoadingScreen />;
@@ -73,7 +97,9 @@ const NotificationList = () => {
             title={notification.title}
             timeFrom={notificationStart}
             timeTo={notificationStop}
-            isNew={notification.isNew} // TODO: Implement logic (with passing states and pushing to db) for new notifications
+            onClick={() => handleNewStatus(notification.id)}
+            isNew={notification.is_new}
+            color={notification.color}
           />
         );
       })}

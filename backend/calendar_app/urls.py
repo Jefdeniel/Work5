@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views.calendar_views import CalendarViewSet
 from .views.event_views import EventViewSet
-from .views.label_views import LabelViewSet
+from .views.category_views import CategoryViewSet
 from .views.notification_views import NotificationViewSet
 from .views.reminder_views import ReminderViewSet
 from .views.user_settings_views import UserSettingsViewSet
@@ -16,8 +16,8 @@ from django.conf import settings
 router = DefaultRouter(trailing_slash=False)
 router.register(r"users", CustomUserViewSet)
 router.register(r"calendars", CalendarViewSet)
+router.register(r"categories", CategoryViewSet)
 router.register(r"events", EventViewSet)
-router.register(r"labels", LabelViewSet)
 router.register(r"notifications", NotificationViewSet)
 router.register(r"reminders", ReminderViewSet)
 router.register(r"user_settings", UserSettingsViewSet)
