@@ -1,19 +1,19 @@
-import { useEffect, useState, useMemo } from 'react';
-import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
-import { toast } from 'react-toastify';
 import moment from 'moment';
-import { momentLocalizer } from 'react-big-calendar';
+import { useEffect, useMemo, useState } from 'react';
+import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop, {
   withDragAndDropProps,
 } from 'react-big-calendar/lib/addons/dragAndDrop';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
+import { toast } from 'react-toastify';
 
-import EventCard from '../../ui/EventCard/EventCard';
-import BaseCalendar from './BaseCalendar';
-import { SettingsContext } from '../../../store/SettingsContext';
 import { CalendarEvent } from '../../../@types/CalendarEvents';
+import EventCard from '../../ui/EventCard/EventCard';
+import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import { DateTime } from 'luxon';
 
 import './Calendar.scss';
+import useFetch from '../../../hooks/useFetch';
 
 const localizer = momentLocalizer(moment);
 
@@ -60,10 +60,20 @@ const BigCalendar = (props: CustomCalendarProps) => {
       });
   }, []);
 
+  const handleClick = () => {
+    console.log('clicked');
+  };
+
   const components = useMemo(
     () => ({
       event: ({ event }: { event: CalendarEvent }) => {
-        return <EventCard title={event.title} color={event.color} />;
+        return (
+          <EventCard
+            title={event.title}
+            color={event.color}
+            onDoubleClick={handleClick}
+          />
+        );
       },
       // We can also add other components here
     }),

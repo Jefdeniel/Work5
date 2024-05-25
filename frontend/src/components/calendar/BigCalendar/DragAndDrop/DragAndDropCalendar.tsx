@@ -1,17 +1,13 @@
 import { useCallback, useState } from 'react';
-import { toast } from 'react-toastify';
 
-import useFetchedEvents from '../../../../hooks/useFetchedEvents';
-import BigCalendar from '../BigCalendar';
-import LoadingScreen from '../../../ui/Loading/LoadingScreen';
-import useFetch from '../../../../hooks/useFetch';
 import { CalendarEvent } from '../../../../@types/CalendarEvents';
+import LoadingScreen from '../../../ui/Loading/LoadingScreen';
+import BigCalendar from '../BigCalendar';
 
-const DragAndDropCalendar = () => {
-  // Custom hook to fetch events, along with loading and error state
-  const { events, loading, error } = useFetchedEvents();
+const DragAndDropCalendar = (events: CalendarEvent[]) => {
   // State to manage the calendar events
   const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>(events);
+  console.log(events);
 
   // Callback function to update event start and end times
   const onChangeEventTime = useCallback(

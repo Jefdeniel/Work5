@@ -1,4 +1,4 @@
-import { Calendar, View, Views, momentLocalizer } from 'react-big-calendar';
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
 import useFetchedEvents from '../../../hooks/useFetchedEvents';
