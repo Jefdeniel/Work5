@@ -9,6 +9,7 @@ import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import EventCard from '../../ui/EventCard/EventCard';
 
 import './Calendar.scss';
+import { useMemo } from 'react';
 
 //TODO: Luxon integration
 
@@ -46,17 +47,20 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     return <h1>Error: {error}</h1>;
   }
 
-  const components = {
-    event: ({ event }: { event: any }) => {
-      return (
-        <EventCard
-          title={event.title}
-          color={event.color}
-          onDoubleClick={() => {}}
-        />
-      );
-    },
-  };
+  const components = useMemo(
+    () => ({
+      event: ({ event }: { event: any }) => {
+        return (
+          <EventCard
+            title={event.title}
+            color={event.color}
+            onDoubleClick={() => {}}
+          />
+        );
+      },
+    }),
+    []
+  );
 
   return (
     <div className="full-calendar">

@@ -1,101 +1,51 @@
-import moment from 'moment';
-import { useEffect, useMemo, useState } from 'react';
-import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
-import withDragAndDrop, {
-  withDragAndDropProps,
-} from 'react-big-calendar/lib/addons/dragAndDrop';
+import { useState } from 'react';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-import { toast } from 'react-toastify';
 
 import { CalendarEvent } from '../../../@types/CalendarEvents';
-import EventCard from '../../ui/EventCard/EventCard';
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
-import { DateTime } from 'luxon';
 
 import './Calendar.scss';
-import useFetch from '../../../hooks/useFetch';
+import BaseCalendar from './BaseCalendar';
 
-// for drag and drop
-const DnDCalendar = withDragAndDrop<CalendarEvent, {}>(Calendar);
-type DnDType = CalendarProps<CalendarEvent, {}> &
-  withDragAndDropProps<CalendarEvent>;
-type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'> & {
-  onShowEventView?: (event: CalendarEvent) => void;
-};
-
-const BigCalendar = (props: CustomCalendarProps) => {
-  const localizer = momentLocalizer(moment);
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
-  const { fetchData: getEvents } = useFetch('GET', ['events']);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    getEvents()
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Failed to fetch events');
-        }
-      })
-      .then((data) => {
-        // Transform the events to have start and end as Date objects
-        const formattedEvents = data.map((event: any) => ({
-          ...event,
-          start: DateTime.fromISO(event.start_time).toJSDate(),
-          end: DateTime.fromISO(event.end_time).toJSDate(),
-        }));
-        setEvents(formattedEvents);
-      })
-      .catch((error) => {
-        console.error('Error fetching events:', error);
-        setError(error.message);
-        toast.error('Error fetching events');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  const handleClick = () => {
-    console.log('clicked');
-  };
-
-  const components = useMemo(
-    () => ({
-      event: ({ event }: { event: CalendarEvent }) => {
-        return (
-          <EventCard
-            title={event.title}
-            color={event.color}
-            onDoubleClick={handleClick}
-          />
-        );
-      },
-      // We can also add other components here
-    }),
-    []
-  );
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  if (error) {
-    return <h1>Error: {error}</h1>;
-  }
+const BigCalendar = () => {
+  //TODO: Make event detail component to edit event and show that like < EventForm at example at bottom of page />
+  // Event is gonna be used to show the event view of the clicked event (example bottom of the page)
+  const [event, setEvent] = useState<CalendarEvent>();
 
   return (
     <div className="full-calendar">
-      <DnDCalendar
-        localizer={localizer}
-        components={components}
-        selectable
-        {...props}
+      <BaseCalendar
+        onShowEventView={(event) => {
+          setEvent(event);
+        }}
       />
     </div>
   );
 };
 
 export default BigCalendar;
+
+// Example https://github.com/usmanabdurrehman/react-big-calendar-tutorial/blob/EventCrud/src/Components/CalendarView/CalendarView.tsx:
+/*
+import { Flex } from "@chakra-ui/react";
+import { useState } from "react";
+import { Calendar } from "../Calendar/Calendar";
+import { Appointment } from "../../types";
+import EventForm from "../EventForm/EventForm";
+
+export default function CalendarView() {
+  const [appointment, setAppointment] = useState<Appointment>();
+
+  return (
+    <Flex gap={10} m={4} height="100%">
+      <Flex grow={1} flexBasis={"50%"} overflow="auto">
+        <Calendar
+          onShowAppointmentView={(appointment) => setAppointment(appointment)}
+        />
+      </Flex>
+      <Flex grow={1} flexBasis={"50%"}>
+        {appointment && <EventForm appointment={appointment} />}
+      </Flex>
+    </Flex>
+  );
+}
+*/
