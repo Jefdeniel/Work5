@@ -452,6 +452,10 @@ ul {
 .rbc-time-view {
   border: none;
 
+  & .rbc-events-container {
+    cursor: pointer;
+  }
+
   & .rbc-header {
     font-size: var(--fs-small);
   }

@@ -2,24 +2,28 @@ import { useEffect, useState, useMemo } from 'react';
 import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
 import { toast } from 'react-toastify';
 import moment from 'moment';
-import { DateTime } from 'luxon';
+import { momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop, {
   withDragAndDropProps,
 } from 'react-big-calendar/lib/addons/dragAndDrop';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 
-import useFetch from '../../../hooks/useFetch';
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import EventCard from '../../ui/EventCard/EventCard';
+import BaseCalendar from './BaseCalendar';
+import { SettingsContext } from '../../../store/SettingsContext';
+import { CalendarEvent } from '../../../@types/CalendarEvents';
 
 import './Calendar.scss';
-import { CalendarEvent } from '../../../@types/Events';
+
+const localizer = momentLocalizer(moment);
 
 // for drag and drop
 const DnDCalendar = withDragAndDrop<CalendarEvent, {}>(Calendar);
 type DnDType = CalendarProps<CalendarEvent, {}> &
   withDragAndDropProps<CalendarEvent>;
-type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'>;
+type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'> & {
+  onShowEventView?: (event: CalendarEvent) => void;
+};
 
 const BigCalendar = (props: CustomCalendarProps) => {
   const localizer = momentLocalizer(moment);
@@ -77,14 +81,14 @@ const BigCalendar = (props: CustomCalendarProps) => {
   return (
     <div className="full-calendar">
       <DnDCalendar
-        {...props}
-        localizer={localizer}
-        events={events}
-        components={components}
-        titleAccessor={(event) => event.title}
-        formats={{
-          dayHeaderFormat: (date) => moment(date).format('MMMM DD yy'),
+        onSelectSlot={({ start, end }) => {
+          console.log('onSelectSlot', start, end);
+          onShowEventView({ start, end });
         }}
+        localizer={localizer}
+        components={components}
+        selectable
+        {...props}
       />
     </div>
   );

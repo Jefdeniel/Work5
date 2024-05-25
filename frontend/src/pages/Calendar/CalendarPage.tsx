@@ -4,10 +4,10 @@ import { Col, Row } from 'react-bootstrap';
 import useFetch from '../../hooks/useFetch';
 
 import Heading from '../../components/ui/Heading/Heading';
-import BigCalendar from '../../components/calendar/BigCalendar/BigCalendar';
 import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
 import Icon from '../../components/ui/Icon/Icon';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
+import DragAndDropCalendar from '../../components/calendar/BigCalendar/DragAndDrop/DragAndDropCalendar';
 
 const Calendar = () => {
   useSetTitle('Calendar');
@@ -73,11 +73,7 @@ const Calendar = () => {
         </Col>
       </Row>
 
-      <BigCalendar
-        defaultView="week"
-        views={['day', 'week', 'month']}
-        timeslots={2}
-      />
+      <DragAndDropCalendar />
     </>
   );
 };

@@ -53,7 +53,7 @@ const Input = ({
 
   return (
     <div
-      className={`full-input ${disableSpacing ? '' : 'my-sm'} ${isFocused ? 'input--focused' : ''} ${isBig ? 'full-input--big' : ''} ${className}`}
+      className={`full-input ${disableSpacing ? '' : 'my-sm'} ${isFocused ? 'input--focused' : ''} ${className}`}
     >
       {title && (
         <label className={`title ${isFocused ? 'small-text' : ''}`}>
@@ -68,7 +68,8 @@ const Input = ({
             ${isNotValid ? 'is-invalid' : ''} 
             ${isSmall ? 'small' : ''} 
             ${disabled ? 'disabled' : ''}
-            ${isSearch ? 'search-bar__input' : ''}`}
+            ${isSearch ? 'search-bar__input' : ''}
+            ${isBig ? 'w-100' : ''}`}
             value={defaultValue}
             placeholder={defaultValue}
             disabled={disabled}
