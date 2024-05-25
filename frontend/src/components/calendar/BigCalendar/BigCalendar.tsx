@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Calendar, CalendarProps, momentLocalizer } from 'react-big-calendar';
 import { toast } from 'react-toastify';
 import moment from 'moment';
@@ -16,8 +16,8 @@ import './Calendar.scss';
 import { CalendarEvent } from '../../../@types/Events';
 
 // for drag and drop
-const DnDCalendar = withDragAndDrop(Calendar);
-type DnDType = CalendarProps<CalendarEvent> &
+const DnDCalendar = withDragAndDrop<CalendarEvent, {}>(Calendar);
+type DnDType = CalendarProps<CalendarEvent, {}> &
   withDragAndDropProps<CalendarEvent>;
 type CustomCalendarProps = Omit<DnDType, 'components' | 'localizer'>;
 
@@ -56,6 +56,16 @@ const BigCalendar = (props: CustomCalendarProps) => {
       });
   }, []);
 
+  const components = useMemo(
+    () => ({
+      event: ({ event }: { event: CalendarEvent }) => {
+        return <EventCard title={event.title} color={event.color} />;
+      },
+      // We can also add other components here
+    }),
+    []
+  );
+
   if (loading) {
     return <LoadingScreen />;
   }
@@ -63,12 +73,6 @@ const BigCalendar = (props: CustomCalendarProps) => {
   if (error) {
     return <h1>Error: {error}</h1>;
   }
-
-  const components = {
-    event: ({ event }: { event: CalendarEvent }) => {
-      return <EventCard title={event.title} color={event.color} />;
-    },
-  };
 
   return (
     <div className="full-calendar">
