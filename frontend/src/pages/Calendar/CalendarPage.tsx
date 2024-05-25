@@ -7,7 +7,7 @@ import Heading from '../../components/ui/Heading/Heading';
 import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
 import Icon from '../../components/ui/Icon/Icon';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
-import DragAndDropCalendar from '../../components/calendar/BigCalendar/DragAndDrop/DragAndDropCalendar';
+import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
 
 const Calendar = () => {
   useSetTitle('Calendar');
@@ -73,7 +73,7 @@ const Calendar = () => {
         </Col>
       </Row>
 
-      <DragAndDropCalendar />
+      <CalendarView />
     </>
   );
 };

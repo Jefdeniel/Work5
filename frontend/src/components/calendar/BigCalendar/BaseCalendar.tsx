@@ -1,13 +1,14 @@
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+
+import { CalendarEvent } from '../../../@types/CalendarEvents';
 
 import useFetchedEvents from '../../../hooks/useFetchedEvents';
 import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import EventCard from '../../ui/EventCard/EventCard';
 
 import './Calendar.scss';
-import { CalendarEvent } from '../../../@types/CalendarEvents';
-import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-import EventCard from '../../ui/EventCard/EventCard';
 
 //TODO: Luxon integration
 

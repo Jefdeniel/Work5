@@ -91,10 +91,6 @@ const BigCalendar = (props: CustomCalendarProps) => {
   return (
     <div className="full-calendar">
       <DnDCalendar
-        onSelectSlot={({ start, end }) => {
-          console.log('onSelectSlot', start, end);
-          onShowEventView({ start, end });
-        }}
         localizer={localizer}
         components={components}
         selectable
