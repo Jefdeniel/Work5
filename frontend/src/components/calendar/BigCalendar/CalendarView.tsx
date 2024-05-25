@@ -15,8 +15,6 @@ import { DateTime } from 'luxon';
 import './Calendar.scss';
 import useFetch from '../../../hooks/useFetch';
 
-const localizer = momentLocalizer(moment);
-
 // for drag and drop
 const DnDCalendar = withDragAndDrop<CalendarEvent, {}>(Calendar);
 type DnDType = CalendarProps<CalendarEvent, {}> &
