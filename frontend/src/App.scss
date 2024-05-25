@@ -82,55 +82,60 @@
 }
 
 /* Fonts loading */
+
+/* The @font-face rule does not support var(). 
+You need to directly use the values instead of CSS variables.  */
 @font-face {
   font-family: 'Rubik';
   src:
-    url('./rubik-regular.woff2') format('woff2'),
-    url('./rubik-regular.woff') format('woff');
+    url('/fonts/rubik-regular.woff2') format('woff2'),
+    url('/fonts/rubik-regular.woff') format('woff');
   font-style: normal;
-  font-weight: var(--regular);
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'Rubik';
   src:
-    url('./rubik-bold.woff2') format('woff2'),
-    url('./rubik-bold.woff') format('woff');
+    url('/fonts/rubik-bold.woff2') format('woff2'),
+    url('/fonts/rubik-bold.woff') format('woff');
   font-style: normal;
-  font-weight: var(--bold);
+  font-weight: 700;
+}
+
+/* Similarly for Lato */
+@font-face {
+  font-family: 'Lato';
+  src:
+    url('/fonts/lato-light.woff2') format('woff2'),
+    url('/fonts/lato-light.woff') format('woff');
+  font-style: normal;
+  font-weight: 300;
 }
 
 @font-face {
   font-family: 'Lato';
   src:
-    url('./lato-light.woff2') format('woff2'),
-    url('./lato-light.woff') format('woff');
+    url('/fonts/lato-regular.woff2') format('woff2'),
+    url('/fonts/lato-regular.woff') format('woff');
   font-style: normal;
-  font-weight: var(--light);
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'Lato';
   src:
-    url('./lato-regular.woff2') format('woff2'),
-    url('./lato-regular.woff') format('woff');
+    url('/fonts/lato-bold.woff2') format('woff2'),
+    url('/fonts/lato-bold.woff') format('woff');
   font-style: normal;
-  font-weight: var(--regular);
-}
-
-@font-face {
-  font-family: 'Lato';
-  src:
-    url('./lato-bold.woff2') format('woff2'),
-    url('./lato-bold.woff') format('woff');
-  font-style: normal;
-  font-weight: var(--bold);
+  font-weight: 700;
 }
 
 body {
   font-family: 'Lato', sans-serif;
   font-size: var(--fs-base);
   color: var(--sa-primary-950);
+  -webkit-text-size-adjust: 100%;
 }
 
 h1,
@@ -204,6 +209,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 code {
@@ -386,6 +392,8 @@ ul {
   transform: translateY(45%);
 }
 
+// Swich component bug fix (temporary )
+
 .switch {
   height: 50px;
   width: auto;
@@ -444,6 +452,8 @@ ul {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
+
+/* Calendar */
 
 .rbc-allday-cell {
   display: none;
