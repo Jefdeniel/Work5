@@ -38,15 +38,6 @@ interface CalendarProps {
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   // Fetch events + handle loading and error state
   const { events, loading, error } = useFetchedEvents();
-
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  if (error) {
-    return <h1>Error: {error}</h1>;
-  }
-
   const components = useMemo(
     () => ({
       event: ({ event }: { event: any }) => {
@@ -61,6 +52,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }),
     []
   );
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <h1>Error: {error}</h1>;
+  }
 
   return (
     <div className="full-calendar">
