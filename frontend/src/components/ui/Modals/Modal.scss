@@ -1,0 +1,22 @@
+.modal {
+  & .modal__heading {
+    padding: var(--sp-lg) var(--sp-base) var(--sp-base) var(--sp-base);
+    position: relative;
+
+    & .modal__close-btn {
+      position: absolute;
+      top: var(--sp-sm);
+      right: var(--sp-sm);
+      transform: rotate(45deg);
+      opacity: 30%;
+    }
+  }
+
+  & .modal__body {
+    padding: var(--sp-base) var(--sp-base) var(--sp-lg) var(--sp-base);
+
+    & > div:first-child {
+      margin-top: -0.5rem;
+    }
+  }
+}
