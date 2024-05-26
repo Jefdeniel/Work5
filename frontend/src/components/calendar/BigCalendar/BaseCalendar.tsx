@@ -68,6 +68,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         // Logic when selecting a time slot
         onSelectSlot={({ start, end }) => {
           onShowEventView({ start, end });
+          console.log("START: ", start, "END: ", end);
+          
         }}
         onDoubleClickEvent={(event) => {
           const calendarEvent = event;
