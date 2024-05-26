@@ -59,7 +59,7 @@ const CreateCalendar = () => {
 
             <Button
               className="btn--primary"
-              icon={<Icon src="/icons/plus.svg " alt="" />}
+              icon={<Icon src="/icons/plus-bright.svg " alt="" />}
               text={t('calendar-create.invite-btn')}
             />
           </div>
@@ -94,7 +94,7 @@ const CreateCalendar = () => {
         <Button
           type="submit"
           text={t('calendar-create.title')}
-          icon={<Icon src="/icons/plus.svg " alt="" />}
+          icon={<Icon src="/icons/plus-bright.svg " alt="" />}
           className="btn--success inline-block"
         />
       </form>
