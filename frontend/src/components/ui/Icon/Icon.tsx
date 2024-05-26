@@ -1,3 +1,4 @@
+// SVG icons that stay same color on active, hover, etc. states
 import './Icon.scss';
 
 interface Props {

@@ -1,3 +1,4 @@
+// SVG icons that need to change color on active, hover, etc. states
 import './Icon.scss';
 
 const NotificationIcon = ({ className }: { className?: string }) => {
