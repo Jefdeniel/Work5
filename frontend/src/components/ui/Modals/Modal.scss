@@ -1,4 +1,10 @@
 .modal {
+  & .modal-dialog {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   & .modal__heading {
     padding: var(--sp-lg) var(--sp-base) var(--sp-base) var(--sp-base);
     position: relative;
