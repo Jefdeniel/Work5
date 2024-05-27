@@ -1,8 +1,11 @@
 import { Col, Row } from 'react-bootstrap';
-import './NotificationCard.scss';
+import { useTranslation } from 'react-i18next';
+
 import NewMessage from '../../../ui/NewMessage/NewMessage';
 import NotificationCardProfileImg from './NotificationCardProfileImg';
 import Badge from '../../../ui/Badge/Badge';
+
+import './NotificationCard.scss';
 
 interface Props {
   title: string;
@@ -23,25 +26,33 @@ const NotificationCard = ({
   isNew,
   onClick,
 }: Props) => {
+  const { t } = useTranslation(['calendar']);
+
   return (
     <div className={`card`} onClick={onClick}>
       {isNew && <NewMessage />}
       <Row className={`card__content`}>
         <Col className={`card__text`} xs={10}>
           <span className={`card__title heading heading--sm`}>{title}</span>
+
           <NotificationCardProfileImg />
         </Col>
+
         <Col className={`card__time`}>
           {isNew && (
             <Badge className={`message-text`} color="red">
-              NEW
+              {t('calendar:notifications.isNew')}
             </Badge>
           )}
+
           <span>{timeFrom}</span>
+
           <div className={`card__time-line`}></div>
+
           <span>{timeTo}</span>
         </Col>
       </Row>
+
       <div className={`card__color`} style={{ backgroundColor: color }}></div>
     </div>
   );
