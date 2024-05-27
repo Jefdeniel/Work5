@@ -1,6 +1,9 @@
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+import { useMemo } from 'react';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { CalendarEvent } from '../../../@types/CalendarEvents';
 
@@ -9,10 +12,9 @@ import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import EventCard from '../../ui/EventCard/EventCard';
 
 import './Calendar.scss';
-import { useMemo } from 'react';
 
 //TODO: Luxon integration
-
+// Calendar 1: General calendar settings/structure
 const localizer = momentLocalizer(moment);
 
 const initProps = {
@@ -36,8 +38,9 @@ interface CalendarProps {
 
 // Base of the calendar component
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
-  // Fetch events + handle loading and error state
-  const { events, loading, error } = useFetchedEvents();
+  // Fetch events + handle loading
+  const { events /*loading,*/ } = useFetchedEvents();
+
   const components = useMemo(
     () => ({
       event: ({ event }: { event: any }) => {
@@ -53,13 +56,9 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     []
   );
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  if (error) {
-    return <h1>Error: {error}</h1>;
-  }
+  // if (loading) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
     <div className="full-calendar">
@@ -68,8 +67,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         // Logic when selecting a time slot
         onSelectSlot={({ start, end }) => {
           onShowEventView({ start, end });
-          console.log("START: ", start, "END: ", end);
-          
+          console.log('START: ', start, 'END: ', end);
         }}
         onDoubleClickEvent={(event) => {
           const calendarEvent = event;
