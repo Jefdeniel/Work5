@@ -1,4 +1,9 @@
 {
+  "error": {
+    "fetchFailed": "Der Abruf ist fehlgeschlagen",
+    "fetchingEvents": "Fehler beim Abrufen von Ereignissen",
+    "fetchingCalendars": "Fehler beim Abrufen der Kalender"
+  },
   "calendar-create": {
     "title": "Kalender erstellen",
     "general": "Allgemein",
@@ -13,12 +18,17 @@
     "no": "NEIN",
     "yes": "JA"
   },
+  "calendar": {
+    "title": "Kalender",
+    "page": "Kalenderseite"
+  },
   "notifications": {
     "title": "Benachrichtigungen",
     "description": "Greifen Sie auf alle Benachrichtigungen an einem Ort zu. Um eine Benachrichtigung zu löschen, klicken Sie einfach darauf und es erscheint eine Löschtaste.",
     "clickOnCircle": "Sie können die Farben ändern, indem Sie auf den Kreis klicken.",
     "forOthers": "Von anderen",
-    "forYou": "Für dich"
+    "forYou": "Für dich",
+    "isNew": "Neu"
   },
   "sharing-hub": {
     "title": "Freigabezentrum",

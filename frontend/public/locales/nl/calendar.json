@@ -1,4 +1,9 @@
 {
+  "error": {
+    "fetchFailed": "Ophalen mislukt",
+    "fetchingEvents": "Fout bij ophalen van events",
+    "fetchingCalendars": "Fout bij ophalen van agenda's"
+  },
   "calendar-create": {
     "title": "Kalender maken",
     "general": "Algemeen",
@@ -13,12 +18,17 @@
     "no": "NEEN",
     "yes": "JA"
   },
+  "calendar": {
+    "title": "Kalender",
+    "page": "Kalenderpagina"
+  },
   "notifications": {
     "title": "Meldingen",
     "description": "Toegang tot alle meldingen op één plek. Om een melding te verwijderen, klik er gewoon op en er verschijnt een verwijderknop.",
     "clickOnCircle": "Je kunt de kleuren veranderen door op de cirkel te klikken.",
     "forOthers": "Van anderen",
-    "forYou": "Voor jou"
+    "forYou": "Voor jou",
+    "isNew": "Nieuw"
   },
   "sharing-hub": {
     "title": "Sharing-hub",

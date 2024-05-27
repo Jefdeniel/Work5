@@ -1,4 +1,9 @@
 {
+  "error": {
+    "fetchFailed": "Fetch failed",
+    "fetchingEvents": "Error fetching events",
+    "fetchingCalendars": "Error fetching calendars"
+  },
   "calendar-create": {
     "title": "Create Calendar",
     "general": "General",
@@ -13,12 +18,17 @@
     "no": "NO",
     "yes": "YES"
   },
+  "calendar": {
+    "title": "Calendar",
+    "page": "Calendar page"
+  },
   "notifications": {
     "title": "Notifications",
     "description": "Access all notifications in one place. To delete a notification, simply click on it and a delete button will appear.",
     "clickOnCircle": "You can change the colors by clicking on the circle.",
     "forOthers": "From others",
-    "forYou": "For you"
+    "forYou": "For you",
+    "isNew": "New"
   },
   "sharing-hub": {
     "title": "Sharing Hub",
