@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { DateTime } from 'ts-luxon';
+
 import useFetch from './useFetch';
+import { useTranslation } from 'react-i18next';
 
 const useFetchedEvents = () => {
   const [events, setEvents] = useState([]);
-  const { fetchData: getEvents } = useFetch('GET', ['events']);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { fetchData: getEvents, loading: isLoading } = useFetch('GET', [
+    'events',
+  ]);
+  // const [loading, setLoading] = useState(true);
+  const { t } = useTranslation(['calendar']);
 
   useEffect(() => {
     getEvents()
@@ -27,16 +31,15 @@ const useFetchedEvents = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => {
-        console.error('Error fetching events:', error);
-        setError(error.message);
-        toast.error('Error fetching events');
-      })
-      .finally(() => {
-        setLoading(false);
+        console.error(t('calendar:error.fetchingEvents'), ': ', error);
+        toast.error(t('calendar:error.fetchingEvents'));
       });
+    // .finally(() => {
+    //   setLoading(false);
+    // });
   }, []);
 
-  return { events, loading, error };
+  return { events /*loading,*/ };
 };
 
 export default useFetchedEvents;

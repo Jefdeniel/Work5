@@ -30,6 +30,7 @@ const customTimeInput = ({
   return (
     <Input
       defaultValue={value}
+      // TODO: No inline function
       onChange={(e) => onChange && onChange(e.target.value)}
       width="100%"
     />
@@ -58,9 +59,11 @@ const EventModal = ({
   const initialValues = useMemo(() => ({ ...event }), [event]);
 
   // Title of the modal
+  // TODO: Add translation hook
   const titleLabel = event?.id ? 'Edit event' : 'Create an event';
 
   //TODO: Let POST work -> ask Jef how to implement with useFetch hook
+  //TODO: Give meta + validators with inputs
 
   return (
     <Modal show={showEvent} onClose={onClose} title={titleLabel} size="sm">
@@ -103,12 +106,14 @@ const EventModal = ({
             <div>
               <div></div>
 
+              {/* TODO: Use translation hook */}
               <Select title="Select a theme" options={[]} />
             </div>
 
             {error && <div className="error-message">{error}</div>}
 
             <Button
+              // TODO: Use translation hook
               className={`btn--success mt-3`}
               text={isLoading ? 'Creating...' : 'Create'}
               icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
