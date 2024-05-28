@@ -20,7 +20,9 @@
   },
   "calendar": {
     "title": "Kalender",
-    "page": "Kalenderpagina"
+    "page": "Kalenderpagina",
+    "createEvent": "Creëer event",
+    "editEvent": "Event bewerken"
   },
   "notifications": {
     "title": "Meldingen",

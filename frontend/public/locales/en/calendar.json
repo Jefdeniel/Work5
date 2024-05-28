@@ -20,7 +20,12 @@
   },
   "calendar": {
     "title": "Calendar",
-    "page": "Calendar page"
+    "page": "Calendar page",
+    "createEvent": "Create Event",
+    "editEvent": "Edit Event",
+    "creating": "Creating...",
+    "editing": "Editing...",
+    "selectTheme": "Select a theme"
   },
   "notifications": {
     "title": "Notifications",
