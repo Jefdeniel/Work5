@@ -52,7 +52,11 @@ const Login = () => {
         <Logo width="50px" height="50px" className={`mt-xsmall`} />
       </Col>
 
-      <Col sm={12} md={6} className="d-flex flex-column align-items-center justify-content-center">
+      <Col
+        sm={12}
+        md={6}
+        className="d-flex flex-column align-items-center justify-content-center"
+      >
         <Form
           onSubmit={onLoginHandler}
           render={({ handleSubmit }) => (
@@ -94,10 +98,10 @@ const Login = () => {
               <div>
                 <Button
                   isBig
-                  className="btn--primary d-flex justify-content-center"
-                  type="submit"
+                  onClick={handleRegister}
+                  className={`btn--bordered-primary d-flex justify-content-center`}
                 >
-                  {t('auth:login.login')}
+                  {t('auth:login.register')}
                 </Button>
 
                 <div
@@ -112,10 +116,10 @@ const Login = () => {
 
                 <Button
                   isBig
-                  onClick={handleRegister}
-                  className={`btn--bordered-primary d-flex justify-content-center`}
+                  className="btn--primary d-flex justify-content-center"
+                  type="submit"
                 >
-                  {t('auth:login.register')}
+                  {t('auth:login.login')}
                 </Button>
               </div>
             </form>
