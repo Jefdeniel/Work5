@@ -1,44 +1,54 @@
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { useMemo, useEffect, useContext } from 'react';
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-import { useMemo } from 'react';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
 
+import { SettingsContext } from '../../../store/SettingsContext';
 import { CalendarEvent } from '../../../@types/CalendarEvents';
-
-import useFetchedEvents from '../../../hooks/useFetchedEvents';
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import EventCard from '../../ui/EventCard/EventCard';
 
+import './BaseCalendar.scss';
 import './Calendar.scss';
 
-//TODO: Luxon integration
+// TODO: Luxon integration
 // Calendar 1: General calendar settings/structure
 const localizer = momentLocalizer(moment);
+
+let formats = {
+  timeGutterFormat: 'HH:mm',
+};
 
 const initProps = {
   // Localizer is used to format dates / date localization
   localizer: localizer,
-  // Views that are available to user
-  views: [Views.DAY, Views.WEEK, Views.MONTH],
-  // Default view when comming on page
-  defaultView: Views.WEEK,
   // Amount of timeslots in an hour
   timeslots: 4,
   // Amount of minutes in a step
   step: 15,
+  formats: { formats },
 };
 
 // Enhance the calendar with drag and drop functionality
 const DnDCalendar = withDragAndDrop<CalendarEvent>(Calendar);
+
 interface CalendarProps {
   onShowEventView: (event: CalendarEvent) => void;
 }
 
 // Base of the calendar component
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
-  // Fetch events + handle loading
+  const { week_start_day, weekend_visibility } = useContext(SettingsContext);
+
+  // Setting: week start day
+  useEffect(() => {
+    moment.updateLocale('es-es', {
+      week: {
+        dow: week_start_day === 'Monday' ? 1 : 0,
+      },
+    });
+  }, [week_start_day]);
+
   const { events /*loading,*/ } = useFetchedEvents();
 
   const components = useMemo(
@@ -56,16 +66,22 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     []
   );
 
-  // if (loading) {
-  //   return <LoadingScreen />;
-  // }
-
   return (
-    <div className="full-calendar">
+    // <div
+    //   className={`full-calendar ${weekend_visibility ? 'weekend-visible' : 'weekend-hidden'}`}
+    // >
+    <div className={'full-calendar '}>
       <DnDCalendar
         {...initProps}
-        // Logic when selecting a time slot
+        views={
+          // Views that are available to user
+          weekend_visibility
+            ? [Views.DAY, Views.WEEK, Views.MONTH, Views.AGENDA]
+            : [Views.DAY, Views.WORK_WEEK, Views.MONTH, Views.AGENDA]
+        }
+        defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
         onSelectSlot={({ start, end }) => {
+          // Logic when selecting a time slot
           onShowEventView({ start, end });
           console.log('START: ', start, 'END: ', end);
         }}
@@ -73,10 +89,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           const calendarEvent = event;
           calendarEvent && onShowEventView(event);
         }}
-        // Events from the db
-        events={events}
-        style={{ width: '100%', height: '100%' }}
-        // General props
+        events={events} // Events db
+        style={{ width: '100%', height: '100%' }} // General props
         components={components}
         selectable
       />

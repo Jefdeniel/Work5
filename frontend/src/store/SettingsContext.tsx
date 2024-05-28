@@ -4,7 +4,7 @@ import { ITimezone, ITimezoneOption } from 'react-timezone-select';
 import { UserSettings } from '../@types/Settings';
 import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';
-import AuthContext from './AuthContext';
+
 interface SettingsContextType {
   language?: string;
   setLanguage: (lang: string) => void;
@@ -56,10 +56,10 @@ export const SettingsContextProvider = ({
   ); // initial timezone is the timezone of the user's browser
   const [time_format, setTimeFormat] = useState<string>('24h');
   const [theme, setTheme] = useState<string>('light');
-  const [weekStartsOn, setWeekStartsOn] = useState<string>('Monday');
-  const [weekendVisibility, setWeekendVisibility] = useState<boolean>(true);
-  const [eventReminderEnabled, setEventReminderEnabled] = useState(true);
-  const [activityNotificationEnabled, setActivityNotificationEnabled] =
+  const [week_start_day, setWeekStartsOn] = useState<string>('Monday');
+  const [weekend_visibility, setWeekendVisibility] = useState<boolean>(true);
+  const [event_reminder, setEventReminderEnabled] = useState(true);
+  const [activity_notifications, setActivityNotificationEnabled] =
     useState(true);
 
   useEffect(() => {
@@ -90,7 +90,17 @@ export const SettingsContextProvider = ({
     };
 
     language && void fetchData();
-  }, [AuthContext, language]);
+  }, [
+    auth.user_id,
+    language,
+    time_zone,
+    time_format,
+    theme,
+    week_start_day,
+    weekend_visibility,
+    event_reminder,
+    activity_notifications,
+  ]);
 
   const contextValue: SettingsContextType = {
     language,
@@ -101,13 +111,13 @@ export const SettingsContextProvider = ({
     setTimeFormat,
     theme,
     setTheme,
-    week_start_day: weekStartsOn,
+    week_start_day,
     setWeekStartsOn,
-    weekend_visibility: weekendVisibility,
+    weekend_visibility,
     setWeekendVisibility,
-    event_reminder: eventReminderEnabled,
+    event_reminder,
     setEventReminderEnabled,
-    activity_notifications: activityNotificationEnabled,
+    activity_notifications,
     setActivityNotificationEnabled,
   };
 

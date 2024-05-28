@@ -8,15 +8,19 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import App from './App.tsx';
 import { SettingsContextProvider } from './store/SettingsContext.js';
 import { AuthContextProvider } from './store/AuthContext.tsx';
+import LoadingScreen from './components/ui/Loading/LoadingScreen.tsx';
 
 import './App.scss';
+import React from 'react';
 
 // As per docs, createRoot is the new way to render in React 18
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <AuthContextProvider>
       <SettingsContextProvider>
-        <App />
+        <React.Suspense fallback={<LoadingScreen />}>
+          <App />
+        </React.Suspense>
         <ToastContainer
           position="bottom-right"
           autoClose={5000}

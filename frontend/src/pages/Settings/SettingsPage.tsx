@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
 import useAuth from '../../hooks/useAuth';
 import Validators from '../../utils/Validators';
-
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
 import ThemeSelector from '../../components/settings/general/ThemeSelector';
@@ -23,7 +22,24 @@ import WeekendVisbilityOnSelector from '../../components/settings/agendaView/Wee
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:title'));
-  const settings = useContext(SettingsContext);
+  const {
+    language,
+    setLanguage,
+    time_zone,
+    setTimezone,
+    time_format,
+    setTimeFormat,
+    theme,
+    setTheme,
+    week_start_day,
+    setWeekStartsOn,
+    weekend_visibility,
+    setWeekendVisibility,
+    event_reminder,
+    setEventReminderEnabled,
+    activity_notifications,
+    setActivityNotificationEnabled,
+  } = useContext(SettingsContext);
 
   const auth = useAuth();
   const { fetchData: updateDeviceSettings, loading: isLoading } = useFetch(
@@ -50,6 +66,16 @@ const SettingsPage = () => {
       );
 
       if (response.ok) {
+        // Update context with new values
+        setLanguage(values.language);
+        setTimezone(values.time_zone);
+        setTimeFormat(values.time_format);
+        setTheme(values.theme);
+        setWeekStartsOn(values.week_start_day);
+        setWeekendVisibility(values.weekend_visibility);
+        setEventReminderEnabled(values.event_reminder);
+        setActivityNotificationEnabled(values.activity_notifications);
+
         toast.success(t('settings:saved'));
       } else {
         toast.error(t('settings:failed'));
@@ -66,14 +92,14 @@ const SettingsPage = () => {
       <Form
         onSubmit={handleSaveSettings}
         initialValues={{
-          language: settings.language,
-          time_zone: settings.time_zone,
-          time_format: settings.time_format,
-          theme: settings.theme,
-          week_start_day: settings.week_start_day,
-          weekend_visibility: settings.weekend_visibility,
-          event_reminder: settings.event_reminder,
-          activity_notifications: settings.activity_notifications,
+          language,
+          time_zone,
+          time_format,
+          theme,
+          week_start_day,
+          weekend_visibility,
+          event_reminder,
+          activity_notifications,
         }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
