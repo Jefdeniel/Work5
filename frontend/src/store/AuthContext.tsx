@@ -77,9 +77,10 @@ export const AuthContextProvider = ({
         const newToken = await response.json();
         setToken(newToken);
         setLocalstorageItem('token', newToken);
-      } else {
-        logoutHandler();
       }
+      // } else {
+      //   logoutHandler();
+      // }
     } catch (error) {
       logoutHandler();
     }
