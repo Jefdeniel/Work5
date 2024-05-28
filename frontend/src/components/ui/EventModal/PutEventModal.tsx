@@ -1,15 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import useFetch from '../../../hooks/useFetch';
-
-import LoadingScreen from '../Loading/LoadingScreen';
 import { CalendarEvent } from '../../../@types/CalendarEvents';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import Input from '../Input/Input';
 import Modal from '../Modals/Modal';
 import Select from '../Select/Select';
+import TimeStartSelector from '../../calendar/general/TimeStartSelector';
+import TimeEndSelector from '../../calendar/general/TimeEndSelector';
 
 interface Props {
   event: CalendarEvent;
@@ -19,24 +21,6 @@ interface Props {
   onClose: () => void;
 }
 
-// Custom time input for the event modal
-const customTimeInput = ({
-  value,
-  onChange,
-}: {
-  value?: string;
-  onChange?: (val: string) => void;
-}) => {
-  return (
-    <Input
-      defaultValue={value}
-      // TODO: No inline function
-      onChange={(e) => onChange && onChange(e.target.value)}
-      width="100%"
-    />
-  );
-};
-
 const EventModal = ({
   event,
   showEvent,
@@ -44,33 +28,48 @@ const EventModal = ({
   descriptionValue,
   onClose,
 }: Props) => {
-  // CRUD requests to backend
-  const [error, setError] = useState<string | null>(null);
-  const { fetchData: postEvent, loading: isLoading } = useFetch('POST', [
-    'events',
-  ]);
-  // const { fetchData: putEvent, loading: isLoading } = useFetch('PUT', ['events', event.id]);
+  const { t } = useTranslation(['calendar']);
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  const { fetchData: putEvent, loading: isLoading } = useFetch('PUT', [
+    'events',
+    event.id,
+  ]);
+  console.log('Event:', event);
+
+  const handleEditEvent = async (values: CalendarEvent) => {
+    try {
+      const response = await putEvent({}, values);
+      // TODO: Put everything that needs to be edited in the event
+      // TODO: Add translations
+      if (response.ok) {
+        onClose();
+        toast.success('Event succesfully edited');
+      } else {
+        toast.error('Failed to edit event');
+        throw new Error('Failed to edit event' + response.statusText);
+      }
+    } catch (error) {
+      toast.error('Failed to edit event');
+      console.error(error);
+    }
+  };
 
   // Initial values for the form
   const initialValues = useMemo(() => ({ ...event }), [event]);
 
   // Title of the modal
-  // TODO: Add translation hook
-  const titleLabel = event?.id ? 'Edit event' : 'Create an event';
+  const titleLabel = event?.id
+    ? t('calendar:calendar.editEvent')
+    : t('calendar:calendar.createEvent');
 
-  //TODO: Let POST work -> ask Jef how to implement with useFetch hook
+  //TODO: Let PUT request work
   //TODO: Give meta + validators with inputs
 
   return (
     <Modal show={showEvent} onClose={onClose} title={titleLabel} size="sm">
       <Form
         onSubmit={async (values) => {
-          if (!event.id) postEvent(values);
-          // else putEvent(values);
+          putEvent(values);
         }}
         initialValues={initialValues}
         render={({ handleSubmit }) => (
@@ -96,26 +95,24 @@ const EventModal = ({
             </Field>
 
             <div className={`d-flex align-items-center gap-3`}>
-              <span>BTN</span>
+              <TimeStartSelector />
 
               <span>-</span>
 
-              <span>BTN</span>
+              <TimeEndSelector />
             </div>
 
             <div>
-              <div></div>
-
-              {/* TODO: Use translation hook */}
-              <Select title="Select a theme" options={[]} />
+              <Select title={t('calendar:calendar.selectTheme')} options={[]} />
             </div>
 
-            {error && <div className="error-message">{error}</div>}
-
             <Button
-              // TODO: Use translation hook
               className={`btn--success mt-3`}
-              text={isLoading ? 'Creating...' : 'Create'}
+              text={
+                isLoading
+                  ? t('calendar:calendar.editing')
+                  : t('calendar:calendar.editEvent')
+              }
               icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
               disabled={isLoading}
             />

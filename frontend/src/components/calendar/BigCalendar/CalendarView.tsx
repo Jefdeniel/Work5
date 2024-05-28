@@ -3,7 +3,7 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 
 import { CalendarEvent } from '../../../@types/CalendarEvents';
 import BaseCalendar from './BaseCalendar';
-import EventModal from '../../ui/EventModal/EventModal';
+import EventModal from '../../ui/EventModal/PostEventModal';
 
 import './Calendar.scss';
 
