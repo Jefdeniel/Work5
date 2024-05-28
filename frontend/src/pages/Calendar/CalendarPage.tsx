@@ -45,42 +45,13 @@ const CalendarPage = () => {
     return <LoadingScreen />;
   }
 
-  const calendarUsers = [
-    { id: 1, name: 'Person 1', avatar: '/img/test-img.jpg' },
-    { id: 2, name: 'Person 2', avatar: '' },
-    { id: 3, name: 'Person 3', avatar: '/img/test-img.jpg' },
-    { id: 4, name: 'Person 4', avatar: '/img/test-img.jpg' },
-  ];
-
   return (
     <>
       <div>{!isLoading ? '' : <LoadingScreen />}</div>
 
-      <Row className={`mb-large`}>
-        <Col xs={6}>
-          <Heading className={`sr-only`} level={1}>
-            {t('calendar:calendar.page')}
-          </Heading>
-        </Col>
-
-        <Col xs={6} className={`p-0 d-flex justify-content-end`}>
-          <ul className={`d-flex gap-2`}>
-            {calendarUsers.map((user) => (
-              <li key={user.id}>
-                {user.avatar ? (
-                  <ProfilePicture
-                    isSmall
-                    src={user.avatar}
-                    alt={`Avatar of ${user.name}`}
-                  />
-                ) : (
-                  <Icon src="/icons/user-profile.svg" alt="User profile icon" />
-                )}
-              </li>
-            ))}
-          </ul>
-        </Col>
-      </Row>
+      <Heading className={`sr-only`} level={1}>
+        {t('calendar:calendar.page')}
+      </Heading>
 
       <CalendarView />
     </>
