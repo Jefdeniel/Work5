@@ -1,0 +1,18 @@
+.profile-btn {
+  text-decoration: none;
+  color: var(--sa-primary-950);
+  background: none;
+  padding: var(--p-xs) var(--p-md);
+  border: 1px solid var(--sa-primary-950);
+  border-radius: var(--br-base);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: var(--sa-primary-500-base);
+    background-color: var(--sa-primary-100);
+    border-color: var(--sa-primary-500-base);
+  }
+}
