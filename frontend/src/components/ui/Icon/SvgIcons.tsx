@@ -75,4 +75,65 @@ const PlusIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export { NotificationIcon, SharingHubIcon, CustomizeIcon, PlusIcon };
+const LeftIcon = ({ className }: { className?: string }) => {
+  return (
+    <div className={`${className}`}>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 14 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.5 7L0.5 7"
+          stroke="var(--sa-primary-400)"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M4 3.5L0.5 7L4 10.5"
+          stroke="var(--sa-primary-400)"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  );
+};
+
+const RightIcon = ({ className }: { className?: string }) => {
+  return (
+    <div className={`${className}`}>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 14 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.5 7L13.5 7"
+          stroke="var(--sa-primary-400)"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M10 10.5L13.5 7L10 3.5"
+          stroke="var(--sa-primary-400)"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  );
+};
+
+export {
+  NotificationIcon,
+  SharingHubIcon,
+  CustomizeIcon,
+  PlusIcon,
+  LeftIcon,
+  RightIcon,
+};
