@@ -1,0 +1,41 @@
+// .full-calendar {
+//   /* Common styles for both scenarios */
+
+//   &.weekend-hidden {
+//     & .rbc-day-slot .rbc-time-column:last-child,
+//     & .rbc-day-slot .rbc-time-column:nth-child(6) {
+//       border: 5px solid red;
+//       display: none;
+//     }
+//   }
+
+//   &.weekend-visible {
+//     & .rbc-day-slot .rbc-time-column:last-child,
+//     & .rbc-day-slot .rbc-time-column:nth-child(6) {
+//       border: 5px solid red;
+//       display: block;
+//     }
+//   }
+// }
+// .rbc-day-slot .rbc-time-column:last-child,
+// .rbc-day-slot .rbc-time-column:nth-child(6) {
+//   border: 5px solid red;
+//   display: none;
+// }
+
+/*
+.rbc-month-header {
+  display: flex;
+  justify-content: space-evenly;
+
+  & .rbc-header:last-child span,
+  & .rbc-header:nth-child(6) span {
+    display: none;
+  }
+}
+
+.rbc-month-row .rbc-row-bg .rbc-day-bg:last-child,
+.rbc-month-row .rbc-row-bg .rbc-day-bg:nth-child(6) {
+  display: none;
+}
+*/

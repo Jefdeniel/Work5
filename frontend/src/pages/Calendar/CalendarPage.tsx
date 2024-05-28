@@ -11,7 +11,7 @@ import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-const Calendar = () => {
+const CalendarPage = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar:calendar.title'));
 
@@ -56,7 +56,7 @@ const Calendar = () => {
     <>
       <div>{!isLoading ? '' : <LoadingScreen />}</div>
 
-      <Row className={`mb-xlarge`}>
+      <Row className={`mb-large`}>
         <Col xs={6}>
           <Heading className={`sr-only`} level={1}>
             {t('calendar:calendar.page')}
@@ -87,4 +87,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarPage;

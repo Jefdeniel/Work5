@@ -8,7 +8,7 @@ import useAuth from './hooks/useAuth';
 import CalendarLayout from './layout/CalendarLayout';
 import Layout from './layout/Layout';
 import Login from './pages/Auth/Login';
-import Calendar from './pages/Calendar/CalendarPage';
+import CalendarPage from './pages/Calendar/CalendarPage';
 import CreateCalendar from './pages/Calendar/CreateCalendarPage';
 import CustomizePage from './pages/CustomizePage';
 import NotificationPage from './pages/NotificationPage';
@@ -42,7 +42,7 @@ function App() {
             <Route path="create" element={<CreateCalendar />} />
           </Route>
           <Route path="/calendar" element={<Layout />}>
-            <Route path="overview" element={<Calendar />} />
+            <Route path="overview" element={<CalendarPage />} />
           </Route>
 
           {/* Account specific routes under /calendar but using a different layout */}

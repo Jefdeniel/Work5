@@ -7,10 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 const useFetchedEvents = () => {
   const [events, setEvents] = useState([]);
-  const { fetchData: getEvents, loading: isLoading } = useFetch('GET', [
-    'events',
-  ]);
-  // const [loading, setLoading] = useState(true);
+  const { fetchData: getEvents } = useFetch('GET', ['events']);
+  const [loading, setLoading] = useState(true);
   const { t } = useTranslation(['calendar']);
 
   useEffect(() => {
@@ -33,13 +31,13 @@ const useFetchedEvents = () => {
       .catch((error) => {
         console.error(t('calendar:error.fetchingEvents'), ': ', error);
         toast.error(t('calendar:error.fetchingEvents'));
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    // .finally(() => {
-    //   setLoading(false);
-    // });
   }, []);
 
-  return { events /*loading,*/ };
+  return { events, loading };
 };
 
 export default useFetchedEvents;

@@ -1,47 +1,68 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useTranslation } from 'react-i18next';
 
-import useFetch from '../../../hooks/useFetch';
-import { CalendarEvent } from '../../../@types/CalendarEvents';
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
-import Input from '../Input/Input';
-import Modal from '../Modals/Modal';
-import Select from '../Select/Select';
-import TimeStartSelector from '../../calendar/general/TimeStartSelector';
-import TimeEndSelector from '../../calendar/general/TimeEndSelector';
+import useFetch from '../../../../hooks/useFetch';
+
+import LoadingScreen from '../../../ui/Loading/LoadingScreen';
+import { Event } from '../../../../@types/Events';
+import Button from '../../../ui/Button/Button';
+import Icon from '../../../ui/Icon/Icon';
+import Input from '../../../ui/Input/Input';
+import Modal from '../../../ui/Modals/Modal';
+import Select from '../../../ui/Select/Select';
 
 interface Props {
-  event: CalendarEvent;
+  event: Event;
   showEvent: boolean;
   titleValue?: string;
   descriptionValue?: string;
   onClose: () => void;
 }
 
-const EventModal = ({
+// Custom time input for the event modal
+const customTimeInput = ({
+  value,
+  onChange,
+}: {
+  value?: string;
+  onChange?: (val: string) => void;
+}) => {
+  return (
+    <Input
+      defaultValue={value}
+      // TODO: No inline function
+      onChange={(e) => onChange && onChange(e.target.value)}
+      width="100%"
+    />
+  );
+};
+
+const EditEventModal = ({
   event,
   showEvent,
   titleValue,
   descriptionValue,
   onClose,
 }: Props) => {
-  const { t } = useTranslation(['calendar']);
-
+  // CRUD requests to backend
+  const [error, setError] = useState<string | null>(null);
   const { fetchData: postEvent, loading: isLoading } = useFetch('POST', [
     'events',
   ]);
+  // const { fetchData: putEvent, loading: isLoading } = useFetch('PUT', ['events', event.id]);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   // Initial values for the form
   const initialValues = useMemo(() => ({ ...event }), [event]);
 
   // Title of the modal
-  const titleLabel = event?.id
-    ? t('calendar:calendar.editEvent')
-    : t('calendar:calendar.createEvent');
+  // TODO: Add translation hook
+  const titleLabel = event?.id ? 'Edit event' : 'Create an event';
 
-  //TODO: Let POST + PUT work -> ask Jef how to implement with useFetch hook
+  //TODO: Let POST work -> ask Jef how to implement with useFetch hook
   //TODO: Give meta + validators with inputs
 
   return (
@@ -75,26 +96,28 @@ const EventModal = ({
             </Field>
 
             <div className={`d-flex align-items-center gap-3`}>
-              <TimeStartSelector />
+              <span>BTN</span>
 
               <span>-</span>
 
-              <TimeEndSelector />
+              <span>BTN</span>
             </div>
 
             <div>
-              <Select title={t('calendar:calendar.selectTheme')} options={[]} />
+              <div></div>
+
+              {/* TODO: Use translation hook */}
+              <Select title="Select a theme" options={[]} />
             </div>
 
+            {error && <div className="error-message">{error}</div>}
+
             <Button
+              // TODO: Use translation hook
               className={`btn--success mt-3`}
-              text={
-                isLoading
-                  ? t('calendar:calendar.creating')
-                  : t('calendar:calendar.createEvent')
-              }
+              text={isLoading ? 'Creating...' : 'Create'}
               icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
-              disabled={isPostLoading || isPutLoading}
+              disabled={isLoading}
             />
           </form>
         )}
@@ -103,4 +126,4 @@ const EventModal = ({
   );
 };
 
-export default EventModal;
+export default EditEventModal;

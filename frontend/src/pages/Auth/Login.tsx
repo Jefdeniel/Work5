@@ -52,7 +52,11 @@ const Login = () => {
         <Logo width="50px" height="50px" className={`mt-xsmall`} />
       </Col>
 
-      <Col sm={12} md={6} className="d-flex flex-column align-items-center justify-content-center">
+      <Col
+        sm={12}
+        md={6}
+        className="d-flex flex-column align-items-center justify-content-center"
+      >
         <Form
           onSubmit={onLoginHandler}
           render={({ handleSubmit }) => (
