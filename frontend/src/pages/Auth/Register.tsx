@@ -171,22 +171,22 @@ const Register = () => {
                 <Col className={`p-0`}>
                   <Button
                     isBig
-                    type="submit"
-                    className="btn--primary d-flex justify-content-center"
-                  >
-                    {t('auth:register.register')}
-                  </Button>
-                </Col>
-
-                <Col className={`p-0`}>
-                  <Button
-                    isBig
                     type="button"
                     className={`btn--bordered-primary d-flex justify-content-center`}
                     isOutline={true}
                     onClick={handleLogin}
                   >
                     {t('auth:register.backToLogin')}
+                  </Button>
+                </Col>
+
+                <Col className={`p-0`}>
+                  <Button
+                    isBig
+                    type="submit"
+                    className="btn--primary d-flex justify-content-center"
+                  >
+                    {t('auth:register.register')}
                   </Button>
                 </Col>
               </Row>

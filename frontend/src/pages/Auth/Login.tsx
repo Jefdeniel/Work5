@@ -98,10 +98,10 @@ const Login = () => {
               <div>
                 <Button
                   isBig
-                  onClick={handleRegister}
-                  className={`btn--bordered-primary d-flex justify-content-center`}
+                  className="btn--primary d-flex justify-content-center"
+                  type="submit"
                 >
-                  {t('auth:login.register')}
+                  {t('auth:login.login')}
                 </Button>
 
                 <div
@@ -116,10 +116,10 @@ const Login = () => {
 
                 <Button
                   isBig
-                  className="btn--primary d-flex justify-content-center"
-                  type="submit"
+                  onClick={handleRegister}
+                  className={`btn--bordered-primary d-flex justify-content-center`}
                 >
-                  {t('auth:login.login')}
+                  {t('auth:login.register')}
                 </Button>
               </div>
             </form>
