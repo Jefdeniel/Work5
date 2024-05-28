@@ -5,7 +5,7 @@
   transition: all .2s ease-in-out;
 
   &.btn--filled {
-    background: var(--sa-primary-300);
+    background: var(--sa-primary-500-base);
     border: none;
     border-radius: var(--br-base);
     display: flex;
@@ -17,7 +17,7 @@
     }
 
     &:hover {
-      background-color: var(--sa-primary-500-base);
+      background-color: var(--sa-primary-950);
     }
   }
 }
