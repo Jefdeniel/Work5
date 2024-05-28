@@ -6,13 +6,45 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-color: var(--bg-color);
 
   & .event-card__title {
     padding: var(--p-sm) var(--p-md);
+    font-weight: bold;
+    flex-shrink: 0;
   }
 
   & .event-card__bar {
     height: 100%;
     min-height: 44px;
+  }
+
+  & .event-card__details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  & .event-card__location,
+  & .event-card__priority,
+  & .event-card__status {
+    padding: var(--p-xs) var(--p-sm);
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  & .event-card__location {
+    color: blue;
+  }
+
+  & .event-card__priority {
+    color: red;
+  }
+
+  & .event-card__status {
+    color: green;
   }
 }
