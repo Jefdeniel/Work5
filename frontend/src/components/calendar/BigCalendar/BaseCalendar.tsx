@@ -2,16 +2,13 @@ import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import { useMemo } from 'react';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
 
 import { CalendarEvent } from '../../../@types/CalendarEvents';
 
-import useFetchedEvents from '../../../hooks/useFetchedEvents';
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import EventCard from '../../ui/EventCard/EventCard';
 
 import './Calendar.scss';
+import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 
 //TODO: Luxon integration
 // Calendar 1: General calendar settings/structure
@@ -55,10 +52,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }),
     []
   );
-
-  // if (loading) {
-  //   return <LoadingScreen />;
-  // }
 
   return (
     <div className="full-calendar">
