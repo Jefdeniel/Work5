@@ -26,8 +26,6 @@ const EventCard = ({
     ? ColorConversion.convertHexToRGBA(color, 0.2)
     : fadedDefaultColor;
 
-  console.log('Event Props:', { title, location, priority, status });
-
   let priorityIcon;
 
   switch (priority) {
