@@ -216,9 +216,15 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <Button className="btn--success" type="submit" disabled={isLoading}>
-              {t('settings:save')}
-            </Button>
+            <div className="d-flex justify-content-end">
+              <Button
+                className="btn--success"
+                type="submit"
+                disabled={isLoading}
+              >
+                {t('settings:save')}
+              </Button>
+            </div>
           </form>
         )}
       />
