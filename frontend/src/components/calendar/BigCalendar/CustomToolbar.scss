@@ -1,0 +1,45 @@
+@import '../../../App.scss';
+
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--p-lg);
+}
+
+.navigation-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.filter-container {
+  display: flex;
+}
+
+.filter-container button {
+  margin: 0;
+  border: 1px solid var(--sa-primary-500-base);
+  border-radius: var(--br-base);
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-container .btn {
+  &:not(:last-child) {
+    margin-right: 0;
+  }
+
+  &.active {
+    background-color: var(--sa-primary-200);
+    border-color: var(--sa-primary-500-base);
+
+    &:hover,
+    &:focus {
+      background-color: var(--sa-primary-300);
+    }
+  }
+
+  span.label-filter-off {
+    padding: var(--p-sm) var(--p-lg);
+    font-size: var(--fs-sm);
+  }
+}
