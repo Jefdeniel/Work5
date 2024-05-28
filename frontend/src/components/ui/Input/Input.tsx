@@ -2,6 +2,7 @@ import React from 'react';
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import ErrorText from '../ErrorText/ErrorText';
+
 import './Input.scss';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   disableSpacing?: boolean;
   disableErrorText?: boolean;
   defaultValue?: string;
+  definePlaceholder?: string;
   isSmall?: boolean;
   isBig?: boolean;
   isSearch?: boolean;
@@ -31,6 +33,7 @@ const Input = ({
   disableSpacing,
   disableErrorText,
   defaultValue,
+  definePlaceholder,
   isSmall,
   isBig,
   isSearch,
@@ -71,7 +74,7 @@ const Input = ({
             ${isSearch ? 'search-bar__input' : ''}
             ${isBig ? 'w-100' : ''}`}
             value={defaultValue}
-            placeholder={defaultValue}
+            placeholder={definePlaceholder || defaultValue}
             disabled={disabled}
             onFocus={handleFocus}
             onBlur={handleLoseFocus}
