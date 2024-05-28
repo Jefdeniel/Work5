@@ -4,20 +4,19 @@ import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
 import { SettingsContext } from '../../../store/SettingsContext';
-import { CalendarEvent, Event } from '../../../@types/Events';
+import { Event } from '../../../@types/Events';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import EventCard from '../../ui/EventCard/EventCard';
 
 import './BaseCalendar.scss';
 import './Calendar.scss';
-import CustomToolbar from './CustomToolbar';
 
 // Calendar step 1: General calendar settings/structure
 
-const DnDCalendar = withDragAndDrop<CalendarEvent>(Calendar);
+const DnDCalendar = withDragAndDrop<Event>(Calendar);
 
 interface CalendarProps {
-  onShowEventView: (event: CalendarEvent) => void;
+  onShowEventView: (event: Event) => void;
 }
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
@@ -56,8 +55,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }),
     []
   );
-
-  console.log(events);
 
   const initProps = useMemo(
     () => ({
