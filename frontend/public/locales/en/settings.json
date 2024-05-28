@@ -44,6 +44,7 @@
     "password": "Password"
   },
   "profile": {
+    "profile": "Profile",
     "title": "Customize your profile",
     "changeOptions": "Change your login information",
     "calendars": "Calendars",
