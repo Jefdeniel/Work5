@@ -349,6 +349,10 @@ ul {
   margin-top: 3px;
 }
 
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
 /* Some specific classes */
 .create-calendar {
   &:hover .ps-menu-icon {
@@ -394,7 +398,6 @@ ul {
 }
 
 // Swich component bug fix (temporary )
-
 .switch {
   height: 50px;
   width: auto;
