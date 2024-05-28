@@ -2,14 +2,13 @@
 
 .card {
   padding: var(--sp-base) var(--sp-lg);
-  margin-bottom: var(--sp-sm);
+  margin-bottom: var(--sp-base);
   position: relative;
 
   & .message-text {
     position: absolute;
     top: 0;
     right: 0;
-    transform: translateX(50%) translateY(-50%);
   }
 
   & .card__title {
@@ -29,5 +28,29 @@
       height: 16px;
       background-color: var(--sa-primary-500-base);
     }
+  }
+}
+
+@include screen(mobile) {
+  .card .message-text {
+    transform: translateX(10%) translateY(-50%);
+  }
+}
+
+@include screen(tablet) {
+  .card .message-text {
+    transform: translateX(50%) translateY(-50%);
+  }
+}
+
+@include screen(desktop) {
+  .card .message-text {
+    transform: translateX(50%) translateY(-50%);
+  }
+}
+
+@include screen(monitors) {
+  .card .message-text {
+    transform: translateX(50%) translateY(-50%);
   }
 }

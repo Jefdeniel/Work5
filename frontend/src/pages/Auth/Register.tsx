@@ -121,6 +121,7 @@ const Register = () => {
                     type="email"
                     onChange={input.onChange}
                     placeholder={t('auth:register.email')}
+                    isBig
                   />
                 )}
               </Field>
@@ -140,6 +141,7 @@ const Register = () => {
                     type="password"
                     onChange={input.onChange}
                     placeholder={t('auth:register.password')}
+                    isBig
                   />
                 )}
               </Field>
@@ -160,6 +162,7 @@ const Register = () => {
                     onChange={input.onChange}
                     placeholder={t('auth:register.repeatPassword')}
                     className={`mb-xlarge`}
+                    isBig
                   />
                 )}
               </Field>

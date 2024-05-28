@@ -34,7 +34,7 @@ const Login = () => {
 
     if (token) {
       auth.login(token.access, token.refresh);
-      navigate('/calendar/notifications');
+      navigate('/calendar/overview');
     }
   };
 
@@ -52,7 +52,7 @@ const Login = () => {
         <Logo width="50px" height="50px" className={`mt-xsmall`} />
       </Col>
 
-      <Col className="d-flex flex-column align-items-center justify-content-center">
+      <Col sm={12} md={6} className="d-flex flex-column align-items-center justify-content-center">
         <Form
           onSubmit={onLoginHandler}
           render={({ handleSubmit }) => (
@@ -69,6 +69,7 @@ const Login = () => {
                     meta={meta}
                     type="email"
                     placeholder={`johndhoe@gmail.com`}
+                    isBig
                   />
                 )}
               </Field>
@@ -85,6 +86,7 @@ const Login = () => {
                     type="password"
                     placeholder={t('auth:login.password')}
                     className={`mb-xlarge`}
+                    isBig
                   />
                 )}
               </Field>

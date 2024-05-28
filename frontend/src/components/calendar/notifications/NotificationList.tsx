@@ -10,15 +10,13 @@ import useAuth from '../../../hooks/useAuth';
 const NotificationList = () => {
   const { user_id } = useAuth();
 
-  const { fetchData: getNotifications } = useFetch('GET', ['notifications']);
+  const { fetchData: getNotifications, loading: isLoading } = useFetch('GET', ['notifications']);
   const { fetchData: putNotification } = useFetch('PUT', [
     'notifications',
     user_id,
   ]);
 
   const [notifications, setNotifications] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -27,15 +25,15 @@ const NotificationList = () => {
         if (response.ok) {
           const data = await response.json();
           setNotifications(data);
+          // TODO: if 0, line 76
+        } else if(notifications.length === 0) {
+          // 
         } else {
           throw new Error('Failed to fetch notifications');
         }
       } catch (error) {
         console.error('Error fetching notifications:', error);
-        setError(error.message);
-        toast.error('Error fetching notifications');
-      } finally {
-        setLoading(false);
+        toast.error(error.message);
       }
     };
 
@@ -43,6 +41,7 @@ const NotificationList = () => {
   }, []);
 
   const handleNewStatus = async (notificationId) => {
+    // TODO: Fix this
     console.log('handleNewStatus called');
     const notification = notifications.find((n) => n.id === notificationId);
     if (!notification) return;
@@ -62,23 +61,18 @@ const NotificationList = () => {
         );
       } else {
         throw new Error('Failed to update notification');
+        // TODO: Translate error
+        toast.error('Failed to update notification');
       }
     } catch (error) {
       console.error('Error updating notification:', error);
+      // TODO: Translate error
       toast.error('Error updating notification');
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingScreen />;
-  }
-
-  if (error) {
-    return <h1>Error: {error}</h1>;
-  }
-
-  if (notifications.length === 0) {
-    return <h1>No notifications: length 0</h1>;
   }
 
   return (

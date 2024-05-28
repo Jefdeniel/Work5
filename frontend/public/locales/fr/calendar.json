@@ -1,4 +1,9 @@
 {
+  "error": {
+    "fetchFailed": "Échec de la récupération",
+    "fetchingEvents": "Erreur lors de la récupération des événements",
+    "fetchingCalendars": "Erreur lors de la récupération des calendriers"
+  },
   "calendar-create": {
     "title": "Créer un calendrier",
     "general": "Général",
@@ -13,12 +18,17 @@
     "no": "NON",
     "yes": "OUI"
   },
+  "calendar": {
+    "title": "Calendrier",
+    "page": "Page de calendrier"
+  },
   "notifications": {
     "title": "Notifications",
     "description": "Accédez à toutes les notifications en un seul endroit. Pour supprimer une notification, cliquez simplement dessus et un bouton de suppression apparaîtra.",
     "clickOnCircle": "Vous pouvez changer les couleurs en cliquant sur le cercle.",
     "forOthers": "Des autres",
-    "forYou": "Pour toi"
+    "forYou": "Pour toi",
+    "isNew": "Nouvelle"
   },
   "sharing-hub": {
     "title": "Centre de partage",

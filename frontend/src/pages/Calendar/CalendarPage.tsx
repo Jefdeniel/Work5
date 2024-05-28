@@ -4,13 +4,16 @@ import { Col, Row } from 'react-bootstrap';
 import useFetch from '../../hooks/useFetch';
 
 import Heading from '../../components/ui/Heading/Heading';
-import BigCalendar from '../../components/calendar/BigCalendar/BigCalendar';
 import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
 import Icon from '../../components/ui/Icon/Icon';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
+import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const Calendar = () => {
-  useSetTitle('Calendar');
+  const { t } = useTranslation(['calendar']);
+  useSetTitle(t('calendar:calendar.title'));
 
   const { fetchData: getCalendars, loading: isLoading } = useFetch('GET', [
     'calendars',
@@ -22,10 +25,16 @@ const Calendar = () => {
         const calendars = await getCalendars();
         if (calendars.status === 200) {
         } else {
-          console.error('Error fetching calendars:', calendars.status);
+          console.error(
+            t('calendar:error.fetchingCalendars'),
+            ': ',
+            calendars.status
+          );
+          toast.error(t('calendar:error.fetchingCalendars'));
         }
       } catch (error) {
-        console.error('Fetch failed:', error);
+        console.error(t('calendar:error.fetchFailed'), error);
+        toast.error(t('calendar:error.fetchFailed'));
       }
     };
 
@@ -50,7 +59,7 @@ const Calendar = () => {
       <Row className={`mb-xlarge`}>
         <Col xs={6}>
           <Heading className={`sr-only`} level={1}>
-            Calendar page
+            {t('calendar:calendar.page')}
           </Heading>
         </Col>
 
@@ -73,11 +82,7 @@ const Calendar = () => {
         </Col>
       </Row>
 
-      <BigCalendar
-        defaultView="week"
-        views={['day', 'week', 'month']}
-        timeslots={2}
-      />
+      <CalendarView />
     </>
   );
 };

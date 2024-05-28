@@ -1,6 +1,9 @@
 import Heading from '../Heading/Heading';
-import IconButton from '../IconButton/IconButton';
 import { Modal as BootstrapModal, Col } from 'react-bootstrap';
+
+import './Modal.scss';
+import Button from '../Button/Button';
+import IconButton from '../IconButton/IconButton';
 
 interface Props {
   title?: string;
@@ -8,7 +11,7 @@ interface Props {
   show: boolean;
   onClose: () => void;
   message?: string;
-  size?: 's' | 'sm' | 'lg' | 'xl';
+  size?: 'sm' | 'lg' | 'xl';
   fullscreen?: boolean;
   isDanger?: boolean;
   children: React.ReactNode;
@@ -28,45 +31,32 @@ const Modal = ({
 }: Props) => {
   if (!show) return null;
 
-  const ICON = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill={isDanger ? 'red' : 'none'}
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
-  );
-
   return (
     <BootstrapModal
       id="modal"
+      className={`modal`}
       show={show}
       onHide={onClose}
       size={size as 'sm' | 'lg' | 'xl'}
-      onClick={onClose}
       fullscreen={fullscreen ? fullscreen : undefined}
     >
-      <BootstrapModal.Header className="mt-2 py-3 px-4">
+      <BootstrapModal.Header className="modal__heading">
+        <IconButton
+          className={`modal__close-btn`}
+          icon={<img src="/icons/plus-dark.svg" alt="Close icon" />}
+          onClick={onClose}
+        />
+
         <Col>
           <Heading level={3} className={isDanger ? 'text-red-500' : ''}>
             {title}
-            {subtitle && <Heading level={6}>{subtitle}</Heading>}
           </Heading>
-          <div className="text-end pe-1 text-muted">
-            <IconButton icon={ICON} onClick={onClose}></IconButton>
-          </div>
+
+          {subtitle && <Heading level={6}>{subtitle}</Heading>}
         </Col>
       </BootstrapModal.Header>
 
-      <div className="p-4">
+      <div className="modal__body">
         {message && <p>{message}</p>}
         {children}
       </div>
