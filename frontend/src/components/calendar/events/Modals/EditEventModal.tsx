@@ -1,18 +1,18 @@
 import { useMemo, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 
-import useFetch from '../../../hooks/useFetch';
+import useFetch from '../../../../hooks/useFetch';
 
-import LoadingScreen from '../Loading/LoadingScreen';
-import { CalendarEvent } from '../../../@types/CalendarEvents';
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
-import Input from '../Input/Input';
-import Modal from '../Modals/Modal';
-import Select from '../Select/Select';
+import LoadingScreen from '../../../ui/Loading/LoadingScreen';
+import { Event } from '../../../../@types/Events';
+import Button from '../../../ui/Button/Button';
+import Icon from '../../../ui/Icon/Icon';
+import Input from '../../../ui/Input/Input';
+import Modal from '../../../ui/Modals/Modal';
+import Select from '../../../ui/Select/Select';
 
 interface Props {
-  event: CalendarEvent;
+  event: Event;
   showEvent: boolean;
   titleValue?: string;
   descriptionValue?: string;
@@ -37,7 +37,7 @@ const customTimeInput = ({
   );
 };
 
-const EventModal = ({
+const EditEventModal = ({
   event,
   showEvent,
   titleValue,
@@ -126,4 +126,4 @@ const EventModal = ({
   );
 };
 
-export default EventModal;
+export default EditEventModal;
