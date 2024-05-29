@@ -59,7 +59,7 @@ const AddEventModal = ({ onClose }: Props) => {
       show={true}
       onClose={onClose}
       title={t('events:modals.add.title')}
-      size="lg"
+      size="sm"
     >
       <Form
         onSubmit={handleAddEvent}
@@ -97,7 +97,8 @@ const AddEventModal = ({ onClose }: Props) => {
                 />
               )}
             </Field>
-            <Field name="repeat">
+            
+            {/* <Field name="repeat">
               {({ input, meta }) => (
                 <EventRepeatSelector
                   {...input}
@@ -105,7 +106,7 @@ const AddEventModal = ({ onClose }: Props) => {
                   onChange={input.onChange}
                 />
               )}
-            </Field>
+            </Field> */}
 
             <div className="d-flex justify-content-end">
               <Button

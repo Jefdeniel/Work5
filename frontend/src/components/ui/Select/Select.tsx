@@ -1,6 +1,8 @@
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
+
 import ErrorText from '../ErrorText/ErrorText';
+
 import './Select.scss';
 
 interface Props {
@@ -28,7 +30,10 @@ const Select = ({ options, meta, value, title, ...rest }: Props) => {
         {...rest}
       >
         {options?.map((option) => (
-          <option key={option.value.toString()} value={option.value.toString()}>
+          <option
+            key={option.value.toString()}
+            value={option.value.toString()}
+          >
             {option.title}
           </option>
         ))}

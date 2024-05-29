@@ -3,12 +3,12 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 
 import { Event } from '../../../@types/Events';
 import BaseCalendar from './BaseCalendar';
-
-import './Calendar.scss';
 import AddEventModal from '../events/Modals/AddEventModal';
 
+import './Calendar.scss';
+
 // Calendar 2: View on base calendar
-const BigCalendar = () => {
+const CalendarView = () => {
   // Event is gonna be used to show the event view of the clicked event
   const [event, setEvent] = useState<Event>();
 
@@ -35,4 +35,4 @@ const BigCalendar = () => {
   );
 };
 
-export default BigCalendar;
+export default CalendarView;
