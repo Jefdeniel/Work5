@@ -1,23 +1,25 @@
-import { Row } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import useFetch from '../../hooks/useFetch';
-import { useTranslation } from 'react-i18next';
-import { Field, Form } from 'react-final-form';
-import useAuth from '../../hooks/useAuth';
-import Validators from '../../utils/Validators';
-import Button from '../../components/ui/Button/Button';
-import Heading from '../../components/ui/Heading/Heading';
-import ThemeSelector from '../../components/settings/general/ThemeSelector';
-import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
-import LanguageSelector from '../../components/settings/general/LanguageSelector';
-import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
-import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
-import ActivityNotificationSelector from '../../components/settings/notifications/ActivityNotificationsSelector';
 import { useContext } from 'react';
-import { SettingsContext } from '../../store/SettingsContext';
-import useSetTitle from '../../hooks/setTitle';
+import { Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+
 import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
 import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
+import LanguageSelector from '../../components/settings/general/LanguageSelector';
+import ThemeSelector from '../../components/settings/general/ThemeSelector';
+import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
+import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
+import ActivityNotificationSelector from '../../components/settings/notifications/ActivityNotificationsSelector';
+import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
+import Button from '../../components/ui/Button/Button';
+import Heading from '../../components/ui/Heading/Heading';
+
+import useSetTitle from '../../hooks/setTitle';
+import useAuth from '../../hooks/useAuth';
+import useFetch from '../../hooks/useFetch';
+import { SettingsContext } from '../../store/SettingsContext';
+import Validators from '../../utils/Validators';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -48,7 +50,7 @@ const SettingsPage = () => {
   );
 
   const handleSaveSettings = async (values) => {
-    console.log('Form values:', values); // Debugging
+    // console.log('Form values:', values); // Debugging
     try {
       const response = await updateDeviceSettings(
         {},

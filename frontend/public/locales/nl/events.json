@@ -1,0 +1,27 @@
+{
+  "eventInfo": {
+    "title": "Titel",
+    "description": "Beschrijving",
+    "start": "Begin",
+    "end": "Einde",
+    "location": "Locatie",
+    "status": "Status",
+    "priority": "Prioriteit",
+    "allDay": "Hele dag"
+  },
+  "modals": {
+    "add": {
+      "title": "Voeg evenement toe"
+    }
+  },
+  "buttons": {
+    "add": "Voeg toe",
+    "edit": "Bewerk",
+    "delete": "Verwijder"
+  },
+  "toasts": {
+    "added": "Evenement toegevoegd",
+    "updated": "Evenement bijgewerkt",
+    "deleted": "Evenement verwijderd"
+  }
+}

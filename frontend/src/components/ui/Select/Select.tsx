@@ -1,4 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import ErrorText from '../ErrorText/ErrorText';
@@ -9,17 +8,20 @@ interface Props {
     title: string;
     value: string;
   }[];
+  title: string;
   meta?: FieldMetaState<any>;
   [x: string]: any;
   value?: string;
 }
 
-const Select = ({ options, meta, value, ...rest }: Props) => {
+const Select = ({ options, meta, value, title, ...rest }: Props) => {
   const { t } = useTranslation(['general']);
   const isNotValid = meta?.error?.[0] && meta.touched;
 
   return (
-    <div>
+    <label>
+      <span className="title">{title}</span>
+
       <select
         className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
         value={value}
@@ -39,7 +41,7 @@ const Select = ({ options, meta, value, ...rest }: Props) => {
           })}
         </ErrorText>
       )}
-    </div>
+    </label>
   );
 };
 

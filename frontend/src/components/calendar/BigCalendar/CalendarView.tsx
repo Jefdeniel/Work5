@@ -6,11 +6,17 @@ import BaseCalendar from './BaseCalendar';
 
 import './Calendar.scss';
 import EditEventModal from '../events/Modals/EditEventModal';
+import AddEventModal from '../events/Modals/AddEventModal';
 
 // Calendar 2: View on base calendar
 const BigCalendar = () => {
   // Event is gonna be used to show the event view of the clicked event
   const [event, setEvent] = useState<Event>();
+
+  // Add event to the list
+  const addEventToList = (event: Event) => {
+    setEvent(event);
+  };
 
   return (
     <div className="full-calendar">
@@ -21,11 +27,8 @@ const BigCalendar = () => {
       />
 
       {event && (
-        <EditEventModal
-          showEvent={true}
-          event={event}
-          titleValue=""
-          descriptionValue=""
+        <AddEventModal
+          setEvent={addEventToList}
           onClose={() => setEvent(undefined)}
         />
       )}

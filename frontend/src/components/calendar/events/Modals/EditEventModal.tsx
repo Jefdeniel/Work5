@@ -95,22 +95,8 @@ const EditEventModal = ({
               )}
             </Field>
 
-            <div className={`d-flex align-items-center gap-3`}>
-              <span>BTN</span>
-
-              <span>-</span>
-
-              <span>BTN</span>
-            </div>
-
-            <div>
-              <div></div>
-
-              {/* TODO: Use translation hook */}
-              <Select title="Select a theme" options={[]} />
-            </div>
-
-            {error && <div className="error-message">{error}</div>}
+            {/* TODO: Use translation hook */}
+            <Select title="Select a theme" options={[]} />
 
             <Button
               // TODO: Use translation hook
