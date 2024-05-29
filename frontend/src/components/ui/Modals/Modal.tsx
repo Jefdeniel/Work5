@@ -1,9 +1,8 @@
-import Heading from '../Heading/Heading';
 import { Modal as BootstrapModal, Col } from 'react-bootstrap';
+import Heading from '../Heading/Heading';
 
-import './Modal.scss';
-import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
+import './Modal.scss';
 
 interface Props {
   title?: string;

@@ -1,7 +1,6 @@
+import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import Select from '../../../ui/Select/Select';
-import { FieldMetaState } from 'react-final-form';
-import { Col, Row } from 'react-bootstrap';
 
 interface SexSelectorProps {
   initialValue?: string;

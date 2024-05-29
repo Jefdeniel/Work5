@@ -16,10 +16,10 @@ import EventRepeatSelector from '../Selectors/EventRepeatSelector';
 
 interface Props {
   onClose: () => void;
-  setEvent: (event: Event) => void;
+  // setEvent: (event: Event) => void;
 }
 
-const AddEventModal = ({ onClose, setEvent }: Props) => {
+const AddEventModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['events']);
   const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
     'events',

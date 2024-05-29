@@ -11,7 +11,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isSmall?: boolean;
   isBig?: boolean;
   icon?: React.ReactNode;
-  text?: string | Object;
+  text?: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;
   disabled?: boolean;

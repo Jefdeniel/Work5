@@ -6,12 +6,12 @@ import './Select.scss';
 interface Props {
   options: {
     title: string;
-    value: string;
+    value: string | boolean | number;
   }[];
-  title: string;
+  title?: string;
   meta?: FieldMetaState<any>;
   [x: string]: any;
-  value?: string;
+  value?: string | boolean | number;
 }
 
 const Select = ({ options, meta, value, title, ...rest }: Props) => {
@@ -24,11 +24,11 @@ const Select = ({ options, meta, value, title, ...rest }: Props) => {
 
       <select
         className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
-        value={value}
+        value={value as string | number | readonly string[]}
         {...rest}
       >
         {options?.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value.toString()} value={option.value.toString()}>
             {option.title}
           </option>
         ))}

@@ -5,12 +5,8 @@ import NavigationTop from '../components/layout/Navigation/NavigationTop';
 import './Layout.scss';
 import { Container, Row } from 'react-bootstrap';
 
-interface Props {
-  title?: string;
-}
-
 // USER FOR CALENDAR SIDEBAR
-const CalendarLayout = ({ title }: Props) => {
+const CalendarLayout = () => {
   const [isMenuBroken, setIsMenuBroken] = useState(false);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -25,7 +21,6 @@ const CalendarLayout = ({ title }: Props) => {
   return (
     <div className="d-flex flex-row p-0" style={{ minHeight: '100%' }}>
       <CalendarNavigation
-        title={title}
         isMenuBroken={isMenuBroken}
         isMenuCollapsed={isMenuCollapsed}
         isMenuToggled={isMenuToggled}
@@ -47,7 +42,6 @@ const CalendarLayout = ({ title }: Props) => {
       >
         <Row className="flex-row top-navigation border-bottom">
           <NavigationTop
-            title={title}
             onMenuClose={() => {
               if (isMenuBroken) {
                 setIsMenuToggled((prev) => !prev);

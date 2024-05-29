@@ -5,7 +5,6 @@ import { Event } from '../../../@types/Events';
 import BaseCalendar from './BaseCalendar';
 
 import './Calendar.scss';
-import EditEventModal from '../events/Modals/EditEventModal';
 import AddEventModal from '../events/Modals/AddEventModal';
 
 // Calendar 2: View on base calendar
@@ -14,9 +13,9 @@ const BigCalendar = () => {
   const [event, setEvent] = useState<Event>();
 
   // Add event to the list
-  const addEventToList = (event: Event) => {
-    setEvent(event);
-  };
+  // const addEventToList = (event: Event) => {
+  //   setEvent(event);
+  // };
 
   return (
     <div className="full-calendar">
@@ -28,7 +27,7 @@ const BigCalendar = () => {
 
       {event && (
         <AddEventModal
-          setEvent={addEventToList}
+          // setEvent={addEventToList}
           onClose={() => setEvent(undefined)}
         />
       )}

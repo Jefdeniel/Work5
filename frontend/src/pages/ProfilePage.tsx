@@ -1,14 +1,14 @@
-import { Col, Row } from 'react-bootstrap';
+import { useState } from 'react';
+import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import DeleteAccount from '../components/settings/account/DeleteAccount';
+import Signout from '../components/settings/account/Signout';
+import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
+import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
 import Heading from '../components/ui/Heading/Heading';
 import ActionButtonList from '../components/ui/List/ActionButtonList';
 import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
 import useSetTitle from '../hooks/setTitle';
-import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
-import Signout from '../components/settings/account/Signout';
-import DeleteAccount from '../components/settings/account/DeleteAccount';
-import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
-import { useState } from 'react';
 
 const ProfilePage = () => {
   const { t } = useTranslation(['settings']);

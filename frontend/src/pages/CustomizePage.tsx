@@ -17,9 +17,9 @@ const CustomizePage = () => {
     setShowModal(false);
   };
 
-  const addEventToList = (event: any) => {
-    console.log('Event:', event);
-  };
+  // const addEventToList = (event: any) => {
+  //   console.log('Event:', event);
+  // };
 
   return (
     <>
@@ -29,9 +29,7 @@ const CustomizePage = () => {
         style={{ height: '40px', marginLeft: '25px' }}
         icon={<img src="/icons/user-plus.svg" alt="add" />}
       />
-      {showModal && (
-        <AddEventModal setEvent={addEventToList} onClose={closeModal} />
-      )}
+      {showModal && <AddEventModal onClose={closeModal} />}
     </>
   );
 };

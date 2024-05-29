@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import {
   getLocalstorageItem,

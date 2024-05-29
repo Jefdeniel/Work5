@@ -9,7 +9,7 @@ import './NotificationCard.scss';
 
 interface Props {
   title: string;
-  person?: string;
+  // person?: string;
   color?: string;
   timeFrom: string;
   timeTo: string;
@@ -19,7 +19,7 @@ interface Props {
 
 const NotificationCard = ({
   title,
-  person,
+  // person,
   color,
   timeFrom,
   timeTo,
