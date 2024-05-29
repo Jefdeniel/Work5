@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useMemo, useEffect, useContext, useState } from 'react';
-import { Calendar, View, Views, momentLocalizer } from 'react-big-calendar';
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
