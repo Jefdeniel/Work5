@@ -19,18 +19,17 @@ const EventTitleSelector = ({
   onChange,
   ...rest
 }: Props) => {
-  const { t } = useTranslation(['calendar']);
+  const { t } = useTranslation(['events']);
 
   const onEventTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
   return (
     <Input
-      title={t('calendar:events.title')}
+      title={t('events:eventInfo.title')}
       type="text"
-      changeValue={changeValue}
       defaultValue={intitialValue}
-      // value={value} // not sure about this, can fix edit event modal
+      value={value} // not sure about this, can fix edit event modal
       onChange={onEventTitleChange}
       meta={meta}
       disableSpacing
