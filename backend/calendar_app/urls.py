@@ -9,6 +9,7 @@ from .views.reminder_views import ReminderViewSet
 from .views.user_settings_views import UserSettingsViewSet
 from .views.user_views import CustomUserViewSet
 from .views.auth_views import SignUpView
+from .views.calendar_users_views import CalendarUsersViewSet
 
 from django.conf import settings
 
@@ -21,7 +22,7 @@ router.register(r"events", EventViewSet)
 router.register(r"notifications", NotificationViewSet)
 router.register(r"reminders", ReminderViewSet)
 router.register(r"user_settings", UserSettingsViewSet)
-
+router.register(r"calendar_users", CalendarUsersViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

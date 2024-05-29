@@ -1,4 +1,5 @@
 import IconButton from '../../ui/IconButton/IconButton';
+import ProfileButton from '../../ui/ProfileButton/ProfileButton';
 
 interface Props {
   title?: string;
@@ -25,8 +26,10 @@ const NavigationTop = ({ title, onMenuClose }: Props) => {
         }
         filled={true}
       />
+
       {title && <h1 className="text-left p-0">{title}</h1>}
-      <div></div>
+
+      <ProfileButton />
     </div>
   );
 };

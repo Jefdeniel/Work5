@@ -7,18 +7,25 @@ type DateRange = [Date | null, Date | null];
 
 interface Props {
   className?: string;
+  onChange?: (date: Date | DateRange) => void;
 }
 
-const SmallCalendar = ({ className }: Props) => {
-  const [value, onChange] = useState<Date | DateRange>(new Date()); // i dont get this?
+const SmallCalendar = ({ className, onChange }: Props) => {
+  const [value, setValue] = useState<Date | DateRange>(new Date());
 
   const handleChange = (date: Date | DateRange) => {
-    // TODO: Show day data on the right when clicking on a day
-    // onChange(date);
+    setValue(date);
+    if (onChange) {
+      onChange(date);
+    }
   };
 
   return (
-    <Calendar className={className} onChange={handleChange} value={value} />
+    <Calendar
+      className={`${className} full-small-calendar p-1`}
+      onChange={handleChange}
+      value={value}
+    />
   );
 };
 
