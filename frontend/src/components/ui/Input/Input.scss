@@ -88,7 +88,7 @@
     color: var(--sa-primary-950);
     background-color: var(--sa-primary-100);
     padding: var(--p-sm) var(--p-lg);
-    border: none;
+    border: 1px solid var(--sa-primary-300) !important;
     border-radius: var(--br-base);
 
     &::placeholder {
