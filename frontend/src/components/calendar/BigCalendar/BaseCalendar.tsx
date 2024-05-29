@@ -37,6 +37,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
   const [isSmallCalendarOpen, setIsSmallCalendarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const { events } = useFetchedEvents();
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
@@ -139,8 +141,29 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }
   };
 
-  const handleSearchInput = () => {
-    // Logic to search event(s) and when clicking on event, show event modal detail
+  // Handle search input
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      const filteredEvents = events.filter((event) =>
+        event.title.toLowerCase().includes(query.toLowerCase())
+      );
+      // Set filtered events
+      setFilteredEvents(filteredEvents);
+    } else {
+      // Reset filtered events
+      setFilteredEvents([]);
+    }
+  };
+
+  const handleEventClick = (event: Event) => {
+    console.log('Event clicked: ', event);
+    // TODO: TypeError: Cannot read properties of null (reading 'toString')
+    onShowEventView(event);
+    setSearchQuery('');
+    setFilteredEvents([]);
   };
 
   return (
@@ -150,14 +173,30 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
 
       <div className="custom-toolbar">
         <Row className={`my-4 d-flex align-items-center search-row`}>
-          <Col>
+          <Col className={`full-search-block`}>
             {/* TODO: Add translation */}
             <Input
               className="toolbar__search"
               isSearch
               placeholder={t('calendar:calendar.search')}
               type="search"
+              defaultValue={searchQuery}
+              onChange={handleSearchInput}
             />
+
+            {filteredEvents.length > 0 && (
+              <ul className="search-results">
+                {filteredEvents.map((event) => (
+                  <li
+                    key={event.id}
+                    className="search-result-item"
+                    onClick={() => handleEventClick(event)}
+                  >
+                    {event.title}
+                  </li>
+                ))}
+              </ul>
+            )}
           </Col>
 
           <Col className={`toolbar-top d-flex justify-content-end`}>
