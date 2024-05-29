@@ -13,7 +13,7 @@ interface Props {
   disableSpacing?: boolean;
   disableErrorText?: boolean;
   defaultValue?: string;
-  definePlaceholder?: string;
+  placeholder?: string;
   isSmall?: boolean;
   isBig?: boolean;
   isSearch?: boolean;
@@ -33,7 +33,7 @@ const Input = ({
   disableSpacing,
   disableErrorText,
   defaultValue,
-  definePlaceholder,
+  placeholder,
   isSmall,
   isBig,
   isSearch,
@@ -74,7 +74,7 @@ const Input = ({
             ${isSearch ? 'search-bar__input' : ''}
             ${isBig ? 'w-100' : ''}`}
             value={defaultValue}
-            placeholder={definePlaceholder || defaultValue}
+            placeholder={placeholder || defaultValue}
             disabled={disabled}
             onFocus={handleFocus}
             onBlur={handleLoseFocus}
@@ -87,6 +87,10 @@ const Input = ({
               isSmall ? 'small' : ''
             } ${disabled ? 'disabled' : ''}`}
             value={defaultValue}
+            placeholder={placeholder || defaultValue}
+            disabled={disabled}
+            onFocus={handleFocus}
+            onBlur={handleLoseFocus}
             onChange={onChange}
             {...rest}
           />

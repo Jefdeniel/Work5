@@ -22,7 +22,8 @@
     "title": "Kalender",
     "page": "Kalenderseite",
     "createEvent": "Ereignis erstellen",
-    "editEvent": "Ereignisereignis bearbeiten"
+    "editEvent": "Ereignisereignis bearbeiten",
+    "search": "Suche"
   },
   "notifications": {
     "title": "Benachrichtigungen",

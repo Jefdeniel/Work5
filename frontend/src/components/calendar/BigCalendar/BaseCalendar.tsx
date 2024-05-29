@@ -3,6 +3,7 @@ import { useMemo, useEffect, useContext, useState } from 'react';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import { Col, Row } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { VIEW_OPTIONS } from '../../../constants/calendar';
 import { SettingsContext } from '../../../store/SettingsContext';
@@ -15,6 +16,7 @@ import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import Input from '../../ui/Input/Input';
 import SmallCalendar from '../../ui/SmallCalendar/SmallCalendar';
+import ToolbarViewList from './ToolbarViewList';
 
 import './BaseCalendar.scss';
 import './Calendar.scss';
@@ -31,6 +33,7 @@ interface CalendarProps {
 type Keys = keyof typeof Views;
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
+  const { t } = useTranslation(['calendar']);
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
   const [isSmallCalendarOpen, setIsSmallCalendarOpen] = useState(false);
@@ -42,6 +45,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const STEP = 15;
   const TIMESLOTS = 60 / STEP;
 
+  // TODO: Add users from the db? maybe put this in a seperate file
   const calendarUsers = [
     { id: 1, name: 'Person 1', avatar: '/img/test-img.jpg' },
     { id: 2, name: 'Person 2', avatar: '' },
@@ -147,32 +151,17 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             <Input
               className="toolbar__search"
               isSearch
-              definePlaceholder="Search"
+              placeholder={t('calendar:calendar.search')}
               type="search"
-              onFocus={handleSearchFocus}
             />
-
-            {isSmallCalendarOpen && (
-              <SmallCalendar
-                className={`small-calendar`}
-                onChange={handleDateChange}
-              />
-            )}
           </Col>
 
           <Col className={`toolbar-top d-flex justify-content-end`}>
-            <ul className={`toolbar__view-list`}>
-              {VIEW_OPTIONS.map(({ id, label, key }) => (
-                <li key={key}>
-                  <Button
-                    className={`toolbar__view-button ${id === view ? 'active' : ''}`}
-                    onClick={() => setView(id)}
-                  >
-                    {label}
-                  </Button>
-                </li>
-              ))}
-            </ul>
+            <ToolbarViewList
+              view={view}
+              setView={setView}
+              viewOptions={VIEW_OPTIONS}
+            />
           </Col>
         </Row>
 
@@ -190,7 +179,19 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
               onClick={onPreviousClick}
             />
 
-            <span className={`heading heading--lg fw-bold`}>{dateText}</span>
+            <span
+              className={`heading heading--lg fw-bold date-title position-relative`}
+              onClick={handleSearchFocus}
+            >
+              {dateText}
+            </span>
+
+            {isSmallCalendarOpen && (
+              <SmallCalendar
+                className={`small-calendar position-absolute`}
+                onChange={handleDateChange}
+              />
+            )}
 
             <IconButton
               className={`click-btn`}
@@ -206,7 +207,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           </Col>
 
           <Col xs={3} className={`p-0 d-flex justify-content-end`}>
-            <ul className={`m-0 d-flex gap-2`}>
+            <ul className={`d-flex gap-2`}>
               {calendarUsers.map((user) => (
                 <li key={user.id}>
                   {user.avatar ? (

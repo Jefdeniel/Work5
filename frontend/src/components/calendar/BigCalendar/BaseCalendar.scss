@@ -52,20 +52,23 @@
   & .toolbar__search {
     max-width: 265px;
   }
-
-  & .search-bar__input {
-    cursor: pointer;
-  }
-
-  & .small-calendar {
-    width: 20rem;
-    background-color: var(--sa-bright);
-    border: 1px solid var(--sa-primary-500-base);
-    border-radius: var(--br-base);
-    position: absolute;
-    z-index: 50;
-  }
 }
+
+.date-title {
+  cursor: pointer;
+}
+
+.small-calendar {
+  width: 20rem;
+  background-color: var(--sa-bright);
+  border: 1px solid var(--sa-primary-500-base);
+  border-radius: var(--br-base);
+  position: absolute;
+  z-index: 50;
+  left: 50%;
+  transform: translateX(-50%) translateY(65%);
+}
+
 
 // .full-calendar {
 //   /* Common styles for both scenarios */

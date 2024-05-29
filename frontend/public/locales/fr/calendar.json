@@ -22,7 +22,8 @@
     "title": "Calendrier",
     "page": "Page de calendrier",
     "createEvent": "Créer un évènement",
-    "editEvent": "Modifier l'événement"
+    "editEvent": "Modifier l'événement",
+    "search": "Rechercher"
   },
   "notifications": {
     "title": "Notifications",

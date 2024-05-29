@@ -1,15 +1,12 @@
 import { useEffect } from 'react';
-import useSetTitle from '../../hooks/setTitle';
-import { Col, Row } from 'react-bootstrap';
-import useFetch from '../../hooks/useFetch';
-
-import Heading from '../../components/ui/Heading/Heading';
-import ProfilePicture from '../../components/ui/ProfilePicture/ProfilePicture';
-import Icon from '../../components/ui/Icon/Icon';
-import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
-import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+
+import useSetTitle from '../../hooks/setTitle';
+import useFetch from '../../hooks/useFetch';
+import Heading from '../../components/ui/Heading/Heading';
+import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
+import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
 
 const CalendarPage = () => {
   const { t } = useTranslation(['calendar']);

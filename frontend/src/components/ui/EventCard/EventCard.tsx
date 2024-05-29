@@ -50,11 +50,9 @@ const EventCard = ({
       priorityIcon = <MediumPriorityIcon className="priority-icon" />;
   }
 
-  const maxLength = 20;
-  const trimmedlocation =
-    location.length > maxLength
-      ? location.substring(0, maxLength) // Truncate without adding ellipsis
-      : location;
+  const MAX_LENGTH = 20;
+  let trimmedlocation =
+    location.length > MAX_LENGTH ? location.substring(0, MAX_LENGTH) : location;
 
   return (
     <div

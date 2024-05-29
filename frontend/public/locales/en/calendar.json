@@ -25,7 +25,8 @@
     "editEvent": "Edit Event",
     "creating": "Creating...",
     "editing": "Editing...",
-    "selectTheme": "Select a theme"
+    "selectTheme": "Select a theme",
+    "search": "Search"
   },
   "notifications": {
     "title": "Notifications",
