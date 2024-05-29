@@ -72,7 +72,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     if (view === Views.WEEK) {
       const start = moment(date).startOf('week');
       const end = moment(date).endOf('week');
-      return `${start.format('MMMM DD')} - ${end.format('MMMM DD')}`;
+      return `${start.format('DD/MM/YY')} - ${end.format('DD/MM/YY')}`;
     }
     if (view === Views.MONTH) return moment(date).format('MMMM YYYY');
   }, [date, view]);
@@ -139,6 +139,10 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }
   };
 
+  const handleSearchInput = () => {
+    // Logic to search event(s) and when clicking on event, show event modal detail
+  };
+
   return (
     // TODO: Add weekend visibility toggle
     <div className={'full-calendar'}>
@@ -190,6 +194,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
               <SmallCalendar
                 className={`small-calendar position-absolute`}
                 onChange={handleDateChange}
+                nextLabel={<Icon src="/icons/arrow.svg" alt="Arrow icon" />}
+                prevLabel={<Icon src="/icons/arrow.svg" alt="Arrow icon" />}
+                next2Label={
+                  <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                }
+                prev2Label={
+                  <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                }
               />
             )}
 
