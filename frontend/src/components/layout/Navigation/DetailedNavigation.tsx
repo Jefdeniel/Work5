@@ -94,7 +94,7 @@ const DetailedNavigation = ({
         {!isMenuCollapsed && (
           <BackButton text={t('general:buttons.back')} className={`mb-base`} />
         )}
-        {!isMenuCollapsed && <Calendar />}
+        {!isMenuCollapsed && <Calendar noNavigation />}
 
         <Menu
           menuItemStyles={{
