@@ -1,10 +1,15 @@
+import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
-import Button from '../../../ui/Button/Button';
-import Modal from '../../../ui/Modals/Modal';
-import useFetch from '../../../../hooks/useFetch';
-import useAuth from '../../../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { AccountSettings } from '../../../../@types/Settings';
+import useAuth from '../../../../hooks/useAuth';
+import useFetch from '../../../../hooks/useFetch';
+import Validators from '../../../../utils/Validators';
+
+import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Input/Input';
+import Modal from '../../../ui/Modals/Modal';
 
 interface Props {
   onClose: () => void;
@@ -12,24 +17,36 @@ interface Props {
 
 const EditPasswordModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['settings']);
-  const navigate = useNavigate();
-  const { user_id, logout } = useAuth();
-  console.log(user_id);
+  const { user_id } = useAuth();
 
-  const { fetchData: deleteUser } = useFetch('DELETE', ['users', user_id]);
+  const { fetchData: updateAccountSettings, loading: isLoading } = useFetch(
+    'PATCH',
+    ['users', user_id]
+  );
 
-  const handleEditPassword = async () => {
-    await deleteUser({}, { id: user_id }).then((response) => {
+  const handleEditPassword = async (values: AccountSettings, form: any) => {
+    try {
+      const response = await updateAccountSettings(
+        {},
+        {
+          ...values,
+          id: user_id,
+          password: values.password,
+        }
+      );
+
       if (response.ok) {
-        toast.success(t('settings:account.accountDeleted'));
-        logout();
-        navigate('/login');
+        toast.success(t('settings:account.passwordUpdated'));
+        form.reset();
+        onClose();
       } else {
-        toast.error(t('settings:account.accountNotDeleted'));
+        toast.error(t('settings:account.passwordNotUpdated'));
         console.error(response);
       }
-      onClose();
-    });
+    } catch (error) {
+      toast.error(t('settings:account.passwordNotUpdated'));
+      console.error(error);
+    }
   };
 
   return (
@@ -37,15 +54,39 @@ const EditPasswordModal = ({ onClose }: Props) => {
       title={t('settings:account.editPassword')}
       message={t('settings:account.editPasswordDescription')}
       show={true}
-      isDanger={true}
+      isDanger={false}
       size="lg"
       onClose={onClose}
     >
-      <div className="d-flex justify-content-end">
-        <Button onClick={handleEditPassword} className="btn btn-danger">
-          {t('settings:account.editPassword')}
-        </Button>
-      </div>
+      <Form
+        onSubmit={handleEditPassword}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field name="password" validate={Validators.password()}>
+              {({ input, meta }) => (
+                <Input
+                  {...input}
+                  meta={meta}
+                  title={t('auth:login.password')}
+                  type="password"
+                  placeholder="*************"
+                  isBig
+                />
+              )}
+            </Field>
+
+            <div className="d-flex justify-content-end">
+              <Button
+                className="btn--danger mt-2"
+                type="submit"
+                disabled={isLoading}
+              >
+                {t('settings:save')}
+              </Button>
+            </div>
+          </form>
+        )}
+      />
     </Modal>
   );
 };
