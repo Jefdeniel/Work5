@@ -1,22 +1,24 @@
-// ProfilePage.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import DeleteAccount from '../components/settings/account/DeleteAccount';
-import Signout from '../components/settings/account/Signout';
-import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
-import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
-import Heading from '../components/ui/Heading/Heading';
-import ActionButtonList from '../components/ui/List/ActionButtonList';
-import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
+
 import useSetTitle from '../hooks/setTitle';
+import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
+
+import Heading from '../components/ui/Heading/Heading';
+import Signout from '../components/settings/account/Signout';
+import ActionButtonList from '../components/ui/List/ActionButtonList';
+import DeleteAccount from '../components/settings/account/DeleteAccount';
 import EditEmailModal from '../components/settings/account/modals/EditEmailModal';
 import EditPasswordModal from '../components/settings/account/modals/EditPasswordModal';
+import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
+import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:profile.title'));
 
+  // State
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [showEditEmailModal, setShowEditEmailModal] = useState(false);
   const [showEditPasswordModal, setShowEditPasswordModal] = useState(false);
@@ -49,8 +51,8 @@ const ProfilePage: React.FC = () => {
         <Heading level={3}>{t('settings:profile.changeOptions')}</Heading>
         <ActionButtonList
           items={CHANGE_OPTIONS_ITEMS}
-          className="btn--primary"
           functionMap={functionMap}
+          className="btn--primary"
         />
       </Row>
 
@@ -62,8 +64,8 @@ const ProfilePage: React.FC = () => {
         <Heading level={3}>{t('settings:profile.connectAccounts')}</Heading>
         <ActionButtonList
           items={CONNECT_ITEMS}
-          className="btn--bordered-primary"
           functionMap={functionMap}
+          className="btn--bordered-primary"
         />
       </Row>
 
