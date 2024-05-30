@@ -38,6 +38,8 @@
     "SignOutDescription": "Sign out of the account",
     "deleteAccount": "Delete Account",
     "deleteAccountDescription": "Delete the account, this is a permanent action.",
+    "accountDeleted": "Account Deleted",
+    "accountNotDeleted": "Account Not Deleted",
     "alreadyHaveAccount": "Already have an account?",
     "createAccount": "Create Account",
     "email": "Email",
