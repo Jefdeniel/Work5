@@ -17,6 +17,8 @@ import SharingHubPage from './pages/SharingHubPage';
 import AccountLayout from './layout/AccountLayout';
 import ProfilePage from './pages/ProfilePage';
 import Register from './pages/Auth/Register';
+import GoogleCalendar from './pages/Calendar/GoogleCalendar';
+import CalendarOverviewPage from './pages/Calendar/CalendarOverviewPage';
 
 function App() {
   const auth = useAuth();
@@ -31,7 +33,7 @@ function App() {
           <Route element={<Layout />}>
             <Route
               path="/"
-              element={<Navigate to="/calendar/overview" replace />}
+              element={<Navigate to="/calendar/main" replace />}
             />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="settings" element={<SettingsPage />} />
@@ -39,10 +41,12 @@ function App() {
 
           {/* Calendar specific routes with CalendarLayout */}
           <Route path="/calendar" element={<CalendarLayout />}>
+            <Route path="overview" element={<CalendarOverviewPage />} />
             <Route path="create" element={<CreateCalendar />} />
           </Route>
           <Route path="/calendar" element={<Layout />}>
-            <Route path="overview" element={<CalendarPage />} />
+            <Route path="main" element={<CalendarPage />} />
+            <Route path="google" element={<GoogleCalendar />} />
           </Route>
 
           {/* Account specific routes under /calendar but using a different layout */}
