@@ -1,14 +1,16 @@
-import { useTranslation } from 'react-i18next';
-import Button from '../../../ui/Button/Button';
-import Modal from '../../../ui/Modals/Modal';
-import useFetch from '../../../../hooks/useFetch';
-import useAuth from '../../../../hooks/useAuth';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
-import Validators from '../../../../utils/Validators';
 import { useCallback, useEffect, useState } from 'react';
+
+import useAuth from '../../../../hooks/useAuth';
+import useFetch from '../../../../hooks/useFetch';
+import Validators from '../../../../utils/Validators';
 import { AccountSettings } from '../../../../@types/Settings';
+
 import Input from '../../../ui/Input/Input';
+import Modal from '../../../ui/Modals/Modal';
+import Button from '../../../ui/Button/Button';
 
 interface Props {
   onClose: () => void;
