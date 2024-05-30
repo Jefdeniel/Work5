@@ -43,7 +43,15 @@
     "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
     "createAccount": "Konto erstellen",
     "email": "Email",
-    "password": "Passwort"
+    "editEmail": "Email bearbeiten",
+    "editEmailDescription": "Ändern Sie Ihre Email-Adresse",
+    "emailUpdated": "Email aktualisiert",
+    "emailNotUpdated": "Email nicht aktualisiert",
+    "password": "Passwort",
+    "editPassword": "Passwort bearbeiten",
+    "editPasswordDescription": "Ändern Sie Ihr Passwort",
+    "passwordUpdated": "Passwort aktualisiert",
+    "passwordNotUpdated": "Passwort"
   },
   "profile": {
     "title": "Passen Sie Ihr Profil an",

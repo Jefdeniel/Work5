@@ -43,7 +43,15 @@
     "alreadyHaveAccount": "Already have an account?",
     "createAccount": "Create Account",
     "email": "Email",
-    "password": "Password"
+    "editEmail": "Edit Email",
+    "editEmailDescription": "Change your email address",
+    "emailUpdated": "Email Updated",
+    "emailNotUpdated": "Email Not Updated",
+    "password": "Password",
+    "editPassword": "Edit Password",
+    "editPasswordDescription": "Change your password. This action is permanent.",
+    "passwordUpdated": "Password Updated",
+    "passwordNotUpdated": "Password Not Updated"
   },
   "profile": {
     "profile": "Profile",

@@ -43,7 +43,15 @@
     "alreadyHaveAccount": "Heeft u al een account?",
     "createAccount": "Account aanmaken",
     "email": "E-mail",
-    "password": "Wachtwoord"
+    "editEmail": "E-mail bewerken",
+    "editEmailDescription": "Verander je e-mailadres",
+    "emailUpdated": "E-mail bijgewerkt",
+    "emailNotUpdated": "E-mail niet bijgewerkt",
+    "password": "Wachtwoord",
+    "editPassword": "Wachtwoord bewerken",
+    "editPasswordDescription": "Verander je wachtwoord, deze actie is permanent.",
+    "passwordUpdated": "Wachtwoord bijgewerkt",
+    "passwordNotUpdated": "Wachtwoord niet bijgewerkt"
   },
   "profile": {
     "title": "Pas je profiel aan",
