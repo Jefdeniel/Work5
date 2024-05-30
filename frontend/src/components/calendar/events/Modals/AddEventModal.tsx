@@ -13,6 +13,7 @@ import Modal from '../../../ui/Modals/Modal';
 import EventDescriptionSelector from '../Selectors/EventDescriptionSelector';
 import EventTitleSelector from '../Selectors/EventTitleSelector copy';
 import EventRepeatSelector from '../Selectors/EventRepeatSelector';
+import Input from '../../../ui/Input/Input';
 
 interface Props {
   onClose: () => void;
@@ -65,35 +66,23 @@ const AddEventModal = ({ onClose }: Props) => {
         onSubmit={handleAddEvent}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Field
-              name="title"
-              validate={Validators.compose(
-                Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(50)
-              )}
-            >
+            <Field name="title" validate={Validators.required()}>
               {({ input, meta }) => (
-                <EventTitleSelector
+                <Input
                   {...input}
                   meta={meta}
-                  onChange={input.onChange}
+                  title={t('auth:login.title')}
+                  isBig
                 />
               )}
             </Field>
-            <Field
-              name="description"
-              validate={Validators.compose(
-                Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(50)
-              )}
-            >
+            <Field name="description" validate={Validators.required()}>
               {({ input, meta }) => (
-                <EventDescriptionSelector
+                <Input
                   {...input}
                   meta={meta}
-                  onChange={input.onChange}
+                  title={t('auth:login.description')}
+                  isBig
                 />
               )}
             </Field>
@@ -109,11 +98,12 @@ const AddEventModal = ({ onClose }: Props) => {
 
             <div className="d-flex justify-content-end">
               <Button
-                className="btn--success mt-3"
-                text={isLoading ? <Spinner /> : t('events:buttons.add')}
-                type="submit" // why the fuck wont it submit
+                className="btn--success mt-2"
+                type="submit"
                 disabled={isLoading}
-              />
+              >
+                {t('settings:save')}
+              </Button>
             </div>
           </form>
         )}
