@@ -2,16 +2,24 @@ import './CalendarCard.scss';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import ProfilePicture from '../../ui/ProfilePicture/ProfilePicture';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   img: string;
   name: string;
   userAvatars?: string[];
+  link?: string;
 }
 
-const CalendarCard = ({ img, name, userAvatars }: Props) => {
+const CalendarCard = ({ img, name, userAvatars, link }: Props) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if (link) {
+      navigate(link);
+    }
+  };
   return (
-    <div className="calendar-card">
+    <div className="calendar-card" onClick={handleClick}>
       <img
         className={`calendar-card__img`}
         src={img}
