@@ -12,14 +12,19 @@ const CalendarOverviewPage = () => {
 
   const contextUserCalendars = useContext(CalendarContext);
   const userCalendars = contextUserCalendars.calendars;
-  console.log(userCalendars);
+  console.log(userCalendars); // [1, 2, 3]
 
   // it now only works if a user has 1 calendar, not if the user has more calendars.
   // /api/calendars/?id=1&id=2&id=3
-  const params = `?id=${userCalendars}`;
-  const calendarIds = userCalendars.map((calendar) => calendar.id).join(',');
+  // const params = `?id=${userCalendars}`;
+  // const calendarIds = userCalendars.map((calendar) => calendar.id).join(',');
 
-  const { fetchData: getCalendars } = useFetch('GET', ['calendars', params]);
+  const calendarId = userCalendars[0];
+
+  const { fetchData: getCalendars } = useFetch('GET', [
+    'calendars',
+    calendarId.toString(),
+  ]);
 
   const [calendars, setCalendars] = useState([]);
 

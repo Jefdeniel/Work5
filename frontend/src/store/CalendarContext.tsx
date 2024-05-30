@@ -19,7 +19,6 @@ export const CalendarContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { user_id } = useAuth();
-  console.log(user_id);
 
   const [calendars, setCalendars] = useState<number[]>([]);
 
@@ -40,6 +39,7 @@ export const CalendarContextProvider = ({
     };
 
     calendars && void fetchData();
+    console.log(calendars.length);
   }, []);
 
   const contextValue: CalendarContextType = {
