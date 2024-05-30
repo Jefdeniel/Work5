@@ -46,8 +46,6 @@ const TimeZoneSelector = ({
         </Col>
         <Col className="d-flex flex-col justify-content-end p-0">
           <Select
-            title={t('settings:general.timeZone')}
-            description={t('settings:general.timeZoneDescription')}
             value={value}
             onChange={onTimeZoneSelectionChange}
             options={options}
