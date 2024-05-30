@@ -13,4 +13,5 @@ export interface Event {
   status?: string;
   allDay?: boolean; // ADD TO DATABASE
   color?: string;
+  htmlLink?: string;
 }
