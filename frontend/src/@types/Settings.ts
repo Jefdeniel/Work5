@@ -2,9 +2,7 @@ import { ITimezoneOption } from 'react-timezone-select';
 
 export interface AccountSettings {
   email?: string;
-  currentPassword?: string;
-  newPassword?: string;
-  repeatNewPassword?: string;
+  password?: string;
 }
 
 export interface UserSettings {
