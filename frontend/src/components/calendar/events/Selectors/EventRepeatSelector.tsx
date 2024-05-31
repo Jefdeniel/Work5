@@ -13,7 +13,7 @@ interface SexSelectorProps {
 export const REPEAT_OPTIONS = [
   {
     title: 'repeatOptions.never',
-    value: null,
+    value: 'null',
   },
   {
     title: 'repeatOptions.daily',

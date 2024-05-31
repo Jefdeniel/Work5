@@ -37,11 +37,21 @@
     "SignOut": "Déconnexion",
     "SignOutDescription": "Se déconnecter du compte",
     "deleteAccount": "Supprimer le compte",
-    "deleteAccountDescription": "Supprimer le compte",
+    "deleteAccountDescription": "Êtes-vous sûr de vouloir supprimer votre compte? Cette action est irréversible.",
+    "accountDeleted": "Compte supprimé",
+    "accountNotDeleted": "Compte non supprimé",
     "alreadyHaveAccount": "Vous avez déjà un compte?",
     "createAccount": "Créer un compte",
     "email": "Email",
-    "password": "Mot de passe"
+    "editEmail": "Modifier l'email",
+    "editEmailDescription": "Changer votre adresse e-mail",
+    "emailUpdated": "Email mis à jour",
+    "emailNotUpdated": "Email non mis à jour",
+    "password": "Mot de passe",
+    "editPassword": "Modifier le mot de passe",
+    "editPasswordDescription": "Changer votre mot de passe",
+    "passwordUpdated": "Mot de passe",
+    "passwordNotUpdated": "Mot de passe non mis à jour"
   },
   "profile": {
     "title": "Personnaliser votre profil",

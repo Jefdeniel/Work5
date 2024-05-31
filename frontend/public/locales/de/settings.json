@@ -37,11 +37,21 @@
     "SignOut": "Abmelden",
     "SignOutDescription": "Melden Sie sich vom Konto ab",
     "deleteAccount": "Konto löschen",
-    "deleteAccountDescription": "Löschen Sie das Konto",
+    "deleteAccountDescription": "Möchten Sie Ihr Konto wirklich löschen? Diese Aktion ist endgültig.",
+    "accountDeleted": "Konto gelöscht",
+    "accountNotDeleted": "Konto nicht gelöscht",
     "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
     "createAccount": "Konto erstellen",
     "email": "Email",
-    "password": "Passwort"
+    "editEmail": "Email bearbeiten",
+    "editEmailDescription": "Ändern Sie Ihre Email-Adresse",
+    "emailUpdated": "Email aktualisiert",
+    "emailNotUpdated": "Email nicht aktualisiert",
+    "password": "Passwort",
+    "editPassword": "Passwort bearbeiten",
+    "editPasswordDescription": "Ändern Sie Ihr Passwort",
+    "passwordUpdated": "Passwort aktualisiert",
+    "passwordNotUpdated": "Passwort"
   },
   "profile": {
     "title": "Passen Sie Ihr Profil an",
