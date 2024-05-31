@@ -42,7 +42,7 @@ const DeleteAccountModal = ({ onClose }: Props) => {
       onClose={onClose}
     >
       <div className="d-flex justify-content-end">
-        <Button onClick={handleDeleteAccount} className="btn btn-danger">
+        <Button onClick={handleDeleteAccount} className="btn--danger">
           {t('settings:account.deleteAccount')}
         </Button>
       </div>

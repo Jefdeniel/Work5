@@ -8,7 +8,7 @@ interface Props {
 
 const NavigationTop = ({ title, onMenuClose }: Props) => {
   return (
-    <div className="d-flex flex-col justify-content-between align-items-center justify-content-center">
+    <div className="d-flex justify-content-between align-items-center">
       <IconButton
         onClick={onMenuClose}
         icon={
