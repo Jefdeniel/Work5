@@ -1,33 +1,33 @@
 interface actionItem {
-  onClick: () => void;
+  onClick: string; // Use string to refer to the function name
   iconSrc?: string;
   label: string;
 }
 
 export const EXPORT_AGENDA_ITEMS: actionItem[] = [
   {
-    onClick: () => console.log('pdf'),
+    onClick: 'exportAsPDF',
     label: 'PDF',
   },
   {
-    onClick: () => console.log('excel sheet'),
+    onClick: 'exportAsExcel',
     label: 'Excel sheet',
   },
 ];
 
 export const EXTERNAL_SERVICES_ITEMS: actionItem[] = [
   {
-    onClick: () => console.log('Slack'),
+    onClick: 'handleSlackClick',
     iconSrc: '/icons/companies/slack-white.svg',
     label: 'Slack',
   },
   {
-    onClick: () => console.log('Microsoft Teams'),
+    onClick: 'handleGoogleCalendarClick',
     iconSrc: '/icons/companies/teams.svg',
     label: 'Google Calendar',
   },
   {
-    onClick: () => console.log('Apple Agenda'),
+    onClick: 'handleOutlookClick',
     iconSrc: '/icons/companies/apple-white.svg',
     label: 'Apple Agenda',
   },

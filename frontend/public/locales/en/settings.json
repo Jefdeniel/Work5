@@ -38,10 +38,20 @@
     "SignOutDescription": "Sign out of the account",
     "deleteAccount": "Delete Account",
     "deleteAccountDescription": "Delete the account, this is a permanent action.",
+    "accountDeleted": "Account Deleted",
+    "accountNotDeleted": "Account Not Deleted",
     "alreadyHaveAccount": "Already have an account?",
     "createAccount": "Create Account",
     "email": "Email",
-    "password": "Password"
+    "editEmail": "Edit Email",
+    "editEmailDescription": "Change your email address",
+    "emailUpdated": "Email Updated",
+    "emailNotUpdated": "Email Not Updated",
+    "password": "Password",
+    "editPassword": "Edit Password",
+    "editPasswordDescription": "Change your password. This action is permanent.",
+    "passwordUpdated": "Password Updated",
+    "passwordNotUpdated": "Password Not Updated"
   },
   "profile": {
     "profile": "Profile",

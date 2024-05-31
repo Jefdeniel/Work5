@@ -53,8 +53,6 @@ const LanguageSelector = ({
       </Col>
       <Col className="d-flex flex-col justify-content-end p-0">
         <Select
-          title={t('settings:general.language')}
-          description={t('settings:general.languageDescription')}
           defaultValue={initialValue}
           value={value}
           onChange={onLanguageSelectionChange}

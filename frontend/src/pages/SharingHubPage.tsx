@@ -12,6 +12,15 @@ const SharingHubPage = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar:sharing-hub.title'));
 
+  // Function map
+  const functionMap: Record<string, () => void> = {
+    exportAsPDF: () => {},
+    exportAsExcel: () => {},
+    handleSlackClick: () => {},
+    handleGoogleCalendarClick: () => {},
+    handleOutlookClick: () => {},
+  };
+
   return (
     <>
       <Row>
@@ -27,6 +36,7 @@ const SharingHubPage = () => {
         </Heading>
         <ActionButtonList
           items={EXPORT_AGENDA_ITEMS}
+          functionMap={functionMap}
           className="btn--primary"
         />
       </Row>
@@ -43,6 +53,7 @@ const SharingHubPage = () => {
         </Heading>
         <ActionButtonList
           items={EXTERNAL_SERVICES_ITEMS}
+          functionMap={functionMap}
           className="btn--primary"
         />
       </Row>

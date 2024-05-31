@@ -13,6 +13,7 @@ import Icon from '../../ui/Icon/Icon';
 import {
   CustomizeIcon,
   NotificationIcon,
+  OverviewIcon,
   SharingHubIcon,
 } from '../../ui/Icon/SvgIcons';
 
@@ -33,6 +34,11 @@ const menuItems: MenuItem[] = [
     link: '/calendar/customize',
     label: 'general:navigation.customize',
     icon: <CustomizeIcon />,
+  },
+  {
+    link: '/calendar',
+    label: 'general:navigation.overview',
+    icon: <OverviewIcon />,
   },
 ];
 

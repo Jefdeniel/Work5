@@ -55,6 +55,25 @@ const CustomizeIcon = ({ className }: { className?: string }) => {
   );
 };
 
+const OverviewIcon = ({ className }: { className?: string }) => {
+  return (
+    <div className={`${className}`}>
+      <svg
+        width="13"
+        height="14"
+        viewBox="0 0 11 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.5369 7.98882C-0.178967 7.44217 -0.178967 6.55442 0.5369 6.00777L7.86737 0.410107C8.39425 0.0077746 9.17884 -0.110301 9.86607 0.108358C10.5533 0.327016 11 0.834305 11 1.40282V12.5981C11 13.1623 10.5533 13.674 9.86607 13.8926C9.17884 14.1113 8.39425 13.9888 7.86737 13.5909L0.5369 7.99319V7.98882Z"
+          fill="var(--sa-primary-950)"
+        />
+      </svg>
+    </div>
+  );
+};
+
 const PlusIcon = ({ className }: { className?: string }) => {
   return (
     <div className={`${className}`}>
@@ -65,8 +84,8 @@ const PlusIcon = ({ className }: { className?: string }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M10.23 2.23A1.73 1.73 0 0 0 8.5.5a1.73 1.73 0 0 0-1.73 1.73v5.04H1.73A1.73 1.73 0 0 0 0 9c0 .957.774 1.73 1.73 1.73h5.04v5.04a1.73 1.73 0 1 0 3.462 0v-5.04h5.037A1.73 1.73 0 0 0 17 9a1.73 1.73 0 0 0-1.73-1.73h-5.04V2.23Z"
           fill="var(--sa-primary-400)"
         />
@@ -133,6 +152,7 @@ export {
   NotificationIcon,
   SharingHubIcon,
   CustomizeIcon,
+  OverviewIcon,
   PlusIcon,
   LeftIcon,
   RightIcon,

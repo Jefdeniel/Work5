@@ -54,11 +54,9 @@ const TimeFormatSelector = ({
         </Col>
         <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
           <Select
-            title={t('settings:general.timeFormat')}
             defaultValue={initialValue}
             value={value}
             onChange={handleTimeFormatChange}
-            description={t('settings:general.timeFormatDescription')}
             options={translatedOptions}
             meta={meta}
             {...rest}

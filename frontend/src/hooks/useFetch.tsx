@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import AuthContext from '../store/AuthContext';
 
 const useFetch = (
-  method: 'POST' | 'GET' | 'DELETE' | 'PUT',
+  method: 'POST' | 'GET' | 'DELETE' | 'PUT' | 'PATCH',
   requestArray: string[]
 ) => {
   const auth = useContext(AuthContext);
