@@ -10,6 +10,7 @@ from .views.user_settings_views import UserSettingsViewSet
 from .views.user_views import CustomUserViewSet
 from .views.auth_views import SignUpView
 from .views.calendar_users_views import CalendarUsersViewSet
+from . import views
 
 from django.conf import settings
 
@@ -24,12 +25,13 @@ router.register(r"reminders", ReminderViewSet)
 router.register(r"user_settings", UserSettingsViewSet)
 router.register(r"calendar_users", CalendarUsersViewSet)
 
+
 urlpatterns = [
     path("", include(router.urls)),
     path("signup", SignUpView.as_view(), name="signup"),
-    # path(
-    #     "user_settings",
-    #     UserSettingsViewSet.as_view({"get": "list", "post": "create"}),
-    #     name="user_settings",
-    # ),
+    path(
+        "calendar_users/user_id/<int:user_id>",
+        views.CalendarUserByUserId.as_view(),
+        name="calendar-user-by-user-id",
+    ),
 ]

@@ -2,6 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from ..models import CalendarUser
 from ..serializers import CalendarUserSerializer
+from rest_framework.generics import get_object_or_404
+from rest_framework.views import APIView
 
 
 class CalendarUsersViewSet(viewsets.ModelViewSet):
@@ -70,3 +72,19 @@ class CalendarUsersViewSet(viewsets.ModelViewSet):
 
     def get_object(self):
         return self.get_queryset().get(pk=self.kwargs["pk"])
+
+
+class CalendarUserByUserId(APIView):
+    """
+    Retrieve calendar users by user_id.
+    """
+
+    def get(self, request, user_id):
+        calendar_users = CalendarUser.objects.filter(user__id=user_id)
+        if not calendar_users.exists():
+            return Response(
+                {"error": "CalendarUser not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        serializer = CalendarUserSerializer(calendar_users, many=True)
+        return Response(serializer.data)

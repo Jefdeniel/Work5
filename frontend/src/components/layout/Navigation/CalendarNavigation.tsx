@@ -101,6 +101,13 @@ const CalendarNavigation = ({
           img="/img/test-img.jpg"
           name="Work / Business"
           userAvatars={userAvatars}
+          link="/calendar/overview"
+        />
+        <CalendarCard
+          img="/img/google-calendar-logo.svg"
+          name="Google"
+          userAvatars={userAvatars}
+          link="/calendar/google"
         />
 
         <Menu
