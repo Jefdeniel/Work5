@@ -55,25 +55,6 @@ const CustomizeIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const OverviewIcon = ({ className }: { className?: string }) => {
-  return (
-    <div className={`${className}`}>
-      <svg
-        width="13"
-        height="14"
-        viewBox="0 0 11 14"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0.5369 7.98882C-0.178967 7.44217 -0.178967 6.55442 0.5369 6.00777L7.86737 0.410107C8.39425 0.0077746 9.17884 -0.110301 9.86607 0.108358C10.5533 0.327016 11 0.834305 11 1.40282V12.5981C11 13.1623 10.5533 13.674 9.86607 13.8926C9.17884 14.1113 8.39425 13.9888 7.86737 13.5909L0.5369 7.99319V7.98882Z"
-          fill="var(--sa-primary-950)"
-        />
-      </svg>
-    </div>
-  );
-};
-
 const PlusIcon = ({ className }: { className?: string }) => {
   return (
     <div className={`${className}`}>
@@ -152,7 +133,6 @@ export {
   NotificationIcon,
   SharingHubIcon,
   CustomizeIcon,
-  OverviewIcon,
   PlusIcon,
   LeftIcon,
   RightIcon,
