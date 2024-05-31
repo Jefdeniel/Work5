@@ -47,8 +47,8 @@ const AddEventModal = ({ onClose }: Props) => {
           ...values,
           title: values.title,
           description: values.description,
-          start: startTime,
-          end: endTime,
+          start_time: startTime,
+          end_time: endTime,
         }
       );
 
