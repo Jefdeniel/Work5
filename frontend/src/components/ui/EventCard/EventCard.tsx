@@ -11,13 +11,15 @@ import {
 interface EventProps {
   event: Event;
   color?: string;
+  isGoogleEvent?: boolean;
   onDoubleClick?: () => void;
 }
 
 // Color has to be in hex format
 const EventCard = ({
-  event: { title, location, priority, status },
+  event: { title, location, priority, status, htmlLink, start, end },
   color,
+  isGoogleEvent,
   onDoubleClick,
 }: EventProps) => {
   const defaultColor = ColorConversion.convertHexToRGBA('#141C57');
@@ -66,6 +68,19 @@ const EventCard = ({
       ></div>
       <div>
         <span className="event-card__title">{title}</span>
+        {isGoogleEvent && (
+          <div>
+            <div className="event-card__time">
+              <strong>Start: </strong>
+              {start.toLocaleString()}
+            </div>
+
+            <div className="event-card__time">
+              <strong>End: </strong>
+              {end.toLocaleString()}
+            </div>
+          </div>
+        )}
         <div className="event-card__details">
           {location && (
             <div className="event-card__location">
@@ -84,6 +99,18 @@ const EventCard = ({
               <strong>Status: </strong>
               {status}
             </div>
+          )}
+          {isGoogleEvent && (
+            <p className="text-gray-700">
+              <a
+                href={htmlLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500"
+              >
+                View on Google Calendar
+              </a>
+            </p>
           )}
         </div>
       </div>

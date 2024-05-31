@@ -1,18 +1,14 @@
 import { Col } from 'react-bootstrap';
 import Button from '../Button/Button';
-
-interface ActionItem {
-  onClick: () => void;
-  iconSrc?: string;
-  label: string;
-}
+import { ActionItem } from '../../../constants/profile';
 
 interface Props {
   items: ActionItem[];
   className?: string;
+  functionMap: Record<string, () => void>;
 }
 
-const ActionButtonList = ({ items, className }: Props) => {
+const ActionButtonList = ({ items, className, functionMap }: Props) => {
   return (
     <>
       {items.map((item, index) => (
@@ -25,7 +21,7 @@ const ActionButtonList = ({ items, className }: Props) => {
                 <img src={item.iconSrc} alt={item.label} />
               ) : undefined
             }
-            onClick={item.onClick}
+            onClick={functionMap[item.onClick]} // Use functionMap to resolve function
           />
         </Col>
       ))}

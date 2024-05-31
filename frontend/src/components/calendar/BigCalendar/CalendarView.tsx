@@ -19,11 +19,11 @@ const CalendarView = () => {
 
   return (
     <div className="full-calendar">
-      <BaseCalendar
+      {/* <BaseCalendar
         onShowEventView={(event) => {
           setEvent(event);
         }}
-      />
+      /> */}
 
       {event && (
         <AddEventModal

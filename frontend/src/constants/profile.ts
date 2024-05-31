@@ -1,38 +1,38 @@
-interface actionItem {
-  onClick: () => void;
+export interface ActionItem {
+  onClick: string; // Use string to refer to the function name
   iconSrc?: string;
   label: string;
 }
 
-export const CHANGE_OPTIONS_ITEMS: actionItem[] = [
+export const CHANGE_OPTIONS_ITEMS: ActionItem[] = [
   {
-    onClick: () => console.log('Change options'),
+    onClick: 'openEditEmailModal',
     label: 'Change email',
   },
   {
-    onClick: () => console.log('Change options'),
+    onClick: 'openEditPasswordModal',
     label: 'Change password',
   },
 ];
 
-export const CONNECT_ITEMS: actionItem[] = [
+export const CONNECT_ITEMS: ActionItem[] = [
   {
-    onClick: () => console.log('Slack'),
+    onClick: 'handleSlackClick',
     iconSrc: '/icons/companies/slack.svg',
     label: 'Slack',
   },
   {
-    onClick: () => console.log('Google Calendar'),
+    onClick: 'handleGoogleCalendarClick',
     iconSrc: '/icons/companies/google.svg',
     label: 'Google Calendar',
   },
   {
-    onClick: () => console.log('Outlook'),
+    onClick: 'handleOutlookClick',
     iconSrc: '/icons/companies/outlook.svg',
     label: 'Outlook',
   },
   {
-    onClick: () => console.log('Apple Calendar'),
+    onClick: 'handleAppleCalendarClick',
     iconSrc: '/icons/companies/apple.svg',
     label: 'Apple Calendar',
   },

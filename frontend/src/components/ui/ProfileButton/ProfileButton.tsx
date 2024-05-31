@@ -48,7 +48,6 @@ const ProfileButton = (props: Props) => {
   const cleanedUserAvatar = userAvatar
     ? userAvatar.replace(/^https?:\/\//, '')
     : '';
-    console.log('cleanedUserAvatar:', cleanedUserAvatar);
 
   const apiKey = import.meta.env.MEDIA_URL;
   const avatarUrl = `${apiKey}/${cleanedUserAvatar}`;

@@ -9,7 +9,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "date_joined",
             "last_login",
-        ]  # This should be a list or tuple
+        ]
         extra_kwargs = {
             "password": {"write_only": True},
         }
@@ -23,16 +23,21 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return user
 
     def validate_email(self, value):
+        if self.instance and self.instance.email == value:
+            return value  # Allow the same email if it's the same instance
         if CustomUser.objects.filter(email=value).exists():
             raise serializers.ValidationError("A user with that email already exists.")
         return value
 
     def update(self, instance, validated_data):
-        for attr, value in validated_data.items():
-            if attr == "password" and value:
-                instance.set_password(value)
-            elif value:
-                setattr(instance, attr, value)
+        # Update email if provided
+        if "email" in validated_data:
+            instance.email = validated_data["email"]
+
+        # Update password if provided
+        if "password" in validated_data:
+            instance.set_password(validated_data["password"])
+
         instance.save()
         return instance
 
