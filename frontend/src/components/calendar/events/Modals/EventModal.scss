@@ -1,0 +1,16 @@
+.event-form {
+  .input-with-icon input {
+    padding: var(--p-xs) var(--p-md);
+  }
+
+  .time-selectors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--sp-sm);
+
+    &input {
+      cursor: pointer;
+    }
+  }
+}
