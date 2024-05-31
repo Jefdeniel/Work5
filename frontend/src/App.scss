@@ -19,7 +19,7 @@
   --sa-error-700: hsla(5, 77%, 42%, 100);
   --sa-bright: hsla(0, 0%, 100%, 100);
   --sa-grey: hsla(231, 36%, 83%, 100);
-  --sa-dark: hsla(240, 3%, 12%, 100);
+  --sa-dark: hsl(0, 0%, 13%);
   --sa-yellow: hsla(45, 100%, 50%, 100);
 
   /* Font weight */
@@ -455,4 +455,13 @@ ul {
   color: var(--sa-primary-500-base);
   margin-left: 0 !important;
   padding-left: 0 !important;
+}
+
+.back-pattern {
+  width: 120%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -50;
 }
