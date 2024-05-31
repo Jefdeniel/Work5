@@ -1,17 +1,22 @@
 import React from 'react';
+
 import './Button.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   className?: string;
+  linkTo?: string;
 }
 
-const BackButton = ({ text, className }: Props) => {
+const BackButton = ({ text, className, linkTo }: Props) => {
+  const navigate = useNavigate();
+
   const button = (
     <button
       className={`btn btn--icon btn--bordered ${className}`}
       onClick={() => {
-        window.history.back();
+        linkTo ? navigate(linkTo) : navigate('/calendar/main');
       }}
     >
       <svg
