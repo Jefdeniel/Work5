@@ -23,7 +23,7 @@ const CalendarOverviewPage = () => {
 
   const { fetchData: getCalendars } = useFetch('GET', [
     'calendars',
-    calendarId.toString(),
+    // calendarId.toString(),
   ]);
 
   const [calendars, setCalendars] = useState([]);
@@ -51,16 +51,18 @@ const CalendarOverviewPage = () => {
   }, []);
 
   return (
-    <>
-      <Heading level={1}>{t('calendar:calendar.page')}</Heading>
+    <div className={`position-relative`}>
+      <img className={`back-pattern`} src="/img/back-pattern.png" alt="Background pattern" />
+
+      {/* <Heading level={1}>{t('calendar:calendar.page')}</Heading>
       <p>Calendar Overview Page</p>
       <Heading level={2}>DB Fetch</Heading>
       <ul>
         {calendars.map((calendar) => (
           <li key={calendar.id}>{calendar.title}</li>
         ))}
-      </ul>
-    </>
+      </ul> */}
+    </div>
   );
 };
 

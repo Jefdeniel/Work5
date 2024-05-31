@@ -1,34 +1,52 @@
 import { useState } from 'react';
-import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 
 import { Event } from '../../../@types/Events';
 import BaseCalendar from './BaseCalendar';
-import AddEventModal from '../events/Modals/AddEventModal';
+import EditEventModal from '../events/Modals/EditEventModal';
 
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import './Calendar.scss';
 
 // Calendar 2: View on base calendar
 const CalendarView = () => {
   // Event is gonna be used to show the event view of the clicked event
-  const [event, setEvent] = useState<Event>();
+  const [selectedEvent, setSelectedEvent] = useState<Event | undefined>();
+  const [isAddEventModalOpen, setIsAddEventModalOpen] =
+    useState<boolean>(false);
+  const [newEventTimes, setNewEventTimes] = useState<
+    { start: Date; end: Date } | undefined
+  >();
 
-  // Add event to the list
+  // Function to handle opening the AddEventModal
+  const handleAddEvent = ({ start, end }: { start: Date; end: Date }) => {
+    setNewEventTimes({ start, end });
+    setIsAddEventModalOpen(true);
+  };
+
+  // Function to handle closing modals
+  const handleCloseModal = () => {
+    setSelectedEvent(undefined);
+    setIsAddEventModalOpen(false);
+  };
+
+  // // Add event to the list
   // const addEventToList = (event: Event) => {
   //   setEvent(event);
   // };
 
   return (
     <div className="full-calendar">
-      {/* <BaseCalendar
+      <BaseCalendar
         onShowEventView={(event) => {
-          setEvent(event);
+          setSelectedEvent(event);
         }}
-      /> */}
+      />
 
-      {event && (
-        <AddEventModal
-          // setEvent={addEventToList}
-          onClose={() => setEvent(undefined)}
+      {selectedEvent && (
+        <EditEventModal
+          event={selectedEvent}
+          setEvent={setSelectedEvent}
+          onClose={() => setSelectedEvent(undefined)}
         />
       )}
     </div>

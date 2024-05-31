@@ -161,9 +161,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const handleEventClick = (event: Event) => {
     console.log('Event clicked: ', event);
     // TODO: TypeError: Cannot read properties of null (reading 'toString')
-    onShowEventView(event);
-    setSearchQuery('');
-    setFilteredEvents([]);
+    // open EditEventModal with event data
   };
 
   return (
@@ -223,7 +221,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             />
 
             <span
-              className={`heading heading--lg fw-bold date-title position-relative`}
+              className={`heading heading--lg fw-bold text-center date-title position-relative`}
               onClick={handleSearchFocus}
             >
               {dateText}
