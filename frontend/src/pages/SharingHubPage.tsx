@@ -24,7 +24,7 @@ const SharingHubPage = () => {
   return (
     <>
       <Row>
-        <Heading level={1} className="clr-primary mb-small">
+        <Heading level={1} className="heading--lg clr-primary mb-small">
           {t('calendar:sharing-hub.title')}
         </Heading>
         <p className="mb-large">{t('calendar:sharing-hub.description')}</p>
