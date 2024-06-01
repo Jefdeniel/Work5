@@ -20,6 +20,7 @@
   --sa-bright: hsla(0, 0%, 100%, 100);
   --sa-grey: hsla(231, 36%, 83%, 100);
   --sa-dark: hsl(0, 0%, 13%);
+  --sa-dark-dimmed: hsl(0, 0%, 20%);
   --sa-yellow: hsla(45, 100%, 50%, 100);
 
   /* Font weight */
@@ -46,6 +47,10 @@
   --sp-base: 1.5rem;
   --sp-lg: 2rem;
   --sp-xl: 3.6rem;
+}
+
+.dark-theme {
+  --sa-primary-950: hsla(0, 0%, 100%, 100);
 }
 
 /* For browsers that support clamp  */
@@ -321,6 +326,18 @@ ul {
   margin-bottom: var(--sp-xl);
 }
 
+.pad-left-neg {
+  transform: translateX(-0.7rem);
+}
+
+.clr-bright {
+  color: var(--sa-bright);
+}
+
+.clr-dark {
+  color: var(--sa-dark);
+}
+
 .clr-primary {
   color: var(--sa-primary-500-base);
 }
@@ -401,8 +418,6 @@ ul {
 .switch {
   height: 50px;
   width: auto;
-  background-color: var(--sa-bright);
-  margin-bottom: var(--sp-base);
 }
 
 .switch-label {
@@ -457,11 +472,18 @@ ul {
   padding-left: 0 !important;
 }
 
+.pattern-block {
+  height: 75vh;
+  position: relative;
+  top: 62%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
 .back-pattern {
   width: 120%;
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: -50;
 }
