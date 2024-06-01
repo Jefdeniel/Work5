@@ -11,6 +11,8 @@ import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
 import { PlusIcon } from '../../ui/Icon/SvgIcons';
 import Input from '../../ui/Input/Input';
 
+import './navigation.scss';
+
 const menuItems: MenuItem[] = [
   {
     link: '/calendar/create',
@@ -44,11 +46,6 @@ const CalendarNavigation = ({
     isMenuBroken && setIsMenuToggled(false);
   };
 
-  // TODO: fix this
-  // const onLogout = () => {
-  //   console.log('logout');
-  // };
-
   let searchPlaceholder = t('general:navigation.search');
 
   return (
@@ -79,6 +76,7 @@ const CalendarNavigation = ({
           <Col className={`d-flex justify-content-end`}>
             {!isMenuCollapsed && (
               <IconButton
+                className={`settings-btn`}
                 icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
                 onClick={handleSettingsClick}
               />
@@ -103,6 +101,7 @@ const CalendarNavigation = ({
           userAvatars={userAvatars}
           link="/calendar/overview"
         />
+
         <CalendarCard
           img="/img/google-calendar-logo.svg"
           name="Google"
@@ -130,7 +129,7 @@ const CalendarNavigation = ({
               key={link}
               link={link}
               icon={icon}
-              className={className}
+              className={`${className} calendar-overview-card`}
               onClick={handleOnClickMenu}
             >
               {t(label.toString())}

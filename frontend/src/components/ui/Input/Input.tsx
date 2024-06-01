@@ -1,6 +1,8 @@
 import React from 'react';
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
+import { useSettings } from '../../../hooks/useSettings';
+
 import ErrorText from '../ErrorText/ErrorText';
 
 import './Input.scss';
@@ -45,6 +47,7 @@ const Input = ({
   const { t } = useTranslation(['general']);
   const isNotValid = meta?.error?.[0] && meta.touched;
   const [isFocused, setIsFocused] = React.useState(false);
+  const { theme } = useSettings();
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -68,6 +71,7 @@ const Input = ({
         {!isTextArea ? (
           <input
             className={`form-control 
+            ${theme === 'dark' ? 'clr-bright' : ''}
             ${isNotValid ? 'is-invalid' : ''} 
             ${isSmall ? 'small' : ''} 
             ${disabled ? 'disabled' : ''}

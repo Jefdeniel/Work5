@@ -24,7 +24,7 @@
 
   &.ps-active {
     & svg path {
-        fill: var(--sa-primary-500-base);
+      fill: var(--sa-primary-500-base);
     }
   }
 
@@ -39,4 +39,81 @@
 
 .sidebar__calendar-title {
   color: var(--sa-primary-500-base);
+}
+
+.sidebar-toggler .icon-button {
+  align-self: center;
+}
+
+.top-navigation:first-child {
+  background-color: var(--sa-bright);
+  position: relative;
+  z-index: 5;
+}
+
+.dark-theme {
+  & .top-navigation:first-child {
+    background-color: var(--sa-dark);
+    position: relative;
+    z-index: 5;
+  }
+
+  & .ps-sidebar-container {
+    margin-top: 0.7rem;
+
+    & .settings-btn {
+      background-color: var(--sa-primary-100);
+      padding: 0.4rem var(--p-sm);
+      border-radius: var(--br-base);
+
+      &:hover {
+        background-color: var(--sa-primary-300);
+      }
+    }
+
+    & .full-small-calendar {
+      background: none;
+
+      & .react-calendar__month-view,
+      .react-calendar__month-view abbr {
+        color: var(--sa-bright);
+      }
+
+      & .react-calendar__month-view__days__day--neighboringMonth abbr {
+        color: var(--sa-primary-700);
+      }
+    }
+
+    & .ps-menu-button:hover {
+      background-color: var(--sa-grey);
+
+      & .ps-menu-label,
+      & .ps-menu-icon svg path {
+        --sa-primary-950: hsla(233, 63%, 21%, 100);
+
+        color: var(--sa-primary-950);
+        fill: var(--sa-primary-950);
+      }
+    }
+
+    & .ps-menu-label,
+    & .ps-menu-icon svg path {
+      color: var(--sa-bright);
+      fill: var(--sa-bright);
+    }
+  }
+
+  & .sidebar-toggler .icon-button:hover {
+    background-color: var(--sa-primary-300);
+  }
+
+  & .calendar-overview-card {
+    & .ps-menu-button {
+      background: none !important;
+
+      &:hover span {
+        color: var(--sa-bright) !important;
+      }
+    }
+  }
 }

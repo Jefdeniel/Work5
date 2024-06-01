@@ -10,7 +10,7 @@ const ActivityNotificationSelector = ({ children }: Props) => {
 
   return (
     <Row className="d-flex flex-row justify-content-between">
-      <Col>
+      <Col className="p-0">
         <Col className="d-flex flex-row align-items-center">
           <span className="title">
             {t('settings:notifications.activityNotification')}
