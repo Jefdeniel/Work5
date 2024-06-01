@@ -54,9 +54,12 @@
     "passwordNotUpdated": "Mot de passe non mis à jour"
   },
   "profile": {
+    "profile": "Profil",
     "title": "Personnaliser votre profil",
     "changeOptions": "Modifier vos informations de connexion",
     "calendars": "Calendriers",
     "connectAccounts": "Connecter des comptes"
-  }
+  },
+  "generalTitle": "Paramètres",
+  "save": "Sauvegarder"
 }
