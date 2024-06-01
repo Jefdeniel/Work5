@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Container, Row } from 'react-bootstrap';
+
 import CalendarNavigation from '../components/layout/Navigation/CalendarNavigation';
 import NavigationTop from '../components/layout/Navigation/NavigationTop';
+
 import './Layout.scss';
-import { Container, Row } from 'react-bootstrap';
 
 // USER FOR CALENDAR SIDEBAR
 const CalendarLayout = () => {

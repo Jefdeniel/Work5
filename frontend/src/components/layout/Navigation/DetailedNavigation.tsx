@@ -2,7 +2,7 @@ import Logo from '../../ui/Logo';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import DetailedNavItem from './DetailedNavItem';
 import BackButton from '../../ui/Button/BackButton';
@@ -13,7 +13,6 @@ import Icon from '../../ui/Icon/Icon';
 import {
   CustomizeIcon,
   NotificationIcon,
-  OverviewIcon,
   SharingHubIcon,
 } from '../../ui/Icon/SvgIcons';
 
@@ -35,11 +34,6 @@ const menuItems: MenuItem[] = [
     label: 'general:navigation.customize',
     icon: <CustomizeIcon />,
   },
-  {
-    link: '/calendar',
-    label: 'general:navigation.overview',
-    icon: <OverviewIcon />,
-  },
 ];
 
 const DetailedNavigation = ({
@@ -50,6 +44,7 @@ const DetailedNavigation = ({
   setIsMenuBroken,
 }: SideBarProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation(['general']);
 
   const handleOnClickMenu = (link: string) => {
@@ -98,9 +93,17 @@ const DetailedNavigation = ({
         </Row>
 
         {!isMenuCollapsed && (
-          <BackButton text={t('general:buttons.back')} className={`mb-base`} />
+          <BackButton
+            text={t('general:buttons.back')}
+            className={`mb-base`}
+            linkTo={
+              location.pathname === '/calendar/main'
+                ? '/calendar/overview'
+                : undefined
+            }
+          />
         )}
-        {!isMenuCollapsed && <Calendar />}
+        {!isMenuCollapsed && <Calendar noNavigation />}
 
         <Menu
           menuItemStyles={{

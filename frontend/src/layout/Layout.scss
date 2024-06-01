@@ -18,3 +18,17 @@
     padding: var(--sp-base) 20px;
   }
 }
+
+.dark-theme {
+  color: var(--sa-bright);
+  background: var(--sa-dark) !important;
+
+  & .css-1de2x4g,
+  & .container-fluid {
+    background: none !important;
+  }
+
+  & .rbc-label {
+    background-color: var(--sa-dark) !important;
+  }
+}

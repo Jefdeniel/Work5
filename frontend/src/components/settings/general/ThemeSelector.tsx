@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { FieldMetaState } from 'react-final-form';
-import Select from '../../ui/Select/Select';
 import { Col, Row } from 'react-bootstrap';
+
+import Select from '../../ui/Select/Select';
 
 interface ThemeSelectorProps {
   initialValue?: string;

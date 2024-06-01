@@ -1,0 +1,12 @@
+{
+  "modals": {
+    "titleInput": "Event title",
+    "descriptionInput": "Description",
+    "add": {
+      "title": "Create event"
+    },
+    "edit": {
+      "title": "Edit event"
+    }
+  }
+}

@@ -19,9 +19,9 @@
   }
 
   & .modal__body {
-    padding: var(--sp-base) var(--sp-base) var(--sp-lg) var(--sp-base);
+    padding: var(--sp-base) var(--sp-base) calc(var(--sp-lg) + .5rem) var(--sp-base);
 
-    & > div:first-child {
+    & form > div:first-child {
       margin-top: -0.5rem;
     }
   }

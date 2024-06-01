@@ -59,11 +59,11 @@ const ProfileButton = (props: Props) => {
     <div>
       <Link to="/profile" className="profile-btn">
         <span>{t('settings:profile.profile')}</span>
-        {userAvatar ? (
+        {/* {userAvatar ? (
           <img src={avatarUrl} alt={`Profile picture of ${userFirstName}`} />
-        ) : (
+        ) : ( */}
           <Icon src="/icons/user-profile.svg" alt="User profile icon" />
-        )}
+        {/* )} */}
       </Link>
     </div>
   );

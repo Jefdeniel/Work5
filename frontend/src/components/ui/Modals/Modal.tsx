@@ -2,6 +2,7 @@ import { Modal as BootstrapModal, Col } from 'react-bootstrap';
 import Heading from '../Heading/Heading';
 
 import IconButton from '../IconButton/IconButton';
+
 import './Modal.scss';
 
 interface Props {

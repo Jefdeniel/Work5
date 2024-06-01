@@ -17,11 +17,12 @@ import EventTimeSelector from '../Selectors/EventTimeSelector';
 import './EventModal.scss';
 
 interface Props {
-  onClose?: () => void;
+  event: Event;
+  onClose: () => void;
   setEvent: (event: Event) => void;
 }
 
-const AddEventModal = ({ onClose }: Props) => {
+const EditEventModal = ({ event, onClose, setEvent }: Props) => {
   const { t } = useTranslation(['events']);
   const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
     'events',
@@ -39,7 +40,7 @@ const AddEventModal = ({ onClose }: Props) => {
     setEndTime(end);
   };
 
-  const handleAddEvent = async (values: Event) => {
+  const handleUpdateEvent = async (values: Event) => {
     try {
       const response = await addEvent(
         {},
@@ -53,16 +54,16 @@ const AddEventModal = ({ onClose }: Props) => {
       );
 
       if (response.ok) {
-        console.log('New event:', values); // Debugging
-        toast.success(t('events:toasts.addSuccess'));
+        console.log('Updated event:', values); // Debugging
+        toast.success(t('events:toasts.updateSuccess'));
         onClose(); // Close the modal after successful submission
       } else {
-        toast.error(t('events:toasts.addError'));
-        throw new Error('Failed to save event: ' + response.statusText);
+        toast.error(t('events:toasts.updateError'));
+        throw new Error('Failed to update event: ' + response.statusText);
       }
     } catch (error) {
-      toast.error(t('events:toasts.addError') + ': ' + error.message);
-      console.error('Error adding event:', error); // Debugging
+      toast.error(t('events:toasts.updateError') + ': ' + error.message);
+      console.error('Error updating event:', error); // Debugging
     }
   };
 
@@ -74,11 +75,11 @@ const AddEventModal = ({ onClose }: Props) => {
     <Modal
       show={true}
       onClose={onClose}
-      title={t('events:modals.add.title')}
+      title={t('events:modals.edit.title')}
       size="sm"
     >
       <Form
-        onSubmit={handleAddEvent}
+        onSubmit={handleUpdateEvent}
         render={({ handleSubmit }) => (
           <form className={`event-form`} onSubmit={handleSubmit}>
             <Field name="title" validate={Validators.required()}>
@@ -143,4 +144,4 @@ const AddEventModal = ({ onClose }: Props) => {
   );
 };
 
-export default AddEventModal;
+export default EditEventModal;

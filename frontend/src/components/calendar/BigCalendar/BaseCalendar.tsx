@@ -37,6 +37,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
   const [isSmallCalendarOpen, setIsSmallCalendarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const { events } = useFetchedEvents();
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
@@ -72,7 +74,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     if (view === Views.WEEK) {
       const start = moment(date).startOf('week');
       const end = moment(date).endOf('week');
-      return `${start.format('MMMM DD')} - ${end.format('MMMM DD')}`;
+      return `${start.format('DD/MM/YY')} - ${end.format('DD/MM/YY')}`;
     }
     if (view === Views.MONTH) return moment(date).format('MMMM YYYY');
   }, [date, view]);
@@ -139,6 +141,29 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }
   };
 
+  // Handle search input
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query) {
+      const filteredEvents = events.filter((event) =>
+        event.title.toLowerCase().includes(query.toLowerCase())
+      );
+      // Set filtered events
+      setFilteredEvents(filteredEvents);
+    } else {
+      // Reset filtered events
+      setFilteredEvents([]);
+    }
+  };
+
+  const handleEventClick = (event: Event) => {
+    console.log('Event clicked: ', event);
+    // TODO: TypeError: Cannot read properties of null (reading 'toString')
+    // open EditEventModal with event data
+  };
+
   return (
     // TODO: Add weekend visibility toggle
     <div className={'full-calendar'}>
@@ -146,14 +171,30 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
 
       <div className="custom-toolbar">
         <Row className={`my-4 d-flex align-items-center search-row`}>
-          <Col>
+          <Col className={`full-search-block`}>
             {/* TODO: Add translation */}
             <Input
               className="toolbar__search"
               isSearch
               placeholder={t('calendar:calendar.search')}
               type="search"
+              defaultValue={searchQuery}
+              onChange={handleSearchInput}
             />
+
+            {filteredEvents.length > 0 && (
+              <ul className="search-results">
+                {filteredEvents.map((event) => (
+                  <li
+                    key={event.id}
+                    className="search-result-item"
+                    onClick={() => handleEventClick(event)}
+                  >
+                    {event.title}
+                  </li>
+                ))}
+              </ul>
+            )}
           </Col>
 
           <Col className={`toolbar-top d-flex justify-content-end`}>
@@ -180,7 +221,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             />
 
             <span
-              className={`heading heading--lg fw-bold date-title position-relative`}
+              className={`heading heading--lg fw-bold text-center date-title position-relative`}
               onClick={handleSearchFocus}
             >
               {dateText}
@@ -190,6 +231,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
               <SmallCalendar
                 className={`small-calendar position-absolute`}
                 onChange={handleDateChange}
+                nextLabel={<Icon src="/icons/arrow.svg" alt="Arrow icon" />}
+                prevLabel={<Icon src="/icons/arrow.svg" alt="Arrow icon" />}
+                next2Label={
+                  <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                }
+                prev2Label={
+                  <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                }
               />
             )}
 
