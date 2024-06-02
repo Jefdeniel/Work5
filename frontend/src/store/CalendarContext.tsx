@@ -25,7 +25,7 @@ export const CalendarContextProvider = ({
   const { fetchData: getCalendarUsers } = useFetch('GET', [
     'calendar_users',
     'user_id',
-    user_id,
+    user_id ? user_id.toString() : '',
   ]);
 
   useEffect(() => {
@@ -35,12 +35,15 @@ export const CalendarContextProvider = ({
       if (response.ok) {
         const data = (await response.json()) as CalendarUser[];
         setCalendars(data.map((calendarUser) => calendarUser.calendar));
+      } else {
+        console.error('Failed to fetch calendar users');
       }
     };
 
-    calendars && void fetchData();
-    console.log(calendars.length);
-  }, []);
+    if (user_id) {
+      calendars && void fetchData();
+    }
+  }, [user_id]);
 
   const contextValue: CalendarContextType = {
     calendars,
