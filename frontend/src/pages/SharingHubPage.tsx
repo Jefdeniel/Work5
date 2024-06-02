@@ -7,15 +7,26 @@ import {
   EXTERNAL_SERVICES_ITEMS,
 } from '../constants/sharing-hub';
 import useSetTitle from '../hooks/setTitle';
+import { useState } from 'react';
+import ExcelExportModal from '../components/sharing-hub/Modals/ExcelExportModal';
+import { Calendar } from '../@types/Calendar';
 
 const SharingHubPage = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar:sharing-hub.title'));
 
+  // State
+  const [showExcelModal, setShowExcelModal] = useState(false);
+  const calendar: Calendar = {}; // Populate this with actual calendar data
+
+  // Modal handlers
+  const openExcelModal = () => setShowExcelModal(true);
+  const closeExcelModal = () => setShowExcelModal(false);
+
   // Function map
   const functionMap: Record<string, () => void> = {
     exportAsPDF: () => {},
-    exportAsExcel: () => {},
+    openExcelModal,
     handleSlackClick: () => {},
     handleGoogleCalendarClick: () => {},
     handleOutlookClick: () => {},
@@ -29,7 +40,6 @@ const SharingHubPage = () => {
         </Heading>
         <p className="mb-large">{t('calendar:sharing-hub.description')}</p>
       </Row>
-
       <Row className={`mb-large`}>
         <Heading level={3}>
           <p>{t('calendar:sharing-hub.exportAgendaAs')}</p>
@@ -40,13 +50,11 @@ const SharingHubPage = () => {
           className="btn--primary"
         />
       </Row>
-
       <Row className={`mb-large`}>
         <Heading level={3}>
           <p>{t('calendar:sharing-hub.usersInAgenda')}</p>
         </Heading>
       </Row>
-
       <Row>
         <Heading level={3}>
           <p>{t('calendar:sharing-hub.integrateExternal')}</p>
@@ -57,6 +65,9 @@ const SharingHubPage = () => {
           className="btn--primary"
         />
       </Row>
+      {showExcelModal && (
+        <ExcelExportModal onClose={closeExcelModal} calendar={calendar} />
+      )}
     </>
   );
 };
