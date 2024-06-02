@@ -23,7 +23,7 @@ import { SettingsContext } from '../../store/SettingsContext';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
-  useSetTitle(t('settings:title'));
+  useSetTitle(t('settings:generalTitle'));
   const {
     language,
     setLanguage,
@@ -91,6 +91,8 @@ const SettingsPage = () => {
 
   return (
     <>
+      <Heading level={1} className="heading--lg clr-primary mb-base p-0 pad-left-neg" />
+
       <Form
         onSubmit={handleSaveSettings}
         initialValues={{
@@ -104,11 +106,12 @@ const SettingsPage = () => {
           activity_notifications,
         }}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="p-0">
             <Row className="settings-block">
-              <Heading level={2} isUnderlined>
+              <Heading className={`heading--md`} level={2} isUnderlined>
                 {t('settings:general.title')}
               </Heading>
+
               <Field name="language" validate={Validators.compose()}>
                 {({ input, meta }) => (
                   <LanguageSelector
@@ -119,6 +122,7 @@ const SettingsPage = () => {
                   />
                 )}
               </Field>
+
               <Field name="time_zone" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <TimeZoneSelector
@@ -129,6 +133,7 @@ const SettingsPage = () => {
                   />
                 )}
               </Field>
+
               <Field name="time_format" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <TimeFormatSelector
@@ -139,6 +144,7 @@ const SettingsPage = () => {
                   />
                 )}
               </Field>
+
               <Field name="theme" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <ThemeSelector
@@ -152,13 +158,14 @@ const SettingsPage = () => {
             </Row>
 
             <Row className="settings-block">
-              <Heading level={2} isUnderlined>
+              <Heading className={`heading--md`} level={2} isUnderlined>
                 {t('settings:notifications.title')}
               </Heading>
+
               <Field name="event_reminder" type="checkbox">
                 {({ input }) => (
                   <EventReminderSelector>
-                    <div className="form-check switch">
+                    <div className="form-check switch d-flex align-items-center">
                       <label className="switch-label">
                         <input
                           id="switch"
@@ -172,10 +179,11 @@ const SettingsPage = () => {
                   </EventReminderSelector>
                 )}
               </Field>
+
               <Field name="activity_notifications" type="checkbox">
                 {({ input }) => (
                   <ActivityNotificationSelector>
-                    <div className="form-check switch">
+                    <div className="form-check switch d-flex align-items-center">
                       <label className="switch-label">
                         <input
                           id="switch"
@@ -191,10 +199,11 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <Row className="settings-block">
-              <Heading level={2} isUnderlined>
-                {t('settings:general.title')}
+            <Row className="settings-block p-0">
+              <Heading className={`heading--md`} level={2} isUnderlined>
+                {t('settings:calendarView.title')}
               </Heading>
+
               <Field name="week_start_day" validate={Validators.required()}>
                 {({ input, meta }) => (
                   <WeekStartsOnSelector
@@ -218,7 +227,7 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <div className="d-flex justify-content-end">
+            <div className="pad-left-neg mt-3 mb-5">
               <Button
                 className="btn--success"
                 type="submit"

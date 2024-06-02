@@ -3,6 +3,8 @@ import Button from '../components/ui/Button/Button';
 import useSetTitle from '../hooks/setTitle';
 import { useTranslation } from 'react-i18next';
 import AddEventModal from '../components/calendar/events/Modals/AddEventModal';
+import { Row } from 'react-bootstrap';
+import Heading from '../components/ui/Heading/Heading';
 
 const CustomizePage = () => {
   useSetTitle('Customize');
@@ -23,6 +25,12 @@ const CustomizePage = () => {
 
   return (
     <>
+      <Row>
+        <Heading level={1} className="heading--lg clr-primary mb-small">
+          {t('calendar:sharing-hub.title')}
+        </Heading>
+      </Row>
+
       <Button
         text={t('general:buttons.add')}
         onClick={openModal}

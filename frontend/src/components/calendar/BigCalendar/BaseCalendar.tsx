@@ -4,6 +4,7 @@ import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useSettings } from '../../../hooks/useSettings';
 
 import { VIEW_OPTIONS } from '../../../constants/calendar';
 import { SettingsContext } from '../../../store/SettingsContext';
@@ -34,6 +35,7 @@ type Keys = keyof typeof Views;
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const { t } = useTranslation(['calendar']);
+  const { theme } = useSettings();
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
   const [isSmallCalendarOpen, setIsSmallCalendarOpen] = useState(false);
@@ -74,7 +76,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     if (view === Views.WEEK) {
       const start = moment(date).startOf('week');
       const end = moment(date).endOf('week');
-      return `${start.format('DD/MM/YY')} - ${end.format('DD/MM/YY')}`;
+      return `${start.format('DD/MM')} - ${end.format('DD/MM')}`;
     }
     if (view === Views.MONTH) return moment(date).format('MMMM YYYY');
   }, [date, view]);
@@ -216,7 +218,17 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
 
             <IconButton
               className={`click-btn`}
-              icon={<img src="/icons/arrow.svg" alt="Arrow icon" />}
+              icon={
+                theme === 'dark' ? (
+                  <img
+                    className="arrow-bright"
+                    src="/icons/arrow-bright.svg"
+                    alt="Arrow icon"
+                  />
+                ) : (
+                  <img src="/icons/arrow.svg" alt="Arrow icon" />
+                )
+              }
               onClick={onPreviousClick}
             />
 
@@ -245,11 +257,15 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             <IconButton
               className={`click-btn`}
               icon={
-                <img
-                  className={`rotate-180`}
-                  src="/icons/arrow.svg"
-                  alt="Arrow icon"
-                />
+                theme === 'dark' ? (
+                  <img
+                    className="arrow-bright--last rotate-180"
+                    src="/icons/arrow-bright.svg"
+                    alt="Arrow icon"
+                  />
+                ) : (
+                  <img src="/icons/arrow.svg" alt="Arrow icon" />
+                )
               }
               onClick={onNextClick}
             />

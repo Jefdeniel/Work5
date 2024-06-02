@@ -35,7 +35,7 @@ const NotificationPage = () => {
 
   return (
     <div>
-      <Heading className={`clr-primary mb-small`} level={1}>
+      <Heading className={`heading--lg clr-primary mb-small`} level={1}>
         {t('calendar:notifications.title')}
       </Heading>
 

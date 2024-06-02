@@ -54,9 +54,12 @@
     "passwordNotUpdated": "Wachtwoord niet bijgewerkt"
   },
   "profile": {
+    "profile": "Profiel",
     "title": "Pas je profiel aan",
     "changeOptions": "Wijzig je logingegevens",
     "calendars": "Kalenders",
     "connectAccounts": "Verbind accounts"
-  }
+  },
+  "generalTitle": "Instellingen",
+  "save": "Opslaan"
 }

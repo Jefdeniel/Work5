@@ -85,6 +85,7 @@ const DetailedNavigation = ({
           <Col className={`d-flex justify-content-end`}>
             {!isMenuCollapsed && (
               <IconButton
+                className={`settings-btn`}
                 icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
                 onClick={handleSettingsClick}
               />
@@ -95,7 +96,7 @@ const DetailedNavigation = ({
         {!isMenuCollapsed && (
           <BackButton
             text={t('general:buttons.back')}
-            className={`mb-base`}
+            className={`back-btn mb-base`}
             linkTo={
               location.pathname === '/calendar/main'
                 ? '/calendar/overview'

@@ -5,3 +5,9 @@
   padding: 0 0 var(--p-xxs) 0 !important;
   border-bottom: 1px solid var(--sa-primary-950);
 }
+
+.dark-theme {
+  & .underline {
+    border-bottom: 1px solid var(--sa-grey);
+  }
+}

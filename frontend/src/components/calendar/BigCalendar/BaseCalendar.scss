@@ -113,3 +113,17 @@
     }
   }
 }
+
+.dark-theme {
+  & .rbc-day-slot .rbc-time-slot {
+    border-top: 1px solid var(--sa-dark-dimmed);
+  }
+
+  & .arrow-bright {
+    transform: scale(0.8);
+  }
+
+  & .arrow-bright--last {
+    transform: scale(0.8) rotate(180deg);
+  }
+}

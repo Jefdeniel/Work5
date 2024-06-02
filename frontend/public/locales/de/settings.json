@@ -54,9 +54,12 @@
     "passwordNotUpdated": "Passwort"
   },
   "profile": {
+    "profile": "Profil",
     "title": "Passen Sie Ihr Profil an",
     "changeOptions": "Ändern Sie Ihre Anmeldeinformationen",
     "calendars": "Kalender",
     "connectAccounts": "Konten verbinden"
-  }
+  },
+  "generalTitle": "Einstellungen",
+  "save": "Speichern"
 }

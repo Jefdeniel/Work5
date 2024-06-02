@@ -48,7 +48,7 @@ const ProfilePage = () => {
       <ProfilePageHeader />
 
       <Row className="mb-base mt-large">
-        <Heading level={3}>{t('settings:profile.changeOptions')}</Heading>
+        <Heading className={`mb-3`} level={3}>{t('settings:profile.changeOptions')}</Heading>
         <ActionButtonList
           items={CHANGE_OPTIONS_ITEMS}
           functionMap={functionMap}
@@ -57,11 +57,11 @@ const ProfilePage = () => {
       </Row>
 
       <Row className="mb-base mt-large">
-        <Heading level={3}>{t('settings:profile.calendars')}</Heading>
+        <Heading className={`mb-3`} level={3}>{t('settings:profile.calendars')}</Heading>
       </Row>
 
       <Row className="mb-base mt-large">
-        <Heading level={3}>{t('settings:profile.connectAccounts')}</Heading>
+        <Heading className={`mb-3`} level={3}>{t('settings:profile.connectAccounts')}</Heading>
         <ActionButtonList
           items={CONNECT_ITEMS}
           functionMap={functionMap}
@@ -70,7 +70,7 @@ const ProfilePage = () => {
       </Row>
 
       <Row className="mb-base mt-large">
-        <Heading level={3}>{t('settings:account.title')}</Heading>
+        <Heading className={`mb-3`} level={3}>{t('settings:account.title')}</Heading>
         <Signout className={`btn btn--danger`} />
 
         <DeleteAccount

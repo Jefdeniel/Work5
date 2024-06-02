@@ -11,6 +11,10 @@
     right: 0;
   }
 
+  & .card__text {
+    margin-left: var(--sp-base);
+  }
+
   & .card__title {
     color: var(--sa-primary-500-base);
     margin-bottom: var(--sp-sm);
@@ -52,5 +56,11 @@
 @include screen(monitors) {
   .card .message-text {
     transform: translateX(50%) translateY(-50%);
+  }
+}
+
+.dark-theme {
+  & .card {
+    background-color: var(--sa-dark-dimmed);
   }
 }

@@ -5,10 +5,12 @@ import { useContext, useEffect, useState } from 'react';
 import { CalendarContext } from '../../store/CalendarContext';
 import useFetch from '../../hooks/useFetch';
 import { toast } from 'react-toastify';
+import { useSettings } from '../../hooks/useSettings';
 
 const CalendarOverviewPage = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar:calendar.title'));
+  const { theme } = useSettings();
 
   const contextUserCalendars = useContext(CalendarContext);
   const userCalendars = contextUserCalendars.calendars;
@@ -51,8 +53,20 @@ const CalendarOverviewPage = () => {
   }, []);
 
   return (
-    <div className={`position-relative`}>
-      <img className={`back-pattern`} src="/img/back-pattern.png" alt="Background pattern" />
+    <div className={`pattern-block`}>
+      {theme === 'dark' ? (
+        <img
+          className={`back-pattern`}
+          src="/img/back-pattern-bright.png"
+          alt="Background pattern"
+        />
+      ) : (
+        <img
+          className={`back-pattern`}
+          src="/img/back-pattern.png"
+          alt="Background pattern"
+        />
+      )}
 
       {/* <Heading level={1}>{t('calendar:calendar.page')}</Heading>
       <p>Calendar Overview Page</p>

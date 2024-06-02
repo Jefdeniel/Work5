@@ -42,11 +42,11 @@ const LanguageSelector = ({
   }));
 
   return (
-    <Row className="full-select d-flex flex-row">
+    <Row className="full-select d-flex flex-row align-items-center">
       <Col className="mb-2">
         <Row>
           <span className="title">{t('settings:general.language')}</span>
-          <small className="description">
+          <small className="description p-0">
             {t('settings:general.languageDescription')}
           </small>
         </Row>

@@ -96,3 +96,13 @@
     }
   }
 }
+
+.dark-theme {
+  & .full-input .title {
+    background-color: var(--sa-dark);
+  }
+
+  & .form-control:focus {
+    color: var(--sa-bright);
+  }
+}

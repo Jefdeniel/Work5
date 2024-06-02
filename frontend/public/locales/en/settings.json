@@ -59,5 +59,7 @@
     "changeOptions": "Change your login information",
     "calendars": "Calendars",
     "connectAccounts": "Connect Accounts"
-  }
+  },
+  "generalTitle": "Settings",
+  "save": "Save"
 }

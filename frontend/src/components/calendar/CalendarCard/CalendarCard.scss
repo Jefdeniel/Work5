@@ -1,7 +1,7 @@
 .calendar-card {
   border-radius: var(--br-lg);
+  margin-bottom: var(--sp-base);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   overflow: hidden;
 
@@ -51,4 +51,10 @@
 
 .icon-button {
   align-self: flex-start;
+}
+
+.dark-theme {
+  & .calendar-card {
+    color: var(--sa-bright);
+  }
 }

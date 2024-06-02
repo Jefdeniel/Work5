@@ -9,8 +9,8 @@ const EventReminderSelector = ({ children }: Props) => {
   const { t } = useTranslation(['settings']);
 
   return (
-    <Row className="d-flex flex-row justify-content-between">
-      <Col>
+    <Row className="mb-4 d-flex flex-row justify-content-between align-items-center">
+      <Col className="p-0">
         <Col className="d-flex flex-row align-items-center">
           <span className="title">
             {t('settings:notifications.eventReminder')}

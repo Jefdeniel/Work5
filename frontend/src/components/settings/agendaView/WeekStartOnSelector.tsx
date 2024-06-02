@@ -43,13 +43,13 @@ const WeekStartsOnSelector = ({
 
   return (
     <>
-      <Row className="full-select d-flex flex-row gap-2">
+      <Row className="full-select d-flex flex-row align-items-center gap-2">
         <Col>
           <Row>
             <span className="title">
               {t('settings:calendarView.weekStartPreference')}
             </span>
-            <small className="description">
+            <small className="description p-0">
               {t('settings:calendarView.weekStartPreferenceDescription')}
             </small>
           </Row>

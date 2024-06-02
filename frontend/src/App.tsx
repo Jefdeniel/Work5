@@ -19,6 +19,7 @@ import ProfilePage from './pages/ProfilePage';
 import Register from './pages/Auth/Register';
 import GoogleCalendar from './pages/Calendar/GoogleCalendar';
 import CalendarOverviewPage from './pages/Calendar/CalendarOverviewPage';
+import ScrollManager from './components/scrollManager/ScrollManager';
 
 function App() {
   const auth = useAuth();
@@ -26,48 +27,52 @@ function App() {
   Settings.defaultLocale = i18n.language;
 
   return (
-    <Routes>
-      {auth.isLoggedIn ? (
-        <>
-          {/* Main layout for general pages */}
-          <Route element={<Layout />}>
-            <Route
-              path="/"
-              element={<Navigate to="/calendar/main" replace />}
-            />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="settings" element={<SettingsPage />} />
-          </Route>
+    <>
+      <ScrollManager />
 
-          {/* Calendar specific routes with CalendarLayout */}
-          <Route path="/calendar" element={<CalendarLayout />}>
-            <Route path="overview" element={<CalendarOverviewPage />} />
-            <Route path="create" element={<CreateCalendar />} />
-          </Route>
-          <Route path="/calendar" element={<Layout />}>
-            <Route path="main" element={<CalendarPage />} />
-            <Route path="google" element={<GoogleCalendar />} />
-          </Route>
+      <Routes>
+        {auth.isLoggedIn ? (
+          <>
+            {/* Main layout for general pages */}
+            <Route element={<Layout />}>
+              <Route
+                path="/"
+                element={<Navigate to="/calendar/main" replace />}
+              />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="settings" element={<SettingsPage />} />
+            </Route>
 
-          {/* Account specific routes under /calendar but using a different layout */}
-          <Route path="/calendar/notifications" element={<Layout />}>
-            <Route index element={<NotificationPage />} />
+            {/* Calendar specific routes with CalendarLayout */}
+            <Route path="/calendar" element={<CalendarLayout />}>
+              <Route path="overview" element={<CalendarOverviewPage />} />
+              <Route path="create" element={<CreateCalendar />} />
+            </Route>
+            <Route path="/calendar" element={<Layout />}>
+              <Route path="main" element={<CalendarPage />} />
+              <Route path="google" element={<GoogleCalendar />} />
+            </Route>
+
+            {/* Account specific routes under /calendar but using a different layout */}
+            <Route path="/calendar/notifications" element={<Layout />}>
+              <Route index element={<NotificationPage />} />
+            </Route>
+            <Route path="/calendar/sharing-hub" element={<Layout />}>
+              <Route index element={<SharingHubPage />} />
+            </Route>
+            <Route path="/calendar/customize" element={<Layout />}>
+              <Route index element={<CustomizePage />} />
+            </Route>
+          </>
+        ) : (
+          <Route element={<AccountLayout />}>
+            <Route index path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
-          <Route path="/calendar/sharing-hub" element={<Layout />}>
-            <Route index element={<SharingHubPage />} />
-          </Route>
-          <Route path="/calendar/customize" element={<Layout />}>
-            <Route index element={<CustomizePage />} />
-          </Route>
-        </>
-      ) : (
-        <Route element={<AccountLayout />}>
-          <Route index path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-      )}
-    </Routes>
+        )}
+      </Routes>
+    </>
   );
 }
 

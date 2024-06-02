@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useSettings } from '../hooks/useSettings';
 import { Container, Row } from 'react-bootstrap';
 
 import CalendarNavigation from '../components/layout/Navigation/CalendarNavigation';
@@ -12,6 +13,7 @@ const CalendarLayout = () => {
   const [isMenuBroken, setIsMenuBroken] = useState(false);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const [isMenuToggled, setIsMenuToggled] = useState(false);
+  const { theme } = useSettings();
 
   const handleMenuClose = () => {
     if (isMenuBroken) {
@@ -21,7 +23,10 @@ const CalendarLayout = () => {
     }
   };
   return (
-    <div className="d-flex flex-row p-0" style={{ minHeight: '100%' }}>
+    <div
+      className={`d-flex flex-row p-0 ${theme === 'dark' ? 'dark-theme' : ''}`}
+      style={{ minHeight: '100%' }}
+    >
       <CalendarNavigation
         isMenuBroken={isMenuBroken}
         isMenuCollapsed={isMenuCollapsed}
