@@ -38,6 +38,9 @@
     "description": "Beheer hoe uw gegevens worden gedeeld en geïntegreerd. Toegang tot instellingen en opties voor het delen van informatie met andere gebruikers of diensten.",
     "usersInAgenda": "Gebruikers in Agenda",
     "exportAgendaAs": "Agenda Exporteren Als",
-    "integrateExternal": "Externe Diensten Integreren"
+    "integrateExternal": "Externe Diensten Integreren",
+    "exportExcel": "Exporteer naar Excel",
+    "exportPdf": "Exporteer naar PDF",
+    "export": "Exporteer"
   }
 }

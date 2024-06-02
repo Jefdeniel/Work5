@@ -38,6 +38,9 @@
     "description": "Verwalten Sie, wie Ihre Daten geteilt und integriert werden. Greifen Sie auf Einstellungen und Optionen für das Teilen von Informationen mit anderen Benutzern oder Diensten zu.",
     "usersInAgenda": "Benutzer in der Agenda",
     "exportAgendaAs": "Agenda exportieren als",
-    "integrateExternal": "Externe Dienste integrieren"
+    "integrateExternal": "Externe Dienste integrieren",
+    "exportExcel": "Excel exportieren",
+    "exportPdf": "PDF exportieren",
+    "export": "Exportieren"
   }
 }

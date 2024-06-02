@@ -38,6 +38,9 @@
     "description": "Gérez la manière dont vos données sont partagées et intégrées. Accédez aux paramètres et options pour partager des informations avec d'autres utilisateurs ou services.",
     "usersInAgenda": "Utilisateurs dans l'agenda",
     "exportAgendaAs": "Exporter l'agenda comme",
+    "exportExcel": "Export l'agenda en Excel",
+    "exportPdf": "Export l'agenda en PDF",
+    "export": "Exporter",
     "integrateExternal": "Intégrer des services externes"
   }
 }
