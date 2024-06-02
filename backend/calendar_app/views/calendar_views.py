@@ -104,7 +104,7 @@ class CalendarViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-    def dispatch(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         if "get_by_ids" in request.query_params:
             return self.get_by_ids(request, *args, **kwargs)
-        return super().dispatch(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
