@@ -44,7 +44,7 @@ const EventRepeatSelector = ({
   meta,
   ...rest
 }: SexSelectorProps) => {
-  const { t } = useTranslation(['patients']);
+  const { t } = useTranslation(['calendars']);
 
   const handlePeriodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(e.target.value);
@@ -58,15 +58,7 @@ const EventRepeatSelector = ({
 
   return (
     <>
-      {/* <Row>
-        <Col className="full-select d-flex flex-col justify-content-center">
-          <small className="description">
-            {t('settings:calendarView.weekendVisibilityToggleDescription')}
-          </small>
-        </Col>
-        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0"> */}
       <Select
-        title={t('patients:patientInfo.sex')}
         type="select"
         defaultValue={initialValue}
         onChange={handlePeriodChange}
@@ -74,8 +66,6 @@ const EventRepeatSelector = ({
         meta={meta}
         {...rest}
       />
-      {/* </Col>
-      </Row> */}
     </>
   );
 };

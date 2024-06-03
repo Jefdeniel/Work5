@@ -10,7 +10,7 @@ export const EXPORT_AGENDA_ITEMS: actionItem[] = [
     label: 'PDF',
   },
   {
-    onClick: 'exportAsExcel',
+    onClick: 'openExcelModal',
     label: 'Excel sheet',
   },
 ];

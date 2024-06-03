@@ -1,0 +1,27 @@
+{
+  "eventInfo": {
+    "title": "Titre",
+    "description": "Description",
+    "start": "Début",
+    "end": "Fin",
+    "location": "Lieu",
+    "status": "Statut",
+    "priority": "Priorité",
+    "allDay": "Toute la journée"
+  },
+  "modals": {
+    "add": {
+      "title": "Ajouter un événement"
+    }
+  },
+  "buttons": {
+    "add": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "toasts": {
+    "added": "Événement ajouté",
+    "updated": "Événement mis à jour",
+    "deleted": "Événement supprimé"
+  }
+}

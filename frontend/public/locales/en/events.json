@@ -1,12 +1,27 @@
 {
+  "eventInfo": {
+    "title": "Title",
+    "description": "Description",
+    "start": "Start",
+    "end": "End",
+    "location": "Location",
+    "status": "Status",
+    "priority": "Priority",
+    "allDay": "All day"
+  },
   "modals": {
-    "titleInput": "Event title",
-    "descriptionInput": "Description",
     "add": {
-      "title": "Create event"
-    },
-    "edit": {
-      "title": "Edit event"
+      "title": "Add event"
     }
+  },
+  "buttons": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "toasts": {
+    "added": "Event added",
+    "updated": "Event updated",
+    "deleted": "Event deleted"
   }
 }

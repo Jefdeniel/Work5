@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..models import Event
 from ..serializers import EventSerializer
+from rest_framework.decorators import action
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -46,3 +47,9 @@ class EventViewSet(viewsets.ModelViewSet):
         return Response(
             {"message": "Event deleted successfully"}, status=status.HTTP_204_NO_CONTENT
         )
+
+    @action(detail=False, methods=["get"], url_path="calendar/(?P<calendar_id>[^/.]+)")
+    def get_events_by_calendar(self, request, calendar_id=None):
+        events = self.queryset.filter(calendar_id=calendar_id)
+        serializer = self.get_serializer(events, many=True)
+        return Response(serializer.data)

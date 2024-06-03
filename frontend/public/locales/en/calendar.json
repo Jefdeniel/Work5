@@ -41,6 +41,9 @@
     "description": "Manage how your data is shared and integrated. Access settings and options for sharing information with other users or services.",
     "usersInAgenda": "Users in Agenda",
     "exportAgendaAs": "Export Agenda As",
+    "exportExcel": "Export Excel",
+    "exportPDF": "Export PDF",
+    "export": "Export",
     "integrateExternal": "Integrate External Services"
   }
 }
