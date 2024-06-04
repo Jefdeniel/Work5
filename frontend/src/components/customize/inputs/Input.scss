@@ -1,0 +1,30 @@
+.label-color-inputs {
+  & .input-intro {
+    margin-bottom: var(--sp-base);
+  }
+
+  & .input-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    column-gap: var(--sp-xl);
+
+    & .input-item label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+    }
+
+    & .input {
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+
+      width: 28px;
+      height: 28px;
+      background: none;
+      border: none;
+      border-radius: var(--br-full);
+      cursor: pointer;
+    }
+  }
+}
