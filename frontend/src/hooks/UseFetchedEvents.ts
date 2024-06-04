@@ -4,10 +4,16 @@ import { DateTime } from 'ts-luxon';
 
 import useFetch from './useFetch';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 const useFetchedEvents = () => {
   const [events, setEvents] = useState([]);
-  const { fetchData: getEvents } = useFetch('GET', ['events']);
+  const params = useParams();
+  const { fetchData: getEvents } = useFetch('GET', [
+    'events',
+    'calendar',
+    params.id?.toString() ?? '',
+  ]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation(['calendar']);
 

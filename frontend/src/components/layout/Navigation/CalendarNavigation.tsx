@@ -93,18 +93,11 @@ const CalendarNavigation = ({
             </Row>
           )}
 
-          <Row>
-            <span className={`heading heading--sm clr-primary-300 mb-base`}>
-              {t('general:navigation.title')}
-            </span>
-          </Row>
-
-          <CalendarCard
-            img="/img/test-img.jpg"
-            name="Work / Business"
-            userAvatars={userAvatars}
-            link="/calendar/overview"
-          />
+        <Row>
+          <span className={`heading heading--sm clr-primary-300 mb-base`}>
+            {t('general:navigation.title')}
+          </span>
+        </Row>
 
           <CalendarCard
             img="/img/google-calendar-logo.svg"
@@ -113,7 +106,7 @@ const CalendarNavigation = ({
             link="/calendar/google"
           />
 
-          <CalendarCardList />
+        <CalendarCardList layout="column" />
 
           <Menu
             menuItemStyles={{

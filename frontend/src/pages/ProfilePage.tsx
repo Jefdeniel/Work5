@@ -63,6 +63,7 @@ const ProfilePage = () => {
         <Heading className={`mb-3`} level={3}>
           {t('settings:profile.calendars')}
         </Heading>
+        <CalendarCardList layout="row" />
       </Row>
 
       <CalendarCardList layout='column' />

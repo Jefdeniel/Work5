@@ -44,8 +44,6 @@ const CalendarPage = () => {
 
   return (
     <>
-      <div>{!isLoading ? '' : <LoadingScreen />}</div>
-
       <Heading className={`sr-only`} level={1}>
         {t('calendar:calendar.page')}
       </Heading>

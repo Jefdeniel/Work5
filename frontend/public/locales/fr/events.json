@@ -12,6 +12,9 @@
   "modals": {
     "add": {
       "title": "Ajouter un événement"
+    },
+    "edit": {
+      "title": "Modifier un événement"
     }
   },
   "buttons": {

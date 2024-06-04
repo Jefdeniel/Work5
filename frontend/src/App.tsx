@@ -49,9 +49,8 @@ function App() {
               <Route path="create" element={<CreateCalendar />} />
             </Route>
             <Route path="/calendar" element={<Layout />}>
-              <Route path="main" element={<CalendarPage />} />
               <Route path="google" element={<GoogleCalendar />} />
-              <Route path="/calendar/:id" element={<CalendarOverviewPage />} />
+              <Route path="/calendar/:id" element={<CalendarPage />} />
             </Route>
 
             {/* Account specific routes under /calendar but using a different layout */}

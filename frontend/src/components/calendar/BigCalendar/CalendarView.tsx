@@ -11,28 +11,10 @@ import './Calendar.scss';
 const CalendarView = () => {
   // Event is gonna be used to show the event view of the clicked event
   const [selectedEvent, setSelectedEvent] = useState<Event | undefined>();
-  const [isAddEventModalOpen, setIsAddEventModalOpen] =
-    useState<boolean>(false);
+  useState<boolean>(false);
   const [newEventTimes, setNewEventTimes] = useState<
     { start: Date; end: Date } | undefined
   >();
-
-  // Function to handle opening the AddEventModal
-  const handleAddEvent = ({ start, end }: { start: Date; end: Date }) => {
-    setNewEventTimes({ start, end });
-    setIsAddEventModalOpen(true);
-  };
-
-  // Function to handle closing modals
-  const handleCloseModal = () => {
-    setSelectedEvent(undefined);
-    setIsAddEventModalOpen(false);
-  };
-
-  // // Add event to the list
-  // const addEventToList = (event: Event) => {
-  //   setEvent(event);
-  // };
 
   return (
     <div className="full-calendar">

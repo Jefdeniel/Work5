@@ -10,9 +10,6 @@ const GoogleEventCard = () => {
   const calendarID = import.meta.env.VITE_CALENDAR_ID;
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  console.log(import.meta.env.VITE_GOOGLE_API_KEY);
-  console.log('calendarID', import.meta.env.VITE_CALENDAR_ID);
-
   const getEvents = (calendarID, apiKey) => {
     setLoading(true);
     function initiate() {
@@ -49,7 +46,7 @@ const GoogleEventCard = () => {
     return <Spinner />;
   }
 
-  console.log('events', googleEvents[0]?.start?.date);
+  // console.log('events', googleEvents[0]?.start?.date);
 
   return (
     <div>

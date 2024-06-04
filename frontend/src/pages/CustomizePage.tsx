@@ -19,10 +19,6 @@ const CustomizePage = () => {
     setShowModal(false);
   };
 
-  // const addEventToList = (event: any) => {
-  //   console.log('Event:', event);
-  // };
-
   return (
     <>
       <Row>

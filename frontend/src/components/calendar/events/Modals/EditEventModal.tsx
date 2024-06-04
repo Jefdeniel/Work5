@@ -87,7 +87,7 @@ const EditEventModal = ({ event, onClose, setEvent }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  title={t('events:modals.titleInput')}
+                  title={t('events:eventInfo.title')}
                   isBig
                 />
               )}
@@ -98,7 +98,7 @@ const EditEventModal = ({ event, onClose, setEvent }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  title={t('events:modals.descriptionInput')}
+                  title={t('events:eventInfo.description')}
                   isBig
                 />
               )}
