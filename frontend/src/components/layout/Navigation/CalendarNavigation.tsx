@@ -23,7 +23,7 @@ const menuItems: MenuItem[] = [
   },
 ];
 
-//TODO Test loop for user avatars in calendar card
+// TODO Test loop for user avatars in calendar card
 const userAvatars = ['/icons/user-profile.svg', ''];
 
 const CalendarNavigation = ({
@@ -135,7 +135,7 @@ const CalendarNavigation = ({
               className={`${className} calendar-overview-card`}
               onClick={handleOnClickMenu}
             >
-              {t(label.toString())}
+              {t(label?.toString() ?? '')}
             </CalendarNavItem>
           ))}
         </Menu>
