@@ -52,9 +52,6 @@ const ProfileButton = (props: Props) => {
   const apiKey = import.meta.env.MEDIA_URL;
   const avatarUrl = `${apiKey}/${cleanedUserAvatar}`;
 
-  // console.log('userAvatar:', userAvatar);
-  // console.log('userAvatarUrl:', avatarUrl);
-
   return (
     <div>
       <Link to="/profile" className="profile-btn">
@@ -62,7 +59,7 @@ const ProfileButton = (props: Props) => {
         {/* {userAvatar ? (
           <img src={avatarUrl} alt={`Profile picture of ${userFirstName}`} />
         ) : ( */}
-          <Icon src="/icons/user-profile.svg" alt="User profile icon" />
+        <Icon src="/icons/user-profile.svg" alt="User profile icon" />
         {/* )} */}
       </Link>
     </div>

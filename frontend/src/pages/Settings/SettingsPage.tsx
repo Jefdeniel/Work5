@@ -50,7 +50,6 @@ const SettingsPage = () => {
   );
 
   const handleSaveSettings = async (values) => {
-    // console.log('Form values:', values); // Debugging
     try {
       const response = await updateDeviceSettings(
         {},

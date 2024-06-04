@@ -17,14 +17,12 @@ const CreateCalendar = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar-create.title'));
   const { user_id } = useAuth();
-  console.log('user_id', user_id);
 
   const { fetchData: addCalendar, loading: isLoading } = useFetch('POST', [
     'calendars',
   ]);
 
   const handleAddCalendar = async (values: Calendar) => {
-    console.log('values', values);
     try {
       const response = await addCalendar(
         {},
@@ -45,7 +43,6 @@ const CreateCalendar = () => {
       );
 
       if (response.ok) {
-        console.log('New calendar:', values);
         toast.success(t('calendar:toasts.addSuccess'));
       }
     } catch (error) {

@@ -14,7 +14,6 @@ const CalendarOverviewPage = () => {
 
   const contextUserCalendars = useContext(CalendarContext);
   const userCalendars = contextUserCalendars.calendars;
-  console.log(userCalendars); // [1, 2, 3]
 
   // it now only works if a user has 1 calendar, not if the user has more calendars.
   // /api/calendars/?id=1&id=2&id=3

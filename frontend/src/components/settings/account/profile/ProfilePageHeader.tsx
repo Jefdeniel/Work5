@@ -6,8 +6,8 @@ import { Colors } from '../../../../@types/Colors';
 
 // TODO: make dynamic (first authorisation)
 const ProfilePageHeader = () => {
-  const auth = useAuth();
-  console.log(auth);
+  const { user_id } = useAuth();
+  console.log('user_id', user_id);
 
   return (
     <Row className="p-5 --br-lg" style={{ backgroundColor: Colors.Primary200 }}>
