@@ -43,10 +43,10 @@ const SettingsPage = () => {
     setActivityNotificationEnabled,
   } = useContext(SettingsContext);
 
-  const auth = useAuth();
+  const { user_id } = useAuth();
   const { fetchData: updateDeviceSettings, loading: isLoading } = useFetch(
     'PUT',
-    ['user_settings', auth.user_id]
+    ['user_settings', user_id ? user_id.toString() : '']
   );
 
   const handleSaveSettings = async (values) => {
@@ -55,7 +55,7 @@ const SettingsPage = () => {
       const response = await updateDeviceSettings(
         {},
         {
-          user: auth.user_id,
+          user: user_id,
           language: values.language,
           time_zone: values.time_zone,
           time_format: values.time_format,
@@ -91,7 +91,10 @@ const SettingsPage = () => {
 
   return (
     <>
-      <Heading level={1} className="heading--lg clr-primary mb-base p-0 pad-left-neg" />
+      <Heading
+        level={1}
+        className="heading--lg clr-primary mb-base p-0 pad-left-neg"
+      />
 
       <Form
         onSubmit={handleSaveSettings}
