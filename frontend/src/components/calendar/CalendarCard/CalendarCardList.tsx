@@ -1,34 +1,22 @@
 import { useCallback, useEffect, useState } from 'react';
-
-import useAuth from '../../../hooks/useAuth';
+import { CalendarUser } from '../../../@types/Calendar';
 import useFetch from '../../../hooks/useFetch';
-
+import useAuth from '../../../hooks/useAuth';
 import CalendarCard from './CalendarCard';
+import Input from '../../ui/Input/Input';
+import { useTranslation } from 'react-i18next';
 
-import './CalendarCardList.scss';
-
-interface Calendar {
-  id: number;
-  title: string;
-  description: string;
-  img: string | null;
-  owner: number;
-  date_start: string | null;
-  date_stop: string | null;
+interface CalendarCardListProps {
+  isMenuCollapsed?: boolean;
+  layout?: 'row' | 'column';
 }
 
-interface CalendarUser {
-  id: number;
-  user: number;
-  calendar: Calendar;
-  role: string;
-  created_at: string;
-}
-
-type Layout = 'row' | 'column';
-
-const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
+const CalendarCardList = ({
+  layout = 'row',
+  isMenuCollapsed,
+}: CalendarCardListProps) => {
   const { user_id } = useAuth();
+  const { t } = useTranslation(['general']);
   const { fetchData: fetchCalendars } = useFetch('GET', [
     'calendar_users',
     'user_id',
@@ -36,6 +24,13 @@ const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
   ]);
 
   const [data, setData] = useState<CalendarUser[]>([]);
+  const [filteredCalendars, setFilteredCalendars] = useState<CalendarUser[]>(
+    []
+  );
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // TODO: Test loop for user avatars in calendar card
+  const userAvatars = ['/icons/user-profile.svg', ''];
 
   const fetchCalendarsMemoized = useCallback(fetchCalendars, [fetchCalendars]);
 
@@ -45,12 +40,23 @@ const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
         const response = await fetchCalendarsMemoized();
         const result: CalendarUser[] = await response.json();
         setData(result);
+        setFilteredCalendars(result);
       } catch (error) {
         console.error(error);
       }
     };
     fetchCalendarsData();
   }, []);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value.toLowerCase();
+    setSearchTerm(searchValue);
+    const filteredData = data.filter((calendarUser) => {
+      const calendarTitle = calendarUser.calendar.title.toLowerCase();
+      return calendarTitle.includes(searchValue);
+    });
+    setFilteredCalendars(filteredData);
+  };
 
   const PLACEHOLDER_IMG =
     'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
@@ -59,15 +65,32 @@ const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
     <ul
       className={`calendar-card-list d-flex ${layout === 'row' ? 'flex-row' : 'flex-column'}`}
     >
-      {data.map((calendarUser) => (
+      {!isMenuCollapsed && (
+        <Input
+          value={searchTerm}
+          onChange={handleSearch}
+          isSearch
+          type="search"
+          placeholder={t('general:navigation.search')}
+        />
+      )}
+
+      <CalendarCard
+        img="/img/google-calendar-logo.svg"
+        name="Google"
+        userAvatars={userAvatars}
+        link="/calendar/google"
+      />
+
+      {filteredCalendars.map((calendarUser) => (
         <CalendarCard
           key={calendarUser.id}
           img={
-            calendarUser.calendar.img
-              ? calendarUser.calendar.img
+            calendarUser.calendar.image
+              ? calendarUser.calendar.image
               : PLACEHOLDER_IMG
           }
-          name={calendarUser.calendar.title}
+          name={!isMenuCollapsed ? calendarUser.calendar.title : ''}
           link={`/calendar/${calendarUser.calendar.id}`}
         />
       ))}

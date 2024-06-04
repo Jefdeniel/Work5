@@ -1,22 +1,18 @@
-import { Menu, Sidebar } from 'react-pro-sidebar';
-import { Link, useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { Menu, Sidebar } from 'react-pro-sidebar';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { MenuItem, SideBarProps } from '../../../@types/Nav';
 
-import IconButton from '../../ui/IconButton/IconButton';
-import CalendarNavItem from './CalendarNavItem';
-import Logo from '../../ui/Logo';
-import Icon from '../../ui/Icon/Icon';
-import CalendarCard from '../../calendar/CalendarCard/CalendarCard';
-import { PlusIcon } from '../../ui/Icon/SvgIcons';
-import Input from '../../ui/Input/Input';
 import CalendarCardList from '../../calendar/CalendarCard/CalendarCardList';
+import Icon from '../../ui/Icon/Icon';
+import { PlusIcon } from '../../ui/Icon/SvgIcons';
+import IconButton from '../../ui/IconButton/IconButton';
+import Logo from '../../ui/Logo';
+import CalendarNavItem from './CalendarNavItem';
 
 import './navigation.scss';
-import CalendarSearch from './CalendarSearch/CalendarSearch';
 
 const menuItems: MenuItem[] = [
   {
@@ -26,9 +22,6 @@ const menuItems: MenuItem[] = [
     className: 'create-calendar',
   },
 ];
-
-// TODO Test loop for user avatars in calendar card
-const userAvatars = ['/icons/user-profile.svg', ''];
 
 const CalendarNavigation = ({
   isMenuBroken,
@@ -89,28 +82,13 @@ const CalendarNavigation = ({
             </Col>
           </Row>
 
-          {!isMenuCollapsed && (
-            <Row className={`mb-large`}>
-              <CalendarSearch />
-            </Row>
-          )}
-
           <Row>
             <span className={`heading heading--sm clr-primary-300 mb-base`}>
               {t('general:navigation.title')}
             </span>
           </Row>
 
-          <ul>
-            <CalendarCard
-              img="/img/google-calendar-logo.svg"
-              name="Google"
-              userAvatars={userAvatars}
-              link="/calendar/google"
-            />
-
-            <CalendarCardList layout="column" />
-          </ul>
+          <CalendarCardList isMenuCollapsed={isMenuCollapsed} layout="column" />
 
           <Menu
             menuItemStyles={{
