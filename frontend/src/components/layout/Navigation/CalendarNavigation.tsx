@@ -12,6 +12,7 @@ import { PlusIcon } from '../../ui/Icon/SvgIcons';
 import Input from '../../ui/Input/Input';
 
 import './navigation.scss';
+import CalendarCardList from '../../calendar/CalendarCard/CalendarCardList';
 
 const menuItems: MenuItem[] = [
   {
@@ -108,6 +109,8 @@ const CalendarNavigation = ({
           userAvatars={userAvatars}
           link="/calendar/google"
         />
+
+        <CalendarCardList />
 
         <Menu
           menuItemStyles={{

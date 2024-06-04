@@ -5,14 +5,14 @@ import ProfilePicture from '../../ui/ProfilePicture/ProfilePicture';
 import { useNavigate } from 'react-router-dom';
 import { useSettings } from '../../../hooks/useSettings';
 
-interface Props {
+export interface CalendarCardProps {
   img: string;
   name: string;
   userAvatars?: string[];
   link?: string;
 }
 
-const CalendarCard = ({ img, name, userAvatars, link }: Props) => {
+const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
   const navigate = useNavigate();
   const { theme } = useSettings();
 
@@ -36,7 +36,7 @@ const CalendarCard = ({ img, name, userAvatars, link }: Props) => {
           </span>
 
           <ul className={`calendar-card__user-list`}>
-            {userAvatars.map((avatar, index) => (
+            {userAvatars?.map((avatar, index) => (
               <li key={index}>
                 {avatar ? (
                   <ProfilePicture
