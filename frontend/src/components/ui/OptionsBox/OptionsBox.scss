@@ -1,0 +1,30 @@
+.options-box {
+  background-color: var(--sa-bright);
+  border: 1px solid var(--sa-primary-300);
+  border-radius: var(--br-base);
+  box-shadow: 4px 4px 4px -1px var(--sa-grey);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0.3rem;
+  right: 1rem;
+
+  & .seperator-line {
+    width: 70%;
+    height: 1px;
+    background-color: var(--sa-grey);
+    align-self: center;
+  }
+
+  & button:hover {
+    background-color: var(--sa-primary-100);
+  }
+
+  & button:first-child {
+    color: var(--sa-primary-500-base);
+  }
+
+  & button:last-child {
+    color: var(--sa-error-500-base);
+  }
+}

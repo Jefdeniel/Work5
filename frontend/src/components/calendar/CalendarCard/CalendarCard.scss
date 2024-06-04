@@ -3,11 +3,18 @@
   margin-bottom: var(--sp-base);
   display: flex;
   align-items: center;
-  overflow: hidden;
 
   &:hover {
     cursor: pointer;
   }
+}
+
+.calendar-card__options {
+  padding: 1rem 1rem;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
 }
 
 .calendar-card__img {

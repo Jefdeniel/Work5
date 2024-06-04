@@ -13,6 +13,7 @@ import EditEmailModal from '../components/settings/account/modals/EditEmailModal
 import EditPasswordModal from '../components/settings/account/modals/EditPasswordModal';
 import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
 import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
+import CalendarCardList from '../components/calendar/CalendarCard/CalendarCardList';
 
 const ProfilePage = () => {
   const { t } = useTranslation(['settings']);
@@ -63,6 +64,8 @@ const ProfilePage = () => {
           {t('settings:profile.calendars')}
         </Heading>
       </Row>
+
+      <CalendarCardList layout='column' />
 
       <Row className="mb-base mt-large">
         <Heading className={`mb-3`} level={3}>

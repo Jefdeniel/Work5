@@ -1,6 +1,12 @@
 .ps-sidebar-container {
   max-width: 315px;
+  height: 100vh !important;
   padding: var(--sp-base);
+}
+
+.full-sidebar-content {
+  overflow-x: initial !important;
+  overflow-y: auto !important;
 }
 
 .css-ewdv3l {
