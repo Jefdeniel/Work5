@@ -15,9 +15,18 @@ export interface CalendarCardProps {
   name: string;
   userAvatars?: string[];
   link?: string;
+  onDelete: () => void;
+  onEdit: () => void;
 }
 
-const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
+const CalendarCard = ({
+  img,
+  name,
+  userAvatars,
+  link,
+  onDelete,
+  onEdit,
+}: CalendarCardProps) => {
   const navigate = useNavigate();
   const { theme } = useSettings();
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
@@ -108,7 +117,7 @@ const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
 
       {areOptionsVisible && (
         <div ref={optionsBoxRef}>
-          <OptionsBox />
+          <OptionsBox onDelete={onDelete} onEdit={onEdit} />
         </div>
       )}
     </li>

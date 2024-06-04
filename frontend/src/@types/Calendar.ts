@@ -4,7 +4,7 @@ export interface Calendar {
   description?: string;
   color?: string;
   image?: string | null;
-  owner_id: number;
+  owner_id?: number;
   date_start?: Date;
   date_stop?: Date;
 }

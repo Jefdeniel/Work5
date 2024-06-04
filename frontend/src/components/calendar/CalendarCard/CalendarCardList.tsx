@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
-import { CalendarUser } from '../../../@types/Calendar';
-import useFetch from '../../../hooks/useFetch';
-import useAuth from '../../../hooks/useAuth';
-import CalendarCard from './CalendarCard';
-import Input from '../../ui/Input/Input';
+import { useCallback, useEffect, useState, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { CalendarUser } from '../../../@types/Calendar';
+import useAuth from '../../../hooks/useAuth';
+import useFetch from '../../../hooks/useFetch';
+import Input from '../../ui/Input/Input';
+import CalendarCard from './CalendarCard';
+import DeleteCalendarModal from '../BigCalendar/Modals/DeleteCalendarModal';
+import { CalendarContext } from '../../../store/CalendarContext';
 
 interface CalendarCardListProps {
   isMenuCollapsed?: boolean;
@@ -17,20 +19,28 @@ const CalendarCardList = ({
 }: CalendarCardListProps) => {
   const { user_id } = useAuth();
   const { t } = useTranslation(['general']);
+  const calendarContext = useContext(CalendarContext);
+
+  // Placeholder images and data
+  const USER_AVATARS = ['/icons/user-profile.svg', ''];
+  const PLACEHOLDER_IMG =
+    'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
+
+  // State hooks
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCalendars, setFilteredCalendars] = useState<CalendarUser[]>(
+    []
+  );
+  const [calendarToDelete, setCalendarToDelete] = useState<CalendarUser | null>(
+    null
+  );
+
+  // Fetch data
   const { fetchData: fetchCalendars } = useFetch('GET', [
     'calendar_users',
     'user_id',
     user_id?.toString() ?? '',
   ]);
-
-  const [data, setData] = useState<CalendarUser[]>([]);
-  const [filteredCalendars, setFilteredCalendars] = useState<CalendarUser[]>(
-    []
-  );
-  const [searchTerm, setSearchTerm] = useState('');
-
-  // TODO: Test loop for user avatars in calendar card
-  const userAvatars = ['/icons/user-profile.svg', ''];
 
   const fetchCalendarsMemoized = useCallback(fetchCalendars, [fetchCalendars]);
 
@@ -38,9 +48,9 @@ const CalendarCardList = ({
     const fetchCalendarsData = async () => {
       try {
         const response = await fetchCalendarsMemoized();
-        const result: CalendarUser[] = await response.json();
-        setData(result);
-        setFilteredCalendars(result);
+        const data: CalendarUser[] = await response.json();
+        calendarContext.setCalendars(data);
+        setFilteredCalendars(data);
       } catch (error) {
         console.error(error);
       }
@@ -51,15 +61,48 @@ const CalendarCardList = ({
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
-    const filteredData = data.filter((calendarUser) => {
+
+    // Add Google calendar to data array
+    const dataWithGoogle = [
+      ...calendarContext.calendars,
+      {
+        calendar: {
+          title: 'Google',
+          img: '/img/google-calendar-logo.svg',
+        },
+        userAvatars: USER_AVATARS,
+        user: 0,
+        link: '/calendar/google',
+        role: '',
+      },
+    ];
+
+    const filteredData = dataWithGoogle.filter((calendarUser) => {
       const calendarTitle = calendarUser.calendar.title.toLowerCase();
       return calendarTitle.includes(searchValue);
     });
+
     setFilteredCalendars(filteredData);
   };
 
-  const PLACEHOLDER_IMG =
-    'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
+  const handleDelete = (calendar: CalendarUser) => {
+    setCalendarToDelete(calendar);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setCalendarToDelete(null);
+  };
+
+  const handleRemoveCalendar = (deletedCalendarId: number) => {
+    calendarContext.setCalendars((prevCalendars) =>
+      prevCalendars.filter(
+        (calendar) => calendar.calendar.id !== deletedCalendarId
+      )
+    );
+    setFilteredCalendars((prevCalendars) =>
+      prevCalendars.filter((calendar) => calendar.id !== deletedCalendarId)
+    );
+  };
 
   return (
     <ul
@@ -78,22 +121,49 @@ const CalendarCardList = ({
       <CalendarCard
         img="/img/google-calendar-logo.svg"
         name="Google"
-        userAvatars={userAvatars}
+        userAvatars={USER_AVATARS}
         link="/calendar/google"
+        onDelete={() =>
+          handleDelete({
+            calendar: {
+              title: 'Google',
+              image: '/img/google-calendar-logo.svg',
+            },
+            userAvatars: USER_AVATARS,
+            user: 0,
+            link: '/calendar/google',
+            role: '',
+          })
+        }
+        onEdit={() => {}}
       />
 
       {filteredCalendars.map((calendarUser) => (
         <CalendarCard
           key={calendarUser.id}
-          img={
-            calendarUser.calendar.image
-              ? calendarUser.calendar.image
-              : PLACEHOLDER_IMG
-          }
+          img={calendarUser.calendar.image || PLACEHOLDER_IMG}
           name={!isMenuCollapsed ? calendarUser.calendar.title : ''}
           link={`/calendar/${calendarUser.calendar.id}`}
+          onDelete={() => handleDelete(calendarUser)}
+          onEdit={() => {}}
         />
       ))}
+
+      {calendarToDelete && (
+        <DeleteCalendarModal
+          onClose={handleCloseDeleteModal}
+          calendar={calendarToDelete.calendar}
+          onRemoveCalendar={handleRemoveCalendar}
+        />
+      )}
+
+      {calendarToEdit && (
+        <EditCalendarModal
+          onClose={handleCloseEditModal}
+          calendar={calendarToEdit.calendar}
+          onEditCalendar={handleEditCalendar}
+        />
+      }
     </ul>
   );
 };

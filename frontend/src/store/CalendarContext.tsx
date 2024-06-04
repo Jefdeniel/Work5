@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';
 
 interface CalendarContextType {
-  calendars: number[];
+  calendars: number[] | number;
   setCalendars: (calendars: number[]) => void;
 }
 
@@ -34,7 +34,11 @@ export const CalendarContextProvider = ({
 
       if (response.ok) {
         const data = (await response.json()) as CalendarUser[];
-        setCalendars(data.map((calendarUser) => calendarUser.calendar));
+        setCalendars(
+          data.map(
+            (calendarUser) => calendarUser.calendar
+          ) as unknown as number[]
+        );
       } else {
         console.error('Failed to fetch calendar users');
       }
