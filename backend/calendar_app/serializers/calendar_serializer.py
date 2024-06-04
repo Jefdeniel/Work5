@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Calendar
+from ..models import Calendar, CalendarUser
 
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -49,3 +49,12 @@ class CalendarSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+
+class CalendarUserSerializer(serializers.ModelSerializer):
+    calendar = CalendarSerializer(read_only=True)  # Nesting the CalendarSerializer
+
+    class Meta:
+        model = CalendarUser
+        fields = ["id", "user", "calendar", "role", "created_at"]
+        read_only_fields = ["id", "created_at"]

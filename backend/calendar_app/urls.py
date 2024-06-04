@@ -11,6 +11,7 @@ from .views.user_views import CustomUserViewSet
 from .views.auth_views import SignUpView
 from .views.calendar_users_views import CalendarUsersViewSet
 from . import views
+from .views.calendar_users_views import CalendarUserByUserId
 
 from django.conf import settings
 
@@ -31,7 +32,7 @@ urlpatterns = [
     path("signup", SignUpView.as_view(), name="signup"),
     path(
         "calendar_users/user_id/<int:user_id>",
-        views.CalendarUserByUserId.as_view(),
+        CalendarUserByUserId.as_view(),
         name="calendar-user-by-user-id",
     ),
 ]

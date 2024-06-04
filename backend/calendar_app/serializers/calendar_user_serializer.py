@@ -1,15 +1,25 @@
 from rest_framework import serializers
-from ..models import CalendarUser, CustomUser, Calendar
+from ..models import Calendar, CalendarUser, CustomUser
+
+
+class CalendarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Calendar
+        fields = [
+            "id",
+            "title",
+            "description",
+            "img",
+            "owner",
+            "date_start",
+            "date_stop",
+        ]
 
 
 class CalendarUserSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
-    calendar = serializers.PrimaryKeyRelatedField(queryset=Calendar.objects.all())
+    calendar = CalendarSerializer(read_only=True)  # Nesting the CalendarSerializer
 
     class Meta:
         model = CalendarUser
-        fields = "__all__"
-        read_only_fields = (
-            "id",
-            "created_at",
-        )
+        fields = ["id", "user", "calendar", "role", "created_at"]
+        read_only_fields = ["id", "created_at"]
