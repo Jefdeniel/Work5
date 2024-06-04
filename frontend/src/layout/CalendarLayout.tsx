@@ -36,7 +36,7 @@ const CalendarLayout = () => {
         onMenuClose={handleMenuClose}
       />
       <Container
-        className="container-fluid p-0"
+        fluid
         style={{
           height: '100vh',
           display: 'flex',

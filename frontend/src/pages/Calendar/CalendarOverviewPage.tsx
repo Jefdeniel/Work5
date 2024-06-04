@@ -27,8 +27,6 @@ const CalendarOverviewPage = () => {
     // calendarId.toString(),
   ]);
 
-  const [calendars, setCalendars] = useState([]);
-
   useEffect(() => {
     const fetchCalendars = async () => {
       const [calendars, setCalendars] = useState<any[]>([]);

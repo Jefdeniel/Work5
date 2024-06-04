@@ -21,7 +21,9 @@ interface CalendarUser {
   created_at: string;
 }
 
-const CalendarCardList = () => {
+type Layout = 'row' | 'column';
+
+const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
   const { user_id } = useAuth();
   const { fetchData: fetchCalendars } = useFetch('GET', [
     'calendar_users',
@@ -50,7 +52,9 @@ const CalendarCardList = () => {
     'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
 
   return (
-    <div>
+    <div
+      className={`calendar-card-list d-flex ${layout === 'row' ? 'flex-row' : 'flex-column'}`}
+    >
       {data.map((calendarUser) => (
         <CalendarCard
           key={calendarUser.id}
