@@ -157,13 +157,13 @@ const CalendarCardList = ({
         />
       )}
 
-      {calendarToEdit && (
+      {/* {calendarToEdit && (
         <EditCalendarModal
           onClose={handleCloseEditModal}
           calendar={calendarToEdit.calendar}
           onEditCalendar={handleEditCalendar}
         />
-      }
+      } */}
     </ul>
   );
 };
