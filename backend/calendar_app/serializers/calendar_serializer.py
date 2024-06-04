@@ -13,6 +13,9 @@ class CalendarSerializer(serializers.ModelSerializer):
         required=False,
         help_text="Image associated with the calendar (binary)",
     )
+    owner_id = serializers.IntegerField(
+        required=True, help_text="ID of the user who owns the calendar"
+    )
     date_start = serializers.DateTimeField(
         allow_null=True,
         help_text="Start date of the calendar (format: YYYY-MM-DDTHH:MM:SS.sssZ)",
@@ -35,6 +38,7 @@ class CalendarSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "img",
+            "owner_id",
             "date_start",
             "date_stop",
             "created_at",
