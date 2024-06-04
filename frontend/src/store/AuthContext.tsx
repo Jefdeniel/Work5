@@ -1,5 +1,5 @@
 import { jwtDecode } from 'jwt-decode';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import {
   getLocalstorageItem,
@@ -78,20 +78,18 @@ export const AuthContextProvider = ({
         setToken(newToken);
         setLocalstorageItem('token', newToken);
       }
-      // } else {
-      //   logoutHandler();
-      // }
     } catch (error) {
       logoutHandler();
+      console.error('Error refreshing token', error);
     }
   };
 
-  // 🐛 this is the problem! Causes logout on every refresh
-  // useEffect(() => {
-  //   if (token && !isLoggedIn()) {
-  //     refreshToken();
-  //   }
-  // }, [token]);
+  //  🐛 this is the problem! Causes logout on every refresh
+  useEffect(() => {
+    if (token && !isLoggedIn()) {
+      refreshToken();
+    }
+  }, [token]);
 
   const contextValue: AuthContextType = {
     token,

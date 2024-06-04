@@ -32,6 +32,8 @@ const CalendarOverviewPage = () => {
 
   useEffect(() => {
     const fetchCalendars = async () => {
+      const [calendars, setCalendars] = useState<any[]>([]);
+
       try {
         if (!userCalendars || userCalendars.length === 0) {
           return;
