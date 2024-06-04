@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Calendar } from '../@types/Calendar';
+import ExcelExportModal from '../components/sharing-hub/Modals/ExcelExportModal';
 import Heading from '../components/ui/Heading/Heading';
 import ActionButtonList from '../components/ui/List/ActionButtonList';
 import {
@@ -7,9 +10,6 @@ import {
   EXTERNAL_SERVICES_ITEMS,
 } from '../constants/sharing-hub';
 import useSetTitle from '../hooks/setTitle';
-import { useState } from 'react';
-import ExcelExportModal from '../components/sharing-hub/Modals/ExcelExportModal';
-import { Calendar } from '../@types/Calendar';
 
 const SharingHubPage = () => {
   const { t } = useTranslation(['calendar']);
@@ -17,7 +17,7 @@ const SharingHubPage = () => {
 
   // State
   const [showExcelModal, setShowExcelModal] = useState(false);
-  const calendar: Calendar = {}; // Populate this with actual calendar data
+  const calendar: Calendar = {};
 
   // Modal handlers
   const openExcelModal = () => setShowExcelModal(true);
@@ -50,11 +50,12 @@ const SharingHubPage = () => {
           className="btn--primary"
         />
       </Row>
-      <Row className={`mb-large`}>
+      {/* TODO: Add users in agenda */}
+      {/* <Row className={`mb-large`}>
         <Heading level={3}>
           <p>{t('calendar:sharing-hub.usersInAgenda')}</p>
         </Heading>
-      </Row>
+      </Row> */}
       <Row>
         <Heading level={3}>
           <p>{t('calendar:sharing-hub.integrateExternal')}</p>
