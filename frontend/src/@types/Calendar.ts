@@ -8,9 +8,11 @@ export interface CalendarUser {
 
 export interface Calendar {
   id?: number;
-  name: string;
+  title: string;
   description?: string;
   color?: string;
-  user: number;
-  created_at?: string;
+  image?: string | null;
+  owner_id: number;
+  date_start?: Date;
+  date_stop?: Date;
 }
