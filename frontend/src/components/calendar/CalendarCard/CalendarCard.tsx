@@ -50,7 +50,7 @@ const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
   }, []);
 
   return (
-    <div className={`position-relative`}>
+    <li className={`position-relative`}>
       <div className="calendar-card">
         <img
           className={`calendar-card__img`}
@@ -111,7 +111,7 @@ const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
           <OptionsBox />
         </div>
       )}
-    </div>
+    </li>
   );
 };
 

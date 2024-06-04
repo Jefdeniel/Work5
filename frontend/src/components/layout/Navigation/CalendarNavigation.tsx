@@ -2,6 +2,7 @@ import { Menu, Sidebar } from 'react-pro-sidebar';
 import { Link, useNavigate } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 import { MenuItem, SideBarProps } from '../../../@types/Nav';
 
@@ -15,6 +16,7 @@ import Input from '../../ui/Input/Input';
 import CalendarCardList from '../../calendar/CalendarCard/CalendarCardList';
 
 import './navigation.scss';
+import CalendarSearch from './CalendarSearch/CalendarSearch';
 
 const menuItems: MenuItem[] = [
   {
@@ -49,8 +51,6 @@ const CalendarNavigation = ({
     isMenuBroken && setIsMenuToggled(false);
   };
 
-  let searchPlaceholder = t('general:navigation.search');
-
   return (
     <>
       <Sidebar
@@ -71,6 +71,7 @@ const CalendarNavigation = ({
             <Col>
               <Link to="/">
                 <Logo
+                  className={`mt-1`}
                   width={isMenuCollapsed ? '50px' : '50px'}
                   height={isMenuCollapsed ? '50px' : '50px'}
                 />
@@ -80,16 +81,17 @@ const CalendarNavigation = ({
             <Col className={`d-flex justify-content-end`}>
               {!isMenuCollapsed && (
                 <IconButton
-                  className={`settings-btn`}
+                  className={`settings-btn align-self-center`}
                   icon={<Icon src="/icons/settings.svg" alt="Settings icon" />}
                   onClick={handleSettingsClick}
                 />
               )}
             </Col>
           </Row>
+
           {!isMenuCollapsed && (
             <Row className={`mb-large`}>
-              <Input isSearch type="search" placeholder={searchPlaceholder} />
+              <CalendarSearch />
             </Row>
           )}
 
@@ -99,14 +101,16 @@ const CalendarNavigation = ({
             </span>
           </Row>
 
-          <CalendarCard
-            img="/img/google-calendar-logo.svg"
-            name="Google"
-            userAvatars={userAvatars}
-            link="/calendar/google"
-          />
+          <ul>
+            <CalendarCard
+              img="/img/google-calendar-logo.svg"
+              name="Google"
+              userAvatars={userAvatars}
+              link="/calendar/google"
+            />
 
-          <CalendarCardList layout="column" />
+            <CalendarCardList layout="column" />
+          </ul>
 
           <Menu
             menuItemStyles={{
@@ -135,6 +139,7 @@ const CalendarNavigation = ({
               </CalendarNavItem>
             ))}
           </Menu>
+
           <div
             style={{
               position: 'absolute',

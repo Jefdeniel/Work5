@@ -60,18 +60,16 @@ const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
       className={`calendar-card-list d-flex ${layout === 'row' ? 'flex-row' : 'flex-column'}`}
     >
       {data.map((calendarUser) => (
-        <li>
-          <CalendarCard
-            key={calendarUser.id}
-            img={
-              calendarUser.calendar.img
-                ? calendarUser.calendar.img
-                : PLACEHOLDER_IMG
-            }
-            name={calendarUser.calendar.title}
-            link={`/calendar/${calendarUser.calendar.id}`}
-          />
-        </li>
+        <CalendarCard
+          key={calendarUser.id}
+          img={
+            calendarUser.calendar.img
+              ? calendarUser.calendar.img
+              : PLACEHOLDER_IMG
+          }
+          name={calendarUser.calendar.title}
+          link={`/calendar/${calendarUser.calendar.id}`}
+        />
       ))}
     </ul>
   );
