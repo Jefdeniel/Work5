@@ -53,16 +53,18 @@ const AddEventModal = ({ onClose }: Props) => {
       );
 
       if (response.ok) {
-        console.log('New event:', values); // Debugging
+        console.log('New event:', values);
         toast.success(t('events:toasts.addSuccess'));
-        onClose(); // Close the modal after successful submission
+        if (onClose) {
+          onClose();
+        }
       } else {
         toast.error(t('events:toasts.addError'));
         throw new Error('Failed to save event: ' + response.statusText);
       }
     } catch (error) {
       toast.error(t('events:toasts.addError') + ': ' + error.message);
-      console.error('Error adding event:', error); // Debugging
+      console.error('Error adding event:', error);
     }
   };
 
@@ -86,7 +88,7 @@ const AddEventModal = ({ onClose }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  title={t('events:modals.titleInput')}
+                  title={t('events:eventInfo.input')}
                   isBig
                 />
               )}
@@ -97,7 +99,7 @@ const AddEventModal = ({ onClose }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  title={t('events:modals.descriptionInput')}
+                  title={t('events:eventInfo.description')}
                   isBig
                 />
               )}
