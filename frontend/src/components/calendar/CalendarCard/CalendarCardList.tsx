@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import useAuth from '../../../hooks/useAuth';
 import useFetch from '../../../hooks/useFetch';
+
 import CalendarCard from './CalendarCard';
+
+import './CalendarCardList.scss';
 
 interface Calendar {
   id: number;
@@ -52,22 +56,24 @@ const CalendarCardList = ({ layout = 'row' }: { layout?: Layout }) => {
     'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
 
   return (
-    <div
+    <ul
       className={`calendar-card-list d-flex ${layout === 'row' ? 'flex-row' : 'flex-column'}`}
     >
       {data.map((calendarUser) => (
-        <CalendarCard
-          key={calendarUser.id}
-          img={
-            calendarUser.calendar.img
-              ? calendarUser.calendar.img
-              : PLACEHOLDER_IMG
-          }
-          name={calendarUser.calendar.title}
-          link={`/calendar/${calendarUser.calendar.id}`}
-        />
+        <li>
+          <CalendarCard
+            key={calendarUser.id}
+            img={
+              calendarUser.calendar.img
+                ? calendarUser.calendar.img
+                : PLACEHOLDER_IMG
+            }
+            name={calendarUser.calendar.title}
+            link={`/calendar/${calendarUser.calendar.id}`}
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

@@ -93,11 +93,11 @@ const CalendarNavigation = ({
             </Row>
           )}
 
-        <Row>
-          <span className={`heading heading--sm clr-primary-300 mb-base`}>
-            {t('general:navigation.title')}
-          </span>
-        </Row>
+          <Row>
+            <span className={`heading heading--sm clr-primary-300 mb-base`}>
+              {t('general:navigation.title')}
+            </span>
+          </Row>
 
           <CalendarCard
             img="/img/google-calendar-logo.svg"
@@ -106,7 +106,7 @@ const CalendarNavigation = ({
             link="/calendar/google"
           />
 
-        <CalendarCardList layout="column" />
+          <CalendarCardList layout="column" />
 
           <Menu
             menuItemStyles={{

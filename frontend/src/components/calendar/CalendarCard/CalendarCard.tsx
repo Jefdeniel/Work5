@@ -51,7 +51,7 @@ const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
 
   return (
     <div className={`position-relative`}>
-      <div className="calendar-card" onClick={handleClick}>
+      <div className="calendar-card">
         <img
           className={`calendar-card__img`}
           src={img}
@@ -59,7 +59,7 @@ const CalendarCard = ({ img, name, userAvatars, link }: CalendarCardProps) => {
         />
 
         <div className={`w-100 d-flex justify-content-between`}>
-          <div className="calendar-card__content">
+          <div className="calendar-card__content" onClick={handleClick}>
             <span className="heading heading--sm calendar-card__title">
               {name}
             </span>

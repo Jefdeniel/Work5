@@ -10,11 +10,11 @@
 }
 
 .calendar-card__options {
-  padding: 1rem 1rem;
+  padding: var(--sp-base);
   position: absolute;
   z-index: 100;
-  top: 0;
-  right: 0;
+  top: -.35rem;
+  right: -.7rem;
 }
 
 .calendar-card__img {
