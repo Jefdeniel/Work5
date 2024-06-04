@@ -110,7 +110,7 @@ const CalendarNavigation = ({
           link="/calendar/google"
         />
 
-        <CalendarCardList />
+        <CalendarCardList layout="column" />
 
         <Menu
           menuItemStyles={{
