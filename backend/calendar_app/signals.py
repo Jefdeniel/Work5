@@ -1,6 +1,14 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import CustomUser, UserSettings, Event, Reminder, EventOccurrence
+from .models import (
+    CustomUser,
+    UserSettings,
+    Event,
+    Reminder,
+    EventOccurrence,
+    Calendar,
+    CalendarUser,
+)
 from datetime import timedelta
 
 
@@ -45,3 +53,14 @@ def create_event_occurrences(sender, instance, **kwargs):
         occurrences = instance.get_occurrences(start_date, end_date)
         for occurrence in occurrences:
             EventOccurrence.objects.create(event=instance, occurrence_time=occurrence)
+
+
+# create calendar_user when creating a new calendar
+
+
+@receiver(post_save, sender=Calendar)
+def create_calendar_user(sender, instance, created, **kwargs):
+    if created:
+        CalendarUser.objects.create(
+            calendar=instance, user=instance.owner, role="owner"
+        )

@@ -2,15 +2,10 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from ..models import CalendarUser
 from ..serializers import CalendarUserSerializer
-from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 
 
 class CalendarUsersViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for viewing and editing calendar users
-    """
-
     queryset = CalendarUser.objects.all()
     serializer_class = CalendarUserSerializer
 
@@ -61,24 +56,8 @@ class CalendarUsersViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return CalendarUser.objects.all()
 
-    def get_serializer_class(self):
-        return CalendarUserSerializer
-
-    def get_serializer_context(self):
-        return {"request": self.request}
-
-    def get_serializer(self, *args, **kwargs):
-        return self.get_serializer_class()(*args, **kwargs)
-
-    def get_object(self):
-        return self.get_queryset().get(pk=self.kwargs["pk"])
-
 
 class CalendarUserByUserId(APIView):
-    """
-    Retrieve calendar users by user_id.
-    """
-
     def get(self, request, user_id):
         calendar_users = CalendarUser.objects.filter(user__id=user_id)
         if not calendar_users.exists():

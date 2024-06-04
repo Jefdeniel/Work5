@@ -15,6 +15,8 @@
     "invite-btn": "Invite",
     "date-range": "Date range",
     "date-range-description": "For temporal agenda&apos;s (projects for example), choose YES and you can define the start + end dates for it. For normal ones, just keep it at NO.",
+    "start-date": "Start date",
+    "end-date": "End date",
     "no": "NO",
     "yes": "YES"
   },

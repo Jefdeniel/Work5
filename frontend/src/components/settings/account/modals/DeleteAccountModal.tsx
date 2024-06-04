@@ -14,7 +14,6 @@ const DeleteAccountModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['settings']);
   const navigate = useNavigate();
   const { user_id, logout } = useAuth();
-  console.log(user_id);
 
   const { fetchData: deleteUser } = useFetch('DELETE', ['users', user_id]);
 

@@ -26,11 +26,11 @@ const EditEmailModal = ({ onClose }: Props) => {
 
   const { fetchData: fetchAccountSettings } = useFetch('GET', [
     'users',
-    user_id,
+    user_id?.toString() ?? '',
   ]);
   const { fetchData: updateAccountSettings, loading: isLoading } = useFetch(
     'PATCH',
-    ['users', user_id]
+    ['users', user_id?.toString() ?? '']
   );
 
   const fetchAccountSettingsMemoized = useCallback(fetchAccountSettings, []);

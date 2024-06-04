@@ -1,16 +1,17 @@
+export interface Calendar {
+  id?: number;
+  title: string;
+  description?: string;
+  color?: string;
+  image?: string | null;
+  owner_id?: number;
+  date_start?: Date;
+  date_stop?: Date;
+}
 export interface CalendarUser {
   id?: number;
   user: number;
-  calendar: number;
+  calendar: Calendar;
   role: string;
-  created_at?: string;
-}
-
-export interface Calendar {
-  id?: number;
-  name: string;
-  description?: string;
-  color?: string;
-  user: number;
   created_at?: string;
 }

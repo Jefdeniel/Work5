@@ -45,7 +45,6 @@ const CalendarExportSelector = ({
   const handleCalendarChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const calendarId = parseInt(e.target.value, 10);
     setSelectedCalendar(calendarId);
-    console.log('calendarId', calendarId);
   };
 
   const translatedOptions = exportOptions.map((option) => ({
@@ -57,11 +56,9 @@ const CalendarExportSelector = ({
   const exportToExcel = async () => {
     try {
       const response = await getEventsByCalendarId();
-      console.log('response', response);
       if (response.ok) {
         const data = await response.json();
         setData(data);
-        console.log('data', data);
 
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();

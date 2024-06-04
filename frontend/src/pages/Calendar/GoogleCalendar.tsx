@@ -46,7 +46,7 @@ const GoogleCalendar = () => {
     return <Spinner />;
   }
 
-  console.log('events', googleEvents[0]?.start?.date);
+  // console.log('events', googleEvents[0]?.start?.date);
 
   return (
     <div>

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Calendar
+from ..models import Calendar, CalendarUser
 
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -12,6 +12,9 @@ class CalendarSerializer(serializers.ModelSerializer):
     img = serializers.ImageField(
         required=False,
         help_text="Image associated with the calendar (binary)",
+    )
+    owner_id = serializers.IntegerField(
+        required=True, help_text="ID of the user who owns the calendar"
     )
     date_start = serializers.DateTimeField(
         allow_null=True,
@@ -35,6 +38,7 @@ class CalendarSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "img",
+            "owner_id",
             "date_start",
             "date_stop",
             "created_at",
@@ -45,3 +49,12 @@ class CalendarSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+
+class CalendarUserSerializer(serializers.ModelSerializer):
+    calendar = CalendarSerializer(read_only=True)  # Nesting the CalendarSerializer
+
+    class Meta:
+        model = CalendarUser
+        fields = ["id", "user", "calendar", "role", "created_at"]
+        read_only_fields = ["id", "created_at"]

@@ -40,9 +40,9 @@ const Layout = () => {
         fluid
         style={{
           height: '100vh',
-          backgroundColor: 'white',
           display: 'flex',
           flexDirection: 'column',
+          backgroundColor: 'white',
           width: '100%',
           overflowY: 'auto',
           borderBottom: '1px solid black',

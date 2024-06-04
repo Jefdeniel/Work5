@@ -12,6 +12,9 @@
   "modals": {
     "add": {
       "title": "Voeg evenement toe"
+    },
+    "edit": {
+      "title": "Bewerk evenement"
     }
   },
   "buttons": {

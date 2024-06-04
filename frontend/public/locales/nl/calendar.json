@@ -15,6 +15,8 @@
     "invite-btn": "Nodig uit",
     "date-range": "Datumbereik",
     "date-range-description": "Voor tijdelijke kalenders (bijvoorbeeld projecten) kiest u JA en kunt u de start- en einddatum ervan definiëren. Voor normale, houd het gewoon op NEEN.",
+    "start-date": "Startdatum",
+    "end-date": "Einddatum",
     "no": "NEEN",
     "yes": "JA"
   },

@@ -74,7 +74,7 @@ const DetailedNavigation = ({
       >
         <Row className="mb-large">
           <Col>
-            <Link to="/">
+            <Link to="/calendar/overview">
               <Logo
                 width={isMenuCollapsed ? '50px' : '50px'}
                 height={isMenuCollapsed ? '50px' : '50px'}
