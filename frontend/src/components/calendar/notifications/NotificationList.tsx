@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import NotificationCard from './NotificationCard/NotificationCard';
-import useFetch from '../../../hooks/useFetch';
 import { DateTime } from 'luxon';
 import { Row } from 'react-bootstrap';
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import { useTranslation } from 'react-i18next';
+
+import useFetch from '../../../hooks/useFetch';
 import useAuth from '../../../hooks/useAuth';
 
+import NotificationCard from './NotificationCard/NotificationCard';
+import LoadingScreen from '../../ui/Loading/LoadingScreen';
+
 const NotificationList = () => {
+  const { t } = useTranslation(['calendar']);
   const { user_id } = useAuth();
 
-  const { fetchData: getNotifications, loading: isLoading } = useFetch('GET', ['notifications']);
+  const { fetchData: getNotifications, loading: isLoading } = useFetch('GET', [
+    'notifications',
+  ]);
   const { fetchData: putNotification } = useFetch('PUT', [
     'notifications',
     user_id,
@@ -26,8 +32,8 @@ const NotificationList = () => {
           const data = await response.json();
           setNotifications(data);
           // TODO: if 0, line 76
-        } else if(notifications.length === 0) {
-          // 
+        } else if (notifications.length === 0) {
+          //
         } else {
           throw new Error('Failed to fetch notifications');
         }
@@ -60,14 +66,21 @@ const NotificationList = () => {
           )
         );
       } else {
-        throw new Error('Failed to update notification');
-        // TODO: Translate error
-        toast.error('Failed to update notification');
+        throw new Error(
+          t('calendar:notifications.toasts.notification-update-failed')
+        );
+        toast.error(
+          t('calendar:notifications.toasts.notification-update-failed')
+        );
       }
     } catch (error) {
-      console.error('Error updating notification:', error);
-      // TODO: Translate error
-      toast.error('Error updating notification');
+      console.error(
+        t('calendar:notifications.toasts.notification-updating-failed'),
+        error
+      );
+      toast.error(
+        t('calendar:notifications.toasts.notification-updating-failed')
+      );
     }
   };
 
