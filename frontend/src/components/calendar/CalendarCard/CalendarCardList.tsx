@@ -119,6 +119,7 @@ const CalendarCardList = ({
       )}
 
       <CalendarCard
+        key={'google-calendar'}
         img="/img/google-calendar-logo.svg"
         name="Google"
         userAvatars={USER_AVATARS}
