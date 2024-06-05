@@ -229,7 +229,7 @@ const SettingsPage = () => {
               </Field>
             </Row>
 
-            <div className="pad-left-neg mt-3 mb-5">
+            <div className="pad-left-neg mt-4 mb-5 d-flex justify-content-end">
               <Button
                 className="btn--success"
                 type="submit"
