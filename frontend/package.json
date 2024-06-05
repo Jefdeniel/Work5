@@ -16,7 +16,7 @@
     "@types/react-big-calendar": "^1.8.9",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "cssnano": "^7.0.1",
+    "cssnano": "^7.0.2",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "file-saver": "^2.0.5",
