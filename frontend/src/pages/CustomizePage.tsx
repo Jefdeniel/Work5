@@ -1,121 +1,28 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Row } from 'react-bootstrap';
-import { Form } from 'react-final-form';
 
 import useSetTitle from '../hooks/setTitle';
 import Heading from '../components/ui/Heading/Heading';
-import Button from '../components/ui/Button/Button';
 import LabelColorInput from '../components/customize/inputs/LabelColorInput';
+import TimeBlockingInput from '../components/customize/inputs/TimeBlockingInput';
+import PermissionBoxes from '../components/customize/inputs/PermissionBoxes';
 
 const CustomizePage = () => {
-  useSetTitle('Customize calendar');
   const { t } = useTranslation(['general', 'customize']);
-  const [selectedColor, setSelectedColor] = useState<string>('');
-
-  const labels = [
-    { name: 'Work', color: '#FF0000' },
-    { name: 'Personal', color: '#00FF00' },
-    { name: 'Family', color: '#0000FF' },
-    { name: 'School', color: '#FFFF00' },
-    { name: 'Other', color: '#00FFFF' },
-  ];
-
-  const handleSaveLabelColors = async (values) => {};
-
-  const handleSaveTimeBlocking = async (values) => {};
-
-  const handleSavePermissions = async (values) => {};
+  useSetTitle(t('calendar:calendar-customize.title'));
 
   return (
-    <>
+    <div className={`d-flex flex-column gap-large`}>
       <Row>
-        <Heading level={1} className="heading--lg clr-primary mb-large">
-          {t('calendar:sharing-hub.title')}
-        </Heading>
+        <Heading level={1} className="heading--lg clr-primary" />
       </Row>
 
-      <Form
-        onSubmit={handleSaveLabelColors}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <LabelColorInput
-              labels={labels}
-              value={selectedColor}
-              onChange={handleSaveLabelColors}
-            />
+      <LabelColorInput />
 
-            <Button
-              className="btn--success"
-              type="submit" /*disabled={isLoading}*/
-            >
-              {t('settings:save')}
-            </Button>
-          </form>
-        )}
-      />
+      <TimeBlockingInput />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <Form
-        onSubmit={handleSaveTimeBlocking}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <Button
-              className="btn--success"
-              type="submit" /*disabled={isLoading}*/
-            >
-              {t('settings:save')}
-            </Button>
-          </form>
-        )}
-      />
-
-      <Form
-        onSubmit={handleSavePermissions}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <Button
-              className="btn--success"
-              type="submit" /*disabled={isLoading}*/
-            >
-              {t('settings:save')}
-            </Button>
-          </form>
-        )}
-      />
-    </>
+      <PermissionBoxes />
+    </div>
   );
 };
 
