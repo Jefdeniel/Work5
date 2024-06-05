@@ -4,6 +4,19 @@
     "fetchingEvents": "Error fetching events",
     "fetchingCalendars": "Error fetching calendars"
   },
+  "calendar-overview": {
+    "delete-title": "Delete calendar",
+    "delete-description": "Are you sure you want to delete this calendar?",
+    "delete-confirmation-yes": "Yes, I am sure",
+    "options": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "toast": {
+      "calendar-deleted": "Calendar deleted",
+      "calendar-deletion-failed": "Calendar deletion failed"
+    }
+  },
   "calendar-create": {
     "title": "Create Calendar",
     "general": "General",
@@ -28,7 +41,14 @@
     "creating": "Creating...",
     "editing": "Editing...",
     "selectTheme": "Select a theme",
-    "search": "Search"
+    "search": "Search",
+    "today": "Today",
+    "views": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "agenda": "Agenda"
+    }
   },
   "notifications": {
     "title": "Notifications",
@@ -36,7 +56,11 @@
     "clickOnCircle": "You can change the colors by clicking on the circle.",
     "forOthers": "From others",
     "forYou": "For you",
-    "isNew": "New"
+    "isNew": "New",
+    "toasts": {
+      "notification-updating-failed": "Error updating notification",
+      "notification-update-failed": "Failed to update notification"
+    }
   },
   "sharing-hub": {
     "title": "Sharing Hub",
@@ -47,5 +71,29 @@
     "exportPDF": "Export PDF",
     "export": "Export",
     "integrateExternal": "Integrate External Services"
+  },
+  "calendar-customize": {
+    "title": "Customize Calendar",
+    "event-labels": {
+      "title": "Event Labels",
+      "description": "Customize event colors here.",
+      "save": "Save labels"
+    },
+    "time-blocking": {
+      "title": "Add time block",
+      "description": "Reserve specific time slots for designated purposes, such as standard work hours or personal activities, ensuring they remain unoccupied.",
+      "start-time": "Start time",
+      "end-time": "End time"
+    },
+    "permissions": {
+      "title": "Collaborator permissions",
+      "description": "Adjust the access permissions for invited members of this agenda.",
+      "can-view": "Can view event details",
+      "can-create": "Can create events",
+      "can-edit": "Can edit events",
+      "can-delete": "Can delete events",
+      "can-invite": "Can invite others",
+      "save": "Save permissions"
+    }
   }
 }
