@@ -354,6 +354,10 @@ ul {
   gap: var(--sp-sm);
 }
 
+.gap-large {
+  gap: var(--sp-lg);
+}
+
 .settings-block > div:last-child {
   margin-bottom: var(--sp-sm);
 }
