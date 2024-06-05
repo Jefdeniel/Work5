@@ -6,7 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../../hooks/useSettings';
 
-import { VIEW_OPTIONS } from '../../../constants/calendar';
+import { translateViewOptions } from '../../../constants/calendar';
 import { SettingsContext } from '../../../store/SettingsContext';
 import { Event } from '../../../@types/Events';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
@@ -35,6 +35,7 @@ type Keys = keyof typeof Views;
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const { t } = useTranslation(['calendar']);
+  const translatedViewOptions = translateViewOptions(t);
   const { theme } = useSettings();
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
@@ -174,7 +175,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       <div className="custom-toolbar">
         <Row className={`my-4 d-flex align-items-center search-row`}>
           <Col className={`full-search-block`}>
-            {/* TODO: Add translation */}
             <Input
               className="toolbar__search"
               isSearch
@@ -203,7 +203,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             <ToolbarViewList
               view={view}
               setView={setView}
-              viewOptions={VIEW_OPTIONS}
+              viewOptions={translatedViewOptions}
             />
           </Col>
         </Row>
@@ -212,7 +212,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           <Col xs={9} className={`d-flex align-items-center date-title`}>
             <Button
               className={`btn--bordered-primary`}
-              text="Today"
+              text={t('calendar:calendar.today')}
               onClick={onTodayClick}
             />
 
@@ -264,7 +264,11 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
                     alt="Arrow icon"
                   />
                 ) : (
-                  <img src="/icons/arrow.svg" alt="Arrow icon" />
+                  <img
+                    className="rotate-180"
+                    src="/icons/arrow.svg"
+                    alt="Arrow icon"
+                  />
                 )
               }
               onClick={onNextClick}
