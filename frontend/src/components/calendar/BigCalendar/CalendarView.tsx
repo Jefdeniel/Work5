@@ -12,9 +12,9 @@ const CalendarView = () => {
   // Event is gonna be used to show the event view of the clicked event
   const [selectedEvent, setSelectedEvent] = useState<Event | undefined>();
   useState<boolean>(false);
-  const [newEventTimes, setNewEventTimes] = useState<
-    { start: Date; end: Date } | undefined
-  >();
+  // const [newEventTimes, setNewEventTimes] = useState<
+  //   { start: Date; end: Date } | undefined
+  // >();
 
   return (
     <div className="full-calendar">

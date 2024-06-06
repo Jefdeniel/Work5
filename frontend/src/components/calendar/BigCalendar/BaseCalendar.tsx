@@ -151,7 +151,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
 
     if (query) {
       const filteredEvents = events.filter((event) =>
-        event.title.toLowerCase().includes(query.toLowerCase())
+        event?.title?.toLowerCase().includes(query.toLowerCase())
       );
       // Set filtered events
       setFilteredEvents(filteredEvents);

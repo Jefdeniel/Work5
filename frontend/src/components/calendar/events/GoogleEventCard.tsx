@@ -51,7 +51,7 @@ const GoogleEventCard = () => {
   return (
     <div>
       <ul>
-        {googleEvents?.map((event) => (
+        {googleEvents?.map((event) => (          
           <EventCard
             key={event.id}
             isGoogleEvent={true}
