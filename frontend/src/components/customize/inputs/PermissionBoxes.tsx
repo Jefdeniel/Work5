@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 
-import Checkbox from '../Checkbox/Checkbox';
+import Checkbox from '../../ui/Checkbox/Checkbox';
 import Button from '../../ui/Button/Button';
 
 const PermissionBoxes = () => {
