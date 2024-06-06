@@ -9,7 +9,9 @@ class CalendarViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing calendars.
     """
 
-    queryset = Calendar.objects.all().prefetch_related("events")
+    queryset = Calendar.objects.all().prefetch_related(
+        "categories", "timeblocks", "events"
+    )
     serializer_class = CalendarSerializer
 
     def list(self, request, *args, **kwargs):

@@ -13,6 +13,7 @@ from calendar_app.models import (
     Category,
     Notification,
     UserSettings,
+    TimeBlock,
 )
 from django.db import IntegrityError, DatabaseError
 from django.core.exceptions import ValidationError
@@ -148,7 +149,7 @@ class Command(BaseCommand):
             "personal",
             "work",
             "fitness",
-            "free time ",
+            "free time",
             "family",
             "health",
             "other",
@@ -242,8 +243,8 @@ class Command(BaseCommand):
                     self.style.ERROR(f"Error creating event {i + 1}: {e}")
                 )
 
-            events = list(Event.objects.all())
-            self.stdout.write(self.style.SUCCESS("100 events created."))
+        events = list(Event.objects.all())
+        self.stdout.write(self.style.SUCCESS("100 events created."))
 
         # Create 100 Reminders
         self.stdout.write("Creating 100 reminders...")
@@ -270,7 +271,7 @@ class Command(BaseCommand):
                 user = random.choice(users)
                 calendar = random.choice(calendars)
 
-                # Use get_or_create to ensure uniqueness
+                # Use get_or_create to ensure uniqueness! (unique_together constraint)
                 CalendarUser.objects.get_or_create(
                     user=user,
                     calendar=calendar,
@@ -323,4 +324,25 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("100 notifications created."))
 
+        # Create 100 TimeBlocks for calendars
+        self.stdout.write("Creating 100 time blocks for calendars...")
+        for i in range(100):
+            try:
+                start_time = fake.future_datetime(end_date="+30d", tzinfo=timezone.utc)
+                end_time = start_time + timedelta(hours=random.randint(1, 4))
+                if end_time <= start_time:
+                    end_time = start_time + timedelta(hours=1)
+
+                TimeBlock.objects.create(
+                    calendar=random.choice(calendars),
+                    start_time=start_time,
+                    end_time=end_time,
+                )
+                self.stdout.write(self.style.SUCCESS(f"Created time block {i + 1}/100"))
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"Error creating time block {i + 1}: {e}")
+                )
+
+        self.stdout.write(self.style.SUCCESS("100 time blocks created."))
         self.stdout.write(self.style.SUCCESS("Data seeding completed successfully!"))

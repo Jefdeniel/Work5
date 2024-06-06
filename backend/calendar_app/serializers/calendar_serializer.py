@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from ..models import Calendar, CalendarUser
+from ..models import Calendar, CalendarUser, TimeBlock
 from .category_serializer import CategorySerializer
+from .timeblock_serializer import TimeBlockSerializer
 
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -27,6 +28,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     )
 
     categories = CategorySerializer(many=True, read_only=True)
+    timeblocks = TimeBlockSerializer(many=True, read_only=True)
 
     created_at = serializers.DateTimeField(
         read_only=True, help_text="Timestamp when the calendar was created"
@@ -46,6 +48,7 @@ class CalendarSerializer(serializers.ModelSerializer):
             "date_start",
             "date_stop",
             "categories",
+            "timeblocks",
             "created_at",
             "updated_at",
         )
@@ -57,9 +60,18 @@ class CalendarSerializer(serializers.ModelSerializer):
 
 
 class CalendarUserSerializer(serializers.ModelSerializer):
-    calendar = CalendarSerializer(read_only=True)  # Nesting the CalendarSerializer
+    calendar = CalendarSerializer(read_only=True)
 
     class Meta:
         model = CalendarUser
         fields = ["id", "user", "calendar", "role", "created_at"]
+        read_only_fields = ["id", "created_at"]
+
+
+class TimeBlockSerializer(serializers.ModelSerializer):
+    calendar = CalendarSerializer(read_only=True)
+
+    class Meta:
+        model = TimeBlock
+        fields = ["id", "calendar", "start_time", "end_time", "created_at"]
         read_only_fields = ["id", "created_at"]
