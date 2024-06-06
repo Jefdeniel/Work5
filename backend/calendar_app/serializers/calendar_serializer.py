@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..models import Calendar, CalendarUser
+from .category_serializer import CategorySerializer
 
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -24,6 +25,9 @@ class CalendarSerializer(serializers.ModelSerializer):
         allow_null=True,
         help_text="End date of the calendar (format: YYYY-MM-DDTHH:MM:SS.sssZ)",
     )
+
+    categories = CategorySerializer(many=True, read_only=True)
+
     created_at = serializers.DateTimeField(
         read_only=True, help_text="Timestamp when the calendar was created"
     )
@@ -41,6 +45,7 @@ class CalendarSerializer(serializers.ModelSerializer):
             "owner_id",
             "date_start",
             "date_stop",
+            "categories",
             "created_at",
             "updated_at",
         )
