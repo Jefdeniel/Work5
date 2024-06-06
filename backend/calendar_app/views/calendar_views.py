@@ -10,7 +10,7 @@ class CalendarViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Calendar.objects.all().prefetch_related(
-        "categories", "timeblocks", "events"
+        "categories", "timeblocks", "events", "users"
     )
     serializer_class = CalendarSerializer
 
@@ -86,27 +86,3 @@ class CalendarViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
-
-    # Custom action for fetching calendars by IDs
-    def get_by_ids(self, request, *args, **kwargs):
-        ids = self.request.query_params.getlist("id", [])
-        if not ids:
-            return Response(
-                {"message": "No IDs provided"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        try:
-            queryset = self.get_queryset().filter(id__in=ids)
-            serializer = self.get_serializer(queryset, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {"message": str(e)},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-    def get(self, request, *args, **kwargs):
-        if "get_by_ids" in request.query_params:
-            return self.get_by_ids(request, *args, **kwargs)
-        return super().get(request, *args, **kwargs)

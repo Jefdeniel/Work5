@@ -1,8 +1,5 @@
 from .custom_user_serializer import CustomUserSerializer
-from .calendar_serializer import (
-    CalendarSerializer,
-    CalendarUserSerializer,
-)
+from .calendar_serializer import CalendarSerializer, CalendarUserSerializer
 from .event_serializer import EventSerializer
 from .reminder_serializer import ReminderSerializer
 from .notification_serializer import NotificationSerializer

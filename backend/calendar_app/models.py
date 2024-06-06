@@ -11,10 +11,6 @@ from datetime import timedelta, date
 import calendar as cal
 from django.core.exceptions import ValidationError
 
-# import logging
-
-# logger = logging.getLogger(__name__)
-
 
 class userAccountManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
@@ -98,6 +94,13 @@ class Calendar(models.Model):
         on_delete=models.CASCADE,
         null=False,
     )
+    users = models.ManyToManyField(
+        get_user_model(),
+        through="CalendarUser",
+        related_name="shared_calendars",
+        through_fields=("calendar", "user"),
+        blank=True,
+    )
     date_start = models.DateTimeField(blank=True, null=True)
     date_stop = models.DateTimeField(blank=True, null=True)
 
@@ -108,6 +111,21 @@ class Calendar(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class CalendarPermissions(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
+    can_view_event_details = models.BooleanField(default=False)
+    can_create_events = models.BooleanField(default=False)
+    can_edit_events = models.BooleanField(default=False)
+    can_delete_events = models.BooleanField(default=False)
+    can_invite_others = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = "calendar_permissions"
+        unique_together = ("user", "calendar")
+        db_table_comment = "Stores permissions of users for a calendar."
 
 
 class Category(models.Model):

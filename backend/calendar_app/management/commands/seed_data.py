@@ -14,6 +14,7 @@ from calendar_app.models import (
     Notification,
     UserSettings,
     TimeBlock,
+    CalendarPermissions,
 )
 from django.db import IntegrityError, DatabaseError
 from django.core.exceptions import ValidationError
@@ -123,10 +124,11 @@ class Command(BaseCommand):
         self.stdout.write("Creating 100 calendars...")
         for i in range(100):
             try:
-                Calendar.objects.create(
+                owner = random.choice(users)
+                calendar = Calendar.objects.create(
                     title=fake.sentence(nb_words=5),
                     description=fake.text(),
-                    owner=random.choice(users),
+                    owner=owner,
                     img=fake.image_url(),
                     date_start=fake.date_time_this_year(
                         before_now=True, after_now=False, tzinfo=timezone.utc
@@ -135,6 +137,26 @@ class Command(BaseCommand):
                         before_now=False, after_now=True, tzinfo=timezone.utc
                     ),
                 )
+
+                # Add other users to the calendar
+                other_users = random.sample(users, random.randint(1, 10))
+                for user in other_users:
+                    if user != owner:
+                        CalendarUser.objects.create(
+                            user=user,
+                            calendar=calendar,
+                            role=random.choice(["EDITOR", "VIEWER"]),
+                        )
+                        CalendarPermissions.objects.create(
+                            user=user,
+                            calendar=calendar,
+                            can_view_event_details=random.choice([True, False]),
+                            can_create_events=random.choice([True, False]),
+                            can_edit_events=random.choice([True, False]),
+                            can_delete_events=random.choice([True, False]),
+                            can_invite_others=random.choice([True, False]),
+                        )
+
                 self.stdout.write(self.style.SUCCESS(f"Created calendar {i + 1}/100"))
             except Exception as e:
                 self.stdout.write(
