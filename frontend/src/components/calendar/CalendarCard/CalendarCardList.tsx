@@ -21,12 +21,10 @@ const CalendarCardList = ({
   const { t } = useTranslation(['general']);
   const calendarContext = useContext(CalendarContext);
 
-  // Placeholder images and data
   const USER_AVATARS = ['/icons/user-profile.svg', ''];
   const PLACEHOLDER_IMG =
     'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
 
-  // State hooks
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCalendars, setFilteredCalendars] = useState<CalendarUser[]>(
     []
@@ -35,7 +33,6 @@ const CalendarCardList = ({
     null
   );
 
-  // Fetch data
   const { fetchData: fetchCalendars } = useFetch('GET', [
     'calendar_users',
     'user_id',
@@ -48,6 +45,9 @@ const CalendarCardList = ({
     const fetchCalendarsData = async () => {
       try {
         const response = await fetchCalendarsMemoized();
+        if (!response.ok) {
+          throw new Error('Failed to fetch calendars');
+        }
         const data: CalendarUser[] = await response.json();
         calendarContext.setCalendars(data);
         setFilteredCalendars(data);
@@ -62,17 +62,16 @@ const CalendarCardList = ({
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
-    // Add Google calendar to data array
-    const dataWithGoogle = [
+    const dataWithGoogle: CalendarUser[] = [
       ...calendarContext.calendars,
       {
+        id: -1,
         calendar: {
+          id: -1,
           title: 'Google',
-          img: '/img/google-calendar-logo.svg',
+          image: '/img/google-calendar-logo.svg',
         },
-        userAvatars: USER_AVATARS,
         user: 0,
-        link: '/calendar/google',
         role: '',
       },
     ];
@@ -96,11 +95,13 @@ const CalendarCardList = ({
   const handleRemoveCalendar = (deletedCalendarId: number) => {
     calendarContext.setCalendars((prevCalendars) =>
       prevCalendars.filter(
-        (calendar) => calendar.calendar.id !== deletedCalendarId
+        (calendarUser) => calendarUser.calendar.id !== deletedCalendarId
       )
     );
     setFilteredCalendars((prevCalendars) =>
-      prevCalendars.filter((calendar) => calendar.id !== deletedCalendarId)
+      prevCalendars.filter(
+        (calendarUser) => calendarUser.calendar.id !== deletedCalendarId
+      )
     );
   };
 
@@ -117,27 +118,6 @@ const CalendarCardList = ({
           placeholder={t('general:navigation.search')}
         />
       )}
-
-      <CalendarCard
-        key={'google-calendar'}
-        img="/img/google-calendar-logo.svg"
-        name="Google"
-        userAvatars={USER_AVATARS}
-        link="/calendar/google"
-        onDelete={() =>
-          handleDelete({
-            calendar: {
-              title: 'Google',
-              image: '/img/google-calendar-logo.svg',
-            },
-            userAvatars: USER_AVATARS,
-            user: 0,
-            link: '/calendar/google',
-            role: '',
-          })
-        }
-        onEdit={() => {}}
-      />
 
       {filteredCalendars.map((calendarUser) => (
         <CalendarCard
@@ -157,14 +137,6 @@ const CalendarCardList = ({
           onRemoveCalendar={handleRemoveCalendar}
         />
       )}
-
-      {/* {calendarToEdit && (
-        <EditCalendarModal
-          onClose={handleCloseEditModal}
-          calendar={calendarToEdit.calendar}
-          onEditCalendar={handleEditCalendar}
-        />
-      } */}
     </ul>
   );
 };

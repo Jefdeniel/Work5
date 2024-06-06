@@ -2,15 +2,16 @@ import { gapi } from 'gapi-script';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import EventCard from '../../components/ui/EventCard/EventCard';
+import { GoogleEvent } from '../../@types/Events';
 
 const GoogleCalendar = () => {
-  const [googleEvents, setGoogleEvents] = useState([]);
+  const [googleEvents, setGoogleEvents] = useState<GoogleEvent[]>([]);
   const [loading, setLoading] = useState(false);
 
   const calendarID = import.meta.env.VITE_CALENDAR_ID;
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
-  const getEvents = (calendarID, apiKey) => {
+  const getEvents = (calendarID: string, apiKey: string) => {
     setLoading(true);
     function initiate() {
       gapi.client
@@ -24,42 +25,42 @@ const GoogleCalendar = () => {
         })
         .then(
           (response) => {
-            let googleEvents = response.result.items;
-
+            let googleEvents: GoogleEvent[] = response.result.items || [];
             setGoogleEvents(googleEvents);
           },
-          function (err) {
-            console.error('Error fetching events:', err);
-            setGoogleEvents([]); // Don't remove: clears events in case of error
+          (error) => {
+            console.error('Error fetching events:', error);
+            setGoogleEvents([]);
           }
-        );
+        )
+        .finally(() => {
+          setLoading(false);
+        });
     }
     gapi.load('client', initiate);
-    setLoading(false);
   };
 
   useEffect(() => {
-    getEvents(calendarID, apiKey);
-  }, []);
+    if (calendarID && apiKey) {
+      getEvents(calendarID, apiKey);
+    }
+  }, [calendarID, apiKey]);
 
   if (loading) {
-    return <Spinner />;
+    return <Spinner animation="border" />;
   }
-
-  // console.log('events', googleEvents[0]?.start?.date);
 
   return (
     <div>
       <ul>
-        {googleEvents?.map((event) => (
+        {googleEvents.map((event) => (
           <EventCard
             key={event.id}
             isGoogleEvent={true}
             event={{
               title: event.summary || '',
-              start: new Date(googleEvents[0]?.start?.date) || 'No start date',
-              end: new Date(googleEvents[0]?.end?.date) || 'No end date',
-
+              start: event.start?.date || 'No start date',
+              end: event.end?.date || 'No end date',
               location: event.location || '',
               status: event.status || '',
               htmlLink: event.htmlLink || '',

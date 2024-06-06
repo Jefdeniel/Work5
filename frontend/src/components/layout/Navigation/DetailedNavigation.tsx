@@ -129,7 +129,7 @@ const DetailedNavigation = ({
               icon={icon}
               onClick={handleOnClickMenu}
             >
-              {t(label.toString())}
+              {t(label?.toString() ?? '')}
             </DetailedNavItem>
           ))}
         </Menu>

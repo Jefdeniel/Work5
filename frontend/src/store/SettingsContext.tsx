@@ -68,7 +68,7 @@ export const SettingsContextProvider = ({
 
   const { fetchData: getUserSettings } = useFetch('GET', [
     'user_settings',
-    auth.user_id,
+    auth.user_id ? auth.user_id.toString() : '',
   ]);
 
   useEffect(() => {

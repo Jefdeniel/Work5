@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { DateTime } from 'luxon';
 import { Row } from 'react-bootstrap';
@@ -9,6 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 
 import NotificationCard from './NotificationCard/NotificationCard';
 import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import { Notification } from '../../../@types/Notification';
 
 const NotificationList = () => {
   const { t } = useTranslation(['calendar']);
@@ -19,10 +20,10 @@ const NotificationList = () => {
   ]);
   const { fetchData: putNotification } = useFetch('PUT', [
     'notifications',
-    user_id,
+    user_id ? user_id.toString() : '',
   ]);
 
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -31,7 +32,6 @@ const NotificationList = () => {
         if (response.ok) {
           const data = await response.json();
           setNotifications(data);
-          // TODO: if 0, line 76
         } else if (notifications.length === 0) {
           //
         } else {
@@ -46,9 +46,28 @@ const NotificationList = () => {
     fetchNotifications();
   }, []);
 
-  const handleNewStatus = async (notificationId) => {
-    // TODO: Fix this
-    console.log('handleNewStatus called');
+  const handleUpdateError = (error: any) => {
+    console.error(
+      t('calendar:notifications.toasts.notification-updating-failed'),
+      error
+    );
+    toast.error(
+      t('calendar:notifications.toasts.notification-updating-failed')
+    );
+  };
+
+  const handleUpdateSuccess = (
+    notificationId: number,
+    updatedNotification: Notification
+  ) => {
+    setNotifications((prevNotifications) =>
+      prevNotifications.map((n) =>
+        n.id === notificationId ? updatedNotification : n
+      )
+    );
+  };
+
+  const handleNewStatus = async (notificationId: number) => {
     const notification = notifications.find((n) => n.id === notificationId);
     if (!notification) return;
 
@@ -60,27 +79,14 @@ const NotificationList = () => {
     try {
       const response = await putNotification({}, updatedNotification);
       if (response.ok) {
-        setNotifications((prevNotifications) =>
-          prevNotifications.map((n) =>
-            n.id === notificationId ? updatedNotification : n
-          )
-        );
+        handleUpdateSuccess(notificationId, updatedNotification);
       } else {
         throw new Error(
           t('calendar:notifications.toasts.notification-update-failed')
         );
-        toast.error(
-          t('calendar:notifications.toasts.notification-update-failed')
-        );
       }
     } catch (error) {
-      console.error(
-        t('calendar:notifications.toasts.notification-updating-failed'),
-        error
-      );
-      toast.error(
-        t('calendar:notifications.toasts.notification-updating-failed')
-      );
+      handleUpdateError(error);
     }
   };
 
@@ -104,9 +110,10 @@ const NotificationList = () => {
             title={notification.title}
             timeFrom={notificationStart}
             timeTo={notificationStop}
-            onClick={() => handleNewStatus(notification.id)}
+            onClick={() => handleNewStatus(notification.id!)}
             isNew={notification.is_new}
-            color={notification.color}
+            // color={notification.color}
+            // TODO: colors
           />
         );
       })}

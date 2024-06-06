@@ -1,35 +1,39 @@
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 import useFetch from '../../../hooks/useFetch';
 
 import Button from '../../ui/Button/Button';
 import Select from '../../ui/Select/Select';
+import { ExportOption } from '../../../@types/Calendar';
 
 interface Props {
   initialValue?: string;
   value?: string | null;
   onChange?: (calendarId: string) => void;
-  exportOptions: number[];
+  exportOptions: ExportOption[];
   [x: string]: any;
 }
 
 const CalendarExportSelector = ({
   initialValue,
-  value,
   onChange,
   exportOptions,
   ...rest
 }: Props) => {
   const { t } = useTranslation(['calendars']);
 
-  const [selectedCalendar, setSelectedCalendar] = useState(
-    initialValue || exportOptions[0] || null
+  const [selectedCalendar, setSelectedCalendar] = useState<number | null>(
+    initialValue
+      ? parseInt(initialValue, 10)
+      : exportOptions.length > 0
+        ? exportOptions[0].calendar.id || null
+        : null
   );
-  const [data, setData] = useState<any[]>([]);
 
+  const [data, setData] = useState<any[]>([]);
   const { fetchData: getEventsByCalendarId } = useFetch('GET', [
     'events',
     'calendar',
@@ -46,12 +50,6 @@ const CalendarExportSelector = ({
     const calendarId = parseInt(e.target.value, 10);
     setSelectedCalendar(calendarId);
   };
-
-  const translatedOptions = exportOptions.map((option) => ({
-    title: t(`calendars:${option}`),
-    value: option,
-    selected: option === selectedCalendar,
-  }));
 
   const exportToExcel = async () => {
     try {
@@ -73,12 +71,12 @@ const CalendarExportSelector = ({
           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
         });
 
-        saveAs(blob, 'Calendar' + selectedCalendar + '.xlsx');
+        saveAs(blob, `Calendar${selectedCalendar?.toString()}.xlsx`);
       } else {
         throw new Error(response.statusText);
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error exporting to Excel:', error);
     }
   };
 
@@ -86,11 +84,23 @@ const CalendarExportSelector = ({
     <div>
       <Select
         type="select"
-        defaultValue={initialValue || exportOptions[0]}
+        value={
+          initialValue ||
+          (exportOptions.length > 0
+            ? exportOptions[0].calendar.id?.toString()
+            : undefined)
+        }
         onChange={handleCalendarChange}
-        options={translatedOptions}
+        options={exportOptions.map((option) => ({
+          title: option.calendar.title,
+          value: option.calendar.id?.toString() || '',
+          selected:
+            selectedCalendar !== null &&
+            option.calendar.id === selectedCalendar,
+        }))}
         {...rest}
       />
+
       <Button onClick={exportToExcel} className="btn--primary">
         {t('calendar:sharing-hub.export')}
       </Button>

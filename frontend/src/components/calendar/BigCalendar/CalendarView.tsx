@@ -26,8 +26,8 @@ const CalendarView = () => {
 
       {selectedEvent && (
         <EditEventModal
-          event={selectedEvent}
-          setEvent={setSelectedEvent}
+          // event={selectedEvent}
+          // setEvent={setSelectedEvent}
           onClose={() => setSelectedEvent(undefined)}
         />
       )}

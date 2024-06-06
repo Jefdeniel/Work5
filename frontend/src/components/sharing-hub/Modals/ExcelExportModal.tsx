@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { CalendarContext } from '../../../store/CalendarContext';
 import Modal from '../../ui/Modals/Modal';
 import CalendarExportSelector from '../Selectors/CalendarExportSelector';
+import { Calendar } from '../../../@types/Calendar';
 
 interface Props {
   onClose: () => void;
+  calendar: Calendar;
 }
 
 const ExcelExportModal = ({ onClose }: Props) => {

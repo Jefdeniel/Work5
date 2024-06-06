@@ -17,7 +17,10 @@ const ProfileButton = (props: Props) => {
   const { t } = useTranslation(['settings']);
   const { user_id } = useAuth();
 
-  const { fetchData: getUserData } = useFetch('GET', ['users', user_id]);
+  const { fetchData: getUserData } = useFetch('GET', [
+    'users',
+    user_id ? user_id.toString() : '',
+  ]);
 
   const [userFirstName, setUserFirstName] = useState<string | undefined>(
     props.userFirstName

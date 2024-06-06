@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useContext } from 'react';
 
-import { Calendar } from '../../../../@types/Calendar';
+import { Calendar, CalendarUser } from '../../../../@types/Calendar';
 import useFetch from '../../../../hooks/useFetch';
 import { CalendarContext } from '../../../../store/CalendarContext';
 
@@ -34,10 +34,8 @@ const DeleteCalendarModal = ({
         toast.success(t('calendar:calendar-overview.toast.calendar-deleted'));
         if (calendar.id) {
           onRemoveCalendar(calendar.id);
-          calendarContext.setCalendars((prev) =>
-            prev.filter(
-              (cal: { id: number | undefined }) => cal.id !== calendar.id
-            )
+          calendarContext.setCalendars((prev: CalendarUser[]) =>
+            prev.filter((cal) => cal.id !== calendar.id)
           );
         }
       } else {
@@ -52,13 +50,13 @@ const DeleteCalendarModal = ({
 
   return (
     <Modal show={true} size="sm" onHide={onClose}>
-      <Modal.Header className={`p-3`} closeButton>
+      <Modal.Header className="p-3" closeButton>
         <Modal.Title>
           {t('calendar:calendar-overview.delete-title')}
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body className={`p-3 pb-4`}>
+      <Modal.Body className="p-3 pb-4">
         <p>{t('calendar:calendar-overview.delete-description')}</p>
 
         <div className="d-flex justify-content-center">

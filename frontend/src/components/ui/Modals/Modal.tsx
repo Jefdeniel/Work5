@@ -1,8 +1,6 @@
 import { Modal as BootstrapModal, Col } from 'react-bootstrap';
 import Heading from '../Heading/Heading';
-
 import IconButton from '../IconButton/IconButton';
-
 import './Modal.scss';
 
 interface Props {
@@ -17,7 +15,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// WORK IN PROGRESS
 const Modal = ({
   show,
   onClose,

@@ -4,8 +4,10 @@ import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';
 
 interface CalendarContextType {
-  calendars: number[] | number;
-  setCalendars: (calendars: number[]) => void;
+  calendars: CalendarUser[];
+  setCalendars: (
+    calendars: CalendarUser[] | ((prev: CalendarUser[]) => CalendarUser[])
+  ) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextType>({
@@ -19,8 +21,7 @@ export const CalendarContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { user_id } = useAuth();
-
-  const [calendars, setCalendars] = useState<number[]>([]);
+  const [calendars, setCalendars] = useState<CalendarUser[]>([]);
 
   const { fetchData: getCalendarUsers } = useFetch('GET', [
     'calendar_users',
@@ -34,18 +35,14 @@ export const CalendarContextProvider = ({
 
       if (response.ok) {
         const data = (await response.json()) as CalendarUser[];
-        setCalendars(
-          data.map(
-            (calendarUser) => calendarUser.calendar
-          ) as unknown as number[]
-        );
+        setCalendars(data);
       } else {
         console.error('Failed to fetch calendar users');
       }
     };
 
     if (user_id) {
-      calendars && void fetchData();
+      void fetchData();
     }
   }, [user_id]);
 

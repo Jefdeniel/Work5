@@ -15,7 +15,10 @@ const DeleteAccountModal = ({ onClose }: Props) => {
   const navigate = useNavigate();
   const { user_id, logout } = useAuth();
 
-  const { fetchData: deleteUser } = useFetch('DELETE', ['users', user_id]);
+  const { fetchData: deleteUser } = useFetch('DELETE', [
+    'users',
+    user_id ? user_id.toString() : '',
+  ]);
 
   const handleDeleteAccount = async () => {
     await deleteUser({}, { id: user_id }).then((response) => {

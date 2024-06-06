@@ -16,20 +16,12 @@ import EventTimeSelector from '../Selectors/EventTimeSelector';
 import './EventModal.scss';
 
 interface Props {
+  // event: Event;
   onClose: () => void;
-  title: string;
-  description: string;
-  start_time: Date;
-  end_time: Date;
+  // setEvent: (event: Event) => void;
 }
 
-const EditEventModal = ({
-  onClose,
-  title,
-  description,
-  start_time,
-  end_time,
-}: Props) => {
+const EditEventModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['events']);
   const { fetchData: addEvent, loading: isLoading } = useFetch('PUT', [
     'events',
@@ -43,8 +35,8 @@ const EditEventModal = ({
           ...values,
           title: values.title,
           description: values.description,
-          start_time: start_time,
-          end_time: end_time,
+          start_time: values.start,
+          end_time: values.end,
         }
       );
 
@@ -92,7 +84,7 @@ const EditEventModal = ({
                   meta={meta}
                   title={t('events:eventInfo.title')}
                   isBig
-                  value={title}
+                  value={values.title}
                 />
               )}
             </Field>
