@@ -5,7 +5,7 @@ import Input from '../../../ui/Input/Input';
 interface Props {
   changeStart?: boolean;
   initialValue?: string;
-  value?: string;
+  value?: string | Date;
   meta?: FieldMetaState<any>;
   onChange?: (start: string) => void;
   [key: string]: any;

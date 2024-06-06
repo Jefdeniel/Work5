@@ -1,40 +1,28 @@
-import { useState } from 'react';
-import Button from '../components/ui/Button/Button';
-import useSetTitle from '../hooks/setTitle';
 import { useTranslation } from 'react-i18next';
-import AddEventModal from '../components/calendar/events/Modals/AddEventModal';
 import { Row } from 'react-bootstrap';
+
+import useSetTitle from '../hooks/setTitle';
 import Heading from '../components/ui/Heading/Heading';
+import LabelColorInput from '../components/customize/inputs/LabelColorInput';
+import TimeBlockingInput from '../components/customize/inputs/TimeBlockingInput';
+import PermissionBoxes from '../components/customize/inputs/PermissionBoxes';
 
 const CustomizePage = () => {
-  useSetTitle('Customize');
-  const [showModal, setShowModal] = useState(false);
   const { t } = useTranslation(['general', 'customize']);
-  // Modals
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  useSetTitle(t('calendar:calendar-customize.title'));
 
   return (
-    <>
+    <div className={`d-flex flex-column gap-large`}>
       <Row>
-        <Heading level={1} className="heading--lg clr-primary mb-small">
-          {t('calendar:sharing-hub.title')}
-        </Heading>
+        <Heading level={1} className="heading--lg clr-primary" />
       </Row>
 
-      <Button
-        text={t('general:buttons.add')}
-        onClick={openModal}
-        style={{ height: '40px', marginLeft: '25px' }}
-        icon={<img src="/icons/user-plus.svg" alt="add" />}
-      />
-      {showModal && <AddEventModal onClose={closeModal} />}
-    </>
+      <LabelColorInput />
+
+      <TimeBlockingInput />
+
+      <PermissionBoxes />
+    </div>
   );
 };
 

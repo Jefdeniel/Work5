@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { DateTime } from 'ts-luxon';
-
-import useFetch from './useFetch';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+import useFetch from './useFetch';
+import { Event } from '../@types/Events';
+
 const useFetchedEvents = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const params = useParams();
   const { fetchData: getEvents } = useFetch('GET', [
     'events',

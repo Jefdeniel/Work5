@@ -4,6 +4,19 @@
     "fetchingEvents": "Erreur lors de la récupération des événements",
     "fetchingCalendars": "Erreur lors de la récupération des calendriers"
   },
+  "calendar-overview": {
+    "delete-title": "Supprimer le calendrier",
+    "delete-description": "Êtes-vous sûr de vouloir supprimer ce calendrier ?",
+    "delete-confirmation-yes": "Oui je suis sûr",
+    "options": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    },
+    "toast": {
+      "calendar-deleted": "Calendrier supprimé",
+      "calendar-deletion-failed": "Échec de la suppression du calendrier"
+    }
+  },
   "calendar-create": {
     "title": "Créer un calendrier",
     "general": "Général",
@@ -25,7 +38,17 @@
     "page": "Page de calendrier",
     "createEvent": "Créer un évènement",
     "editEvent": "Modifier l'événement",
-    "search": "Rechercher"
+    "creating": "Création...",
+    "editing": "Modification...",
+    "selectTheme": "Sélectionnez un thème",
+    "search": "Rechercher",
+    "today": "Aujourd'hui",
+    "views": {
+      "day": "Jour",
+      "week": "Semaine",
+      "month": "Mois",
+      "agenda": "Ordre du jour"
+    }
   },
   "notifications": {
     "title": "Notifications",
@@ -33,7 +56,11 @@
     "clickOnCircle": "Vous pouvez changer les couleurs en cliquant sur le cercle.",
     "forOthers": "Des autres",
     "forYou": "Pour toi",
-    "isNew": "Nouvelle"
+    "isNew": "Nouvelle",
+    "toasts": {
+      "notification-updating-failed": "Erreur lors de la mise à jour de la notification",
+      "notification-update-failed": "Échec de la mise à jour de la notification"
+    }
   },
   "sharing-hub": {
     "title": "Centre de partage",
@@ -44,5 +71,29 @@
     "exportPdf": "Export l'agenda en PDF",
     "export": "Exporter",
     "integrateExternal": "Intégrer des services externes"
+  },
+  "calendar-customize": {
+    "title": "Personnaliser le calendrier",
+    "event-labels": {
+      "title": "Étiquettes d'événements",
+      "description": "Personnalisez les couleurs de l'événement ici.",
+      "save": "Enregistrer les étiquettes"
+    },
+    "time-blocking": {
+      "title": "Ajouter un bloc horaire",
+      "description": "Réservez des plages horaires spécifiques à des fins désignées, telles que les heures de travail standard ou les activités personnelles, en vous assurant qu'elles restent inoccupées.",
+      "start-time": "Heure de début",
+      "end-time": "Heure de fin"
+    },
+    "permissions": {
+      "title": "Autorisations des collaborateurs",
+      "description": "Ajustez les autorisations d'accès pour les membres invités de cet agenda.",
+      "can-view": "Peut afficher les détails de l'événement",
+      "can-create": "Peut créer des événements",
+      "can-edit": "Peut modifier des événements",
+      "can-delete": "Peut supprimer des événements",
+      "can-invite": "Peut inviter d'autres personnes",
+      "save": "Enregistrer les autorisations"
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useContext, useMemo } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CalendarUser } from '../../../@types/Calendar';
 import useAuth from '../../../hooks/useAuth';
@@ -119,6 +119,7 @@ const CalendarCardList = ({
       )}
 
       <CalendarCard
+        key={'google-calendar'}
         img="/img/google-calendar-logo.svg"
         name="Google"
         userAvatars={USER_AVATARS}

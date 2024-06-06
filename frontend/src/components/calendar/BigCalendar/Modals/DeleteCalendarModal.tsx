@@ -1,11 +1,13 @@
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { useContext } from 'react';
+
 import { Calendar } from '../../../../@types/Calendar';
 import useFetch from '../../../../hooks/useFetch';
-import Button from '../../../ui/Button/Button';
-import { useContext } from 'react';
 import { CalendarContext } from '../../../../store/CalendarContext';
+
+import Button from '../../../ui/Button/Button';
 
 interface Props {
   onClose: () => void;
@@ -18,7 +20,7 @@ const DeleteCalendarModal = ({
   calendar,
   onRemoveCalendar,
 }: Props) => {
-  const { t } = useTranslation(['calendars']);
+  const { t } = useTranslation(['calendar']);
   const calendarContext = useContext(CalendarContext);
 
   const { fetchData: deleteCalendar } = useFetch('DELETE', [
@@ -29,7 +31,7 @@ const DeleteCalendarModal = ({
   const handleDeleteCalendar = async () => {
     await deleteCalendar({}, { id: calendar.id }).then((response) => {
       if (response.ok) {
-        toast.success(t('settings:account.accountDeleted'));
+        toast.success(t('calendar:calendar-overview.toast.calendar-deleted'));
         if (calendar.id) {
           onRemoveCalendar(calendar.id);
           calendarContext.setCalendars((prev) =>
@@ -39,7 +41,9 @@ const DeleteCalendarModal = ({
           );
         }
       } else {
-        toast.error(t('settings:account.accountNotDeleted'));
+        toast.error(
+          t('calendar:calendar-overview.toast.calendar-deletion-failed')
+        );
         console.error(response);
       }
       onClose();
@@ -47,19 +51,22 @@ const DeleteCalendarModal = ({
   };
 
   return (
-    <Modal
-      title={t('settings:account.deleteAccount')}
-      message={t('settings:account.deleteAccountDescription')}
-      show={true}
-      isDanger={true}
-      size="lg"
-      onClose={onClose}
-    >
-      <div className="d-flex justify-content-end">
-        <Button onClick={handleDeleteCalendar} className="btn--danger">
-          {t('settings:account.deleteAccount')}
-        </Button>
-      </div>
+    <Modal show={true} size="sm" onHide={onClose}>
+      <Modal.Header className={`p-3`} closeButton>
+        <Modal.Title>
+          {t('calendar:calendar-overview.delete-title')}
+        </Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body className={`p-3 pb-4`}>
+        <p>{t('calendar:calendar-overview.delete-description')}</p>
+
+        <div className="d-flex justify-content-center">
+          <Button onClick={handleDeleteCalendar} className="btn--danger">
+            {t('calendar:calendar-overview.delete-confirmation-yes')}
+          </Button>
+        </div>
+      </Modal.Body>
     </Modal>
   );
 };

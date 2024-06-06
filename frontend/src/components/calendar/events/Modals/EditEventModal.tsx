@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
 import { toast } from 'react-toastify';
@@ -17,28 +16,24 @@ import EventTimeSelector from '../Selectors/EventTimeSelector';
 import './EventModal.scss';
 
 interface Props {
-  event: Event;
   onClose: () => void;
-  setEvent: (event: Event) => void;
+  title: string;
+  description: string;
+  start_time: Date;
+  end_time: Date;
 }
 
-const EditEventModal = ({ event, onClose, setEvent }: Props) => {
+const EditEventModal = ({
+  onClose,
+  title,
+  description,
+  start_time,
+  end_time,
+}: Props) => {
   const { t } = useTranslation(['events']);
-  const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
+  const { fetchData: addEvent, loading: isLoading } = useFetch('PUT', [
     'events',
   ]);
-  const [startTime, setStartTime] = useState<string>('');
-  const [endTime, setEndTime] = useState<string>('');
-
-  // Handle the start time change
-  const onHandleStartTime = (start: string) => {
-    setStartTime(start);
-  };
-
-  // Handle the end time change
-  const onHandleEndTime = (end: string) => {
-    setEndTime(end);
-  };
 
   const handleUpdateEvent = async (values: Event) => {
     try {
@@ -48,8 +43,8 @@ const EditEventModal = ({ event, onClose, setEvent }: Props) => {
           ...values,
           title: values.title,
           description: values.description,
-          start_time: startTime,
-          end_time: endTime,
+          start_time: start_time,
+          end_time: end_time,
         }
       );
 
@@ -71,6 +66,14 @@ const EditEventModal = ({ event, onClose, setEvent }: Props) => {
     return <LoadingScreen />;
   }
 
+  const onHandleStartTime = (startTime: string) => {
+    console.log('Start time:', startTime);
+  };
+
+  const onHandleEndTime = (endTime: string) => {
+    console.log('End time:', endTime);
+  };
+
   return (
     <Modal
       show={true}
@@ -82,24 +85,26 @@ const EditEventModal = ({ event, onClose, setEvent }: Props) => {
         onSubmit={handleUpdateEvent}
         render={({ handleSubmit }) => (
           <form className={`event-form`} onSubmit={handleSubmit}>
-            <Field name="title" validate={Validators.required()}>
+            <Field name="title" validate={Validators.maxLength('50')}>
               {({ input, meta }) => (
                 <Input
                   {...input}
                   meta={meta}
                   title={t('events:eventInfo.title')}
                   isBig
+                  value={title}
                 />
               )}
             </Field>
 
-            <Field name="description" validate={Validators.required()}>
+            <Field name="description" validate={Validators.maxLength('100')}>
               {({ input, meta }) => (
                 <Input
                   {...input}
                   meta={meta}
                   title={t('events:eventInfo.description')}
                   isBig
+                  value={description}
                 />
               )}
             </Field>
@@ -107,12 +112,12 @@ const EditEventModal = ({ event, onClose, setEvent }: Props) => {
             <div className={`time-selectors`}>
               <EventTimeSelector
                 onChange={onHandleStartTime}
-                value={startTime}
+                value={start_time}
               />
 
               <span>-</span>
 
-              <EventTimeSelector onChange={onHandleEndTime} value={endTime} />
+              <EventTimeSelector onChange={onHandleEndTime} value={end_time} />
             </div>
 
             <span className="my-3">Label choice select</span>

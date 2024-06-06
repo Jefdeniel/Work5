@@ -62,7 +62,7 @@ const CalendarNavigation = ({
         <div className={`full-sidebar-content`}>
           <Row className="mb-large">
             <Col>
-              <Link to="/">
+              <Link to="/calendar/overview">
                 <Logo
                   className={`mt-1`}
                   width={isMenuCollapsed ? '50px' : '50px'}

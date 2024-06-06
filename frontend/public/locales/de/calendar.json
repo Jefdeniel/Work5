@@ -4,6 +4,19 @@
     "fetchingEvents": "Fehler beim Abrufen von Ereignissen",
     "fetchingCalendars": "Fehler beim Abrufen der Kalender"
   },
+  "calendar-overview": {
+    "delete-title": "Kalender löschen",
+    "delete-description": "Möchten Sie diesen Kalender wirklich löschen?",
+    "delete-confirmation-yes": "Ja, ich bin sicher",
+    "options": {
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
+    },
+    "toast": {
+      "calendar-deleted": "Kalender gelöscht",
+      "calendar-deletion-failed": "Das Löschen des Kalenders ist fehlgeschlagen"
+    }
+  },
   "calendar-create": {
     "title": "Kalender erstellen",
     "general": "Allgemein",
@@ -25,7 +38,17 @@
     "page": "Kalenderseite",
     "createEvent": "Ereignis erstellen",
     "editEvent": "Ereignisereignis bearbeiten",
-    "search": "Suche"
+    "creating": "Erstellen...",
+    "editing": "Bearbeitung...",
+    "selectTheme": "Wähle ein Thema",
+    "search": "Suche",
+    "today": "Heute",
+    "views": {
+      "day": "Tag",
+      "week": "Woche",
+      "month": "Monat",
+      "agenda": "Agenda"
+    }
   },
   "notifications": {
     "title": "Benachrichtigungen",
@@ -33,16 +56,44 @@
     "clickOnCircle": "Sie können die Farben ändern, indem Sie auf den Kreis klicken.",
     "forOthers": "Von anderen",
     "forYou": "Für dich",
-    "isNew": "Neu"
+    "isNew": "Neu",
+    "toasts": {
+      "notification-updating-failed": "Fehler beim Aktualisieren der Benachrichtigung",
+      "notification-update-failed": "Die Benachrichtigung konnte nicht aktualisiert werden"
+    }
   },
   "sharing-hub": {
     "title": "Freigabezentrum",
     "description": "Verwalten Sie, wie Ihre Daten geteilt und integriert werden. Greifen Sie auf Einstellungen und Optionen für das Teilen von Informationen mit anderen Benutzern oder Diensten zu.",
     "usersInAgenda": "Benutzer in der Agenda",
     "exportAgendaAs": "Agenda exportieren als",
-    "integrateExternal": "Externe Dienste integrieren",
     "exportExcel": "Excel exportieren",
     "exportPdf": "PDF exportieren",
-    "export": "Exportieren"
+    "export": "Exportieren",
+    "integrateExternal": "Externe Dienste integrieren"
+  },
+  "calendar-customize": {
+    "title": "Kalender anpassen",
+    "event-labels": {
+      "title": "Ereignisetiketten",
+      "description": "Passen Sie hier die Eventfarben an.",
+      "save": "Etiketten speichern"
+    },
+    "time-blocking": {
+      "title": "Zeitblock hinzufügen",
+      "description": "Reservieren Sie bestimmte Zeitfenster für bestimmte Zwecke, wie z. B. normale Arbeitszeiten oder persönliche Aktivitäten, und stellen Sie sicher, dass diese frei bleiben.",
+      "start-time": "Startzeit",
+      "end-time": "Endzeit"
+    },
+    "permissions": {
+      "title": "Berechtigungen für Mitarbeiter",
+      "description": "Passen Sie die Zugriffsberechtigungen für eingeladene Mitglieder dieser Agenda an.",
+      "can-view": "Kann Ereignisdetails anzeigen",
+      "can-create": "Kann Ereignisse erstellen",
+      "can-edit": "Kann Ereignisse bearbeiten",
+      "can-delete": "Kann Ereignisse löschen",
+      "can-invite": "Kann andere einladen",
+      "save": "Berechtigungen speichern"
+    }
   }
 }

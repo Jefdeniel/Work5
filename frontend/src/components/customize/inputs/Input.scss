@@ -1,0 +1,50 @@
+.label-color-inputs {
+  & .input-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    row-gap: var(--sp-sm);
+    column-gap: var(--sp-xl);
+
+    & .input-item label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+    }
+
+    & .input {
+      position: relative;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+
+      width: 28px;
+      height: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &::-webkit-color-swatch {
+        border-radius: var(--br-full);
+        border: none;
+      }
+
+      &::before {
+        content: '';
+        width: 18px;
+        height: 18px;
+        background-color: var(--sa-bright);
+        border-radius: var(--br-full);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+  }
+}
+
+.dark-theme {
+  & .input::before {
+    background-color: var(--sa-dark) !important;
+  }
+}
