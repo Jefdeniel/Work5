@@ -10,17 +10,17 @@ const PermissionBoxes = () => {
   const { t } = useTranslation(['calendar']);
 
   // State
-  // const [permissions, setPermissions] = useState({
-  //   can_view_event_details: false,
-  //   can_create_events: false,
-  //   can_edit_events: false,
-  //   can_delete_events: false,
-  //   can_invite_others: false,
-  // });
+  const [permissions, setPermissions] = useState({
+    can_view_event_details: false,
+    can_create_events: false,
+    can_edit_events: false,
+    can_delete_events: false,
+    can_invite_others: false,
+  });
 
-  // TODO: Fetch existing permissions for this agenda and user -> setPermissions
+  //  TODO: Fetch existing permissions for this agenda and user -> setPermissions
 
-  // const onSubmit = async () => {};
+  const onSubmit = async () => {};
 
   return (
     <Row className={`mt-4`}>
@@ -35,7 +35,7 @@ const PermissionBoxes = () => {
       </div>
 
       <div className={`mt-3`}>
-        {/* <Form
+        <Form
           initialValues={permissions}
           onSubmit={onSubmit}
           render={({ handleSubmit }) => (
@@ -75,7 +75,7 @@ const PermissionBoxes = () => {
               />
             </form>
           )}
-        /> */}
+        />
       </div>
     </Row>
   );
