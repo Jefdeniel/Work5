@@ -1,7 +1,11 @@
 import { useTranslation } from 'react-i18next';
+import useFetch from '../../../hooks/useFetch';
 import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
+import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import Button from '../../ui/Button/Button';
 
 import './Input.scss';
@@ -17,7 +21,16 @@ const LabelColorInput = () => {
     { name: 'Other', color: '#00FFFF' },
   ];
 
+  // TODO: Change to api call that gets the specific calendar and get categories trough that
+  const { fetchData: getCategories, loading: isLoading } = useFetch('GET', [
+    'categories',
+  ]);
+
   const onSubmit = async (values) => {};
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Row className={`label-color-inputs`}>
