@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import useSetTitle from '../../hooks/setTitle';
-import useFetch from '../../hooks/useFetch';
 import { useSettings } from '../../hooks/useSettings';
 import { CalendarContext } from '../../store/CalendarContext';
 

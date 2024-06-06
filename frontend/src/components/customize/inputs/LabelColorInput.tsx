@@ -26,7 +26,24 @@ const LabelColorInput = () => {
     'categories',
   ]);
 
-  const onSubmit = async (values) => {};
+  const handleEditLabels = async (values: any) => {
+    console.log(values);
+  };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getCategories();
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error(t('calendar:calendar-customize.event-labels.error'));
+      }
+    };
+    fetchCategories();
+  }, []);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -45,7 +62,7 @@ const LabelColorInput = () => {
       </div>
 
       <Form
-        onSubmit={onSubmit}
+        onSubmit={handleEditLabels}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <ul className={`input-list`}>

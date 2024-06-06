@@ -15,3 +15,19 @@ export interface Event {
   color?: string;
   htmlLink?: string;
 }
+
+export interface GoogleEvent {
+  id: string;
+  summary?: string;
+  start?: {
+    date?: string;
+    dateTime?: string;
+  };
+  end?: {
+    date?: string;
+    dateTime?: string;
+  };
+  location?: string;
+  status?: string;
+  htmlLink?: string;
+}

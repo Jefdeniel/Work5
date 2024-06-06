@@ -24,7 +24,7 @@ const OPTIONS = [
 
 const WeekendVisbilityOnSelector = ({
   initialValue,
-  value,
+  value = false,
   onChange,
   meta,
   ...rest

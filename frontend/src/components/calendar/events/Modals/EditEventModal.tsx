@@ -17,12 +17,12 @@ import EventTimeSelector from '../Selectors/EventTimeSelector';
 import './EventModal.scss';
 
 interface Props {
-  event: Event;
+  // event: Event;
   onClose: () => void;
-  setEvent: (event: Event) => void;
+  // setEvent: (event: Event) => void;
 }
 
-const EditEventModal = ({ event, onClose, setEvent }: Props) => {
+const EditEventModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['events']);
   const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
     'events',

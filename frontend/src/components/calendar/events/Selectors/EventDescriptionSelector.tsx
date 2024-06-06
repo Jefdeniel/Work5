@@ -22,7 +22,7 @@ const EventDescriptionSelector = ({
   const { t } = useTranslation(['events']);
 
   const onEventDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+    onChange?.(e.target.value);
   };
   return (
     <Input

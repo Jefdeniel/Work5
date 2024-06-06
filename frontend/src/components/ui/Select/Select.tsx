@@ -13,7 +13,7 @@ interface Props {
   title?: string;
   meta?: FieldMetaState<any>;
   [x: string]: any;
-  value?: string | boolean | number;
+  value?: string | boolean | number | null;
 }
 
 const Select = ({ options, meta, value, title, ...rest }: Props) => {
@@ -30,10 +30,7 @@ const Select = ({ options, meta, value, title, ...rest }: Props) => {
         {...rest}
       >
         {options?.map((option) => (
-          <option
-            key={option.value.toString()}
-            value={option.value.toString()}
-          >
+          <option key={option.value.toString()} value={option.value.toString()}>
             {option.title}
           </option>
         ))}

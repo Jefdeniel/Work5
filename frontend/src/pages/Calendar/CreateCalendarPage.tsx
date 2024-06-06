@@ -149,7 +149,7 @@ const CreateCalendar = () => {
 
             <Row className="mt-0">
               <Col sm={12} md={6} className="m-0">
-                <Field name="date_start" validate={Validators.date()}>
+                <Field name="date_start">
                   {({ input, meta }) => (
                     <Input
                       {...input}
@@ -162,7 +162,7 @@ const CreateCalendar = () => {
                 </Field>
               </Col>
               <Col sm={12} md={6}>
-                <Field name="date_stop" validate={Validators.date()}>
+                <Field name="date_stop">
                   {({ input, meta }) => (
                     <Input
                       {...input}

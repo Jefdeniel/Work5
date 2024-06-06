@@ -16,13 +16,13 @@ export default function Heading({
   children,
 }: Props) {
   const getClasses = () => {
-    const classes = [];
+    const classes: string[] = [];
 
     if (isUnderlined) {
       classes.push('underline mb-base');
     }
 
-    classes.push(className);
+    classes.push(className || '');
 
     return classes.join(' ');
   };

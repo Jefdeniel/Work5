@@ -15,3 +15,7 @@ export interface CalendarUser {
   role: string;
   created_at?: string;
 }
+
+export interface ExportOption {
+  calendar: Calendar;
+}

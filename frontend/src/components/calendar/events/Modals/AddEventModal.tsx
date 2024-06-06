@@ -2,23 +2,19 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
 import { toast } from 'react-toastify';
-
 import { Event } from '../../../../@types/Events';
 import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
-
 import Button from '../../../ui/Button/Button';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
-// import EventRepeatSelector from '../Selectors/EventRepeatSelector';
 import Input from '../../../ui/Input/Input';
 import EventTimeSelector from '../Selectors/EventTimeSelector';
-
 import './EventModal.scss';
 
 interface Props {
-  onClose?: () => void;
-  setEvent: (event: Event) => void;
+  onClose: () => void;
+  // setEvent: (event: Event) => void;
 }
 
 const AddEventModal = ({ onClose }: Props) => {
@@ -29,12 +25,10 @@ const AddEventModal = ({ onClose }: Props) => {
   const [startTime, setStartTime] = useState<string>('');
   const [endTime, setEndTime] = useState<string>('');
 
-  // Handle the start time change
   const onHandleStartTime = (start: string) => {
     setStartTime(start);
   };
 
-  // Handle the end time change
   const onHandleEndTime = (end: string) => {
     setEndTime(end);
   };
@@ -43,13 +37,7 @@ const AddEventModal = ({ onClose }: Props) => {
     try {
       const response = await addEvent(
         {},
-        {
-          ...values,
-          title: values.title,
-          description: values.description,
-          start_time: startTime,
-          end_time: endTime,
-        }
+        { ...values, start_time: startTime, end_time: endTime }
       );
 
       if (response.ok) {
@@ -117,16 +105,6 @@ const AddEventModal = ({ onClose }: Props) => {
             </div>
 
             <span className="my-3">Label choice select</span>
-
-            {/* <Field name="repeat">
-              {({ input, meta }) => (
-                <EventRepeatSelector
-                  {...input}
-                  meta={meta}
-                  onChange={input.onChange}
-                />
-              )}
-            </Field> */}
 
             <div className="d-flex justify-content-end">
               <Button

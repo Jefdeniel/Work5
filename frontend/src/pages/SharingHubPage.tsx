@@ -17,7 +17,9 @@ const SharingHubPage = () => {
 
   // State
   const [showExcelModal, setShowExcelModal] = useState(false);
-  const calendar: Calendar = {};
+  const calendar: Calendar = {
+    title: '',
+  };
 
   // Modal handlers
   const openExcelModal = () => setShowExcelModal(true);
