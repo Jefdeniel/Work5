@@ -20,6 +20,7 @@ import Register from './pages/Auth/Register';
 import GoogleCalendar from './pages/Calendar/GoogleCalendar';
 import CalendarOverviewPage from './pages/Calendar/CalendarOverviewPage';
 import ScrollManager from './components/scrollManager/ScrollManager';
+import InspirationPage from './pages/InspirationPage';
 
 function App() {
   const auth = useAuth();
@@ -62,6 +63,9 @@ function App() {
             </Route>
             <Route path="/calendar/customize" element={<Layout />}>
               <Route index element={<CustomizePage />} />
+            </Route>
+            <Route path="/calendar/inspiration" element={<Layout />}>
+              <Route index element={<InspirationPage />} />
             </Route>
           </>
         ) : (
