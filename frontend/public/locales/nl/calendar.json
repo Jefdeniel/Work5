@@ -95,5 +95,11 @@
       "can-invite": "Kan anderen uitnodigen",
       "save": "Machtigingen opslaan"
     }
+  },
+  "inspiration": {
+    "description": "Welkom bij de inspiratiehub! Hier biedt uw assistent persoonlijke motivatie, creatieve ideeën en productiviteitstips om uw dagen inspirerender en bevredigender te maken.",
+    "slogan": "Welkom bij uw persoonlijke assistent!",
+    "placeholder": "Waar wil je over praten?",
+    "send": "Sturen"
   }
 }
