@@ -13,6 +13,8 @@ from calendar_app.models import (
     Category,
     Notification,
     UserSettings,
+    TimeBlock,
+    CalendarPermissions,
 )
 from django.db import IntegrityError, DatabaseError
 from django.core.exceptions import ValidationError
@@ -122,10 +124,11 @@ class Command(BaseCommand):
         self.stdout.write("Creating 100 calendars...")
         for i in range(100):
             try:
-                Calendar.objects.create(
+                owner = random.choice(users)
+                calendar = Calendar.objects.create(
                     title=fake.sentence(nb_words=5),
                     description=fake.text(),
-                    owner=random.choice(users),
+                    owner=owner,
                     img=fake.image_url(),
                     date_start=fake.date_time_this_year(
                         before_now=True, after_now=False, tzinfo=timezone.utc
@@ -134,6 +137,26 @@ class Command(BaseCommand):
                         before_now=False, after_now=True, tzinfo=timezone.utc
                     ),
                 )
+
+                # Add other users to the calendar
+                other_users = random.sample(users, random.randint(1, 10))
+                for user in other_users:
+                    if user != owner:
+                        CalendarUser.objects.create(
+                            user=user,
+                            calendar=calendar,
+                            role=random.choice(["EDITOR", "VIEWER"]),
+                        )
+                        CalendarPermissions.objects.create(
+                            user=user,
+                            calendar=calendar,
+                            can_view_event_details=random.choice([True, False]),
+                            can_create_events=random.choice([True, False]),
+                            can_edit_events=random.choice([True, False]),
+                            can_delete_events=random.choice([True, False]),
+                            can_invite_others=random.choice([True, False]),
+                        )
+
                 self.stdout.write(self.style.SUCCESS(f"Created calendar {i + 1}/100"))
             except Exception as e:
                 self.stdout.write(
@@ -148,7 +171,7 @@ class Command(BaseCommand):
             "personal",
             "work",
             "fitness",
-            "free time ",
+            "free time",
             "family",
             "health",
             "other",
@@ -242,8 +265,8 @@ class Command(BaseCommand):
                     self.style.ERROR(f"Error creating event {i + 1}: {e}")
                 )
 
-            events = list(Event.objects.all())
-            self.stdout.write(self.style.SUCCESS("100 events created."))
+        events = list(Event.objects.all())
+        self.stdout.write(self.style.SUCCESS("100 events created."))
 
         # Create 100 Reminders
         self.stdout.write("Creating 100 reminders...")
@@ -270,7 +293,7 @@ class Command(BaseCommand):
                 user = random.choice(users)
                 calendar = random.choice(calendars)
 
-                # Use get_or_create to ensure uniqueness
+                # Use get_or_create to ensure uniqueness! (unique_together constraint)
                 CalendarUser.objects.get_or_create(
                     user=user,
                     calendar=calendar,
@@ -323,4 +346,25 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("100 notifications created."))
 
+        # Create 100 TimeBlocks for calendars
+        self.stdout.write("Creating 100 time blocks for calendars...")
+        for i in range(100):
+            try:
+                start_time = fake.future_datetime(end_date="+30d", tzinfo=timezone.utc)
+                end_time = start_time + timedelta(hours=random.randint(1, 4))
+                if end_time <= start_time:
+                    end_time = start_time + timedelta(hours=1)
+
+                TimeBlock.objects.create(
+                    calendar=random.choice(calendars),
+                    start_time=start_time,
+                    end_time=end_time,
+                )
+                self.stdout.write(self.style.SUCCESS(f"Created time block {i + 1}/100"))
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"Error creating time block {i + 1}: {e}")
+                )
+
+        self.stdout.write(self.style.SUCCESS("100 time blocks created."))
         self.stdout.write(self.style.SUCCESS("Data seeding completed successfully!"))

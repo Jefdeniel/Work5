@@ -1,8 +1,20 @@
 from .custom_user_serializer import CustomUserSerializer
-from .calendar_serializer import CalendarSerializer
+from .calendar_serializer import CalendarSerializer, CalendarUserSerializer
 from .event_serializer import EventSerializer
 from .reminder_serializer import ReminderSerializer
 from .notification_serializer import NotificationSerializer
 from .user_settings_serializer import UserSettingsSerializer
 from .category_serializer import CategorySerializer
-from .calendar_serializer import CalendarUserSerializer
+from .timeblock_serializer import TimeBlockSerializer
+
+__all__ = [
+    "CustomUserSerializer",
+    "CalendarSerializer",
+    "CalendarUserSerializer",
+    "EventSerializer",
+    "ReminderSerializer",
+    "NotificationSerializer",
+    "UserSettingsSerializer",
+    "CategorySerializer",
+    "TimeBlockSerializer",
+]

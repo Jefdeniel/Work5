@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from ..models import Calendar, CalendarUser
+from ..models import Calendar, CalendarUser, TimeBlock, CalendarPermissions, CustomUser
 from .category_serializer import CategorySerializer
+from .timeblock_serializer import TimeBlockSerializer
+from .custom_user_serializer import CustomUserSerializer
 
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -27,6 +29,8 @@ class CalendarSerializer(serializers.ModelSerializer):
     )
 
     categories = CategorySerializer(many=True, read_only=True)
+    timeblocks = TimeBlockSerializer(many=True, read_only=True)
+    users = serializers.SerializerMethodField()
 
     created_at = serializers.DateTimeField(
         read_only=True, help_text="Timestamp when the calendar was created"
@@ -43,9 +47,11 @@ class CalendarSerializer(serializers.ModelSerializer):
             "description",
             "img",
             "owner_id",
+            "users",
             "date_start",
             "date_stop",
             "categories",
+            "timeblocks",
             "created_at",
             "updated_at",
         )
@@ -55,11 +61,53 @@ class CalendarSerializer(serializers.ModelSerializer):
             "updated_at",
         )
 
+    def get_users(self, obj):
+        users = obj.users.exclude(id=obj.owner_id)
+        return CustomUserSerializer(
+            users, many=True, context={"calendar_id": obj.id}
+        ).data
+
+
+class CalendarPermissionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CalendarPermissions
+        fields = [
+            "can_view_event_details",
+            "can_create_events",
+            "can_edit_events",
+            "can_delete_events",
+            "can_invite_others",
+        ]
+
+
+class CustomUserSerializer(serializers.ModelSerializer):
+    permissions = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ["id", "first_name", "last_name", "email", "permissions"]
+
+    def get_permissions(self, obj):
+        calendar_id = self.context.get("calendar_id")
+        permissions = CalendarPermissions.objects.filter(
+            user=obj, calendar_id=calendar_id
+        ).first()
+        return CalendarPermissionsSerializer(permissions).data if permissions else None
+
 
 class CalendarUserSerializer(serializers.ModelSerializer):
-    calendar = CalendarSerializer(read_only=True)  # Nesting the CalendarSerializer
+    calendar = CalendarSerializer(read_only=True)
 
     class Meta:
         model = CalendarUser
         fields = ["id", "user", "calendar", "role", "created_at"]
         read_only_fields = ["id", "created_at"]
+
+
+class TimeBlockSerializer(serializers.ModelSerializer):
+    calendar = serializers.PrimaryKeyRelatedField(queryset=Calendar.objects.all())
+
+    class Meta:
+        model = TimeBlock
+        fields = ["id", "calendar", "start_time", "end_time"]
+        read_only_fields = ["id"]

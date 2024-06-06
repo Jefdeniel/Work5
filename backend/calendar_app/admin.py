@@ -14,7 +14,16 @@ from django.apps import AppConfig
 
 
 class CalendarAdmin(admin.ModelAdmin):
-    list_display = ("title", "description", "img", "owner", "date_start", "date_stop")
+    list_display = (
+        "title",
+        "description",
+        "img",
+        "owner",
+        "display_users",
+        "display_categories",
+        "date_start",
+        "date_stop",
+    )
     search_fields = ("title", "description")
     list_filter = ("owner", "date_start", "date_stop")
     readonly_fields = ("display_events",)
@@ -22,7 +31,15 @@ class CalendarAdmin(admin.ModelAdmin):
     def display_events(self, obj):
         return ", ".join([event.title for event in obj.events.all()])
 
+    def display_users(self, obj):
+        return ", ".join([user.email for user in obj.users.all()])
+
+    def display_categories(self, obj):
+        return ", ".join([category.title for category in obj.categories.all()])
+
     display_events.short_description = "Events"
+    display_users.short_description = "Users"
+    display_categories.short_description = "Categories"
 
 
 class EventAdmin(admin.ModelAdmin):
