@@ -1,0 +1,7 @@
+.big-icon svg {
+    transform: scale(6);
+
+    & path {
+        fill: var(--sa-primary-200);
+    }
+}
