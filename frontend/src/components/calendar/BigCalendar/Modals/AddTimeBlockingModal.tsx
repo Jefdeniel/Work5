@@ -1,8 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
+import { DateTime } from 'ts-luxon';
 
+import Validators from '../../../../utils/Validators';
 import Modal from '../../../ui/Modals/Modal';
 import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Input/Input';
 
 import './Modal.scss';
 
@@ -33,12 +36,18 @@ const AddTimeBlockingModal = ({ onClose, onSubmit }: Props) => {
                   {t('calendar:calendar-customize.time-blocking.start-time')}
                 </span>
 
-                <Field
-                  className={`time-input`}
-                  name="start_time"
-                  component="input"
-                  type="time"
-                />
+                <Field name="start_time" validate={Validators.required()}>
+                  {({ input, meta }) => (
+                    <Input
+                      {...input}
+                      meta={meta}
+                      className={`time-input`}
+                      type="datetime-local"
+                      title={t('calendar-create.start-date')}
+                      isBig
+                    />
+                  )}
+                </Field>
               </label>
 
               <span className={`mt-4`}>-</span>
@@ -48,12 +57,18 @@ const AddTimeBlockingModal = ({ onClose, onSubmit }: Props) => {
                   {t('calendar:calendar-customize.time-blocking.end-time')}
                 </span>
 
-                <Field
-                  className={`time-input`}
-                  name="end_time"
-                  component="input"
-                  type="time"
-                />
+                <Field name="end_time" validate={Validators.required()}>
+                  {({ input, meta }) => (
+                    <Input
+                      {...input}
+                      meta={meta}
+                      className={`time-input`}
+                      type="datetime-local"
+                      title={t('calendar-create.start-date')}
+                      isBig
+                    />
+                  )}
+                </Field>
               </label>
             </div>
 
