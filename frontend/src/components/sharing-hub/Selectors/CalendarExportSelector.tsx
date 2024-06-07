@@ -108,7 +108,7 @@ const CalendarExportSelector = ({
         {...rest}
       />
 
-      <Button onClick={exportToExcel} className="btn--primary">
+      <Button onClick={exportToExcel} className="btn--primary m-3">
         {t('calendar:sharing-hub.export')}
       </Button>
     </div>
