@@ -55,16 +55,16 @@ function App() {
             </Route>
 
             {/* Account specific routes under /calendar but using a different layout */}
-            <Route path="/calendar/notifications" element={<Layout />}>
+            <Route path="/calendar/notifications/:id" element={<Layout />}>
               <Route index element={<NotificationPage />} />
             </Route>
-            <Route path="/calendar/sharing-hub" element={<Layout />}>
+            <Route path="/calendar/sharing-hub/:id" element={<Layout />}>
               <Route index element={<SharingHubPage />} />
             </Route>
-            <Route path="/calendar/customize" element={<Layout />}>
+            <Route path="/calendar/customize/:id" element={<Layout />}>
               <Route index element={<CustomizePage />} />
             </Route>
-            <Route path="/calendar/inspiration" element={<Layout />}>
+            <Route path="/calendar/inspiration/:id" element={<Layout />}>
               <Route index element={<InspirationPage />} />
             </Route>
           </>
