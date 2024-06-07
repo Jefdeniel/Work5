@@ -8,14 +8,19 @@
     "delete-title": "Supprimer le calendrier",
     "delete-description": "Êtes-vous sûr de vouloir supprimer ce calendrier ?",
     "delete-confirmation-yes": "Oui je suis sûr",
-    "options": {
-      "edit": "Modifier",
-      "delete": "Supprimer"
-    },
+    "edit-title": "Modifier le calendrier",
+    "edit-description": "Modifiez les détails de votre calendrier ci-dessous.",
     "toast": {
       "calendar-deleted": "Calendrier supprimé",
-      "calendar-deletion-failed": "Échec de la suppression du calendrier"
-    }
+      "calendar-deletion-failed": "Échec de la suppression du calendrier",
+      "calendar-edited": "Calendrier mis à jour",
+      "calendar-edit-failed": "Échec de la mise à jour du calendrier"
+    },
+    "title": "Titre du calendrier",
+    "description": "Description du calendrier",
+    "date-start": "Date de début",
+    "date-stop": "Date de fin",
+    "edit-confirmation-yes": "Enregistrer"
   },
   "calendar-create": {
     "title": "Créer un calendrier",
