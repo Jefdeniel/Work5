@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
-import { DateTime } from 'ts-luxon';
 
-import Validators from '../../../../utils/Validators';
 import Modal from '../../../ui/Modals/Modal';
 import Button from '../../../ui/Button/Button';
-import Input from '../../../ui/Input/Input';
 
 import './Modal.scss';
+import Validators from '../../../../utils/Validators';
+import Input from '../../../ui/Input/Input';
 
 interface Props {
   onClose: () => void;
@@ -27,53 +26,38 @@ const AddTimeBlockingModal = ({ onClose, onSubmit }: Props) => {
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={`d-flex flex-column gap-3`}>
-            <div
-              className={`d-flex justify-content-between align-items-center`}
-            >
-              <label>
-                <span className={`time-input-label`}>
-                  {t('calendar:calendar-customize.time-blocking.start-time')}
-                </span>
-
-                <Field name="start_time" validate={Validators.required()}>
-                  {({ input, meta }) => (
-                    <Input
-                      {...input}
-                      meta={meta}
-                      className={`time-input`}
-                      type="datetime-local"
-                      title={t('calendar-create.start-date')}
-                      isBig
-                    />
+          <form onSubmit={handleSubmit} className={`time-block-modal`}>
+            <Field name="start_time" validate={Validators.required()}>
+              {({ input, meta }) => (
+                <Input
+                  {...input}
+                  meta={meta}
+                  type="datetime-local"
+                  title={t(
+                    'calendar:calendar-customize.time-blocking.start-time'
                   )}
-                </Field>
-              </label>
+                  className={`time-input my-0`}
+                />
+              )}
+            </Field>
 
-              <span className={`mt-4`}>-</span>
-
-              <label>
-                <span className={`time-input-label`}>
-                  {t('calendar:calendar-customize.time-blocking.end-time')}
-                </span>
-
-                <Field name="end_time" validate={Validators.required()}>
-                  {({ input, meta }) => (
-                    <Input
-                      {...input}
-                      meta={meta}
-                      className={`time-input`}
-                      type="datetime-local"
-                      title={t('calendar-create.start-date')}
-                      isBig
-                    />
+            <Field name="end_time" validate={Validators.required()}>
+              {({ input, meta }) => (
+                <Input
+                  {...input}
+                  meta={meta}
+                  type="datetime-local"
+                  title={t(
+                    'calendar:calendar-customize.time-blocking.end-time'
                   )}
-                </Field>
-              </label>
-            </div>
+                  className={`time-input my-0`}
+                />
+              )}
+            </Field>
 
             <Button
-              className={`btn--success mt-3 d-flex`}
+              className={`btn--success submit-btn`}
+              isSmall
               type="submit"
               text={t('calendar:calendar-customize.time-blocking.title')}
             />
