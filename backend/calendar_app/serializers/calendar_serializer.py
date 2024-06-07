@@ -21,10 +21,12 @@ class CalendarSerializer(serializers.ModelSerializer):
     )
     date_start = serializers.DateTimeField(
         allow_null=True,
+        required=False,
         help_text="Start date of the calendar (format: YYYY-MM-DDTHH:MM:SS.sssZ)",
     )
     date_stop = serializers.DateTimeField(
         allow_null=True,
+        required=False,
         help_text="End date of the calendar (format: YYYY-MM-DDTHH:MM:SS.sssZ)",
     )
 

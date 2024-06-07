@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CalendarUser } from '../../../@types/Calendar';
 import useAuth from '../../../hooks/useAuth';
 import useFetch from '../../../hooks/useFetch';
-import Input from '../../ui/Input/Input';
-import CalendarCard from './CalendarCard';
-import DeleteCalendarModal from '../BigCalendar/Modals/DeleteCalendarModal';
 import { CalendarContext } from '../../../store/CalendarContext';
+import Input from '../../ui/Input/Input';
+import DeleteCalendarModal from '../BigCalendar/Modals/DeleteCalendarModal';
+import EditCalendarModal from '../BigCalendar/Modals/EditCalendarModal';
+import CalendarCard from './CalendarCard';
 
 interface CalendarCardListProps {
   isMenuCollapsed?: boolean;
@@ -30,6 +31,10 @@ const CalendarCardList = ({
     []
   );
   const [calendarToDelete, setCalendarToDelete] = useState<CalendarUser | null>(
+    null
+  );
+
+  const [calendarToEdit, setCalendarToEdit] = useState<CalendarUser | null>(
     null
   );
 
@@ -84,12 +89,21 @@ const CalendarCardList = ({
     setFilteredCalendars(filteredData);
   };
 
+  // Modals
   const handleDelete = (calendar: CalendarUser) => {
     setCalendarToDelete(calendar);
   };
 
   const handleCloseDeleteModal = () => {
     setCalendarToDelete(null);
+  };
+
+  const handleEdit = (calendar: CalendarUser) => {
+    setCalendarToEdit(calendar);
+  };
+
+  const handleCloseEditModal = () => {
+    setCalendarToEdit(null);
   };
 
   const handleRemoveCalendar = (deletedCalendarId: number) => {
@@ -101,6 +115,35 @@ const CalendarCardList = ({
     setFilteredCalendars((prevCalendars) =>
       prevCalendars.filter(
         (calendarUser) => calendarUser.calendar.id !== deletedCalendarId
+      )
+    );
+  };
+
+  const handleEditCalendar = (editedCalendarId: number) => {
+    calendarContext.setCalendars((prevCalendars) =>
+      prevCalendars.map((calendarUser) =>
+        calendarUser.calendar.id === editedCalendarId
+          ? {
+              ...calendarUser,
+              calendar: {
+                ...calendarUser.calendar,
+                ...calendarToEdit?.calendar,
+              },
+            }
+          : calendarUser
+      )
+    );
+    setFilteredCalendars((prevCalendars) =>
+      prevCalendars.map((calendarUser) =>
+        calendarUser.calendar.id === editedCalendarId
+          ? {
+              ...calendarUser,
+              calendar: {
+                ...calendarUser.calendar,
+                ...calendarToEdit?.calendar,
+              },
+            }
+          : calendarUser
       )
     );
   };
@@ -126,7 +169,7 @@ const CalendarCardList = ({
           name={!isMenuCollapsed ? calendarUser.calendar.title : ''}
           link={`/calendar/${calendarUser.calendar.id}`}
           onDelete={() => handleDelete(calendarUser)}
-          onEdit={() => {}}
+          onEdit={() => handleEdit(calendarUser)}
         />
       ))}
 
@@ -135,6 +178,14 @@ const CalendarCardList = ({
           onClose={handleCloseDeleteModal}
           calendar={calendarToDelete.calendar}
           onRemoveCalendar={handleRemoveCalendar}
+        />
+      )}
+
+      {calendarToEdit && (
+        <EditCalendarModal
+          onClose={handleCloseEditModal}
+          calendar={calendarToEdit.calendar}
+          onEditCalendar={handleEditCalendar}
         />
       )}
     </ul>
