@@ -1,7 +1,12 @@
 // SVG icons that need to change color on active, hover, etc. states
 import './Icon.scss';
 
-const NotificationIcon = ({ className }: { className?: string }) => {
+interface Props {
+  className?: string;
+  isBig?: boolean;
+}
+
+const NotificationIcon = ({ className }: Props) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -19,7 +24,7 @@ const NotificationIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const SharingHubIcon = ({ className }: { className?: string }) => {
+const SharingHubIcon = ({ className }: Props) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -37,7 +42,7 @@ const SharingHubIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const CustomizeIcon = ({ className }: { className?: string }) => {
+const CustomizeIcon = ({ className }: Props) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -55,7 +60,7 @@ const CustomizeIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const PlusIcon = ({ className }: { className?: string }) => {
+const PlusIcon = ({ className }: Props) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -75,7 +80,7 @@ const PlusIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const LeftIcon = ({ className }: { className?: string }) => {
+const LeftIcon = ({ className }: Props) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -102,7 +107,7 @@ const LeftIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const RightIcon = ({ className }: { className?: string }) => {
+const RightIcon = ({ className }: Props) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -129,6 +134,24 @@ const RightIcon = ({ className }: { className?: string }) => {
   );
 };
 
+const InspirationIcon = ({ className, isBig }: Props) => {
+  return (
+    <div className={`${className} ${isBig ? 'big-icon' : 'scale-65'}`}>
+      <svg
+        width="22"
+        height="22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19.937.263a1.033 1.033 0 0 1 1.418.039l.343.343c.387.387.404 1.01.039 1.418l-3.687 4.12a.69.69 0 0 0-.176.46v.92a.69.69 0 0 1-.687.688h-.68a.677.677 0 0 0-.51.227L4.327 21.523a1.437 1.437 0 0 1-1.07.477c-.378 0-.743-.15-1.01-.421l-1.83-1.826A1.439 1.439 0 0 1 0 18.743c0-.408.172-.795.477-1.066l4.795-4.288a.684.684 0 0 0 .228-.51v-1.191A.69.69 0 0 1 6.187 11h1.487c.167 0 .33-.064.46-.176L19.937.263Zm-1.375 12.112c.154 0 .288.104.33.25l.637 2.221 2.22.636c.147.043.25.176.25.33a.345.345 0 0 1-.25.332l-2.22.636-.636 2.22a.345.345 0 0 1-.662 0l-.636-2.22-2.221-.636a.345.345 0 0 1-.25-.331c0-.155.103-.288.25-.331l2.221-.636.636-2.221a.345.345 0 0 1 .33-.25ZM3.768 3l.636 2.221 2.221.636c.147.043.25.176.25.331a.345.345 0 0 1-.25.331l-2.22.636-.637 2.221a.345.345 0 0 1-.33.25.345.345 0 0 1-.331-.25L2.47 7.155.249 6.519A.345.345 0 0 1 0 6.189c0-.156.103-.289.25-.332l2.22-.636L3.108 3a.345.345 0 0 1 .33-.25c.155 0 .288.104.331.25Zm5.17-3c.158 0 .296.108.334.263l.292 1.173 1.173.292a.345.345 0 0 1 0 .67l-1.173.293-.292 1.173a.345.345 0 0 1-.67 0L8.31 2.69l-1.173-.293a.345.345 0 0 1 0-.67l1.173-.292.292-1.173a.345.345 0 0 1 .335-.262Z"
+          fill="#141C57"
+        />
+      </svg>
+    </div>
+  );
+};
+
 export {
   NotificationIcon,
   SharingHubIcon,
@@ -136,4 +159,5 @@ export {
   PlusIcon,
   LeftIcon,
   RightIcon,
+  InspirationIcon,
 };

@@ -350,6 +350,10 @@ ul {
   color: var(--sa-primary-300);
 }
 
+.clr-primary-200 {
+  color: var(--sa-primary-200);
+}
+
 .gap-base {
   gap: var(--sp-sm);
 }
@@ -372,6 +376,10 @@ ul {
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+.scale-65 {
+  transform: scale(65%);
 }
 
 /* Some specific classes */
@@ -477,11 +485,23 @@ ul {
 }
 
 .pattern-block {
-  height: 75vh;
+  height: 75svh;
   position: relative;
   top: 62%;
   transform: translateY(-50%);
   z-index: 1;
+}
+
+.height-50 {
+  height: 50svh;
+}
+
+.height-50px {
+  height: 50px;
+}
+
+.height-80 {
+  height: 80svh;
 }
 
 .back-pattern {

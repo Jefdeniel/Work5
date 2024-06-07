@@ -95,5 +95,11 @@
       "can-invite": "Peut inviter d'autres personnes",
       "save": "Enregistrer les autorisations"
     }
+  },
+  "inspiration": {
+    "description": "Bienvenue dans le Centre d'Inspiration ! Ici, votre assistant vous propose une motivation personnalisée, des idées créatives et des conseils de productivité pour rendre vos journées plus inspirantes et épanouissantes.",
+    "slogan": "Bienvenue dans votre assistant personnel!",
+    "placeholder": "De quoi veux-tu parler?",
+    "send": "Envoyer"
   }
 }

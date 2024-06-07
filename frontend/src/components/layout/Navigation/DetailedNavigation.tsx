@@ -12,6 +12,7 @@ import { MenuItem, SideBarProps } from '../../../@types/Nav';
 import Icon from '../../ui/Icon/Icon';
 import {
   CustomizeIcon,
+  InspirationIcon,
   NotificationIcon,
   SharingHubIcon,
 } from '../../ui/Icon/SvgIcons';
@@ -33,6 +34,11 @@ const menuItems: MenuItem[] = [
     link: '/calendar/customize',
     label: 'general:navigation.customize',
     icon: <CustomizeIcon />,
+  },
+  {
+    link: '/calendar/inspiration',
+    label: 'general:navigation.inspiration',
+    icon: <InspirationIcon />,
   },
 ];
 

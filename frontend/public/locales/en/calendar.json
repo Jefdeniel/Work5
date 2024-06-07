@@ -95,5 +95,11 @@
       "can-invite": "Can invite others",
       "save": "Save permissions"
     }
+  },
+  "inspiration": {
+    "description": "Welcome to the Inspiration Hub! Here, your assistant offers personalized motivation, creative ideas, and productivity tips to make your days more inspiring and fulfilling.",
+    "slogan": "Welcome to your personnal assistant!",
+    "placeholder": "What do you want to talk about?",
+    "send": "Send"
   }
 }
