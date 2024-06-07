@@ -8,6 +8,7 @@ import useFetch from '../../../hooks/useFetch';
 import Button from '../../ui/Button/Button';
 import Select from '../../ui/Select/Select';
 import { ExportOption } from '../../../@types/Calendar';
+import useAuth from '../../../hooks/useAuth';
 
 interface Props {
   initialValue?: string;
@@ -24,6 +25,8 @@ const CalendarExportSelector = ({
   ...rest
 }: Props) => {
   const { t } = useTranslation(['calendars']);
+  const { user_id } = useAuth();
+  console.log(user_id);
 
   const [selectedCalendar, setSelectedCalendar] = useState<number | null>(
     initialValue
@@ -56,6 +59,10 @@ const CalendarExportSelector = ({
       const response = await getEventsByCalendarId();
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
+        if (data.length === 0) {
+          throw new Error('No events to export');
+        }
         setData(data);
 
         const worksheet = XLSX.utils.json_to_sheet(data);
