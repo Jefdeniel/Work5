@@ -7,13 +7,16 @@ export interface Calendar {
   owner_id?: number;
   date_start?: Date;
   date_stop?: Date;
-}
-export interface CalendarUser {
-  id?: number;
-  user: number;
-  calendar: Calendar;
-  role: string;
-  created_at?: string;
+  users?: CalendarUser[];
+  }
+  export interface CalendarUser {
+    id?: number;
+    user: number;
+    calendar: Calendar;
+    role: string;
+    created_at?: string;
+    first_name?: string;
+    avatar?: string;
 }
 
 export interface ExportOption {
