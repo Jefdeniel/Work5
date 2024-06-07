@@ -1,53 +1,51 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useFetch from '../../../hooks/useFetch';
 import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
+import { Calendar } from '../../../@types/Calendar';
+
+import useAuth from '../../../hooks/useAuth';
 import Button from '../../ui/Button/Button';
 
 import './Input.scss';
 
-const LabelColorInput = () => {
+interface Props {
+  calendar: Calendar;
+}
+
+// TODO: Add translations
+const LabelColorInput = ({ calendar }: Props) => {
   const { t } = useTranslation(['calendar']);
+  const calendarId = calendar.id;
+  const [categories, setCategories] = useState(calendar.categories);
 
-  const labels = [
-    { name: 'Work', color: '#FF0000' },
-    { name: 'Personal', color: '#00FF00' },
-    { name: 'Family', color: '#0000FF' },
-    { name: 'School', color: '#FFFF00' },
-    { name: 'Other', color: '#00FFFF' },
-  ];
-
-  // TODO: Change to api call that gets the specific calendar and get categories trough that
-  const { fetchData: getCategories, loading: isLoading } = useFetch('GET', [
-    'categories',
-  ]);
+  const { fetchData: updateCategoryColors } = useFetch('PATCH', [`categories`]);
 
   const handleEditLabels = async (values: any) => {
-    console.log(values);
+    const updatedCategories = categories?.map((category) => ({
+      ...category,
+      color_code: values.color_code,
+    }));
+
+    try {
+      const response = await updateCategoryColors({
+        categories: updatedCategories,
+      });
+
+      if (response.ok) {
+        console.log('Update successful');
+        setCategories(updatedCategories);
+      } else {
+        console.error('Update failed', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error updating categories', error);
+    }
   };
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await getCategories();
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-      } catch (error) {
-        console.error(error);
-        toast.error(t('calendar:calendar-customize.event-labels.error'));
-      }
-    };
-    fetchCategories();
-  }, []);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  console.log('calendar', calendar);
 
   return (
     <Row className={`label-color-inputs`}>
@@ -66,17 +64,17 @@ const LabelColorInput = () => {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <ul className={`input-list`}>
-              {labels.map((label) => (
-                <li key={label.name} className={`input-item`}>
+              {calendar?.categories?.map((category) => (
+                <li key={category.id} className={`input-item`}>
                   <label>
                     <input
                       className={`input`}
                       type="color"
                       name="color-label"
-                      defaultValue={label.color}
+                      defaultValue={category.color_code}
                     />
 
-                    <span>{label.name}</span>
+                    <span>{category.title}</span>
                   </label>
                 </li>
               ))}
