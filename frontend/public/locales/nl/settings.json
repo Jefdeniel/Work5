@@ -60,6 +60,11 @@
     "calendars": "Kalenders",
     "connectAccounts": "Verbind accounts"
   },
+  "notFound": {
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die u zoekt, bestaat niet of is verplaatst.",
+    "goBack": "Ga terug naar de vorige pagina"
+  },
   "generalTitle": "Instellingen",
   "save": "Opslaan"
 }

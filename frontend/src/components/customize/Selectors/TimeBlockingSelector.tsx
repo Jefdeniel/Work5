@@ -8,7 +8,7 @@ import Button from '../../ui/Button/Button';
 import AddTimeBlockingModal from '../../calendar/BigCalendar/Modals/AddTimeBlockingModal';
 import Icon from '../../ui/Icon/Icon';
 
-const TimeBlockingInput = () => {
+const TimeBlockingSelector = () => {
   const { t } = useTranslation(['calendar']);
   // State
   const [showAddTimeBlockingModal, setShowAddTimeBlockingModal] =
@@ -65,4 +65,4 @@ const TimeBlockingInput = () => {
   );
 };
 
-export default TimeBlockingInput;
+export default TimeBlockingSelector;

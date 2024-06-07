@@ -40,5 +40,10 @@
       "colorCode": "Dit veld moet een geldige kleurcode zijn. (#FFFFFFFF)",
       "password": "Dit veld moet minimaal 8 tekens bevatten, waarvan minimaal 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal"
     }
+  },
+  "notFound": {
+    "title": "Pagina niet gevonden",
+    "description": "De pagina die u zoekt, bestaat niet of is verplaatst.",
+    "goBack": "Ga terug naar de vorige pagina"
   }
 }

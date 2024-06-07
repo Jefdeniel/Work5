@@ -10,7 +10,7 @@ import Button from '../../ui/Button/Button';
 
 import './Input.scss';
 
-const LabelColorInput = () => {
+const LabelColorSelector = () => {
   const { t } = useTranslation(['calendar']);
 
   const labels = [
@@ -92,4 +92,4 @@ const LabelColorInput = () => {
   );
 };
 
-export default LabelColorInput;
+export default LabelColorSelector;

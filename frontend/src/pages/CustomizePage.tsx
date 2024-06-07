@@ -3,9 +3,10 @@ import { Row } from 'react-bootstrap';
 
 import useSetTitle from '../hooks/setTitle';
 import Heading from '../components/ui/Heading/Heading';
-import LabelColorInput from '../components/customize/inputs/LabelColorInput';
-import TimeBlockingInput from '../components/customize/inputs/TimeBlockingInput';
-import PermissionBoxes from '../components/customize/inputs/PermissionBoxes';
+import TimeBlockingInput from '../components/customize/Selectors/TimeBlockingSelector';
+import PermissionBoxes from '../components/customize/Selectors/PermissionBoxes';
+import LabelColorSelector from '../components/customize/Selectors/LabelColorSelector';
+import TimeBlockingSelector from '../components/customize/Selectors/TimeBlockingSelector';
 
 const CustomizePage = () => {
   const { t } = useTranslation(['general', 'customize']);
@@ -17,9 +18,9 @@ const CustomizePage = () => {
         <Heading level={1} className="heading--lg clr-primary" />
       </Row>
 
-      <LabelColorInput />
+      <LabelColorSelector />
 
-      <TimeBlockingInput />
+      <TimeBlockingSelector />
 
       <PermissionBoxes />
     </div>

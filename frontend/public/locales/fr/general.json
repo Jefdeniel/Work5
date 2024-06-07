@@ -40,5 +40,10 @@
       "colorCode": "Ce champ doit être un code couleur valide. (#FFFFFFFF)",
       "password": "Ce champ doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial."
     }
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "goBack": "Retour à la page précédente"
   }
 }
