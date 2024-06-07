@@ -2,11 +2,11 @@ export interface Calendar {
   id?: number;
   title: string;
   description?: string;
+  owner_id?: string;
   color?: string;
-  image?: string | null;
-  owner_id?: number;
-  date_start?: Date;
-  date_stop?: Date;
+  img?: string | null;
+  date_start?: string;
+  date_stop?: string;
 }
 export interface CalendarUser {
   id?: number;

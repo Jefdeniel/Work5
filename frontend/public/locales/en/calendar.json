@@ -8,14 +8,19 @@
     "delete-title": "Delete calendar",
     "delete-description": "Are you sure you want to delete this calendar?",
     "delete-confirmation-yes": "Yes, I am sure",
-    "options": {
-      "edit": "Edit",
-      "delete": "Delete"
-    },
+    "edit-title": "Edit calendar",
+    "edit-description": "Edit the details of your calendar below.",
     "toast": {
       "calendar-deleted": "Calendar deleted",
-      "calendar-deletion-failed": "Calendar deletion failed"
-    }
+      "calendar-deletion-failed": "Calendar deletion failed",
+      "calendar-edited": "Calendar updated",
+      "calendar-edit-failed": "Calendar update failed"
+    },
+    "title": "Calendar title",
+    "description": "Calendar description",
+    "date-start": "Start date",
+    "date-stop": "End date",
+    "edit-confirmation-yes": "Save"
   },
   "calendar-create": {
     "title": "Create Calendar",
@@ -27,7 +32,7 @@
     "people-description": "Invite others to collaborate on a shared agenda for collective time management.",
     "invite-btn": "Invite",
     "date-range": "Date range",
-    "date-range-description": "For temporal agenda&apos;s (projects for example), choose YES and you can define the start + end dates for it. For normal ones, just keep it at NO.",
+    "date-range-description": "For temporal agendas (projects for example), choose YES and you can define the start + end dates for it. For normal ones, just keep it at NO.",
     "start-date": "Start date",
     "end-date": "End date",
     "no": "NO",
@@ -98,7 +103,7 @@
   },
   "inspiration": {
     "description": "Welcome to the Inspiration Hub! Here, your assistant offers personalized motivation, creative ideas, and productivity tips to make your days more inspiring and fulfilling.",
-    "slogan": "Welcome to your personnal assistant!",
+    "slogan": "Welcome to your personal assistant!",
     "placeholder": "What do you want to talk about?",
     "send": "Send"
   }

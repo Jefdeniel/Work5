@@ -8,14 +8,19 @@
     "delete-title": "Kalender verwijderen",
     "delete-description": "Weet je zeker dat je deze agenda wilt verwijderen?",
     "delete-confirmation-yes": "Ja, ik ben zeker",
-    "options": {
-      "edit": "Bewerken",
-      "delete": "Verwijderen"
-    },
+    "edit-title": "Kalender bewerken",
+    "edit-description": "Bewerk de details van je kalender hieronder.",
     "toast": {
       "calendar-deleted": "Kalender verwijderd",
-      "calendar-deletion-failed": "Verwijderen van kalender is mislukt"
-    }
+      "calendar-deletion-failed": "Verwijderen van kalender is mislukt",
+      "calendar-edited": "Kalender bijgewerkt",
+      "calendar-edit-failed": "Kalender bijwerken is mislukt"
+    },
+    "title": "Kalendertitel",
+    "description": "Kalenderbeschrijving",
+    "date-start": "Begindatum",
+    "date-stop": "Einddatum",
+    "edit-confirmation-yes": "Opslaan"
   },
   "calendar-create": {
     "title": "Kalender maken",
