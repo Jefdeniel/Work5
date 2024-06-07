@@ -4,3 +4,4 @@ before building we should
 - - https://medium.com/@gwamaka_charles/storing-and-using-environment-variables-in-github-6f6f64b167d8
 - manifest.json
 - good logo
+- give avatar with user object when /calendar/:id
