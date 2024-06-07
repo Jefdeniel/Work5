@@ -8,17 +8,26 @@ export interface Calendar {
   date_start?: Date;
   date_stop?: Date;
   users?: CalendarUser[];
-  }
-  export interface CalendarUser {
-    id?: number;
-    user: number;
-    calendar: Calendar;
-    role: string;
-    created_at?: string;
-    first_name?: string;
-    avatar?: string;
+  categories?: Category[];
+}
+
+export interface CalendarUser {
+  id?: number;
+  user: number;
+  calendar: Calendar;
+  role: string;
+  created_at?: string;
+  first_name?: string;
+  avatar?: string;
 }
 
 export interface ExportOption {
   calendar: Calendar;
+}
+
+export interface Category {
+  id: number;
+  calendar: Calendar;
+  title: string;
+  color_code: string;
 }
