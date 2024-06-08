@@ -7,7 +7,7 @@ interface LogoProps {
 }
 
 const Logo = ({ width, height, className }: LogoProps) => {
-  const logoSrc = '/logo.jpg';
+  const logoSrc = '/logo/logo.svg';
 
   return (
     <div className={`logo ${className}`}>
