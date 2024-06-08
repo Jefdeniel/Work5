@@ -1,0 +1,60 @@
+@import '../../../App.scss';
+
+.time-block-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  padding: var(--p-md);
+  border-radius: var(--br-base);
+}
+
+.time-block-item {
+  padding: var(--p-md);
+  border: 1px solid var(--sa-grey);
+  border-radius: var(--br-base);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: var(--sa-primary-200);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  strong {
+    display: block;
+    font-size: var(--fs-read);
+    margin-bottom: var(--sp-xs);
+    color: var(--sa-primary-700);
+  }
+
+  p {
+    margin: 0;
+    color: var(--sa-dark);
+    font-size: var(--fs-small);
+  }
+}
+
+.dark-theme {
+  .time-block-list {
+    background-color: var(--sa-dark);
+  }
+
+  .time-block-item {
+    background-color: var(--sa-dark-dimmed);
+    border: 1px solid var(--sa-primary-950);
+
+    &:hover {
+      background-color: var(--sa-dark);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    strong {
+      color: var(--sa-bright);
+    }
+
+    p {
+      color: var(--sa-grey);
+    }
+  }
+}

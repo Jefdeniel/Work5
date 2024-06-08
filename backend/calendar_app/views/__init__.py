@@ -7,6 +7,7 @@ from .user_settings_views import UserSettingsViewSet
 from .category_views import CategoryViewSet
 from .calendar_users_views import CalendarUsersViewSet
 from .calendar_users_views import CalendarUserByUserId
+from .timeblock_views import TimeBlockViewSet
 
 
 default_app_config = "calendar_app.apps.CalendarConfig"

@@ -1,0 +1,30 @@
+.time-input-label {
+  color: var(--sa-primary-500-base);
+  font-weight: var(--fw-bold);
+}
+
+.time-input {
+  color: var(--sa-primary-950);
+  padding: var(--p-sm);
+  border-color: var(--sa-grey);
+  border-radius: var(--br-base);
+
+  & .input-with-icon input {
+    padding-right: var(--p-sm);
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(48%) sepia(13%) saturate(1500%) hue-rotate(180deg)
+      brightness(100%) contrast(80%);
+  }
+
+  &:focus {
+    border-color: var(--sa-primary-500-base);
+  }
+}
+
+.time-block-modal {
+  & .submit-btn {
+    margin: var(--sp-base) 0 var(--sp-sm) var(--p-sm);
+  }
+}
