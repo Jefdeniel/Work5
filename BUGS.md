@@ -1,2 +1,0 @@
-- state bugs for add + edit calendar
-- AUTH bug
