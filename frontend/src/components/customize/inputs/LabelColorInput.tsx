@@ -10,6 +10,7 @@ import useAuth from '../../../hooks/useAuth';
 import Button from '../../ui/Button/Button';
 
 import './Input.scss';
+import { toast } from 'react-toastify';
 
 interface Props {
   calendar: Calendar;
@@ -18,15 +19,18 @@ interface Props {
 // TODO: Add translations
 const LabelColorInput = ({ calendar }: Props) => {
   const { t } = useTranslation(['calendar']);
-  const calendarId = calendar.id;
   const [categories, setCategories] = useState(calendar.categories);
 
-  const { fetchData: updateCategoryColors } = useFetch('PATCH', [`categories`]);
+  const { fetchData: updateCategoryColors } = useFetch('PUT', [
+    'categories',
+    categories?.id,
+  ]);
 
   const handleEditLabels = async (values: any) => {
     const updatedCategories = categories?.map((category) => ({
       ...category,
       color_code: values.color_code,
+      calendar: category.id,
     }));
 
     try {
@@ -36,12 +40,15 @@ const LabelColorInput = ({ calendar }: Props) => {
 
       if (response.ok) {
         console.log('Update successful');
+        toast.success('Update successful');
         setCategories(updatedCategories);
       } else {
         console.error('Update failed', response.statusText);
+        toast.error('Update failed');
       }
     } catch (error) {
       console.error('Error updating categories', error);
+      toast.error('Error updating categories');
     }
   };
 
