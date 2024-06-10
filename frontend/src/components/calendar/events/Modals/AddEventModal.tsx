@@ -103,10 +103,12 @@ const AddEventModal = ({ onClose }: Props) => {
   }));
 
   const onHandleStartTime = (start: string) => {
-    setStartTime(new Date(start));
+    // setStartTime(new Date(start));
+    console.log('start', start);
   };
 
   const onHandleEndTime = (end: string) => {
+    console.log('end', end);
     setEndTime(end);
   };
 
