@@ -10,7 +10,7 @@ import Validators from '../../utils/Validators';
 import Logo from '../../components/ui/Logo';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const RegisterPage = () => {
   const { t } = useTranslation(['auth']);
   const navigate = useNavigate();
 
@@ -198,4 +198,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
