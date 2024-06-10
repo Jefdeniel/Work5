@@ -7,7 +7,6 @@ import './App.scss';
 import useAuth from './hooks/useAuth';
 import CalendarLayout from './layout/CalendarLayout';
 import Layout from './layout/Layout';
-import Login from './pages/Auth/Login';
 import CalendarPage from './pages/Calendar/CalendarPage';
 import CreateCalendar from './pages/Calendar/CreateCalendarPage';
 import CustomizePage from './pages/CustomizePage';
@@ -16,11 +15,12 @@ import SettingsPage from './pages/Settings/SettingsPage';
 import SharingHubPage from './pages/SharingHubPage';
 import AccountLayout from './layout/AccountLayout';
 import ProfilePage from './pages/ProfilePage';
-import Register from './pages/Auth/Register';
 import GoogleCalendar from './pages/Calendar/GoogleCalendar';
 import CalendarOverviewPage from './pages/Calendar/CalendarOverviewPage';
 import ScrollManager from './components/scrollManager/ScrollManager';
 import InspirationPage from './pages/InspirationPage';
+import LoginPage from './pages/Auth/LoginPage';
+import RegisterPage from './pages/Auth/RegisterPage';
 
 function App() {
   const auth = useAuth();
@@ -70,8 +70,8 @@ function App() {
           </>
         ) : (
           <Route element={<AccountLayout />}>
-            <Route index path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route index path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         )}

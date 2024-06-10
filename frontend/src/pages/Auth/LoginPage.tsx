@@ -11,7 +11,7 @@ import useAuth from '../../hooks/useAuth';
 import useFetch from '../../hooks/useFetch';
 import Validators from '../../utils/Validators';
 
-const Login = () => {
+const LoginPage = () => {
   const { t } = useTranslation('auth');
   const auth = useAuth();
   const navigate = useNavigate();
@@ -130,4 +130,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
