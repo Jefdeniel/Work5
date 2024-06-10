@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
 import { toast } from 'react-toastify';
+import { DateTime } from 'ts-luxon';
+
 import { Event } from '../../../../@types/Events';
+import { Category } from '../../../../@types/Calendar';
+
 import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
 import Button from '../../../ui/Button/Button';
@@ -10,34 +15,69 @@ import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
 import Input from '../../../ui/Input/Input';
 import EventTimeSelector from '../Selectors/EventTimeSelector';
+import Select from '../../../ui/Select/Select';
+
 import './EventModal.scss';
+import ColorConversion from '../../../../utils/ColorConversion';
+import useAuth from '../../../../hooks/useAuth';
 
 interface Props {
   onClose: () => void;
   // setEvent: (event: Event) => void;
 }
 
+// TODO: Add translations
 const AddEventModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['events']);
+  const params = useParams();
+  const calendarId = params.id;
+  const { user_id } = useAuth();
+
+  // State
+  const [startTime, setStartTime] = useState<string>('');
+  const [endTime, setEndTime] = useState<string>('');
+  const [labelList, setLabelList] = useState<Category[]>([]);
+
+  // Fetch
+  const { fetchData: getCurrentCalendar } = useFetch('GET', [
+    `calendars/${calendarId}`,
+  ]);
   const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
     'events',
   ]);
-  const [startTime, setStartTime] = useState<string>('');
-  const [endTime, setEndTime] = useState<string>('');
 
-  const onHandleStartTime = (start: string) => {
-    setStartTime(start);
-  };
+  useEffect(() => {
+    const getCalendar = async () => {
+      try {
+        const response = await getCurrentCalendar();
+        if (response.ok) {
+          const currentCalendar = await response.json();
+          setLabelList(currentCalendar.categories);
+          console.log('Calendar:', currentCalendar);
+        } else {
+          console.error('Error fetching calendar');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const onHandleEndTime = (end: string) => {
-    setEndTime(end);
-  };
+    getCalendar();
+  }, []);
 
   const handleAddEvent = async (values: Event) => {
     try {
       const response = await addEvent(
         {},
-        { ...values, start_time: startTime, end_time: endTime }
+        {
+          ...values,
+          start_time: startTime,
+          end_time: endTime,
+          owner: user_id,
+          status: 'pending',
+          category: '1',
+          priority: 'low',
+        }
       );
 
       if (response.ok) {
@@ -55,6 +95,24 @@ const AddEventModal = ({ onClose }: Props) => {
       console.error('Error adding event:', error);
     }
   };
+
+  const options = labelList.map((label) => ({
+    value: label.id,
+    title: label.title,
+    color: label.color_code,
+  }));
+
+  const onHandleStartTime = (start: string) => {
+    setStartTime(new Date(start));
+  };
+
+  const onHandleEndTime = (end: string) => {
+    setEndTime(end);
+  };
+
+  // const handleChangeEventLabel = (event: any) => {
+  //   console.log('event', event);
+  // };
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -76,7 +134,7 @@ const AddEventModal = ({ onClose }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  title={t('events:eventInfo.input')}
+                  title={t('events:eventInfo.title')}
                   isBig
                 />
               )}
@@ -104,9 +162,18 @@ const AddEventModal = ({ onClose }: Props) => {
               <EventTimeSelector onChange={onHandleEndTime} value={endTime} />
             </div>
 
-            <span className="my-3">Label choice select</span>
+            <div className={`mb-4`}>
+              <span className="mt-3 mb-1">Label choice select</span>
 
-            <div className="d-flex justify-content-end">
+              <Select
+                options={options}
+                // style={{
+                //   background: ColorConversion.convertHexToRGBA('#FF00FF', 0.2),
+                // }}
+              />
+            </div>
+
+            <div className="d-flex">
               <Button
                 className="btn--success mt-3 d-flex"
                 isBig
