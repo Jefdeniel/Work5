@@ -1,6 +1,11 @@
 import moment from 'moment';
 import { useMemo, useEffect, useContext, useState } from 'react';
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
+import {
+  Calendar,
+  DateLocalizer,
+  Views,
+  momentLocalizer,
+} from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
 import { Event } from '../../../@types/Events';
@@ -55,7 +60,11 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       },
       formats: {
         timeGutterFormat: time_format === '24h' ? 'HH:mm' : 'hh:mm A',
-        eventTimeRangeFormat: ({ start, end }, culture: any, localizer: any) =>
+        eventTimeRangeFormat: (
+          { start, end },
+          culture: string,
+          localizer: DateLocalizer
+        ) =>
           localizer.format(start, 'HH:mm', culture) +
           ' - ' +
           localizer.format(end, 'HH:mm', culture),
