@@ -3,21 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSettings } from '../../../hooks/useSettings';
 
+import { CalendarCardProps } from '../../../@types/CalendarCard';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
 import ProfilePicture from '../../ui/ProfilePicture/ProfilePicture';
 import OptionsBox from '../../ui/OptionsBox/OptionsBox';
 
 import './CalendarCard.scss';
-
-export interface CalendarCardProps {
-  img: string;
-  name: string;
-  userAvatars?: string[];
-  link?: string;
-  onDelete: () => void;
-  onEdit: () => void;
-}
 
 const CalendarCard = ({
   img,
@@ -29,7 +21,7 @@ const CalendarCard = ({
 }: CalendarCardProps) => {
   const navigate = useNavigate();
   const { theme } = useSettings();
-  const [areOptionsVisible, setAreOptionsVisible] = useState(false);
+  const [isOptionsVisible, setIsOptionsVisibility] = useState(false);
   const optionsBoxRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
@@ -39,7 +31,7 @@ const CalendarCard = ({
   };
 
   const handleOptionsClick = () => {
-    setAreOptionsVisible((prev) => !prev);
+    setIsOptionsVisibility((prev) => !prev);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -47,7 +39,7 @@ const CalendarCard = ({
       optionsBoxRef.current &&
       !optionsBoxRef.current.contains(event.target as Node)
     ) {
-      setAreOptionsVisible(false);
+      setIsOptionsVisibility(false);
     }
   };
 
@@ -115,7 +107,7 @@ const CalendarCard = ({
         </div>
       </div>
 
-      {areOptionsVisible && (
+      {isOptionsVisible && (
         <div ref={optionsBoxRef}>
           <OptionsBox onDelete={onDelete} onEdit={onEdit} />
         </div>

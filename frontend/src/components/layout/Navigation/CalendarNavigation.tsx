@@ -83,7 +83,7 @@ const CalendarNavigation = ({
           </Row>
 
           <Row>
-            <span className={`heading heading--sm clr-primary-300 mb-base`}>
+            <span className={`heading heading--sm clr-primary-300 mb-xsmall`}>
               {t('general:navigation.title')}
             </span>
           </Row>

@@ -118,6 +118,7 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "user",
+        "calendar",
         "is_new",
         "date_start",
         "date_stop",

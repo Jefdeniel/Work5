@@ -1,5 +1,5 @@
 export interface ActionItem {
-  onClick: string; // Use string to refer to the function name
+  onClick: string;
   iconSrc?: string;
   label: string;
 }

@@ -2,7 +2,7 @@ import Logo from '../../ui/Logo';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import DetailedNavItem from './DetailedNavItem';
 import BackButton from '../../ui/Button/BackButton';
@@ -19,29 +19,6 @@ import {
 
 import './navigation.scss';
 
-const menuItems: MenuItem[] = [
-  {
-    link: '/calendar/notifications',
-    label: 'general:navigation.notifications',
-    icon: <NotificationIcon />,
-  },
-  {
-    link: '/calendar/sharing-hub',
-    label: 'general:navigation.sharing-hub',
-    icon: <SharingHubIcon />,
-  },
-  {
-    link: '/calendar/customize',
-    label: 'general:navigation.customize',
-    icon: <CustomizeIcon />,
-  },
-  {
-    link: '/calendar/inspiration',
-    label: 'general:navigation.inspiration',
-    icon: <InspirationIcon />,
-  },
-];
-
 const DetailedNavigation = ({
   isMenuBroken,
   isMenuCollapsed,
@@ -52,6 +29,30 @@ const DetailedNavigation = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(['general']);
+  const params = useParams();
+
+  const menuItems: MenuItem[] = [
+    {
+      link: `/calendar/notifications/${params.id}`,
+      label: 'general:navigation.notifications',
+      icon: <NotificationIcon />,
+    },
+    {
+      link: `/calendar/sharing-hub/${params.id}`,
+      label: 'general:navigation.sharing-hub',
+      icon: <SharingHubIcon />,
+    },
+    {
+      link: `/calendar/customize/${params.id}`,
+      label: 'general:navigation.customize',
+      icon: <CustomizeIcon />,
+    },
+    {
+      link: `/calendar/inspiration/${params.id}`,
+      label: 'general:navigation.inspiration',
+      icon: <InspirationIcon />,
+    },
+  ];
 
   const handleOnClickMenu = (link: string) => {
     navigate(link);

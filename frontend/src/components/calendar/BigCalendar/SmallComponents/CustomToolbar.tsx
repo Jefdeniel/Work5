@@ -33,15 +33,15 @@ interface Props {
 }
 
 const CustomToolbar = ({
-  searchQuery,
+  searchQuery = '',
   handleSearchInput,
-  filteredEvents,
+  filteredEvents = [],
   handleEventClick,
-  view,
+  view = Views.WEEK,
   setView,
-  date,
+  date = new Date(),
   setDate,
-  isSmallCalendarOpen,
+  isSmallCalendarOpen = false,
   handleSearchFocus,
   handleDateChange,
 }: Props) => {
@@ -102,71 +102,111 @@ const CustomToolbar = ({
       </Row>
 
       <Row className={`my-3 d-flex align-items-center`}>
-        <Col xs={9} className={`d-flex align-items-center date-title`}>
-          <Button
-            className={`btn--bordered-primary`}
-            text={t('calendar:calendar.today')}
-            onClick={onTodayClick}
-          />
+        {view === Views.AGENDA && <Col></Col>}
 
-          <IconButton
-            className={`click-btn`}
-            icon={
-              theme === 'dark' ? (
-                <img
-                  className="arrow-bright"
-                  src="/icons/arrow-bright.svg"
-                  alt="Arrow icon"
-                />
-              ) : (
-                <img src="/icons/arrow.svg" alt="Arrow icon" />
-              )
-            }
-            onClick={onPreviousClick}
-          />
-
-          <span
-            className={`heading heading--lg fw-bold text-center date-title position-relative`}
-            onClick={handleSearchFocus}
-          >
-            {dateText}
-          </span>
-
-          {isSmallCalendarOpen && (
-            <SmallCalendar
-              className={`small-calendar position-absolute`}
-              onChange={handleDateChange}
-              nextLabel={<Icon src="/icons/arrow.svg" alt="Arrow icon" />}
-              prevLabel={<Icon src="/icons/arrow.svg" alt="Arrow icon" />}
-              next2Label={
-                <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
-              }
-              prev2Label={
-                <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
-              }
+        {view !== Views.AGENDA && (
+          <Col xs={9} className={`d-flex align-items-center date-title`}>
+            <Button
+              className={`btn--bordered-primary`}
+              text={t('calendar:calendar.today')}
+              onClick={onTodayClick}
             />
-          )}
 
-          <IconButton
-            className={`click-btn`}
-            icon={
-              theme === 'dark' ? (
-                <img
-                  className="arrow-bright--last rotate-180"
-                  src="/icons/arrow-bright.svg"
-                  alt="Arrow icon"
-                />
-              ) : (
-                <img
-                  className="rotate-180"
-                  src="/icons/arrow.svg"
-                  alt="Arrow icon"
-                />
-              )
-            }
-            onClick={onNextClick}
-          />
-        </Col>
+            <IconButton
+              className={`click-btn`}
+              icon={
+                theme === 'dark' ? (
+                  <img
+                    className="arrow-bright"
+                    src="/icons/arrow-bright.svg"
+                    alt="Arrow icon"
+                  />
+                ) : (
+                  <img src="/icons/arrow.svg" alt="Arrow icon" />
+                )
+              }
+              onClick={onPreviousClick}
+            />
+
+            <span
+              className={`heading heading--lg fw-bold text-center date-title position-relative`}
+              onClick={handleSearchFocus}
+            >
+              {dateText}
+            </span>
+
+            {isSmallCalendarOpen && (
+              <SmallCalendar
+                className={`small-calendar position-absolute`}
+                onChange={handleDateChange}
+                nextLabel={
+                  theme === 'dark' ? (
+                    <Icon
+                      className={`arrow-bright`}
+                      src="/icons/arrow-bright.svg"
+                      alt="Arrow icon"
+                    />
+                  ) : (
+                    <Icon src="/icons/arrow.svg" alt="Arrow icon" />
+                  )
+                }
+                prevLabel={
+                  theme === 'dark' ? (
+                    <Icon
+                      className={`arrow-bright`}
+                      src="/icons/arrow-bright.svg"
+                      alt="Arrow icon"
+                    />
+                  ) : (
+                    <Icon src="/icons/arrow.svg" alt="Arrow icon" />
+                  )
+                }
+                next2Label={
+                  theme === 'dark' ? (
+                    <Icon
+                      className={`arrow-bright`}
+                      src="/icons/double-arrow-bright.svg"
+                      alt="Arrow icon"
+                    />
+                  ) : (
+                    <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                  )
+                }
+                prev2Label={
+                  theme === 'dark' ? (
+                    <Icon
+                      className={`arrow-bright`}
+                      src="/icons/double-arrow-bright.svg"
+                      alt="Arrow icon"
+                    />
+                  ) : (
+                    <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                  )
+                }
+              />
+            )}
+
+            <IconButton
+              className={`click-btn`}
+              icon={
+                theme === 'dark' ? (
+                  <img
+                    className="arrow-bright--last rotate-180"
+                    src="/icons/arrow-bright.svg"
+                    alt="Arrow icon"
+                  />
+                ) : (
+                  <img
+                    className="rotate-180"
+                    src="/icons/arrow.svg"
+                    alt="Arrow icon"
+                  />
+                )
+              }
+              onClick={onNextClick}
+            />
+          </Col>
+        )}
 
         <Col xs={3} className={`p-0 d-flex justify-content-end`}>
           <ul className={`d-flex gap-2`}>

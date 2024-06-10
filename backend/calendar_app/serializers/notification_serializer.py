@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Notification, CustomUser
+from ..models import Notification, CustomUser, Calendar
 
 
 class NotificationSerializer(serializers.ModelSerializer):
@@ -7,6 +7,7 @@ class NotificationSerializer(serializers.ModelSerializer):
         max_length=255, required=True, help_text="Title of the notification"
     )
     user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+    calendar = serializers.PrimaryKeyRelatedField(queryset=Calendar.objects.all())
     date_start = serializers.DateTimeField(
         required=True,
         help_text="Start date of the notification (format: YYYY-MM-DDTHH:MM:SS.sssZ)",

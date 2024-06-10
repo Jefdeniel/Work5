@@ -1,6 +1,8 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { CalendarUser } from '../../../@types/Calendar';
+
 import useAuth from '../../../hooks/useAuth';
 import useFetch from '../../../hooks/useFetch';
 import { CalendarContext } from '../../../store/CalendarContext';
@@ -54,8 +56,22 @@ const CalendarCardList = ({
           throw new Error('Failed to fetch calendars');
         }
         const data: CalendarUser[] = await response.json();
-        calendarContext.setCalendars(data);
-        setFilteredCalendars(data);
+
+        const googleCalendar = {
+          id: -1,
+          calendar: {
+            id: -1,
+            title: 'Google',
+            image: '/img/google-calendar-logo.svg',
+          },
+          user: 0,
+          role: '',
+        };
+
+        const updatedData = [googleCalendar, ...data];
+
+        calendarContext.setCalendars(updatedData);
+        setFilteredCalendars(updatedData);
       } catch (error) {
         console.error(error);
       }
@@ -67,21 +83,7 @@ const CalendarCardList = ({
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
-    const dataWithGoogle: CalendarUser[] = [
-      ...calendarContext.calendars,
-      {
-        id: -1,
-        calendar: {
-          id: -1,
-          title: 'Google',
-          image: '/img/google-calendar-logo.svg',
-        },
-        user: 0,
-        role: '',
-      },
-    ];
-
-    const filteredData = dataWithGoogle.filter((calendarUser) => {
+    const filteredData = calendarContext.calendars.filter((calendarUser) => {
       const calendarTitle = calendarUser.calendar.title.toLowerCase();
       return calendarTitle.includes(searchValue);
     });

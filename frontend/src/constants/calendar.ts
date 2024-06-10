@@ -7,9 +7,7 @@ export const VIEW_OPTIONS = [
   { id: Views.AGENDA, label: 'Agenda', key: Views.AGENDA },
 ];
 
-// Export function that receives the translation function as an argument
 export const translateViewOptions = (t) => {
-  // Translate the labels using the provided translation function
   return VIEW_OPTIONS.map((option) => ({
     ...option,
     label: t(`calendar:calendar.views.${option.id}`),

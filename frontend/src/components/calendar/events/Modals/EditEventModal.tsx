@@ -13,9 +13,10 @@ import Input from '../../../ui/Input/Input';
 import EventTimeSelector from '../Selectors/EventTimeSelector';
 
 import './EventModal.scss';
+import EventRepeatSelector from '../Selectors/EventRepeatSelector';
 
 interface Props {
-  // event: Event;
+  event?: Event;
   onClose: () => void;
   // setEvent: (event: Event) => void;
 }
@@ -83,7 +84,7 @@ const EditEventModal = ({ onClose }: Props) => {
                   meta={meta}
                   title={t('events:eventInfo.title')}
                   isBig
-                  value={values.title}
+                  value={input.values.title}
                 />
               )}
             </Field>
@@ -95,7 +96,7 @@ const EditEventModal = ({ onClose }: Props) => {
                   meta={meta}
                   title={t('events:eventInfo.description')}
                   isBig
-                  value={description}
+                  value={input.description}
                 />
               )}
             </Field>
@@ -103,17 +104,17 @@ const EditEventModal = ({ onClose }: Props) => {
             <div className={`time-selectors`}>
               <EventTimeSelector
                 onChange={onHandleStartTime}
-                value={start_time}
+                // value={start_time}
               />
 
               <span>-</span>
 
-              <EventTimeSelector onChange={onHandleEndTime} value={end_time} />
+              <EventTimeSelector onChange={onHandleEndTime} /*value={end_time}*/ />
             </div>
 
             <span className="my-3">Label choice select</span>
 
-            {/* <Field name="repeat">
+            <Field name="repeat">
               {({ input, meta }) => (
                 <EventRepeatSelector
                   {...input}
@@ -121,7 +122,7 @@ const EditEventModal = ({ onClose }: Props) => {
                   onChange={input.onChange}
                 />
               )}
-            </Field> */}
+            </Field>
 
             <div className="d-flex justify-content-end">
               <Button

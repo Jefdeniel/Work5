@@ -1,15 +1,11 @@
 import { Col, Row } from 'react-bootstrap';
 import { useEffect, useMemo, useState } from 'react';
+
+import { UserData } from '../../../../@types/UserData';
 import { Colors } from '../../../../@types/Colors';
 import useAuth from '../../../../hooks/useAuth';
 import useFetch from '../../../../hooks/useFetch';
 import Heading from '../../../ui/Heading/Heading';
-
-interface UserData {
-  first_name?: string;
-  last_name?: string;
-  email?: string;
-}
 
 const ProfilePageHeader = () => {
   const { user_id } = useAuth();
@@ -19,7 +15,7 @@ const ProfilePageHeader = () => {
     user_id?.toString() || '',
   ]);
 
-  const [userData, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -38,19 +34,19 @@ const ProfilePageHeader = () => {
   }, []);
 
   const fullName = useMemo(() => {
-    return `${userData?.first_name || ''} ${userData?.last_name || ''}`;
-  }, [userData]);
+    return `${user?.first_name || ''} ${user?.last_name || ''}`;
+  }, [user]);
 
   return (
     <Row className="p-5 --br-lg" style={{ backgroundColor: Colors.Primary200 }}>
       <Col className={`d-flex justify-content-center`}>
         <div className={`d-flex flex-column justify-content-center`}>
           <Heading level={2} className={`heading--lg clr-dark highlight`}>
-            {fullName}
+            {fullName || 'User'}
           </Heading>
 
           <Heading level={2} className={`heading--sm clr-primary`}>
-            {userData?.email || ''}
+            {user?.email || ''}
           </Heading>
         </div>
       </Col>

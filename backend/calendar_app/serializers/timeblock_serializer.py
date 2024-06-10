@@ -7,5 +7,13 @@ class TimeBlockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TimeBlock
-        fields = ["id", "calendar", "start_time", "end_time"]
+        fields = [
+            "id",
+            "calendar",
+            "title",
+            "start_time",
+            "end_time",
+            "created_at",
+            "updated_at",
+        ]
         read_only_fields = ["id"]

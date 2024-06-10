@@ -6,8 +6,8 @@ import './App.scss';
 
 import Layout from './layout/Layout';
 import useAuth from './hooks/useAuth';
-import Login from './pages/Auth/Login';
-import Register from './pages/Auth/Register';
+import LoginPage from './pages/Auth/LoginPage';
+import RegisterPage from './pages/Auth/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import CustomizePage from './pages/CustomizePage';
 import AccountLayout from './layout/AccountLayout';
@@ -59,27 +59,27 @@ function App() {
             </Route>
 
             {/* Account specific routes under /calendar but using a different layout */}
-            <Route path="/calendar/notifications" element={<Layout />}>
+            <Route path="/calendar/notifications/:id" element={<Layout />}>
               <Route index element={<NotificationPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="/calendar/sharing-hub" element={<Layout />}>
+            <Route path="/calendar/sharing-hub/:id" element={<Layout />}>
               <Route index element={<SharingHubPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="/calendar/customize" element={<Layout />}>
+            <Route path="/calendar/customize/:id" element={<Layout />}>
               <Route index element={<CustomizePage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="/calendar/inspiration" element={<Layout />}>
+            <Route path="/calendar/inspiration/:id" element={<Layout />}>
               <Route index element={<InspirationPage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </>
         ) : (
           <Route element={<AccountLayout />}>
-            <Route index path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route index path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         )}

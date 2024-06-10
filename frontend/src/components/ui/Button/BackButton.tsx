@@ -12,12 +12,14 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const BackButton = ({ text, className, linkTo }: Props) => {
   const navigate = useNavigate();
 
+  const handleNavigate = () => {
+    linkTo ? navigate(linkTo) : navigate('/calendar/main');
+  };
+
   const button = (
     <button
       className={`btn btn--icon btn--bordered ${className}`}
-      onClick={() => {
-        linkTo ? navigate(linkTo) : navigate('/calendar/main');
-      }}
+      onClick={handleNavigate}
     >
       <svg
         className="btn__icon"
