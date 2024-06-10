@@ -9,7 +9,7 @@ import useSetTitle from '../hooks/setTitle';
 import useFetch from '../hooks/useFetch';
 import Heading from '../components/ui/Heading/Heading';
 import LabelColorInput from '../components/customize/inputs/LabelColorInput';
-import TimeBlockingInput from '../components/customize/inputs/TimeBlockingInput';
+import TimeBlockingInput from '../components/customize/TimeBlocks/TimeBlockingInput';
 import PermissionBoxes from '../components/customize/inputs/PermissionBoxes';
 import LoadingScreen from '../components/ui/Loading/LoadingScreen';
 
