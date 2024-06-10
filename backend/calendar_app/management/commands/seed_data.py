@@ -320,8 +320,9 @@ class Command(BaseCommand):
         for i in range(100):
             try:
                 Notification.objects.create(
-                    user=random.choice(users),
                     title=fake.sentence(nb_words=10),
+                    user=random.choice(users),
+                    calendar=random.choice(calendars),
                     date_start=fake.date_time_this_year(
                         before_now=True, after_now=False, tzinfo=timezone.utc
                     ),
