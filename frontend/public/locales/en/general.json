@@ -40,5 +40,10 @@
       "colorCode": "This field must be a valid color code. (#FFFFFFFF)",
       "password": "This field must be a valid password. (At least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character.)"
     }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "goBack": "Go back to the previous page."
   }
 }

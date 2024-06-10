@@ -8,14 +8,19 @@
     "delete-title": "Kalender löschen",
     "delete-description": "Möchten Sie diesen Kalender wirklich löschen?",
     "delete-confirmation-yes": "Ja, ich bin sicher",
-    "options": {
-      "edit": "Bearbeiten",
-      "delete": "Löschen"
-    },
+    "edit-title": "Kalender bearbeiten",
+    "edit-description": "Bearbeiten Sie die Details Ihres Kalenders unten.",
     "toast": {
       "calendar-deleted": "Kalender gelöscht",
-      "calendar-deletion-failed": "Das Löschen des Kalenders ist fehlgeschlagen"
-    }
+      "calendar-deletion-failed": "Das Löschen des Kalenders ist fehlgeschlagen",
+      "calendar-edited": "Kalender aktualisiert",
+      "calendar-edit-failed": "Kalenderaktualisierung fehlgeschlagen"
+    },
+    "title": "Kalendertitel",
+    "description": "Kalenderbeschreibung",
+    "date-start": "Startdatum",
+    "date-stop": "Enddatum",
+    "edit-confirmation-yes": "Speichern"
   },
   "calendar-create": {
     "title": "Kalender erstellen",
@@ -37,9 +42,9 @@
     "title": "Kalender",
     "page": "Kalenderseite",
     "createEvent": "Ereignis erstellen",
-    "editEvent": "Ereignisereignis bearbeiten",
+    "editEvent": "Ereignis bearbeiten",
     "creating": "Erstellen...",
-    "editing": "Bearbeitung...",
+    "editing": "Bearbeiten...",
     "selectTheme": "Wähle ein Thema",
     "search": "Suche",
     "today": "Heute",

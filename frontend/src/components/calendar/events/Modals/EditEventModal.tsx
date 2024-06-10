@@ -9,7 +9,6 @@ import Validators from '../../../../utils/Validators';
 import Button from '../../../ui/Button/Button';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
-// import EventRepeatSelector from '../Selectors/EventRepeatSelector';
 import Input from '../../../ui/Input/Input';
 import EventTimeSelector from '../Selectors/EventTimeSelector';
 
@@ -42,16 +41,16 @@ const EditEventModal = ({ onClose }: Props) => {
       );
 
       if (response.ok) {
-        console.log('Updated event:', values); // Debugging
+        console.log('Updated event:', values);
         toast.success(t('events:toasts.updateSuccess'));
-        onClose(); // Close the modal after successful submission
+        onClose();
       } else {
         toast.error(t('events:toasts.updateError'));
         throw new Error('Failed to update event: ' + response.statusText);
       }
     } catch (error) {
       toast.error(t('events:toasts.updateError') + ': ' + error.message);
-      console.error('Error updating event:', error); // Debugging
+      console.error('Error updating event:', error);
     }
   };
 

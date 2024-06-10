@@ -8,10 +8,10 @@ import { Calendar } from '../@types/Calendar';
 import useSetTitle from '../hooks/setTitle';
 import useFetch from '../hooks/useFetch';
 import Heading from '../components/ui/Heading/Heading';
-import LabelColorInput from '../components/customize/inputs/LabelColorInput';
-import TimeBlockingInput from '../components/customize/TimeBlocks/TimeBlockingInput';
-import PermissionBoxes from '../components/customize/inputs/PermissionBoxes';
-import LoadingScreen from '../components/ui/Loading/LoadingScreen';
+import TimeBlockingInput from '../components/customize/Selectors/TimeBlockingSelector';
+import PermissionBoxes from '../components/customize/Selectors/PermissionBoxes';
+import LabelColorSelector from '../components/customize/Selectors/LabelColorSelector';
+import TimeBlockingSelector from '../components/customize/Selectors/TimeBlockingSelector';
 
 const CustomizePage = () => {
   const { t } = useTranslation(['general', 'customize']);
@@ -56,7 +56,7 @@ const CustomizePage = () => {
 
       {calendar && <LabelColorInput calendar={calendar} />}
 
-      <TimeBlockingInput />
+      <TimeBlockingSelector />
 
       <PermissionBoxes />
     </div>

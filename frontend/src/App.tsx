@@ -4,23 +4,24 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
 
-import useAuth from './hooks/useAuth';
-import CalendarLayout from './layout/CalendarLayout';
 import Layout from './layout/Layout';
-import CalendarPage from './pages/Calendar/CalendarPage';
-import CreateCalendar from './pages/Calendar/CreateCalendarPage';
-import CustomizePage from './pages/CustomizePage';
-import NotificationPage from './pages/NotificationPage';
-import SettingsPage from './pages/Settings/SettingsPage';
-import SharingHubPage from './pages/SharingHubPage';
-import AccountLayout from './layout/AccountLayout';
+import useAuth from './hooks/useAuth';
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
 import ProfilePage from './pages/ProfilePage';
-import GoogleCalendar from './pages/Calendar/GoogleCalendar';
-import CalendarOverviewPage from './pages/Calendar/CalendarOverviewPage';
-import ScrollManager from './components/scrollManager/ScrollManager';
+import CustomizePage from './pages/CustomizePage';
+import AccountLayout from './layout/AccountLayout';
+import SharingHubPage from './pages/SharingHubPage';
+import CalendarLayout from './layout/CalendarLayout';
 import InspirationPage from './pages/InspirationPage';
-import LoginPage from './pages/Auth/LoginPage';
-import RegisterPage from './pages/Auth/RegisterPage';
+import NotificationPage from './pages/NotificationPage';
+import NotFound from './components/ui/NotFound/NotFound';
+import CalendarPage from './pages/Calendar/CalendarPage';
+import SettingsPage from './pages/Settings/SettingsPage';
+import GoogleCalendar from './pages/Calendar/GoogleCalendar';
+import CreateCalendar from './pages/Calendar/CreateCalendarPage';
+import ScrollManager from './components/scrollManager/ScrollManager';
+import CalendarOverviewPage from './pages/Calendar/CalendarOverviewPage';
 
 function App() {
   const auth = useAuth();
@@ -42,30 +43,37 @@ function App() {
               />
               <Route path="profile" element={<ProfilePage />} />
               <Route path="settings" element={<SettingsPage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
 
             {/* Calendar specific routes with CalendarLayout */}
             <Route path="/calendar" element={<CalendarLayout />}>
               <Route path="overview" element={<CalendarOverviewPage />} />
               <Route path="create" element={<CreateCalendar />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/calendar" element={<Layout />}>
               <Route path="google" element={<GoogleCalendar />} />
               <Route path="/calendar/:id" element={<CalendarPage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
 
             {/* Account specific routes under /calendar but using a different layout */}
             <Route path="/calendar/notifications/:id" element={<Layout />}>
               <Route index element={<NotificationPage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/calendar/sharing-hub/:id" element={<Layout />}>
               <Route index element={<SharingHubPage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/calendar/customize/:id" element={<Layout />}>
               <Route index element={<CustomizePage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/calendar/inspiration/:id" element={<Layout />}>
               <Route index element={<InspirationPage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </>
         ) : (
