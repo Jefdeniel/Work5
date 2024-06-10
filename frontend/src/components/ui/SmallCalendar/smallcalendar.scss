@@ -103,3 +103,9 @@
     color: var(--sa-primary-300);
   }
 }
+
+.dark-theme {
+  & .full-calendar .small-calendar  {
+    background: var(--sa-dark-dimmed);
+  }
+}
