@@ -47,15 +47,14 @@
 
 # Random
 
-- Logo Overal Hetzelfde Maken Voor Alle Browsers + manifest.json
 - Fetch Avatars When Calendar GET: Users
-- Small Calendar Dark Theme Styling
 - Bij Updaten van Settings: Loading State Tonen
 - De Grote Translation Check-up
 - Sidebar Calendar Icons bij Collapsed State Fixen
 - Customize: Collaborator Permissions Laten Werken
 - Export naar PDF
 - readme perfectioneren
+- Wanneer back button click -> error in fetching data
 
   # Deployment
 

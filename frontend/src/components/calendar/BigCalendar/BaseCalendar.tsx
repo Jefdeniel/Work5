@@ -3,12 +3,14 @@ import { useMemo, useEffect, useContext, useState } from 'react';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
-import { SettingsContext } from '../../../store/SettingsContext';
 import { Event } from '../../../@types/Events';
+
+import { SettingsContext } from '../../../store/SettingsContext';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import EventCard from '../../ui/EventCard/EventCard';
 import CustomToolbar from './SmallComponents/CustomToolbar';
 import EditEventModal from '../events/Modals/EditEventModal';
+import AddEventModal from '../events/Modals/AddEventModal';
 
 import './BaseCalendar.scss';
 import './Calendar.scss';
@@ -32,7 +34,12 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [showEditEventModal, setShowEditEventModal] = useState(false);
+  const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event>();
+  const [newEventTimes, setNewEventTimes] = useState<
+    { start: Date; end: Date } | undefined
+  >();
+
   const { events } = useFetchedEvents();
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
@@ -48,7 +55,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       },
       formats: {
         timeGutterFormat: time_format === '24h' ? 'HH:mm' : 'hh:mm A',
-        eventTimeRangeFormat: ({ start, end }, culture, localizer) =>
+        eventTimeRangeFormat: ({ start, end }, culture: any, localizer: any) =>
           localizer.format(start, 'HH:mm', culture) +
           ' - ' +
           localizer.format(end, 'HH:mm', culture),
@@ -57,17 +64,28 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     });
   }, [week_start_day, time_format]);
 
-  const handleOpenTimeBlockingModal = () => {
+  // const handleOpenTimeBlockingModal = () => {
+  //   setShowEditEventModal(true);
+  // };
+
+  // const closeAddTimeBlockingModal = () => {
+  //   setShowEditEventModal(false);
+  // };
+
+  const handleOpenEditEventModal = () => {
     setShowEditEventModal(true);
   };
 
-  const closeAddTimeBlockingModal = () => {
+  const handleOpenAddEventModal = () => {
+    setShowAddEventModal(true);
+  };
+
+  const closeEditEventModal = () => {
     setShowEditEventModal(false);
   };
 
-  const handleEditEvent = () => {
-    console.log('Edit event');
-    closeAddTimeBlockingModal();
+  const closeAddEventModal = () => {
+    setShowAddEventModal(false);
   };
 
   const components = useMemo(
@@ -76,7 +94,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         <EventCard
           event={event}
           color={event.color}
-          onDoubleClick={handleEditEvent}
+          onDoubleClick={handleOpenEditEventModal}
         />
       ),
     }),
@@ -90,10 +108,17 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         : [Views.DAY, Views.WORK_WEEK, Views.MONTH, Views.AGENDA],
       defaultView: weekend_visibility ? Views.WEEK : Views.WORK_WEEK,
       onSelectSlot: ({ start, end }) => {
-        onShowEventView({ start, end });
         console.log('START: ', start, 'END: ', end);
+        setNewEventTimes({ start, end });
+        setSelectedEvent(undefined);
+        handleOpenAddEventModal();
       },
-      onDoubleClickEvent: onShowEventView,
+      onDoubleClickEvent: (event) => {
+        console.log('Event double clicked: ', event);
+        setSelectedEvent(event);
+        setNewEventTimes(undefined);
+        handleOpenEditEventModal();
+      },
       events,
       style: { width: '100%', height: '100%' },
       components: components,
@@ -131,10 +156,12 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }
   };
 
-  const handleEventClick = (event: Event) => {
+  const handleEventClickForSearch = (event: Event) => {
     console.log('Event clicked: ', event);
-    setSelectedEvent(event);
-    handleOpenTimeBlockingModal();
+    // setSelectedEvent(event);
+    // handleOpenAddEventModal();
+    // handleOpenEditEventModal();
+    // handleOpenTimeBlockingModal();
   };
 
   return (
@@ -146,7 +173,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         searchQuery={searchQuery}
         handleSearchInput={handleSearchInput}
         filteredEvents={filteredEvents}
-        handleEventClick={handleEventClick}
+        handleEventClick={handleEventClickForSearch}
         view={view}
         setView={setView}
         date={date}
@@ -156,13 +183,25 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         handleDateChange={handleDateChange}
       />
 
-      {showEditEventModal && (
+      {/* {showEditEventModal && selectedEvent && (
         <EditEventModal
           title={selectedEvent?.title!}
           description={selectedEvent?.description!}
           start_time={selectedEvent?.start as Date}
           end_time={selectedEvent?.end as Date}
-          onClose={closeAddTimeBlockingModal}
+          onClose={closeEditEventModal}
+        />
+      )} */}
+
+      {showEditEventModal && selectedEvent && (
+        <EditEventModal event={selectedEvent} onClose={closeEditEventModal} />
+      )}
+
+      {showAddEventModal && newEventTimes && (
+        <AddEventModal
+          // start={newEventTimes.start}
+          // end={newEventTimes.end}
+          onClose={closeAddEventModal}
         />
       )}
 

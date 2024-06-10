@@ -48,12 +48,12 @@ const TimeBlockingInput = () => {
           text={t('calendar:calendar-customize.time-blocking.title')}
         />
 
-        {showAddTimeBlockingModal && (
+        {/* {showAddTimeBlockingModal && (
           <AddTimeBlockingModal
             onClose={closeAddTimeBlockingModal}
             onSubmit={handleAddTimeBlock}
           />
-        )}
+        )} */}
       </div>
     </Row>
   );

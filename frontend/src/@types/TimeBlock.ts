@@ -1,6 +1,7 @@
 export interface TimeBlock {
-  id: string;
+  id?: number;
   title: string;
-  start_time: Date;
-  end_time: Date;
+  start_time: string;
+  end_time: string;
+  description: string;
 }
