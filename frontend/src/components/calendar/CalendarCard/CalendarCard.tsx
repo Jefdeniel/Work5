@@ -21,7 +21,7 @@ const CalendarCard = ({
 }: CalendarCardProps) => {
   const navigate = useNavigate();
   const { theme } = useSettings();
-  const [isOptionsVisible, setOptionsVisibility] = useState(false);
+  const [isOptionsVisible, setIsOptionsVisibility] = useState(false);
   const optionsBoxRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
@@ -31,7 +31,7 @@ const CalendarCard = ({
   };
 
   const handleOptionsClick = () => {
-    setOptionsVisibility((prev) => !prev);
+    setIsOptionsVisibility((prev) => !prev);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -39,7 +39,7 @@ const CalendarCard = ({
       optionsBoxRef.current &&
       !optionsBoxRef.current.contains(event.target as Node)
     ) {
-      setOptionsVisibility(false);
+      setIsOptionsVisibility(false);
     }
   };
 
