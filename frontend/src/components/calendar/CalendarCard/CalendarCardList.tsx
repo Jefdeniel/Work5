@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 
 import { CalendarUser } from '../../../@types/Calendar';
 
-import { CalendarContext } from '../../../store/CalendarContext';
 import useAuth from '../../../hooks/useAuth';
 import useFetch from '../../../hooks/useFetch';
 import { CalendarContext } from '../../../store/CalendarContext';

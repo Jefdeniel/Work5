@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { TimeBlock } from '../../../@types/TimeBlock';
 
 import Button from '../../ui/Button/Button';
-import AddTimeBlockingModal from '../../calendar/BigCalendar/Modals/AddTimeBlockingModal';
+import AddTimeBlockingModal from '../Modals/AddTimeBlockingModal';
 import Icon from '../../ui/Icon/Icon';
 
 const TimeBlockingSelector = () => {
@@ -24,8 +24,9 @@ const TimeBlockingSelector = () => {
   };
 
   const handleAddTimeBlock = (newTimeBlock) => {
-    setTimeBlocks([...timeBlocks, newTimeBlock]);
-    closeAddTimeBlockingModal();
+    console.log('newTimeBlock:', newTimeBlock);
+    // setTimeBlocks([...timeBlocks, newTimeBlock]);
+    // closeAddTimeBlockingModal();
   };
 
   return (
@@ -57,7 +58,7 @@ const TimeBlockingSelector = () => {
         {showAddTimeBlockingModal && (
           <AddTimeBlockingModal
             onClose={closeAddTimeBlockingModal}
-            onSubmit={handleAddTimeBlock}
+            setTimeBlock={handleAddTimeBlock}
           />
         )}
       </div>

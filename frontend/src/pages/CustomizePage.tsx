@@ -12,6 +12,8 @@ import TimeBlockingInput from '../components/customize/Selectors/TimeBlockingSel
 import PermissionBoxes from '../components/customize/Selectors/PermissionBoxes';
 import LabelColorSelector from '../components/customize/Selectors/LabelColorSelector';
 import TimeBlockingSelector from '../components/customize/Selectors/TimeBlockingSelector';
+import LoadingScreen from '../components/ui/Loading/LoadingScreen';
+import LabelColorInput from '../components/customize/Inputs/LabelColorInput';
 
 const CustomizePage = () => {
   const { t } = useTranslation(['general', 'customize']);

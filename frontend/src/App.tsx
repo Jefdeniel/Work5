@@ -6,8 +6,8 @@ import './App.scss';
 
 import Layout from './layout/Layout';
 import useAuth from './hooks/useAuth';
-import Login from './pages/Auth/Login';
-import Register from './pages/Auth/Register';
+import LoginPage from './pages/Auth/LoginPage';
+import RegisterPage from './pages/Auth/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import CustomizePage from './pages/CustomizePage';
 import AccountLayout from './layout/AccountLayout';

@@ -2,7 +2,6 @@ export interface Calendar {
   id?: number;
   title: string;
   description?: string;
-  owner_id?: string;
   color?: string;
   image?: string | null;
   owner_id?: number;
