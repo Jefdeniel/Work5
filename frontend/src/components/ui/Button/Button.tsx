@@ -53,7 +53,7 @@ const Button = ({
         {icon}
         {text && !isLoading && <span>{text}</span>}
         {isLoading && <Spinner animation="border" size="sm" />}
-        {children}
+        {!isLoading && children}
       </div>
     </button>
   );

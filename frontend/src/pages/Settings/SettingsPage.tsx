@@ -20,6 +20,7 @@ import useFetch from '../../hooks/useFetch';
 import useSetTitle from '../../hooks/setTitle';
 import Validators from '../../utils/Validators';
 import { SettingsContext } from '../../store/SettingsContext';
+import Spinner from '../../components/ui/Loading/Spinner';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -234,6 +235,7 @@ const SettingsPage = () => {
                 className="btn--success"
                 type="submit"
                 disabled={isLoading}
+                isLoading={isLoading}
               >
                 {t('settings:save')}
               </Button>

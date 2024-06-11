@@ -48,7 +48,6 @@
 # Random
 
 - Fetch Avatars When Calendar GET: Users
-- Bij Updaten van Settings: Loading State Tonen
 - De Grote Translation Check-up
 - Sidebar Calendar Icons bij Collapsed State Fixen
 - Customize: Collaborator Permissions Laten Werken
