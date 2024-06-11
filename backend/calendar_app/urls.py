@@ -13,6 +13,7 @@ from .views.auth_views import SignUpView
 from .views.calendar_users_views import CalendarUsersViewSet
 from .views.calendar_users_views import CalendarUserByUserId
 from .views.timeblock_views import TimeBlockViewSet
+from .views.prompt_views import PromptInspirationViewSet
 
 from django.conf import settings
 
@@ -36,5 +37,10 @@ urlpatterns = [
         "calendar_users/user_id/<int:user_id>",
         CalendarUserByUserId.as_view(),
         name="calendar-user-by-user-id",
+    ),
+    path(
+        "prompt/inspiration",
+        PromptInspirationViewSet.as_view({"post": "list"}),
+        name="prompt-inspiration",
     ),
 ]
