@@ -38,7 +38,6 @@
 
 - Max 5 (huidige situatie: 28)
 - Reset en seed laten werken bij Kyandro
-- Seed file opdelen in seperate files (nice-to-have)
 
 # Settings
 
