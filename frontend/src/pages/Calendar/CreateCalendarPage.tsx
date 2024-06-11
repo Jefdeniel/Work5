@@ -1,22 +1,21 @@
+import { Col, Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { Calendar } from '../../@types/Calendar';
+import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
+import Icon from '../../components/ui/Icon/Icon';
 import Input from '../../components/ui/Input/Input';
 import useSetTitle from '../../hooks/setTitle';
-import Icon from '../../components/ui/Icon/Icon';
-import Button from '../../components/ui/Button/Button';
-import { useTranslation } from 'react-i18next';
-import useFetch from '../../hooks/useFetch';
-import { Calendar } from '../../@types/Calendar';
-import { toast } from 'react-toastify';
-import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
 import useAuth from '../../hooks/useAuth';
-import { Field, Form } from 'react-final-form';
+import useFetch from '../../hooks/useFetch';
 import Validators from '../../utils/Validators';
-import { Col, Row } from 'react-bootstrap';
 
 const CreateCalendar = () => {
   const { t } = useTranslation(['calendar']);
-  useSetTitle(t('calendar-create.title'));
   const { user_id } = useAuth();
+  useSetTitle(t('calendar-create.title'));
 
   const { fetchData: addCalendar, loading: isLoading } = useFetch('POST', [
     'calendars',
@@ -43,17 +42,13 @@ const CreateCalendar = () => {
       );
 
       if (response.ok) {
-        toast.success(t('calendar:toasts.addSuccess'));
+        toast.success(t('calendar:toasts.success'));
       }
     } catch (error) {
-      toast.error(t('calendar:error.addFailed'));
+      toast.error(t('calendar:toasts.error'));
       throw new Error('Failed to add calendar');
     }
   };
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   return (
     <div>
@@ -176,12 +171,16 @@ const CreateCalendar = () => {
               </Col>
             </Row>
 
-            <Button
-              type="submit"
-              text={t('calendar-create.title')}
-              icon={<Icon src="/icons/plus-bright.svg " alt="Plus icon" />}
-              className="btn--success inline-block"
-            />
+            <div className="pad-left-neg mt-4 mb-5 d-flex justify-content-start">
+              <Button
+                className="btn--success inline-block"
+                icon={<Icon src="/icons/plus-bright.svg " alt="Plus icon" />}
+                text={t('calendar-create.title')}
+                type="submit"
+                disabled={isLoading}
+                isLoading={isLoading}
+              />
+            </div>
           </form>
         )}
       />
