@@ -30,7 +30,7 @@ const TimeBlockingSelector = () => {
   };
 
   return (
-    <div className={`mt-4`}>
+    <>
       <div className={`input-intro`}>
         <span className={`title mb-1`}>
           {t('calendar:calendar-customize.time-blocking.title')}
@@ -62,7 +62,7 @@ const TimeBlockingSelector = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

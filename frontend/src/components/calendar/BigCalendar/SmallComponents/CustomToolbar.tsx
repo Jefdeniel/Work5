@@ -217,7 +217,7 @@ const CustomToolbar = ({
         <Col
           xs={12}
           md={3}
-          className={`p-0 d-flex align-items-center justify-content-end users-list`}
+          className={`d-flex align-items-center justify-content-end users-list p-0`}
         >
           <ul className={`calendar-users-list`}>
             {calendarUsers.map((user) => (

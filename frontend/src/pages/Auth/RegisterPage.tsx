@@ -59,7 +59,10 @@ const RegisterPage = () => {
           onSubmit={handleRegister}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className="d-flex flex-column gap-1">
-              <Heading level={2} className={`heading--lg fw-bold clr-primary text-center`}>
+              <Heading
+                level={2}
+                className={`heading--lg fw-bold clr-primary text-center`}
+              >
                 {t('auth:register.title')}
               </Heading>
 
@@ -168,7 +171,7 @@ const RegisterPage = () => {
                 )}
               </Field>
 
-              <Row className={`px-3 d-flex gap-4 register-buttons`}>
+              <Row className={`register-buttons px-3 d-flex gap-4`}>
                 <Col className={`p-0`}>
                   <Button
                     isBig

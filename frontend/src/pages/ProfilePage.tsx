@@ -77,7 +77,7 @@ const ProfilePage = () => {
         />
       </Row>
 
-      <div className="mb-base mt-large">
+      <Row className="mb-base mt-large">
         <Heading className={`mb-3`} level={3}>
           {t('settings:account.title')}
         </Heading>
@@ -88,7 +88,7 @@ const ProfilePage = () => {
           className={`btn btn--bordered-danger`}
           onClick={openDeleteAccountModal}
         />
-      </div>
+      </Row>
 
       {showDeleteAccountModal && (
         <DeleteAccountModal onClose={closeDeleteAccountModal} />

@@ -5,6 +5,8 @@ import { Col, Row } from 'react-bootstrap';
 
 import Select from '../../ui/Select/Select';
 
+import './Selector.scss';
+
 interface TimeZoneSelectorProps {
   initialValue?: string | ITimezoneOption;
   value?: string;
@@ -40,7 +42,7 @@ const TimeZoneSelector = ({
         <Col>
           <span className="title">{t('settings:general.timeZone')}</span>
 
-          <small className="description p-0">
+          <small className="description">
             {t('settings:general.timeZoneDescription')}
           </small>
         </Col>
