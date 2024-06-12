@@ -11,7 +11,7 @@ interface Props {
   [key: string]: any;
 }
 const StartEventTimeSelector = ({ value, meta, onChange, ...rest }) => {
-  const { t } = useTranslation(['calendars']);
+  const { t } = useTranslation(['events']);
 
   const formatDateTimeLocal = (date) => {
     if (!date) return '';
@@ -29,7 +29,7 @@ const StartEventTimeSelector = ({ value, meta, onChange, ...rest }) => {
   return (
     <Input
       type="datetime-local"
-      title={t('events:eventInfo.startTime')}
+      title={t('events:eventInfo.start')}
       value={formatDateTimeLocal(value)}
       onChange={onEventStartChange}
       meta={meta}

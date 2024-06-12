@@ -1,13 +1,15 @@
+import { useState, useEffect } from 'react';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import useAuth from '../../../../hooks/useAuth';
 import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
+
 import Button from '../../../ui/Button/Button';
 import Input from '../../../ui/Input/Input';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
@@ -15,20 +17,18 @@ import Modal from '../../../ui/Modals/Modal';
 import EndEventTimeSelector from '../Selectors/EndEventTimeSelector';
 import EventPrioritySelector from '../Selectors/EventPrioritySelector';
 import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
+
 import './EventModal.scss';
 
-const AddEventModal = ({ onClose, start, end }) => {
+const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
   const { t } = useTranslation(['events']);
   const { user_id } = useAuth();
   const params = useParams();
   const calendarId = params.id;
 
-  // States
   const [startTime, setStartTime] = useState(new Date(start));
   const [endTime, setEndTime] = useState(new Date(end));
-  const [labelList, setLabelList] = useState([]);
 
-  // Fetches
   const { fetchData: getCurrentCalendar } = useFetch('GET', [
     `calendars/${calendarId}`,
   ]);
@@ -36,7 +36,6 @@ const AddEventModal = ({ onClose, start, end }) => {
     'events',
   ]);
 
-  // Fetch calendar
   useEffect(() => {
     const getCalendar = async () => {
       try {
@@ -56,27 +55,27 @@ const AddEventModal = ({ onClose, start, end }) => {
 
   const handleAddEvent = async (values) => {
     try {
-      const response = await addEvent(
-        {},
-        {
-          ...values,
-          start_time: moment(startTime).format('YYYY-MM-DD HH:mm:ssZ'),
-          end_time: moment(endTime).format('YYYY-MM-DD HH:mm:ssZ'),
-          owner: user_id,
-          calendar: calendarId,
-          status: 'pending',
-          category: '1',
-          priority: values.priority,
-          location: 'none',
-          is_recurring: false,
-        }
-      );
+      const newEvent = {
+        ...values,
+        start_time: moment(startTime).format('YYYY-MM-DD HH:mm:ssZ'),
+        end_time: moment(endTime).format('YYYY-MM-DD HH:mm:ssZ'),
+        owner: user_id,
+        calendar: calendarId,
+        status: 'pending',
+        category: '1',
+        priority: values.priority,
+        location: 'none',
+        is_recurring: false,
+      };
+
+      const response = await addEvent({}, newEvent);
 
       if (response.ok) {
-        toast.success(t('events:toasts.addSuccess'));
+        toast.success(t('events:toasts.added'));
+        onAddEvent(newEvent);
         onClose && onClose();
       } else {
-        toast.error(t('events:toasts.addError'));
+        toast.error(t('events:toasts.error'));
         throw new Error('Failed to save event: ' + response.statusText);
       }
     } catch (error) {
@@ -85,7 +84,6 @@ const AddEventModal = ({ onClose, start, end }) => {
     }
   };
 
-  // Handlers
   const onHandleStartTime = (start) => {
     setStartTime(new Date(start));
   };

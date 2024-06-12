@@ -7,16 +7,13 @@ import {
   momentLocalizer,
 } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-
 import { Event } from '../../../@types/Events';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import { SettingsContext } from '../../../store/SettingsContext';
-
 import EventCard from '../../ui/EventCard/EventCard';
 import AddEventModal from '../events/Modals/AddEventModal';
 import EditEventModal from '../events/Modals/EditEventModal';
 import CustomToolbar from './SmallComponents/CustomToolbar';
-
 import './BaseCalendar.scss';
 import './Calendar.scss';
 
@@ -40,7 +37,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     end: Date;
   }>();
 
-  const { events } = useFetchedEvents();
+  const { events, addEvent } = useFetchedEvents();
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
     useContext(SettingsContext);
@@ -108,6 +105,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         setSelectedEvent(undefined);
         handleOpenAddEventModal();
       },
+      tileDisabled: ({ date }) => date.getDay() === 0 || date.getDay() === 6,
+
       onDoubleClickEvent: (event) => {
         console.log('Event double clicked: ', event);
         setSelectedEvent(event);
@@ -162,6 +161,11 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     handleOpenEditEventModal();
   };
 
+  const handleAddEvent = (newEvent) => {
+    addEvent(newEvent);
+    closeAddEventModal();
+  };
+
   return (
     <div className={'full-calendar'}>
       <CustomToolbar
@@ -185,6 +189,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           start={newEventTimes.start.toISOString()}
           end={newEventTimes.end.toISOString()}
           onClose={closeAddEventModal}
+          onAddEvent={handleAddEvent}
         />
       )}
       <DnDCalendar

@@ -12,7 +12,7 @@ interface Props {
 }
 
 const EndEventTimeSelector = ({ value, meta, onChange, ...rest }) => {
-  const { t } = useTranslation(['calendars']);
+  const { t } = useTranslation(['events']);
 
   const formatDateTimeLocal = (date) => {
     if (!date) return '';
@@ -30,7 +30,7 @@ const EndEventTimeSelector = ({ value, meta, onChange, ...rest }) => {
   return (
     <Input
       type="datetime-local"
-      title={t('events:eventInfo.endTime')}
+      title={t('events:eventInfo.end')}
       value={formatDateTimeLocal(value)}
       onChange={onEventStartChange}
       meta={meta}
