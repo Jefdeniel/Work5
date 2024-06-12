@@ -63,7 +63,8 @@ const AddTimeBlockingModal = ({ onClose, setTimeBlock }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  title={t('calendar-create.name-input')}
+                  // TODO: Add translations
+                  title={'Title of time block'}
                   className="heading--sm clr-primary-400"
                 />
               )}
