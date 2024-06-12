@@ -16,10 +16,9 @@ import Modal from '../../../ui/Modals/Modal';
 import Input from '../../../ui/Input/Input';
 import EventTimeSelector from '../Selectors/EventTimeSelector';
 import Select from '../../../ui/Select/Select';
+import useAuth from '../../../../hooks/useAuth';
 
 import './EventModal.scss';
-import ColorConversion from '../../../../utils/ColorConversion';
-import useAuth from '../../../../hooks/useAuth';
 
 interface Props {
   onClose: () => void;
