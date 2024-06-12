@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Event } from '../../../@types/Events';
-import BaseCalendar from './BaseCalendar';
 import EditEventModal from '../events/Modals/EditEventModal';
+import BaseCalendar from './BaseCalendar';
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import './Calendar.scss';

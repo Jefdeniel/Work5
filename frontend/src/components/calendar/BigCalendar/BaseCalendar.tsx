@@ -13,9 +13,9 @@ import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
 import AddEventModal from '../events/Modals/AddEventModal';
 import EditEventModal from '../events/Modals/EditEventModal';
-import CustomToolbar from './SmallComponents/CustomToolbar';
 import './BaseCalendar.scss';
 import './Calendar.scss';
+import CustomToolbar from './SmallComponents/CustomToolbar';
 
 type Keys = keyof typeof Views;
 const DnDCalendar = withDragAndDrop<Event>(Calendar);
