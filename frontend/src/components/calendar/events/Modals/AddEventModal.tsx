@@ -42,7 +42,7 @@ const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
         const response = await getCurrentCalendar();
         if (response.ok) {
           const currentCalendar = await response.json();
-          setLabelList(currentCalendar.categories);
+          // setLabelList(currentCalendar.categories);
         } else {
           console.error('Error fetching calendar');
         }
