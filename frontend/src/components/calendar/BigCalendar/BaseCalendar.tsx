@@ -105,8 +105,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         setSelectedEvent(undefined);
         handleOpenAddEventModal();
       },
-      tileDisabled: ({ date }) => date.getDay() === 0 || date.getDay() === 6,
-
       onDoubleClickEvent: (event) => {
         console.log('Event double clicked: ', event);
         setSelectedEvent(event);
@@ -194,21 +192,21 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       )}
       <DnDCalendar
         {...initProps}
-        localizer={localizer}
-        view={view}
-        onView={setView}
-        date={date}
-        onNavigate={setDate}
-        defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
-        onSelectSlot={handleSelectSlot}
-        onDoubleClickEvent={handleDoubleClickEvent}
-        events={events}
-        style={{ width: '100%', height: '100%' }}
-        components={components}
         selectable
-        toolbar={false}
+        date={date}
+        view={view}
         step={STEP}
+        events={events}
+        toolbar={false}
+        onView={setView}
+        onNavigate={setDate}
+        localizer={localizer}
+        components={components}
         timeslots={TIMESLOTS}
+        onSelectSlot={handleSelectSlot}
+        style={{ width: '100%', height: '100%' }}
+        onDoubleClickEvent={handleDoubleClickEvent}
+        defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
       />
     </div>
   );
