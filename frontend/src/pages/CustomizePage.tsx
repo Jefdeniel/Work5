@@ -4,13 +4,12 @@ import { Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 import { Calendar } from '../@types/Calendar';
+import { TimeBlock } from '../@types/TimeBlock';
 
 import useSetTitle from '../hooks/setTitle';
 import useFetch from '../hooks/useFetch';
 import Heading from '../components/ui/Heading/Heading';
-import TimeBlockingInput from '../components/customize/Selectors/TimeBlockingSelector';
 import PermissionBoxes from '../components/customize/Selectors/PermissionBoxes';
-import LabelColorSelector from '../components/customize/Selectors/LabelColorSelector';
 import TimeBlockingSelector from '../components/customize/Selectors/TimeBlockingSelector';
 import LoadingScreen from '../components/ui/Loading/LoadingScreen';
 import LabelColorInput from '../components/customize/Inputs/LabelColorInput';
@@ -58,7 +57,7 @@ const CustomizePage = () => {
 
       {calendar && <LabelColorInput calendar={calendar} />}
 
-      <TimeBlockingSelector />
+      <TimeBlockingSelector calendar={calendar!} />
 
       <PermissionBoxes />
     </div>
