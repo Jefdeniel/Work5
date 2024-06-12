@@ -15,8 +15,6 @@
 - Slack en Apple Calendar button integratie weghalen
 - Alle Agenda's Integreren in 1 Grote Agenda
 
-# Algemene Responsiveness Check-up
-
 # State Bugs en CRUD
 
 - Add Calendar (state)

@@ -23,13 +23,13 @@ const PermissionBoxes = () => {
   const onSubmit = async () => {};
 
   return (
-    <Row className={`mt-4`}>
+    <>
       <div className={`input-intro`}>
         <span className={`title mb-1`}>
           {t('calendar:calendar-customize.permissions.title')}
         </span>
 
-        <p className={`w-75`}>
+        <p className={`w-75 customize-intro`}>
           {t('calendar:calendar-customize.permissions.description')}
         </p>
       </div>
@@ -77,7 +77,7 @@ const PermissionBoxes = () => {
           )}
         />
       </div>
-    </Row>
+    </>
   );
 };
 

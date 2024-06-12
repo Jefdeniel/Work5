@@ -23,7 +23,7 @@ const InspirationPage = () => {
     <div
       className={`px-5 height-80 d-flex flex-column justify-content-between`}
     >
-      <Row className={`w-75`}>
+      <Row className={`w-75 inspiration-page-intro`}>
         <Heading level={1} className="heading--lg clr-primary mb-small" />
         {/* TODO: Add other translations */}
         <p className={`mb-large`}>{t('calendar:inspiration.description')}</p>
@@ -35,7 +35,7 @@ const InspirationPage = () => {
         {/* TODO: if no messages yet */}
         <InspirationIcon isBig className={`mb-xlarge`} />
 
-        <span className={`heading heading--lg clr-primary-300 mt-4`}>
+        <span className={`heading heading--lg text-center clr-primary-300 mt-4`}>
           {t('calendar:inspiration.slogan')}
         </span>
 

@@ -220,6 +220,7 @@ body {
 
 .top-navigation {
   width: 100%;
+  transform: translateX(11px);
 }
 
 code {
@@ -430,7 +431,6 @@ ul {
   transform: translateY(45%);
 }
 
-// Swich component bug fix (temporary )
 .switch {
   height: 50px;
   width: auto;
@@ -514,4 +514,70 @@ ul {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.settings-form {
+  & .settings-submit {
+    width: 100%;
+    margin-right: -1.5rem;
+    display: flex;
+    align-self: center;
+  }
+}
+
+/* Mixins */
+@include screen(mobile) {
+  .register-buttons {
+    flex-direction: column;
+  }
+
+  .pattern-block {
+    top: 0%;
+  }
+
+  .settings-page-content {
+    padding: 1rem;
+
+    & .settings-submit {
+      margin-right: -0.5rem;
+    }
+  }
+
+  .inspiration-page-intro,
+  .customize-intro {
+    width: 100% !important;
+  }
+
+  .full-search-block {
+    display: flex;
+    justify-content: center;
+
+    & .toolbar__search {
+      width: 100%;
+      max-width: 100% !important;
+    }
+  }
+
+  .toolbar-top {
+    padding-left: 0 !important;
+    justify-content: center !important;
+  }
+
+  .date-title {
+    display: flex;
+    justify-content: space-between;
+
+    & > div:last-child {
+      margin-right: calc(var(--p-lg) * -1);
+    }
+  }
+
+  .users-list {
+    margin: var(--sp-sm);
+    justify-content: start !important;
+  }
+
+  .profile-header {
+    text-align: center;
+  }
 }

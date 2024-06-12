@@ -1,4 +1,3 @@
-import { Col } from 'react-bootstrap';
 import Button from '../Button/Button';
 import { ActionItem } from '../../../constants/profile';
 
@@ -10,11 +9,11 @@ interface Props {
 
 const ActionButtonList = ({ items, className, functionMap }: Props) => {
   return (
-    <>
+    <ul className={`d-flex flex-wrap gap-3`}>
       {items.map((item, index) => (
-        <Col xs="auto" key={index}>
+        <li key={index}>
           <Button
-            className={`${className} mt-2`}
+            className={`${className}`}
             text={item.label}
             icon={
               item.iconSrc ? (
@@ -23,9 +22,9 @@ const ActionButtonList = ({ items, className, functionMap }: Props) => {
             }
             onClick={functionMap[item.onClick]} // Use functionMap to resolve function
           />
-        </Col>
+        </li>
       ))}
-    </>
+    </ul>
   );
 };
 

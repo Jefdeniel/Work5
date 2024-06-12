@@ -3,9 +3,12 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { UserData } from '../../../../@types/UserData';
 import { Colors } from '../../../../@types/Colors';
+
 import useAuth from '../../../../hooks/useAuth';
 import useFetch from '../../../../hooks/useFetch';
 import Heading from '../../../ui/Heading/Heading';
+
+import './ProfilePageHeader.scss';
 
 const ProfilePageHeader = () => {
   const { user_id } = useAuth();
@@ -38,7 +41,7 @@ const ProfilePageHeader = () => {
   }, [user]);
 
   return (
-    <Row className="p-5 --br-lg" style={{ backgroundColor: Colors.Primary200 }}>
+    <Row className="profile-header" style={{ backgroundColor: Colors.Primary200 }}>
       <Col className={`d-flex justify-content-center`}>
         <div className={`d-flex flex-column justify-content-center`}>
           <Heading level={2} className={`heading--lg clr-dark highlight`}>
