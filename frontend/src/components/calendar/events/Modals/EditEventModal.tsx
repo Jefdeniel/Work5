@@ -10,7 +10,7 @@ import Button from '../../../ui/Button/Button';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
 import Input from '../../../ui/Input/Input';
-import EventTimeSelector from '../Selectors/EventTimeSelector';
+import EventTimeSelector from '../Selectors/EndEventTimeSelector';
 
 import './EventModal.scss';
 import EventRepeatSelector from '../Selectors/EventRepeatSelector';
@@ -109,7 +109,9 @@ const EditEventModal = ({ onClose }: Props) => {
 
               <span>-</span>
 
-              <EventTimeSelector onChange={onHandleEndTime} /*value={end_time}*/ />
+              <EventTimeSelector
+                onChange={onHandleEndTime} /*value={end_time}*/
+              />
             </div>
 
             <span className="my-3">Label choice select</span>

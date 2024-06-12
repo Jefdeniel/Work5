@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { useMemo, useEffect, useContext, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import {
   Calendar,
   DateLocalizer,
@@ -9,28 +9,22 @@ import {
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
 import { Event } from '../../../@types/Events';
-
-import { SettingsContext } from '../../../store/SettingsContext';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
+import { SettingsContext } from '../../../store/SettingsContext';
+
 import EventCard from '../../ui/EventCard/EventCard';
-import CustomToolbar from './SmallComponents/CustomToolbar';
-import EditEventModal from '../events/Modals/EditEventModal';
 import AddEventModal from '../events/Modals/AddEventModal';
+import EditEventModal from '../events/Modals/EditEventModal';
+import CustomToolbar from './SmallComponents/CustomToolbar';
 
 import './BaseCalendar.scss';
 import './Calendar.scss';
 
-// Calendar step 1: General calendar settings/structure
-// TODO: Warning error on Agenda view
-// TODO 2: Transform start and end time to luxon
-
+type Keys = keyof typeof Views;
 const DnDCalendar = withDragAndDrop<Event>(Calendar);
-
 interface CalendarProps {
   onShowEventView: (event: Event) => void;
 }
-
-type Keys = keyof typeof Views;
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
@@ -41,9 +35,10 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [showEditEventModal, setShowEditEventModal] = useState(false);
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event>();
-  const [newEventTimes, setNewEventTimes] = useState<
-    { start: Date; end: Date } | undefined
-  >();
+  const [newEventTimes, setNewEventTimes] = useState<{
+    start: Date;
+    end: Date;
+  }>();
 
   const { events } = useFetchedEvents();
   const localizer = momentLocalizer(moment);
@@ -72,14 +67,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       },
     });
   }, [week_start_day, time_format]);
-
-  // const handleOpenTimeBlockingModal = () => {
-  //   setShowEditEventModal(true);
-  // };
-
-  // const closeAddTimeBlockingModal = () => {
-  //   setShowEditEventModal(false);
-  // };
 
   const handleOpenEditEventModal = () => {
     setShowEditEventModal(true);
@@ -117,7 +104,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         : [Views.DAY, Views.WORK_WEEK, Views.MONTH, Views.AGENDA],
       defaultView: weekend_visibility ? Views.WEEK : Views.WORK_WEEK,
       onSelectSlot: ({ start, end }) => {
-        console.log('START: ', start, 'END: ', end);
         setNewEventTimes({ start, end });
         setSelectedEvent(undefined);
         handleOpenAddEventModal();
@@ -148,7 +134,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }
   };
 
-  // Handle search input
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -157,27 +142,28 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       const filteredEvents = events.filter((event) =>
         event?.title?.toLowerCase().includes(query.toLowerCase())
       );
-      // Set filtered events
       setFilteredEvents(filteredEvents);
     } else {
-      // Reset filtered events
       setFilteredEvents([]);
     }
   };
 
   const handleEventClickForSearch = (event: Event) => {
     console.log('Event clicked: ', event);
-    // setSelectedEvent(event);
-    // handleOpenAddEventModal();
-    // handleOpenEditEventModal();
-    // handleOpenTimeBlockingModal();
+  };
+
+  const handleSelectSlot = ({ start, end }) => {
+    setNewEventTimes({ start, end });
+    handleOpenAddEventModal();
+  };
+
+  const handleDoubleClickEvent = (event: Event) => {
+    setSelectedEvent(event);
+    handleOpenEditEventModal();
   };
 
   return (
-    // TODO: Add weekend visibility toggle
     <div className={'full-calendar'}>
-      {/* <div className={`full-calendar ${weekend_visibility ? 'weekend-visible' : 'weekend-hidden'}`} > */}
-
       <CustomToolbar
         searchQuery={searchQuery}
         handleSearchInput={handleSearchInput}
@@ -191,29 +177,16 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         isSmallCalendarOpen={isSmallCalendarOpen}
         handleDateChange={handleDateChange}
       />
-
-      {/* {showEditEventModal && selectedEvent && (
-        <EditEventModal
-          title={selectedEvent?.title!}
-          description={selectedEvent?.description!}
-          start_time={selectedEvent?.start as Date}
-          end_time={selectedEvent?.end as Date}
-          onClose={closeEditEventModal}
-        />
-      )} */}
-
       {showEditEventModal && selectedEvent && (
         <EditEventModal event={selectedEvent} onClose={closeEditEventModal} />
       )}
-
       {showAddEventModal && newEventTimes && (
         <AddEventModal
-          // start={newEventTimes.start}
-          // end={newEventTimes.end}
+          start={newEventTimes.start.toISOString()}
+          end={newEventTimes.end.toISOString()}
           onClose={closeAddEventModal}
         />
       )}
-
       <DnDCalendar
         {...initProps}
         localizer={localizer}
@@ -222,17 +195,10 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         date={date}
         onNavigate={setDate}
         defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
-        onSelectSlot={({ start, end }) => {
-          // Logic when selecting a time slot
-          onShowEventView({ start, end });
-          console.log('START: ', start, 'END: ', end);
-        }}
-        onDoubleClickEvent={(event) => {
-          const calendarEvent = event;
-          calendarEvent && onShowEventView(event);
-        }}
-        events={events} // Events db
-        style={{ width: '100%', height: '100%' }} // General props
+        onSelectSlot={handleSelectSlot}
+        onDoubleClickEvent={handleDoubleClickEvent}
+        events={events}
+        style={{ width: '100%', height: '100%' }}
         components={components}
         selectable
         toolbar={false}
