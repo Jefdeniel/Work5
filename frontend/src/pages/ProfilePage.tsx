@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import useSetTitle from '../hooks/setTitle';
 import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
-
 import Heading from '../components/ui/Heading/Heading';
 import Signout from '../components/settings/account/Signout';
 import ActionButtonList from '../components/ui/List/ActionButtonList';
@@ -45,7 +44,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <>
+    <div>
       <ProfilePageHeader />
 
       <Row className="mb-base mt-large">
@@ -70,6 +69,7 @@ const ProfilePage = () => {
         <Heading className={`mb-3`} level={3}>
           {t('settings:profile.connectAccounts')}
         </Heading>
+
         <ActionButtonList
           items={CONNECT_ITEMS}
           functionMap={functionMap}
@@ -77,17 +77,18 @@ const ProfilePage = () => {
         />
       </Row>
 
-      <Row className="mb-base mt-large">
+      <div className="mb-base mt-large">
         <Heading className={`mb-3`} level={3}>
           {t('settings:account.title')}
         </Heading>
+
         <Signout className={`btn btn--danger`} />
 
         <DeleteAccount
           className={`btn btn--bordered-danger`}
           onClick={openDeleteAccountModal}
         />
-      </Row>
+      </div>
 
       {showDeleteAccountModal && (
         <DeleteAccountModal onClose={closeDeleteAccountModal} />
@@ -98,7 +99,7 @@ const ProfilePage = () => {
       {showEditPasswordModal && (
         <EditPasswordModal onClose={closeEditPasswordModal} />
       )}
-    </>
+    </div>
   );
 };
 

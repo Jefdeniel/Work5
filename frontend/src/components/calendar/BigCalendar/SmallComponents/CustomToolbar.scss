@@ -7,6 +7,11 @@
   padding: var(--p-lg);
 }
 
+.toolbar-date-switcher {
+  display: flex;
+  align-items: center;
+}
+
 .navigation-buttons {
   display: flex;
   align-items: center;
@@ -42,4 +47,11 @@
     padding: var(--p-sm) var(--p-lg);
     font-size: var(--fs-sm);
   }
+}
+
+.calendar-users-list {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
 }

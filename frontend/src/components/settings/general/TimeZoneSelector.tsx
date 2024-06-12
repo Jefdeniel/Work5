@@ -1,8 +1,9 @@
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { ITimezoneOption, allTimezones } from 'react-timezone-select';
-import Select from '../../ui/Select/Select';
 import { Col, Row } from 'react-bootstrap';
+
+import Select from '../../ui/Select/Select';
 
 interface TimeZoneSelectorProps {
   initialValue?: string | ITimezoneOption;
@@ -37,13 +38,13 @@ const TimeZoneSelector = ({
     <>
       <Row className="full-select d-flex flex-row align-items-center gap-2">
         <Col>
-          <Row>
-            <span className="title">{t('settings:general.timeZone')}</span>
-            <small className="description p-0">
-              {t('settings:general.timeZoneDescription')}
-            </small>
-          </Row>
+          <span className="title">{t('settings:general.timeZone')}</span>
+
+          <small className="description p-0">
+            {t('settings:general.timeZoneDescription')}
+          </small>
         </Col>
+
         <Col className="d-flex flex-col justify-content-end p-0">
           <Select
             value={value}

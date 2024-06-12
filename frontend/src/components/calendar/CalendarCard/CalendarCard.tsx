@@ -51,7 +51,7 @@ const CalendarCard = ({
   }, []);
 
   return (
-    <li className={`position-relative`}>
+    <li className={`position-relative nav-calendar-card`}>
       <div className="calendar-card">
         <img
           className={`calendar-card__img`}

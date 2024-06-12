@@ -10,18 +10,16 @@ const EventReminderSelector = ({ children }: Props) => {
 
   return (
     <Row className="mb-4 d-flex flex-row justify-content-between align-items-center">
-      <Col className="p-0">
-        <Col className="d-flex flex-row align-items-center">
-          <span className="title">
-            {t('settings:notifications.eventReminder')}
-          </span>
-        </Col>
-        <Col className="d-flex flex-row align-items-center">
-          <small className="description">
-            {t('settings:notifications.eventReminderDescription')}
-          </small>
-        </Col>
+      <Col>
+        <span className="title">
+          {t('settings:notifications.eventReminder')}
+        </span>
+
+        <small className="description">
+          {t('settings:notifications.eventReminderDescription')}
+        </small>
       </Col>
+
       <Col className="d-flex flex-row justify-content-end">{children}</Col>
     </Row>
   );

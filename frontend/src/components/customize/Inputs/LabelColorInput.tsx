@@ -55,13 +55,13 @@ const LabelColorInput = ({ calendar }: Props) => {
   console.log('calendar', calendar);
 
   return (
-    <Row className={`label-color-inputs`}>
+    <div className={`label-color-inputs`}>
       <div className={`input-intro`}>
         <span className={`title mb-1`}>
           {t('calendar:calendar-customize.event-labels.title')}
         </span>
 
-        <p className={`w-75`}>
+        <p className={`w-75 customize-intro`}>
           {t('calendar:calendar-customize.event-labels.description')}
         </p>
       </div>
@@ -95,7 +95,7 @@ const LabelColorInput = ({ calendar }: Props) => {
           </form>
         )}
       />
-    </Row>
+    </div>
   );
 };
 

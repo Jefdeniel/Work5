@@ -123,3 +123,28 @@
     }
   }
 }
+
+.ps-collapsed {
+  & .heading--sm {
+    display: none;
+  }
+
+  & .calendar-card-list {
+    & .nav-calendar-card {
+      & .calendar-card__img {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+      }
+
+      & .calendar-card__content,
+      & .calendar-card__options {
+        display: none;
+      }
+    }
+  }
+
+  & .create-calendar {
+    display: none;
+  }
+}

@@ -73,15 +73,13 @@ const SharingHubPage = () => {
   const calendarUsers = calendar.users;
 
   return (
-    <>
-      <Row>
-        <Heading level={1} className="heading--lg clr-primary mb-small">
-          {t('calendar:sharing-hub.title')}
-        </Heading>
-        <p className="mb-large">{t('calendar:sharing-hub.description')}</p>
-      </Row>
+    <div>
+      <Heading level={1} className="heading--lg clr-primary mb-small">
+        {t('calendar:sharing-hub.title')}
+      </Heading>
+      <p className="mb-large">{t('calendar:sharing-hub.description')}</p>
 
-      <Row className={`mb-large`}>
+      <div className={`mb-large`}>
         <Heading level={3} className={`heading heading--sm fw-bold`}>
           <p>{t('calendar:sharing-hub.usersInAgenda')}</p>
         </Heading>
@@ -119,9 +117,9 @@ const SharingHubPage = () => {
             />
           </li>
         </ul>
-      </Row>
+      </div>
 
-      <Row className={`mb-large`}>
+      <div className={`mb-large`}>
         <Heading level={3} className={`heading heading--sm fw-bold`}>
           <p>{t('calendar:sharing-hub.exportAgendaAs')}</p>
         </Heading>
@@ -130,23 +128,24 @@ const SharingHubPage = () => {
           functionMap={functionMap}
           className="btn--primary"
         />
-      </Row>
+      </div>
 
-      <Row>
+      <div>
         <Heading level={3} className={`heading heading--sm fw-bold`}>
           <p>{t('calendar:sharing-hub.integrateExternal')}</p>
         </Heading>
+        
         <ActionButtonList
           items={EXTERNAL_SERVICES_ITEMS}
           functionMap={functionMap}
           className="btn--primary"
         />
-      </Row>
+      </div>
 
       {showExcelModal && calendar && (
         <ExcelExportModal onClose={closeExcelModal} calendar={calendar} />
       )}
-    </>
+    </div>
   );
 };
 

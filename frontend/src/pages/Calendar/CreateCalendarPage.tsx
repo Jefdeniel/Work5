@@ -1,17 +1,19 @@
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import { Field, Form } from 'react-final-form';
+import { Col, Row } from 'react-bootstrap';
+
+import { Calendar } from '../../@types/Calendar';
+
 import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
 import useSetTitle from '../../hooks/setTitle';
 import Icon from '../../components/ui/Icon/Icon';
 import Button from '../../components/ui/Button/Button';
-import { useTranslation } from 'react-i18next';
 import useFetch from '../../hooks/useFetch';
-import { Calendar } from '../../@types/Calendar';
-import { toast } from 'react-toastify';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
 import useAuth from '../../hooks/useAuth';
-import { Field, Form } from 'react-final-form';
 import Validators from '../../utils/Validators';
-import { Col, Row } from 'react-bootstrap';
 
 const CreateCalendar = () => {
   const { t } = useTranslation(['calendar']);
@@ -97,11 +99,10 @@ const CreateCalendar = () => {
             </Field>
 
             {/* PEOPLE */}
-
             <Heading
               level={2}
               children={t('calendar-create.people')}
-              className={`heading--sm clr-primary-400 mb-small`}
+              className={`heading--sm clr-primary-400 mt-5 mb-small`}
             />
 
             <span className={`mb-base`}>
@@ -120,14 +121,13 @@ const CreateCalendar = () => {
             </div>
 
             {/* DATE RANGE */}
-
             <Heading
               level={2}
               children={t('calendar-create.date-range')}
-              className={`heading--sm clr-primary-400 mt-small`}
+              className={`heading--sm clr-primary-400 mt-5 mb-small`}
             />
 
-            <span className={`mb-base`}>
+            <span className={`mb-small`}>
               {t('calendar-create.date-range-description')}
             </span>
             {/* 
@@ -161,6 +161,7 @@ const CreateCalendar = () => {
                   )}
                 </Field>
               </Col>
+              
               <Col sm={12} md={6}>
                 <Field name="date_stop">
                   {({ input, meta }) => (
@@ -180,7 +181,7 @@ const CreateCalendar = () => {
               type="submit"
               text={t('calendar-create.title')}
               icon={<Icon src="/icons/plus-bright.svg " alt="Plus icon" />}
-              className="btn--success inline-block"
+              className="btn--success inline-block mt-4 mb-5"
             />
           </form>
         )}

@@ -46,14 +46,14 @@ const ThemeSelector = ({
     <>
       <Row className="full-select d-flex flex-row align-items-center gap-2">
         <Col>
-          <Row>
-            <span className="title">{t('settings:general.theme')}</span>
-            <small className="description p-0">
-              {t('settings:general.themeDescription')}
-            </small>
-          </Row>
+          <span className="title">{t('settings:general.theme')}</span>
+
+          <small className="description p-0">
+            {t('settings:general.themeDescription')}
+          </small>
         </Col>
-        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
+
+        <Col className="d-flex flex-col justify-content-end p-0">
           <Select
             defaultValue={initialValue}
             value={value}
