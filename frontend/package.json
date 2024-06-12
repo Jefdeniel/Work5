@@ -41,7 +41,7 @@
     "react-select": "^5.8.0",
     "react-timezone-select": "^3.2.5",
     "react-toastify": "^10.0.5",
-    "sass": "^1.77.4",
+    "sass": "^1.77.5",
     "toastify-react": "^4.3.1",
     "ts-luxon": "^5.0.5",
     "universal-cookie": "^7.1.4",
