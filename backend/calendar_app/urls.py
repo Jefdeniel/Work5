@@ -28,6 +28,7 @@ router.register(r"reminders", ReminderViewSet)
 router.register(r"user_settings", UserSettingsViewSet)
 router.register(r"calendar_users", CalendarUsersViewSet)
 router.register(r"timeblocks", TimeBlockViewSet)
+router.register(r"prompt", PromptInspirationViewSet)
 
 
 urlpatterns = [
@@ -39,8 +40,8 @@ urlpatterns = [
         name="calendar-user-by-user-id",
     ),
     path(
-        "prompt/inspiration",
-        PromptInspirationViewSet.as_view({"post": "list"}),
-        name="prompt-inspiration",
+        "prompt",
+        PromptInspirationViewSet.as_view({"get": "prompt"}),
+        name="prompt",
     ),
 ]

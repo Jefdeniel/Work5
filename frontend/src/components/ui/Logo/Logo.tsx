@@ -1,4 +1,4 @@
-import './Logo.scss';
+import './logo.scss';
 
 interface LogoProps {
   width: string;
