@@ -17,11 +17,16 @@ const useFetch = (
     params?: any,
     body?: any,
     customAuthorizationToken: string | null = null,
-    useContentType = true
+    useContentType = true,
+    dynamicRequestArray?: string[]
   ): Promise<Response> => {
     setIsLoading(true);
 
-    const url = `${Config.apiBaseUrl}/${requestArray.join('/')}?${new URLSearchParams(params).toString()}`;
+    // TIP: Use dynamicRequestArray if provided, otherwise fallback to requestArray
+    const pathArray = dynamicRequestArray || requestArray;
+    const url = `${Config.apiBaseUrl}/${pathArray.join('/')}${
+      params ? `?${new URLSearchParams(params).toString()}` : ''
+    }`;
 
     const makeRequest = async () => {
       try {
