@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-
 import './SmallCalendar.scss';
 
 type DateRange = [Date | null, Date | null];
@@ -9,7 +8,7 @@ interface Props {
   className?: string;
   noNavigation?: boolean;
   onChange?: (date: Date | DateRange) => void;
-  [key: string]: any; // Allow for any additional props
+  [key: string]: any;
 }
 
 const SmallCalendar = ({
@@ -18,7 +17,6 @@ const SmallCalendar = ({
   onChange,
   ...rest
 }: Props) => {
-  // State
   const [value, setValue] = useState<Date | DateRange>(new Date());
 
   const handleChange = (date: Date | DateRange) => {
