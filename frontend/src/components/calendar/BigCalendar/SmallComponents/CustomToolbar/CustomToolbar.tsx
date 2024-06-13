@@ -4,17 +4,17 @@ import { Col, Row } from 'react-bootstrap';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
-import { Event } from '../../../../@types/Events';
+import { Event } from '../../../../../@types/Events';
 
-import { translateViewOptions } from '../../../../constants/calendar';
-import { useSettings } from '../../../../hooks/useSettings';
-import SmallCalendar from '../../../ui/SmallCalendar/SmallCalendar';
-import IconButton from '../../../ui/IconButton/IconButton';
-import Icon from '../../../ui/Icon/Icon';
-import ProfilePicture from '../../../ui/ProfilePicture/ProfilePicture';
+import { translateViewOptions } from '../../../../../constants/calendar';
+import { useSettings } from '../../../../../hooks/useSettings';
+import SmallCalendar from '../../../../ui/SmallCalendar/SmallCalendar';
+import IconButton from '../../../../ui/IconButton/IconButton';
+import Icon from '../../../../ui/Icon/Icon';
+import ProfilePicture from '../../../../ui/ProfilePicture/ProfilePicture';
 import ToolbarViewList from './ToolbarViewList';
-import Button from '../../../ui/Button/Button';
-import SearchBar from './SearchBar';
+import Button from '../../../../ui/Button/Button';
+import SearchBar from '../SearchBar/SearchBar';
 
 import './CustomToolbar.scss';
 

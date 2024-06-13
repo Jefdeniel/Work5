@@ -1,0 +1,10 @@
+{
+  "toasts": {
+    "added": "Hinzugefügt",
+    "updated": "Aktualisiert",
+    "deleted": "Gelöscht"
+  },
+  "error": {
+    "fetchingTimeBlocks": "Fehler beim Abrufen der Zeitblöcke"
+  }
+}

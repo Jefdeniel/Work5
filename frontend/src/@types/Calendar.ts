@@ -1,3 +1,5 @@
+import { TimeBlock } from './TimeBlock';
+
 export interface Calendar {
   id?: number;
   title: string;
@@ -9,6 +11,7 @@ export interface Calendar {
   date_stop?: Date;
   users?: CalendarUser[];
   categories?: Category[];
+  timeblocks?: TimeBlock[];
 }
 
 export interface CalendarUser {

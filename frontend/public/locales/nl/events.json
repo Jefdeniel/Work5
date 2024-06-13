@@ -33,5 +33,8 @@
     "added": "Evenement toegevoegd",
     "updated": "Evenement bijgewerkt",
     "deleted": "Evenement verwijderd"
+  },
+  "errors": {
+    "fetchingEvents": "Kan gebeurtenissen niet ophalen"
   }
 }

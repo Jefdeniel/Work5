@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import { Event } from '../../../@types/Events';
+
 import EditEventModal from '../events/Modals/EditEventModal';
 import BaseCalendar from './BaseCalendar';
 

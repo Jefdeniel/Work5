@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from ..models import Event, CustomUser, Calendar, Category
+from ..models import Event, CustomUser, Calendar, Category, TimeBlock
+from ..validators import validate_start_before_end
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -99,3 +100,24 @@ class EventSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+    def validate(self, data):
+        """
+        Check that the start time is before the end time and that there are no overlapping time blocks.
+        """
+        validate_start_before_end("start_time", "end_time", data)
+
+        calendar = data.get("calendar")
+        start_time = data.get("start_time")
+        end_time = data.get("end_time")
+
+        if calendar and start_time and end_time:
+            overlapping_time_blocks = TimeBlock.objects.filter(
+                calendar=calendar, start_time__lt=end_time, end_time__gt=start_time
+            )
+            if overlapping_time_blocks.exists():
+                raise serializers.ValidationError(
+                    "This event overlaps with an existing time block."
+                )
+
+        return data

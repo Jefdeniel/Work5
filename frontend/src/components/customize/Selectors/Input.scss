@@ -37,6 +37,34 @@
   }
 }
 
+.timeblock-item button {
+  &::after {
+    content: '';
+    width: 14px;
+    height: 17px;
+    background-color: var(--sa-bright);
+    background-image: url('/icons/delete.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.3rem;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    color: var(--sa-error-500-base) !important;
+    background-color: var(--sa-error-300) !important;
+    position: relative;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
 .dark-theme {
   .time-block-list {
     background-color: var(--clr-dark);
@@ -54,4 +82,10 @@
 
 .input-intro {
   margin-top: var(--sp-base);
+}
+
+.time-blocker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
 }

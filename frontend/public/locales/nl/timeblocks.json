@@ -1,0 +1,10 @@
+{
+  "toasts": {
+    "added": "Tijdsblok toegevoegd",
+    "updated": "Tijdsblok bijgewerkt",
+    "deleted": "Tijdsblok verwijderd"
+  },
+  "error": {
+    "fetchingTimeBlocks": "Tijdsblokken ophalen mislukt"
+  }
+}

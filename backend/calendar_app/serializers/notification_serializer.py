@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..models import Notification, CustomUser, Calendar
+from ..validators import validate_start_before_end
 
 
 class NotificationSerializer(serializers.ModelSerializer):
@@ -24,3 +25,6 @@ class NotificationSerializer(serializers.ModelSerializer):
         model = Notification
         fields = "__all__"
         read_only_fields = ("id",)
+
+    def validate(self, data):
+        return validate_start_before_end("start_time", "end_time", data)

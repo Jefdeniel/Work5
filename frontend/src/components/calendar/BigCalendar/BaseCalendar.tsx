@@ -7,18 +7,23 @@ import {
   momentLocalizer,
 } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+
 import { Event } from '../../../@types/Events';
+import { TimeBlock } from '../../../@types/TimeBlock';
+
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
 import AddEventModal from '../events/Modals/AddEventModal';
 import EditEventModal from '../events/Modals/EditEventModal';
+import CustomToolbar from './SmallComponents/CustomToolbar/CustomToolbar';
+import TimeBlockCard from './SmallComponents/TimeBlockCard/TimeBlockCard';
+
 import './BaseCalendar.scss';
 import './Calendar.scss';
-import CustomToolbar from './SmallComponents/CustomToolbar';
 
 type Keys = keyof typeof Views;
-const DnDCalendar = withDragAndDrop<Event>(Calendar);
+const DnDCalendar = withDragAndDrop<Event | TimeBlock>(Calendar);
 interface CalendarProps {
   onShowEventView: (event: Event) => void;
 }
@@ -37,7 +42,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     end: Date;
   }>();
 
-  const { events, addEvent } = useFetchedEvents();
+  const { events, timeBlocks, addEvent } = useFetchedEvents();
+
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
     useContext(SettingsContext);
@@ -83,16 +89,28 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
 
   const components = useMemo(
     () => ({
-      event: ({ event }: { event: Event }) => (
-        <EventCard
-          event={event}
-          color={event.color}
-          onDoubleClick={handleOpenEditEventModal}
-        />
-      ),
+      event: ({ event }: { event: Event | TimeBlock }) => {
+        if ((event as TimeBlock).type === 'timeBlocker') {
+          return <TimeBlockCard title={event.title} />;
+        }
+        return (
+          <EventCard
+            event={event as Event}
+            color={(event as Event).color}
+            onDoubleClick={handleOpenEditEventModal}
+          />
+        );
+      },
     }),
     []
   );
+
+  const allEvents: (Event | TimeBlock)[] = useMemo(
+    () => [...events, ...timeBlocks],
+    [events, timeBlocks]
+  );
+
+  console.log('All events: ', allEvents);
 
   const initProps = useMemo(
     () => ({
@@ -111,13 +129,13 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         setNewEventTimes(undefined);
         handleOpenEditEventModal();
       },
-      events,
+      events: allEvents,
       style: { width: '100%', height: '100%' },
       components: components,
       selectable: true,
       format: time_format === '24H' ? 'HH:mm' : 'hh:mm A',
     }),
-    [weekend_visibility, events, time_format, components, onShowEventView]
+    [weekend_visibility, allEvents, time_format, components, onShowEventView]
   );
 
   const handleSearchFocus = () => {
@@ -179,6 +197,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         isSmallCalendarOpen={isSmallCalendarOpen}
         handleDateChange={handleDateChange}
       />
+
       {showEditEventModal && selectedEvent && (
         <EditEventModal event={selectedEvent} onClose={closeEditEventModal} />
       )}
@@ -190,13 +209,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           onAddEvent={handleAddEvent}
         />
       )}
+
       <DnDCalendar
         {...initProps}
         selectable
         date={date}
         view={view}
         step={STEP}
-        events={events}
+        events={allEvents}
         toolbar={false}
         onView={setView}
         onNavigate={setDate}

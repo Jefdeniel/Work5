@@ -67,7 +67,7 @@ const LabelColorInput = ({ calendar }: Props) => {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <ul
-              className={`input-list d-flex flex-wrap justify-content-between align-items-center gap-4`}
+              className={`input-list d-flex flex-wrap align-items-center gap-4`}
             >
               {calendar?.categories?.map((category) => (
                 <li key={category.id} className={`input-item`}>

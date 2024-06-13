@@ -33,5 +33,8 @@
     "added": "Ereignis hinzugefügt",
     "updated": "Ereignis aktualisiert",
     "deleted": "Ereignis gelöscht"
+  },
+  "errors": {
+    "fetchingEvents": "Ereignisse konnten nicht abgerufen werden"
   }
 }
