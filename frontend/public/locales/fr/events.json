@@ -7,6 +7,13 @@
     "location": "Lieu",
     "status": "Statut",
     "priority": "Priorité",
+    "priorityOptions": {
+      "very_low": "Très basse",
+      "low": "Basse",
+      "medium": "Moyenne",
+      "high": "Haute",
+      "very_high": "Très haute"
+    },
     "allDay": "Toute la journée"
   },
   "modals": {

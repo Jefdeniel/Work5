@@ -95,7 +95,7 @@ const CreateCalendar = () => {
             <Heading
               level={2}
               children={t('calendar-create.people')}
-              className={`heading--sm clr-primary-400 mb-small`}
+              className={`heading--sm clr-primary-400 mt-5 mb-small`}
             />
             <span className={`mb-base`}>
               {t('calendar-create.people-description')}
@@ -112,11 +112,12 @@ const CreateCalendar = () => {
               />
             </div>
 
+            {/* DATE RANGE */}
             {/* Date Range */}
             <Heading
               level={2}
               children={t('calendar-create.date-range')}
-              className={`heading--sm clr-primary-400 mt-small`}
+              className={`heading--sm clr-primary-400 mt-5 mb-small`}
             />
             <span className={`mb-base`}>
               {t('calendar-create.date-range-description')}
@@ -136,6 +137,7 @@ const CreateCalendar = () => {
                   )}
                 </Field>
               </Col>
+
               <Col sm={12} md={6}>
                 <Field name="date_stop">
                   {({ input, meta }) => (

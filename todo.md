@@ -15,15 +15,13 @@
 - Slack en Apple Calendar button integratie weghalen
 - Alle Agenda's Integreren in 1 Grote Agenda
 
-# Algemene Responsiveness Check-up
-
 # State Bugs en CRUD
 
 - Add Calendar (state)
 - Edit Calendar (state)
 - Add Timeblock (state)
 - Edit timeblock (volledig)
-- Add Events (volledig)
+- Add Events (state)
 - Edit events (volledig)
 - Delete Events (volledig)
 - Email Update State Bug Fixen bij Profile Page (state)

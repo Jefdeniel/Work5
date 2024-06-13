@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
@@ -90,11 +90,8 @@ const SettingsPage = () => {
   };
 
   return (
-    <>
-      <Heading
-        level={1}
-        className="heading--lg clr-primary mb-base p-0 pad-left-neg"
-      />
+    <div className={`settings-page-content`}>
+      <Heading level={1} className="heading--lg clr-primary mb-base" />
 
       <Form
         onSubmit={handleSaveSettings}
@@ -109,8 +106,8 @@ const SettingsPage = () => {
           activity_notifications,
         }}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className="p-0">
-            <Row className="settings-block">
+          <form onSubmit={handleSubmit} className="settings-form p-0">
+            <div className="settings-block">
               <Heading className={`heading--md`} level={2} isUnderlined>
                 {t('settings:general.title')}
               </Heading>
@@ -158,9 +155,9 @@ const SettingsPage = () => {
                   />
                 )}
               </Field>
-            </Row>
+            </div>
 
-            <Row className="settings-block">
+            <div className="settings-block">
               <Heading className={`heading--md`} level={2} isUnderlined>
                 {t('settings:notifications.title')}
               </Heading>
@@ -200,9 +197,9 @@ const SettingsPage = () => {
                   </ActivityNotificationSelector>
                 )}
               </Field>
-            </Row>
+            </div>
 
-            <Row className="settings-block p-0">
+            <div className="settings-block p-0">
               <Heading className={`heading--md`} level={2} isUnderlined>
                 {t('settings:calendarView.title')}
               </Heading>
@@ -228,7 +225,7 @@ const SettingsPage = () => {
                   />
                 )}
               </Field>
-            </Row>
+            </div>
 
             <div className="pad-left-neg mt-4 mb-5 d-flex justify-content-end">
               <Button
@@ -243,7 +240,7 @@ const SettingsPage = () => {
           </form>
         )}
       />
-    </>
+    </div>
   );
 };
 

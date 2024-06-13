@@ -1,44 +1,34 @@
+import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { DateTime } from 'ts-luxon';
 
-import { Event } from '../../../../@types/Events';
-import { Category } from '../../../../@types/Calendar';
-
+import useAuth from '../../../../hooks/useAuth';
 import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
+
 import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Input/Input';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
-import Input from '../../../ui/Input/Input';
-import EventTimeSelector from '../Selectors/EventTimeSelector';
-import Select from '../../../ui/Select/Select';
+import EndEventTimeSelector from '../Selectors/EndEventTimeSelector';
+import EventPrioritySelector from '../Selectors/EventPrioritySelector';
+import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
 
 import './EventModal.scss';
-import ColorConversion from '../../../../utils/ColorConversion';
-import useAuth from '../../../../hooks/useAuth';
 
-interface Props {
-  onClose: () => void;
-  // setEvent: (event: Event) => void;
-}
-
-// TODO: Add translations
-const AddEventModal = ({ onClose }: Props) => {
+const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
   const { t } = useTranslation(['events']);
+  const { user_id } = useAuth();
   const params = useParams();
   const calendarId = params.id;
-  const { user_id } = useAuth();
 
-  // State
-  const [startTime, setStartTime] = useState<string>('');
-  const [endTime, setEndTime] = useState<string>('');
-  const [labelList, setLabelList] = useState<Category[]>([]);
+  const [startTime, setStartTime] = useState(new Date(start));
+  const [endTime, setEndTime] = useState(new Date(end));
 
-  // Fetch
   const { fetchData: getCurrentCalendar } = useFetch('GET', [
     `calendars/${calendarId}`,
   ]);
@@ -52,8 +42,7 @@ const AddEventModal = ({ onClose }: Props) => {
         const response = await getCurrentCalendar();
         if (response.ok) {
           const currentCalendar = await response.json();
-          setLabelList(currentCalendar.categories);
-          console.log('Calendar:', currentCalendar);
+          // setLabelList(currentCalendar.categories);
         } else {
           console.error('Error fetching calendar');
         }
@@ -61,33 +50,32 @@ const AddEventModal = ({ onClose }: Props) => {
         console.error(error);
       }
     };
-
     getCalendar();
   }, []);
 
-  const handleAddEvent = async (values: Event) => {
+  const handleAddEvent = async (values) => {
     try {
-      const response = await addEvent(
-        {},
-        {
-          ...values,
-          start_time: startTime,
-          end_time: endTime,
-          owner: user_id,
-          status: 'pending',
-          category: '1',
-          priority: 'low',
-        }
-      );
+      const newEvent = {
+        ...values,
+        start_time: moment(startTime).format('YYYY-MM-DD HH:mm:ssZ'),
+        end_time: moment(endTime).format('YYYY-MM-DD HH:mm:ssZ'),
+        owner: user_id,
+        calendar: calendarId,
+        status: 'pending',
+        category: '1',
+        priority: values.priority,
+        location: 'none',
+        is_recurring: false,
+      };
+
+      const response = await addEvent({}, newEvent);
 
       if (response.ok) {
-        console.log('New event:', values);
-        toast.success(t('events:toasts.addSuccess'));
-        if (onClose) {
-          onClose();
-        }
+        toast.success(t('events:toasts.added'));
+        onAddEvent(newEvent);
+        onClose && onClose();
       } else {
-        toast.error(t('events:toasts.addError'));
+        toast.error(t('events:toasts.error'));
         throw new Error('Failed to save event: ' + response.statusText);
       }
     } catch (error) {
@@ -96,25 +84,13 @@ const AddEventModal = ({ onClose }: Props) => {
     }
   };
 
-  const options = labelList.map((label) => ({
-    value: label.id,
-    title: label.title,
-    color: label.color_code,
-  }));
-
-  const onHandleStartTime = (start: string) => {
-    // setStartTime(new Date(start));
-    console.log('start', start);
+  const onHandleStartTime = (start) => {
+    setStartTime(new Date(start));
   };
 
-  const onHandleEndTime = (end: string) => {
-    console.log('end', end);
-    setEndTime(end);
+  const onHandleEndTime = (end) => {
+    setEndTime(new Date(end));
   };
-
-  // const handleChangeEventLabel = (event: any) => {
-  //   console.log('event', event);
-  // };
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -142,7 +118,45 @@ const AddEventModal = ({ onClose }: Props) => {
               )}
             </Field>
 
-            <Field name="description" validate={Validators.required()}>
+            <Row>
+              <Col sm={12}>
+                <Field name="start_time">
+                  {({ input, meta }) => (
+                    <StartEventTimeSelector
+                      {...input}
+                      meta={meta}
+                      value={startTime}
+                      onChange={(date) => onHandleStartTime(new Date(date))}
+                    />
+                  )}
+                </Field>
+              </Col>
+              <Col sm={12}>
+                <Field name="end_time">
+                  {({ input, meta }) => (
+                    <EndEventTimeSelector
+                      {...input}
+                      meta={meta}
+                      value={endTime}
+                      onChange={(date) => onHandleEndTime(new Date(date))}
+                    />
+                  )}
+                </Field>
+              </Col>
+            </Row>
+
+            <Field name="priority" validate={Validators.required()}>
+              {({ input, meta }) => (
+                <EventPrioritySelector
+                  {...input}
+                  meta={meta}
+                  onChange={input.onChange}
+                  value={input.value}
+                />
+              )}
+            </Field>
+
+            <Field name="description" validate={Validators.maxLength(50)}>
               {({ input, meta }) => (
                 <Input
                   {...input}
@@ -152,28 +166,6 @@ const AddEventModal = ({ onClose }: Props) => {
                 />
               )}
             </Field>
-
-            <div className={`time-selectors`}>
-              <EventTimeSelector
-                onChange={onHandleStartTime}
-                value={startTime}
-              />
-
-              <span>-</span>
-
-              <EventTimeSelector onChange={onHandleEndTime} value={endTime} />
-            </div>
-
-            <div className={`mb-4`}>
-              <span className="mt-3 mb-1">Label choice select</span>
-
-              <Select
-                options={options}
-                // style={{
-                //   background: ColorConversion.convertHexToRGBA('#FF00FF', 0.2),
-                // }}
-              />
-            </div>
 
             <div className="d-flex">
               <Button
