@@ -36,15 +36,11 @@ const TimeBlockingSelector = ({ calendar }: Props) => {
       ]);
       if (response.ok) {
         setTimeblocks(timeblocks.filter((block) => block.id !== timeBlockId));
-        toast.success(t('calendar:calendar-customize.time-blocking.deleted'));
-      } else {
-        toast.error(
-          t('calendar:calendar-customize.time-blocking.delete-failed')
-        );
+        toast.success(t('calendar:toasts.success'));
       }
     } catch (error) {
       console.error('Error deleting Time Block:', error);
-      toast.error(t('calendar:calendar-customize.time-blocking.delete-error'));
+      toast.error(t('calendar:toasts.error'));
     }
   };
 

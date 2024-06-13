@@ -3,28 +3,28 @@ import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import useSetTitle from '../hooks/setTitle';
-
 import { Notification } from '../@types/Notification';
+import useSetTitle from '../hooks/setTitle';
+import useAuth from '../hooks/useAuth';
+import useFetch from '../hooks/useFetch';
 
 import NotificationList from '../components/calendar/notifications/NotificationList';
 import Badge from '../components/ui/Badge/Badge';
 import Button from '../components/ui/Button/Button';
 import Heading from '../components/ui/Heading/Heading';
-import useAuth from '../hooks/useAuth';
-import useFetch from '../hooks/useFetch';
 
 const NotificationPage = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar:notifications.title'));
   const { user_id } = useAuth();
-  console.log('user_id:', user_id);
 
   // Fetch notifications
-  const { fetchData: deleteNotifications, loading: isDeleteLoading } = useFetch(
-    'DELETE',
-    ['notifications', user_id ? user_id.toString() : '']
-  );
+  const { fetchData: delete_notifications_by_user, loading: isDeleteLoading } =
+    useFetch('DELETE', [
+      'notifications',
+      'd-user',
+      user_id ? user_id.toString() : '',
+    ]);
 
   const { fetchData: getNotifications, loading: isGetLoading } = useFetch(
     'GET',
@@ -60,7 +60,7 @@ const NotificationPage = () => {
 
   const handleNotificationDelete = async () => {
     try {
-      const response = await deleteNotifications();
+      const response = await delete_notifications_by_user();
       if (response.ok) {
         setNotifications([]);
       } else {

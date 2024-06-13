@@ -29,7 +29,7 @@ const DeleteCalendarModal = ({
   const handleDeleteCalendar = async () => {
     await deleteCalendar({}, { id: calendar.id }).then((response) => {
       if (response.ok) {
-        toast.success(t('calendar:toasts:succes'));
+        toast.success(t('calendar:toasts:success'));
         if (calendar.id) {
           setCalendars((prevCalendars) =>
             prevCalendars.filter(

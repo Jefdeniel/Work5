@@ -41,10 +41,10 @@ const AddTimeBlockingModal = ({ onClose, setTimeBlock }: Props) => {
     if (response.ok) {
       const newTimeBlock = await response.json();
       setTimeBlock(newTimeBlock);
-      toast.success(t('calendar:calendar-customize.time-blocking.success'));
+      toast.success(t('calendar:toasts.success'));
       onClose();
     } else {
-      toast.error(t('calendar:calendar-customize.time-blocking.error'));
+      toast.error(t('calendar:toasts.error'));
     }
   };
 
