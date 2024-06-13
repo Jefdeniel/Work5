@@ -83,3 +83,9 @@
 .input-intro {
   margin-top: var(--sp-base);
 }
+
+.time-blocker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+}
