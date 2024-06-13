@@ -64,6 +64,7 @@
     "forOthers": "Van anderen",
     "forYou": "Voor jou",
     "isNew": "Nieuw",
+    "emptyList": "Geen meldingen om weer te geven",
     "toasts": {
       "notification-updating-failed": "Fout bij updaten van melding",
       "notification-update-failed": "Kan de melding niet updaten"

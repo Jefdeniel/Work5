@@ -1,13 +1,14 @@
 import { DateTime } from 'luxon';
+import { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import { Notification } from '../../../@types/Notification';
-import useAuth from '../../../hooks/useAuth';
+
 import useFetch from '../../../hooks/useFetch';
+import Icon from '../../ui/Icon/Icon';
 import NotificationCard from './NotificationCard/NotificationCard';
-import { useState } from 'react';
 
 const NotificationList = ({ notifications, setNotifications }) => {
   const { t } = useTranslation(['calendar']);
@@ -56,9 +57,20 @@ const NotificationList = ({ notifications, setNotifications }) => {
     }
   };
 
-  // TODO: Kyandro: can you make this pretty, something like the inspiration starting position
   if (notifications.length === 0) {
-    return <div>{t('calendar:notifications.noNotifications')}</div>;
+    return (
+      <div className={`d-flex flex-column align-items-center`}>
+        <Icon
+          src="/icons/notification-light.svg"
+          alt="Notification icon"
+          className={`w-110 mt-5 mb-4`}
+        />
+
+        <span className={`heading heading--lg text-center clr-primary-300`}>
+          {t('calendar:notifications.emptyList')}
+        </span>
+      </div>
+    );
   }
 
   return (
