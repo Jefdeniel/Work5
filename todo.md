@@ -21,7 +21,7 @@
 - Edit Calendar (state)
 - Add Timeblock (state)
 - Edit timeblock (volledig)
-- Add Events (volledig)
+- Add Events (state)
 - Edit events (volledig)
 - Delete Events (volledig)
 - Email Update State Bug Fixen bij Profile Page (state)
@@ -36,7 +36,6 @@
 
 - Max 5 (huidige situatie: 28)
 - Reset en seed laten werken bij Kyandro
-- Seed file opdelen in seperate files (nice-to-have)
 
 # Settings
 

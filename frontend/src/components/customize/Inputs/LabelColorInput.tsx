@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import useFetch from '../../../hooks/useFetch';
 import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-
 import { Calendar } from '../../../@types/Calendar';
-
-import useAuth from '../../../hooks/useAuth';
+import useFetch from '../../../hooks/useFetch';
 import Button from '../../ui/Button/Button';
-
 import './Input.scss';
 
 interface Props {
@@ -33,6 +29,8 @@ const LabelColorInput = ({ calendar }: Props) => {
       calendar: category.id,
     }));
 
+    console.log('Updated categories:', updatedCategories);
+
     try {
       const response = await updateCategoryColors({
         categories: updatedCategories,
@@ -51,8 +49,6 @@ const LabelColorInput = ({ calendar }: Props) => {
       toast.error('Error updating categories');
     }
   };
-
-  console.log('calendar', calendar);
 
   return (
     <div className={`label-color-inputs`}>

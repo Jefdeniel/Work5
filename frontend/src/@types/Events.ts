@@ -2,8 +2,8 @@ export interface Event {
   id?: number;
   title?: string;
   description?: string;
-  start: string | Date;
-  end: string | Date;
+  start_time: Date;
+  end_time: Date;
   is_recurring?: boolean;
   location?: string;
   priority?: string;

@@ -59,8 +59,12 @@ const GoogleCalendar = () => {
             isGoogleEvent={true}
             event={{
               title: event.summary || '',
-              start: event.start?.date || 'No start date',
-              end: event.end?.date || 'No end date',
+              start_time: new Date(
+                event.start?.dateTime || event.start?.date || 'No start date'
+              ),
+              end_time: new Date(
+                event.end?.dateTime || event.end?.date || 'No end date'
+              ),
               location: event.location || '',
               status: event.status || '',
               htmlLink: event.htmlLink || '',
