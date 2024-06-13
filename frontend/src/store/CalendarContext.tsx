@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
-import { CalendarUser } from '../@types/Calendar';
+import { Calendar } from '../@types/Calendar';
 import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';
 
 interface CalendarContextType {
-  calendars: CalendarUser[];
+  calendars: Calendar[];
   setCalendars: (
-    calendars: CalendarUser[] | ((prev: CalendarUser[]) => CalendarUser[])
+    calendars: Calendar[] | ((prev: Calendar[]) => Calendar[])
   ) => void;
 }
 
@@ -21,34 +21,44 @@ export const CalendarContextProvider = ({
   children: React.ReactNode;
 }) => {
   const { user_id } = useAuth();
-  const [calendars, setCalendars] = useState<CalendarUser[]>([]);
+  const [calendars, setCalendars] = useState<Calendar[]>([]);
 
-  const { fetchData: getCalendarUsers } = useFetch('GET', [
-    'calendar_users',
-    'user_id',
+  const { fetchData: getCalendars } = useFetch('GET', [
+    'calendars',
+    'owner_id',
     user_id ? user_id.toString() : '',
   ]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getCalendarUsers();
+    const fetchCalendars = async () => {
+      if (!user_id) return;
+      const response = await getCalendars();
 
       if (response.ok) {
-        const data = (await response.json()) as CalendarUser[];
+        const data = (await response.json()) as Calendar[];
         setCalendars(data);
       } else {
-        console.error('Failed to fetch calendar users');
+        console.error('Failed to fetch calendars');
       }
     };
 
-    if (user_id) {
-      void fetchData();
-    }
-  }, [user_id]);
+    void fetchCalendars();
+  }, []);
+
+  const addCalendarToState = (
+    newCalendars: Calendar[] | ((prev: Calendar[]) => Calendar[])
+  ) => {
+    setCalendars((prevCalendars) => [
+      ...prevCalendars,
+      ...(typeof newCalendars === 'function'
+        ? newCalendars(prevCalendars)
+        : newCalendars),
+    ]);
+  };
 
   const contextValue: CalendarContextType = {
     calendars,
-    setCalendars,
+    setCalendars: addCalendarToState,
   };
 
   return (

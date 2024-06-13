@@ -106,5 +106,9 @@
     "slogan": "Welkom bij uw persoonlijke assistent!",
     "placeholder": "Waar wil je over praten?",
     "send": "Sturen"
+  },
+  "toasts": {
+    "success": "Dat is gelukt!",
+    "error": "Er is iets misgegaan"
   }
 }

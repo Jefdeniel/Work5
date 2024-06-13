@@ -106,5 +106,9 @@
     "slogan": "Willkommen bei Ihrem persönlichen Assistenten!",
     "placeholder": "Worüber möchten Sie sprechen?",
     "send": "Schicken"
+  },
+  "toasts": {
+    "success": "Das hat geklappt",
+    "error": "Etwas ist schief gelaufen"
   }
 }

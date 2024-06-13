@@ -1,21 +1,21 @@
+import { useContext } from 'react';
 import { Modal } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useContext } from 'react';
-import { Field, Form } from 'react-final-form';
 
-import { Calendar } from '../../../../@types/Calendar';
+import { CalendarUser } from '../../../../@types/Calendar';
 import useFetch from '../../../../hooks/useFetch';
 import { CalendarContext } from '../../../../store/CalendarContext';
 
-import Button from '../../../ui/Button/Button';
 import useAuth from '../../../../hooks/useAuth';
 import Validators from '../../../../utils/Validators';
+import Button from '../../../ui/Button/Button';
 import Input from '../../../ui/Input/Input';
 
 interface Props {
   onClose: () => void;
-  calendar: Calendar;
+  calendar: CalendarUser;
   onEditCalendar: (calendarId: number) => void;
 }
 

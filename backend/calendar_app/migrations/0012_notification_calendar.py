@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('calendar_app', '0011_calendar_users_calendarpermissions'),
+        ("calendar_app", "0011_calendar_users_calendarpermissions"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='notification',
-            name='calendar',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='notifications', to='calendar_app.calendar'),
+            model_name="notification",
+            name="calendar",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="notifications",
+                to="calendar_app.calendar",
+            ),
         ),
     ]
