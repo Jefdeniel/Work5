@@ -28,7 +28,7 @@ const useFetchedEvents = () => {
     params.id?.toString() ?? '',
   ]);
   const { fetchData: addEventAPI } = useFetch('POST', ['events']);
-  const { t } = useTranslation(['calendar']);
+  const { t } = useTranslation(['calendar', 'timeblocks']);
 
   useEffect(() => {
     getEvents()
@@ -36,7 +36,7 @@ const useFetchedEvents = () => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Failed to fetch events');
+          throw new Error(t('events:toasts.fetchingEvents'));
         }
       })
       .then((data) => {
@@ -48,17 +48,16 @@ const useFetchedEvents = () => {
         setEvents(formattedEvents);
       })
       .catch((error) => {
-        console.error(t('calendar:error.fetchingEvents'), ': ', error);
-        toast.error(t('calendar:error.fetchingEvents'));
+        console.error(t('events:toasts.fetchingEvents'), ': ', error);
+        toast.error(t('events:error.fetchingEvents'));
       });
 
-    // TODO: Add Translations
     getTimeBlocks()
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Failed to fetch timeblocks');
+          throw new Error(t('timeblocks:error.fetchingTimeBlocks'));
         }
       })
       .then((data) => {
@@ -71,8 +70,8 @@ const useFetchedEvents = () => {
         setTimeBlocks(formattedTimeBlocks);
       })
       .catch((error) => {
-        console.error(t('calendar:error.fetchingTimeBlocks'), ': ', error);
-        toast.error(t('calendar:error.fetchingTimeBlocks'));
+        console.error(t('timeblocks:error.fetchingTimeBlocks'), ': ', error);
+        toast.error(t('timeblocks:error.fetchingTimeBlocks'));
       });
   }, []);
 

@@ -1,0 +1,10 @@
+{
+  "toasts": {
+    "added": "Bloc de temps ajouté",
+    "updated": "Bloc de temps mis à jour",
+    "deleted": "Bloc de temps supprimé"
+  },
+  "error": {
+    "fetchingTimeBlocks": "Échec de la récupération des blocs de temps"
+  }
+}
