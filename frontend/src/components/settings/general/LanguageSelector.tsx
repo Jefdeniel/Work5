@@ -1,8 +1,9 @@
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
+import { Col, Row } from 'react-bootstrap';
+
 import { AVAILABLE_LANGUAGES } from '../../../i18n';
 import Select from '../../ui/Select/Select';
-import { Col, Row } from 'react-bootstrap';
 
 interface LanguageSelectorProps {
   changeLanguage?: boolean;
@@ -44,13 +45,13 @@ const LanguageSelector = ({
   return (
     <Row className="full-select d-flex flex-row align-items-center">
       <Col className="mb-2">
-        <Row>
-          <span className="title">{t('settings:general.language')}</span>
-          <small className="description p-0">
-            {t('settings:general.languageDescription')}
-          </small>
-        </Row>
+        <span className="title">{t('settings:general.language')}</span>
+
+        <small className="description p-0">
+          {t('settings:general.languageDescription')}
+        </small>
       </Col>
+
       <Col className="d-flex flex-col justify-content-end p-0">
         <Select
           defaultValue={initialValue}

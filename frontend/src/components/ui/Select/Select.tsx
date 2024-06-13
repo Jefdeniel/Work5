@@ -7,7 +7,7 @@ import './Select.scss';
 
 interface Props {
   options: {
-    title: string;
+    title: string | JSX.Element;
     value: string | boolean | number;
   }[];
   title?: string;
@@ -25,7 +25,7 @@ const Select = ({ options, meta, value, title, ...rest }: Props) => {
       <span className="title">{title}</span>
 
       <select
-        className={`form-control m-2 ${isNotValid ? 'is-invalid' : ''}`}
+        className={`form-control  ${isNotValid ? 'is-invalid' : ''}`}
         value={value as string | number | readonly string[]}
         {...rest}
       >

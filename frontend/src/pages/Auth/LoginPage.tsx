@@ -3,6 +3,7 @@ import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
@@ -61,7 +62,7 @@ const LoginPage = () => {
           onSubmit={onLoginHandler}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className="d-flex flex-column gap-1">
-              <Heading level={2} className={`heading--lg fw-bold clr-primary`}>
+              <Heading level={2} className={`heading--lg fw-bold clr-primary text-center`}>
                 {t('auth:login.title')}
               </Heading>
 

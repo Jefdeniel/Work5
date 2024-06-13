@@ -59,13 +59,13 @@ const TimeBlockingSelector = ({ calendar }: Props) => {
   };
 
   return (
-    <Row className={`mt-4`}>
+    <>
       <div className={`input-intro`}>
         <span className={`title mb-1`}>
           {t('calendar:calendar-customize.time-blocking.title')}
         </span>
 
-        <p className={`w-75`}>
+        <p className={`w-75 customize-intro`}>
           {t('calendar:calendar-customize.time-blocking.description')}
         </p>
       </div>
@@ -104,7 +104,7 @@ const TimeBlockingSelector = ({ calendar }: Props) => {
           />
         )}
       </div>
-    </Row>
+    </>
   );
 };
 

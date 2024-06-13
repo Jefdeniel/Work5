@@ -17,11 +17,6 @@ export const CHANGE_OPTIONS_ITEMS: ActionItem[] = [
 
 export const CONNECT_ITEMS: ActionItem[] = [
   {
-    onClick: 'handleSlackClick',
-    iconSrc: '/icons/companies/slack.svg',
-    label: 'Slack',
-  },
-  {
     onClick: 'handleGoogleCalendarClick',
     iconSrc: '/icons/companies/google.svg',
     label: 'Google Calendar',
@@ -30,10 +25,5 @@ export const CONNECT_ITEMS: ActionItem[] = [
     onClick: 'handleOutlookClick',
     iconSrc: '/icons/companies/outlook.svg',
     label: 'Outlook',
-  },
-  {
-    onClick: 'handleAppleCalendarClick',
-    iconSrc: '/icons/companies/apple.svg',
-    label: 'Apple Calendar',
   },
 ];

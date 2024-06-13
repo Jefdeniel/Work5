@@ -13,7 +13,7 @@ const BackButton = ({ text, className, linkTo }: Props) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    linkTo ? navigate(linkTo) : navigate('/calendar/main');
+    linkTo ? navigate(linkTo) : navigate('/calendar/overview');
   };
 
   const button = (
