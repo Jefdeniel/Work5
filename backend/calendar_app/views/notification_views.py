@@ -16,3 +16,10 @@ class NotificationViewSet(viewsets.ModelViewSet):
         notifications = self.queryset.filter(user_id=user_id)
         serializer = self.get_serializer(notifications, many=True)
         return Response(serializer.data)
+
+    # Delete all notifications for a user
+    @action(detail=False, methods=["delete"], url_path="d-user/(?P<user_id>[^/.]+)")
+    def delete_notifications_by_user(self, request, user_id=None):
+        notifications = self.queryset.filter(user_id=user_id)
+        notifications.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

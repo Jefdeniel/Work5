@@ -33,6 +33,5 @@ class TimeBlockSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id"]
 
-
-def validate(self, data):
-    return validate_start_before_end("start_time", "end_time", data)
+    def validate(self, data):
+        return validate_start_before_end("start_time", "end_time", data)
