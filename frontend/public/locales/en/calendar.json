@@ -106,5 +106,6 @@
     "slogan": "Welcome to your personal assistant!",
     "placeholder": "What do you want to talk about?",
     "send": "Send"
-  }
+  },
+  "toasts": {}
 }
