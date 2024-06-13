@@ -73,8 +73,9 @@ const TimeBlockingSelector = ({ calendar }: Props) => {
       </div>
 
       <div className={`d-flex align-items-center gap-3`}>
-        <ul>
+        <ul className={`time-blocker-list`}>
           {timeblocks.length === 0 && <li>No time blockers yet</li>}
+
           {timeblocks.map((timeBlock) => (
             <li key={timeBlock.id} className={`timeblock-item`}>
               <Button
@@ -84,14 +85,16 @@ const TimeBlockingSelector = ({ calendar }: Props) => {
               />
             </li>
           ))}
-        </ul>
 
-        <Button
-          className={`btn--primary mb-3`}
-          onClick={handleOpenTimeBlockingModal}
-          icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
-          text={t('calendar:calendar-customize.time-blocking.title')}
-        />
+          <li>
+            <Button
+              className={`btn--primary mb-3`}
+              onClick={handleOpenTimeBlockingModal}
+              icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
+              text={t('calendar:calendar-customize.time-blocking.title')}
+            />
+          </li>
+        </ul>
 
         {showAddTimeBlockingModal && (
           <AddTimeBlockingModal
