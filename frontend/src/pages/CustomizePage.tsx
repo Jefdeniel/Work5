@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { Calendar } from '../@types/Calendar';
-
 import useSetTitle from '../hooks/setTitle';
 import useFetch from '../hooks/useFetch';
-import Heading from '../components/ui/Heading/Heading';
+
+import LabelColorInput from '../components/customize/Inputs/LabelColorInput';
 import PermissionBoxes from '../components/customize/Selectors/PermissionBoxes';
 import TimeBlockingSelector from '../components/customize/Selectors/TimeBlockingSelector';
+import Heading from '../components/ui/Heading/Heading';
 import LoadingScreen from '../components/ui/Loading/LoadingScreen';
-import LabelColorInput from '../components/customize/Inputs/LabelColorInput';
 
 const CustomizePage = () => {
   const { t } = useTranslation(['general', 'customize']);

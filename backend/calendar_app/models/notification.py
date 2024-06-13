@@ -9,7 +9,7 @@ class Notification(models.Model):
         CustomUser, related_name="notifications", on_delete=models.CASCADE, null=False
     )
     calendar = models.ForeignKey(
-        Calendar, related_name="notifications", on_delete=models.CASCADE, null=False
+        Calendar, related_name="notifications", on_delete=models.CASCADE, null=False, default=1
     )
     date_start = models.DateTimeField()
     date_stop = models.DateTimeField()
