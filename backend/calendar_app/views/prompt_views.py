@@ -1,3 +1,4 @@
+import os
 from rest_framework import viewsets
 from rest_framework.response import Response
 from ..models import Prompt
@@ -24,7 +25,7 @@ class PromptInspirationViewSet(viewsets.ModelViewSet):
 
     def __init__(self, *args, **kwargs):
         # Or use `os.getenv('GOOGLE_API_KEY')` to fetch an environment variable.
-        self.GOOGLE_API_KEY = "AIzaSyD4YoS4VbDutvUbnrtugiVzGSJc2KLxUxg"
+        self.GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
         genai.configure(api_key=self.GOOGLE_API_KEY)
 
         self.model = genai.GenerativeModel("gemini-1.5-flash")
