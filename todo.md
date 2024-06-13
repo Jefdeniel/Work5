@@ -18,13 +18,13 @@
 # State Bugs en CRUD
 
 - Edit timeblock (volledig)
-- Add Events (state)
 - Edit events (volledig)
 - Delete Events (volledig)
 
-# Backend: Fix Seed for Categories in Calendar
+- Add Events (state)
 
-- Max 5 (huidige situatie: 28)
+# Backend:
+
 - Reset en seed laten werken bij Kyandro
 
 # Settings
