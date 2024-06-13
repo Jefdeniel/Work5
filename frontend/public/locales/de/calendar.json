@@ -64,6 +64,7 @@
     "forOthers": "Von anderen",
     "forYou": "Für dich",
     "isNew": "Neu",
+    "emptyList": "Keine Benachrichtigungen gefunden",
     "toasts": {
       "notification-updating-failed": "Fehler beim Aktualisieren der Benachrichtigung",
       "notification-update-failed": "Die Benachrichtigung konnte nicht aktualisiert werden"

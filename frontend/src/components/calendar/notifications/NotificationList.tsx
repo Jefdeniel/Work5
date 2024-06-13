@@ -67,7 +67,7 @@ const NotificationList = ({ notifications, setNotifications }) => {
         />
 
         <span className={`heading heading--lg text-center clr-primary-300`}>
-          No notifications yet.
+          {t('calendar:notifications.emptyList')}
         </span>
       </div>
     );
