@@ -1,13 +1,11 @@
-import { createContext, useEffect, useState } from 'react';
-import { Calendar } from '../@types/Calendar';
+import { createContext, useEffect, useState, ReactNode } from 'react';
+import { CalendarUser } from '../@types/Calendar';
 import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';
 
 interface CalendarContextType {
-  calendars: Calendar[];
-  setCalendars: (
-    calendars: Calendar[] | ((prev: Calendar[]) => Calendar[])
-  ) => void;
+  calendars: CalendarUser[];
+  setCalendars: React.Dispatch<React.SetStateAction<CalendarUser[]>>;
 }
 
 export const CalendarContext = createContext<CalendarContextType>({
@@ -18,47 +16,37 @@ export const CalendarContext = createContext<CalendarContextType>({
 export const CalendarContextProvider = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const { user_id } = useAuth();
-  const [calendars, setCalendars] = useState<Calendar[]>([]);
+  const [calendars, setCalendars] = useState<CalendarUser[]>([]);
 
-  const { fetchData: getCalendars } = useFetch('GET', [
-    'calendars',
-    'owner_id',
+  const { fetchData: getCalendarUsers } = useFetch('GET', [
+    'calendar_users',
+    'user_id',
     user_id ? user_id.toString() : '',
   ]);
 
   useEffect(() => {
-    const fetchCalendars = async () => {
-      if (!user_id) return;
-      const response = await getCalendars();
+    const fetchData = async () => {
+      const response = await getCalendarUsers();
 
       if (response.ok) {
-        const data = (await response.json()) as Calendar[];
+        const data = (await response.json()) as CalendarUser[];
         setCalendars(data);
       } else {
-        console.error('Failed to fetch calendars');
+        console.error('Failed to fetch calendar users');
       }
     };
 
-    void fetchCalendars();
-  }, []);
-
-  const addCalendarToState = (
-    newCalendars: Calendar[] | ((prev: Calendar[]) => Calendar[])
-  ) => {
-    setCalendars((prevCalendars) => [
-      ...prevCalendars,
-      ...(typeof newCalendars === 'function'
-        ? newCalendars(prevCalendars)
-        : newCalendars),
-    ]);
-  };
+    if (user_id) {
+      fetchData();
+    }
+  }, [user_id]);
 
   const contextValue: CalendarContextType = {
     calendars,
-    setCalendars: addCalendarToState,
+    setCalendars,
   };
 
   return (

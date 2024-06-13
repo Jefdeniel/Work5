@@ -5,9 +5,11 @@
     "fetchingCalendars": "Fehler beim Abrufen der Kalender"
   },
   "calendar-overview": {
+    "delete": "Löschen",
     "delete-title": "Kalender löschen",
     "delete-description": "Möchten Sie diesen Kalender wirklich löschen?",
     "delete-confirmation-yes": "Ja, ich bin sicher",
+    "edit": "Bearbeiten",
     "edit-title": "Kalender bearbeiten",
     "edit-description": "Bearbeiten Sie die Details Ihres Kalenders unten.",
     "toast": {

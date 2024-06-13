@@ -1,54 +1,36 @@
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
+import { AccountSettings } from '../../../../@types/Settings';
+import { UserData } from '../../../../@types/UserData';
 import useAuth from '../../../../hooks/useAuth';
 import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
-import { AccountSettings } from '../../../../@types/Settings';
 
+import Button from '../../../ui/Button/Button';
 import Input from '../../../ui/Input/Input';
 import Modal from '../../../ui/Modals/Modal';
-import Button from '../../../ui/Button/Button';
 
 interface Props {
   onClose: () => void;
+  user: UserData | null;
+  setUser: React.Dispatch<React.SetStateAction<UserData | null>>;
 }
 
-const EditEmailModal = ({ onClose }: Props) => {
+const EditEmailModal = ({ onClose, user, setUser }: Props) => {
   const { t } = useTranslation(['settings']);
   const { user_id } = useAuth();
 
   const [initialValues, setInitialValues] = useState<AccountSettings>({
-    email: '',
+    email: user?.email || '',
   });
 
-  const { fetchData: fetchAccountSettings } = useFetch('GET', [
-    'users',
-    user_id?.toString() ?? '',
-  ]);
   const { fetchData: updateAccountSettings, loading: isLoading } = useFetch(
     'PATCH',
     ['users', user_id?.toString() ?? '']
   );
-
-  const fetchAccountSettingsMemoized = useCallback(fetchAccountSettings, []);
-
-  useEffect(() => {
-    const fetchAccountSettingsData = async () => {
-      try {
-        const response = await fetchAccountSettingsMemoized();
-        const data = await response.json();
-        setInitialValues({
-          email: data.email,
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchAccountSettingsData();
-  }, [fetchAccountSettingsMemoized]);
 
   const handleEditEmail = async (values: AccountSettings, form: any) => {
     try {
@@ -62,6 +44,7 @@ const EditEmailModal = ({ onClose }: Props) => {
       );
 
       if (response.ok) {
+        setUser((prev) => (prev ? { ...prev, email: values.email } : prev));
         toast.success(t('settings:account.emailUpdated'));
         form.reset();
         onClose();

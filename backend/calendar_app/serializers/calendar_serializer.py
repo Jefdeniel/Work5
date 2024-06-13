@@ -11,7 +11,10 @@ class CalendarSerializer(serializers.ModelSerializer):
         max_length=255, required=True, help_text="Title of the calendar"
     )
     description = serializers.CharField(
-        max_length=255, required=False, help_text="Description of the calendar"
+        max_length=255,
+        required=False,
+        allow_blank=True,
+        help_text="Description of the calendar",
     )
     img = serializers.ImageField(
         required=False,

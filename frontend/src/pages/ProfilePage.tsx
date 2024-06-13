@@ -1,27 +1,53 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import useSetTitle from '../hooks/setTitle';
-import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
-import Heading from '../components/ui/Heading/Heading';
-import Signout from '../components/settings/account/Signout';
-import ActionButtonList from '../components/ui/List/ActionButtonList';
+import { UserData } from '../@types/UserData';
+import CalendarCardList from '../components/calendar/CalendarCard/CalendarCardList';
 import DeleteAccount from '../components/settings/account/DeleteAccount';
+import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
 import EditEmailModal from '../components/settings/account/modals/EditEmailModal';
 import EditPasswordModal from '../components/settings/account/modals/EditPasswordModal';
 import ProfilePageHeader from '../components/settings/account/profile/ProfilePageHeader';
-import DeleteAccountModal from '../components/settings/account/modals/DeleteAccountModal';
-import CalendarCardList from '../components/calendar/CalendarCard/CalendarCardList';
+import Signout from '../components/settings/account/Signout';
+import Heading from '../components/ui/Heading/Heading';
+import ActionButtonList from '../components/ui/List/ActionButtonList';
+import { CHANGE_OPTIONS_ITEMS, CONNECT_ITEMS } from '../constants/profile';
+import useSetTitle from '../hooks/setTitle';
+import useAuth from '../hooks/useAuth';
+import useFetch from '../hooks/useFetch';
 
 const ProfilePage = () => {
   const { t } = useTranslation(['settings']);
   useSetTitle(t('settings:profile.title'));
+  const { user_id } = useAuth();
 
   // State
+  const [user, setUser] = useState<UserData | null>(null);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [showEditEmailModal, setShowEditEmailModal] = useState(false);
   const [showEditPasswordModal, setShowEditPasswordModal] = useState(false);
+
+  const { fetchData: getUserData } = useFetch('GET', [
+    'users',
+    user_id?.toString() || '',
+  ]);
+
+  const fetchUserData = useCallback(async () => {
+    try {
+      const response = await getUserData();
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+      }
+    } catch (error) {
+      console.error('Failed to fetch user data', error);
+    }
+  }, [getUserData]);
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   // Modal handlers
   const openDeleteAccountModal = () => setShowDeleteAccountModal(true);
@@ -45,7 +71,7 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <ProfilePageHeader />
+      <ProfilePageHeader user={user} />
 
       <Row className="mb-base mt-large">
         <Heading className={`mb-3`} level={3}>
@@ -94,7 +120,13 @@ const ProfilePage = () => {
         <DeleteAccountModal onClose={closeDeleteAccountModal} />
       )}
 
-      {showEditEmailModal && <EditEmailModal onClose={closeEditEmailModal} />}
+      {showEditEmailModal && (
+        <EditEmailModal
+          onClose={closeEditEmailModal}
+          user={user}
+          setUser={setUser}
+        />
+      )}
 
       {showEditPasswordModal && (
         <EditPasswordModal onClose={closeEditPasswordModal} />

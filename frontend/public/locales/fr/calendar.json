@@ -5,9 +5,11 @@
     "fetchingCalendars": "Erreur lors de la récupération des calendriers"
   },
   "calendar-overview": {
+    "delete": "Supprimer",
     "delete-title": "Supprimer le calendrier",
     "delete-description": "Êtes-vous sûr de vouloir supprimer ce calendrier ?",
     "delete-confirmation-yes": "Oui je suis sûr",
+    "edit": "Modifier",
     "edit-title": "Modifier le calendrier",
     "edit-description": "Modifiez les détails de votre calendrier ci-dessous.",
     "toast": {

@@ -1,47 +1,27 @@
 import { Col, Row } from 'react-bootstrap';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { UserData } from '../../../../@types/UserData';
 import { Colors } from '../../../../@types/Colors';
 
-import useAuth from '../../../../hooks/useAuth';
-import useFetch from '../../../../hooks/useFetch';
 import Heading from '../../../ui/Heading/Heading';
 
 import './ProfilePageHeader.scss';
 
-const ProfilePageHeader = () => {
-  const { user_id } = useAuth();
+interface Props {
+  user: UserData | null;
+}
 
-  const { fetchData: getUserData } = useFetch('GET', [
-    'users',
-    user_id?.toString() || '',
-  ]);
-
-  const [user, setUser] = useState<UserData | null>(null);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await getUserData();
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch user data', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
+const ProfilePageHeader = ({ user }: Props) => {
   const fullName = useMemo(() => {
     return `${user?.first_name || ''} ${user?.last_name || ''}`;
   }, [user]);
 
   return (
-    <Row className="profile-header" style={{ backgroundColor: Colors.Primary200 }}>
+    <Row
+      className="profile-header"
+      style={{ backgroundColor: Colors.Primary200 }}
+    >
       <Col className={`d-flex justify-content-center`}>
         <div className={`d-flex flex-column justify-content-center`}>
           <Heading level={2} className={`heading--lg clr-dark highlight`}>

@@ -5,9 +5,11 @@
     "fetchingCalendars": "Error fetching calendars"
   },
   "calendar-overview": {
+    "delete": "Delete",
     "delete-title": "Delete calendar",
     "delete-description": "Are you sure you want to delete this calendar?",
     "delete-confirmation-yes": "Yes, I am sure",
+    "edit": "Edit calendar",
     "edit-title": "Edit calendar",
     "edit-description": "Edit the details of your calendar below.",
     "toast": {

@@ -1,10 +1,10 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CalendarUser } from '../../../@types/Calendar';
 
+import { PLACEHOLDER_IMG } from '../../../constants/placeholders';
 import useAuth from '../../../hooks/useAuth';
-import useFetch from '../../../hooks/useFetch';
 import { CalendarContext } from '../../../store/CalendarContext';
 import Input from '../../ui/Input/Input';
 import DeleteCalendarModal from '../BigCalendar/Modals/DeleteCalendarModal';
@@ -20,12 +20,8 @@ const CalendarCardList = ({
   layout = 'row',
   isMenuCollapsed,
 }: CalendarCardListProps) => {
-  const { user_id } = useAuth();
   const { t } = useTranslation(['general']);
   const calendarContext = useContext(CalendarContext);
-
-  const PLACEHOLDER_IMG =
-    'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCalendars, setFilteredCalendars] = useState<CalendarUser[]>(
@@ -38,54 +34,16 @@ const CalendarCardList = ({
     null
   );
 
-  const { fetchData: fetchCalendars } = useFetch('GET', [
-    'calendar_users',
-    'user_id',
-    user_id?.toString() ?? '',
-  ]);
-
-  const fetchCalendarsMemoized = useCallback(fetchCalendars, [fetchCalendars]);
-
   useEffect(() => {
-    const fetchCalendarsData = async () => {
-      try {
-        const response = await fetchCalendarsMemoized();
-        if (!response.ok) {
-          throw new Error('Failed to fetch calendars');
-        }
-        const data: CalendarUser[] = await response.json();
-
-        // Assuming googleCalendar is correctly defined as a CalendarUser
-        const googleCalendar: CalendarUser = {
-          id: -1,
-          user: 0,
-          calendar: {
-            id: -1,
-            title: 'Google',
-            img: '/img/google-calendar-logo.svg',
-            users: [], // Add necessary properties based on actual data structure
-          },
-          role: '',
-        };
-
-        const updatedData = [googleCalendar, ...data];
-
-        calendarContext.setCalendars(updatedData);
-        setFilteredCalendars(updatedData);
-      } catch (error) {
-        console.error('Error fetching calendars:', error);
-      }
-    };
-
-    fetchCalendarsData();
-  }, [calendarContext, fetchCalendarsMemoized]);
+    setFilteredCalendars(calendarContext.calendars);
+  }, [calendarContext.calendars]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
     const filteredData = calendarContext.calendars.filter((calendarUser) => {
-      const calendarTitle = calendarUser.title.toLowerCase();
+      const calendarTitle = calendarUser.calendar.title.toLowerCase();
       return calendarTitle.includes(searchValue);
     });
 
@@ -98,11 +56,7 @@ const CalendarCardList = ({
   };
 
   const handleCloseDeleteModal = () => {
-    if (calendarToDelete) {
-      const deletedCalendarId = calendarToDelete.calendar.id;
-      handleRemoveCalendar(deletedCalendarId);
-      setCalendarToDelete(null);
-    }
+    setCalendarToDelete(null);
   };
 
   const handleEdit = (calendar: CalendarUser) => {
@@ -113,10 +67,11 @@ const CalendarCardList = ({
     setCalendarToEdit(null);
   };
 
+  // Handlers
   const handleRemoveCalendar = (deletedCalendarId: number) => {
     calendarContext.setCalendars((prevCalendars) =>
       prevCalendars.filter(
-        (calendarUser) => calendarUser.id !== deletedCalendarId
+        (calendarUser) => calendarUser.calendar.id !== deletedCalendarId
       )
     );
     setFilteredCalendars((prevCalendars) =>
@@ -129,11 +84,11 @@ const CalendarCardList = ({
   const handleEditCalendar = (editedCalendarId: number) => {
     calendarContext.setCalendars((prevCalendars) =>
       prevCalendars.map((calendarUser) =>
-        calendarUser.id === editedCalendarId
+        calendarUser.calendar.id === editedCalendarId
           ? {
               ...calendarUser,
               calendar: {
-                ...calendarUser,
+                ...calendarUser.calendar,
                 ...calendarToEdit?.calendar,
               },
             }
@@ -172,9 +127,9 @@ const CalendarCardList = ({
       {filteredCalendars.map((calendarUser) => (
         <CalendarCard
           key={calendarUser.id}
-          img={calendarUser.calendar?.img || PLACEHOLDER_IMG}
-          name={!isMenuCollapsed ? calendarUser.calendar?.title || '' : ''}
-          link={`/calendar/${calendarUser.calendar?.id || ''}`}
+          img={calendarUser.calendar.image || PLACEHOLDER_IMG}
+          name={!isMenuCollapsed ? calendarUser.calendar.title : ''}
+          link={`/calendar/${calendarUser.calendar.id}`}
           onDelete={() => handleDelete(calendarUser)}
           onEdit={() => handleEdit(calendarUser)}
         />
@@ -183,18 +138,16 @@ const CalendarCardList = ({
       {calendarToDelete && (
         <DeleteCalendarModal
           onClose={handleCloseDeleteModal}
-          calendar={calendarToDelete}
-          onRemoveCalendar={() =>
-            handleRemoveCalendar(calendarToDelete.calendar.id)
-          }
+          calendar={calendarToDelete.calendar}
+          onRemoveCalendar={handleRemoveCalendar}
         />
       )}
 
       {calendarToEdit && (
         <EditCalendarModal
           onClose={handleCloseEditModal}
-          calendar={calendarToEdit}
-          onEditCalendar={() => handleEditCalendar(calendarToEdit.calendar.id)}
+          calendar={calendarToEdit.calendar}
+          onEditCalendar={handleEditCalendar}
         />
       )}
     </ul>

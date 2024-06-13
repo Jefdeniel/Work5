@@ -17,11 +17,12 @@ const NotificationPage = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar:notifications.title'));
   const { user_id } = useAuth();
+  console.log('user_id:', user_id);
 
   // Fetch notifications
   const { fetchData: deleteNotifications, loading: isDeleteLoading } = useFetch(
     'DELETE',
-    ['notifications', 'delete-user', user_id ? user_id.toString() : '']
+    ['notifications', user_id ? user_id.toString() : '']
   );
 
   const { fetchData: getNotifications, loading: isGetLoading } = useFetch(

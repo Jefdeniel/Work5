@@ -5,9 +5,11 @@
     "fetchingCalendars": "Fout bij ophalen van agenda's"
   },
   "calendar-overview": {
+    "delete": "Verwijderen",
     "delete-title": "Kalender verwijderen",
     "delete-description": "Weet je zeker dat je deze agenda wilt verwijderen?",
     "delete-confirmation-yes": "Ja, ik ben zeker",
+    "edit": "Bewerken",
     "edit-title": "Kalender bewerken",
     "edit-description": "Bewerk de details van je kalender hieronder.",
     "toast": {

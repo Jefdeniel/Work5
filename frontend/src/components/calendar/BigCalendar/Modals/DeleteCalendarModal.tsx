@@ -2,17 +2,14 @@ import { useContext } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-
-import { CalendarUser } from '../../../../@types/Calendar';
-
+import { Calendar } from '../../../../@types/Calendar';
 import useFetch from '../../../../hooks/useFetch';
 import { CalendarContext } from '../../../../store/CalendarContext';
-
 import Button from '../../../ui/Button/Button';
 
 interface Props {
   onClose: () => void;
-  calendar: CalendarUser;
+  calendar: Calendar;
   onRemoveCalendar: (calendarId: number) => void;
 }
 
@@ -22,28 +19,28 @@ const DeleteCalendarModal = ({
   onRemoveCalendar,
 }: Props) => {
   const { t } = useTranslation(['calendar']);
-  const calendarContext = useContext(CalendarContext);
+  const { setCalendars } = useContext(CalendarContext);
 
   const { fetchData: deleteCalendar } = useFetch('DELETE', [
     'calendars',
-    calendar.calendar.id?.toString() ?? '',
+    calendar.id?.toString() ?? '',
   ]);
 
   const handleDeleteCalendar = async () => {
-    await deleteCalendar({}, { id: calendar.calendar.id }).then((response) => {
+    await deleteCalendar({}, { id: calendar.id }).then((response) => {
       if (response.ok) {
-        toast.success(t('calendar:calendar-overview.toast.calendar-deleted'));
-        if (calendar.calendar.id) {
-          onRemoveCalendar(calendar.calendar.id);
-          calendarContext.setCalendars((prev: CalendarUser[]) =>
-            prev.filter((cal) => cal.calendar.id !== calendar.calendar.id)
+        toast.success(t('calendar:toasts:succes'));
+        if (calendar.id) {
+          setCalendars((prevCalendars) =>
+            prevCalendars.filter(
+              (calendarUser) => calendarUser.calendar.id !== calendar.id
+            )
           );
+          onRemoveCalendar(calendar.id!);
         }
       } else {
-        toast.error(
-          t('calendar:calendar-overview.toast.calendar-deletion-failed')
-        );
         console.error(response);
+        toast.error(t('calendar:toasts:error'));
       }
       onClose();
     });

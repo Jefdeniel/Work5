@@ -4,10 +4,11 @@ import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import { CalendarUser } from '../../../../@types/Calendar';
+import { Calendar } from '../../../../@types/Calendar';
 import useFetch from '../../../../hooks/useFetch';
 import { CalendarContext } from '../../../../store/CalendarContext';
 
+import { PLACEHOLDER_IMG } from '../../../../constants/placeholders';
 import useAuth from '../../../../hooks/useAuth';
 import Validators from '../../../../utils/Validators';
 import Button from '../../../ui/Button/Button';
@@ -15,11 +16,11 @@ import Input from '../../../ui/Input/Input';
 
 interface Props {
   onClose: () => void;
-  calendar: CalendarUser;
+  calendar: Calendar;
   onEditCalendar: (calendarId: number) => void;
 }
 
-const EditCalendarModal = ({ onClose, calendar, onEditCalendar }: Props) => {
+const EditCalendarModal = ({ onClose, calendar }: Props) => {
   const { t } = useTranslation(['calendar']);
   const { user_id } = useAuth();
   const { setCalendars } = useContext(CalendarContext);
@@ -32,8 +33,12 @@ const EditCalendarModal = ({ onClose, calendar, onEditCalendar }: Props) => {
   const initialValues = {
     title: calendar.title || '',
     description: calendar.description || '',
-    date_start: calendar.date_start || '',
-    date_stop: calendar.date_stop || '',
+    date_start: calendar.date_start
+      ? new Date(calendar.date_start).toISOString().substring(0, 16)
+      : '',
+    date_stop: calendar.date_stop
+      ? new Date(calendar.date_stop).toISOString().substring(0, 16)
+      : '',
   };
 
   const handleEditCalendar = async (values: Calendar) => {
@@ -44,21 +49,37 @@ const EditCalendarModal = ({ onClose, calendar, onEditCalendar }: Props) => {
           ...values,
           id: calendar.id,
           owner_id: user_id,
+          image: values.image || PLACEHOLDER_IMG,
+          date_start: values.date_start
+            ? new Date(values.date_start).toISOString()
+            : null,
+          date_stop: values.date_stop
+            ? new Date(values.date_stop).toISOString()
+            : null,
         }
       );
       if (response.ok) {
         setCalendars((prevCalendars) =>
-          prevCalendars.map((cal) => (cal.id === calendar.id ? values : cal))
+          prevCalendars.map((calendarUser) => {
+            if (calendarUser.calendar.id === calendar.id) {
+              return {
+                ...calendarUser,
+                calendar: {
+                  ...calendarUser.calendar,
+                  ...values,
+                  image: values.image || PLACEHOLDER_IMG,
+                },
+              };
+            }
+            return calendarUser;
+          })
         );
-        onEditCalendar(calendar.id);
         onClose();
-        toast.success(t('calendar:calendar-overview.edit-success'));
-      } else {
-        toast.error(t('calendar:calendar-overview.edit-error'));
+        toast.success(t('calendar:toats:succes'));
       }
     } catch (error) {
       console.error(error);
-      toast.error(t('calendar:calendar-overview.edit-error'));
+      toast.error(t('calendar:toats:error'));
     }
   };
 
