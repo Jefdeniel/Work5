@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
-import { Event } from '../../../../@types/Events';
+import { Event } from '../../../../../@types/Events';
 
 import { Col } from 'react-bootstrap';
-import Input from '../../../ui/Input/Input';
+import Input from '../../../../ui/Input/Input';
 
 interface Props {
   className?: string;
