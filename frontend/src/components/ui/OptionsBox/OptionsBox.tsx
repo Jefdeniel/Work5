@@ -36,7 +36,7 @@ const OptionsBox = ({ className, onDelete, onEdit }: Props) => {
       <Button
         isSmall
         icon={EDIT_ICON}
-        text={t('calendar:calendar-overview.options.edit')}
+        text={t('calendar:calendar-overview.edit')}
         onClick={onEditClickHandler}
       />
 
@@ -45,7 +45,7 @@ const OptionsBox = ({ className, onDelete, onEdit }: Props) => {
       <Button
         isSmall
         icon={DELETE_ICON}
-        text={t('calendar:calendar-overview.options.delete')}
+        text={t('calendar:calendar-overview.delete')}
         onClick={onDeleteClickHandler}
       />
     </div>

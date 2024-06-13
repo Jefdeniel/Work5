@@ -15,10 +15,8 @@ import Heading from '../../components/ui/Heading/Heading';
 import Icon from '../../components/ui/Icon/Icon';
 import Input from '../../components/ui/Input/Input';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
+import { PLACEHOLDER_IMG } from '../../constants/placeholders';
 import useSetTitle from '../../hooks/setTitle';
-
-const DEFAULT_IMAGE_URL =
-  'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
 
 const CreateCalendar = () => {
   const { t } = useTranslation(['calendar']);
@@ -38,7 +36,7 @@ const CreateCalendar = () => {
         {
           ...values,
           owner_id: user_id,
-          image: values.image || DEFAULT_IMAGE_URL,
+          image: values.image || PLACEHOLDER_IMG,
           date_start: values.date_start?.toISOString() || null,
           date_stop: values.date_stop?.toISOString() || null,
         }
@@ -53,9 +51,7 @@ const CreateCalendar = () => {
           role: 'owner',
         };
         setCalendars((prevCalendars) => [...prevCalendars, newCalendarUser]);
-        toast.success(t('calendar:toasts.addSuccess'));
-      } else {
-        toast.error(t('calendar:error.addFailed'));
+        toast.success(t('calendar:toasts.success'));
       }
     } catch (error) {
       toast.error(t('calendar:error.addFailed'));

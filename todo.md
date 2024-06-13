@@ -17,17 +17,10 @@
 
 # State Bugs en CRUD
 
-- Add Calendar (state)
-- Edit Calendar (state)
 - Edit timeblock (volledig)
 - Add Events (state)
 - Edit events (volledig)
 - Delete Events (volledig)
-- Email Update State Bug Fixen bij Profile Page (state)
-
-# Notificaties
-
-- Notificaties effectief laten werken
 
 # Backend: Fix Seed for Categories in Calendar
 

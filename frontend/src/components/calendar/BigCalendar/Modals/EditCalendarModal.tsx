@@ -75,11 +75,11 @@ const EditCalendarModal = ({ onClose, calendar }: Props) => {
           })
         );
         onClose();
-        toast.success(t('calendar:toats:succes'));
+        toast.success(t('calendar:toasts:success'));
       }
     } catch (error) {
       console.error(error);
-      toast.error(t('calendar:toats:error'));
+      toast.error(t('calendar:toasts:error'));
     }
   };
 
