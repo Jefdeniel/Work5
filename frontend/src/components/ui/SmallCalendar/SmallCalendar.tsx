@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-
 import './SmallCalendar.scss';
 
 type DateRange = [Date | null, Date | null];

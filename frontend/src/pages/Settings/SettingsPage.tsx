@@ -20,6 +20,7 @@ import useFetch from '../../hooks/useFetch';
 import useSetTitle from '../../hooks/setTitle';
 import Validators from '../../utils/Validators';
 import { SettingsContext } from '../../store/SettingsContext';
+import Spinner from '../../components/ui/Loading/Spinner';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -226,23 +227,16 @@ const SettingsPage = () => {
               </Field>
             </div>
 
-            <Row>
-              <Col md={8} lg={10}></Col>
-
-              <Col
-                md={4}
-                lg={2}
-                className="mt-4 mb-5 d-flex justify-content-end"
+            <div className="pad-left-neg mt-4 mb-5 d-flex justify-content-end">
+              <Button
+                className="btn--success"
+                type="submit"
+                disabled={isLoading}
+                isLoading={isLoading}
               >
-                <Button
-                  className="btn--success settings-submit"
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  {t('settings:save')}
-                </Button>
-              </Col>
-            </Row>
+                {t('settings:save')}
+              </Button>
+            </div>
           </form>
         )}
       />

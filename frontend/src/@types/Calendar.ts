@@ -14,7 +14,28 @@ export interface Calendar {
 export interface CalendarUser {
   id?: number;
   user: number;
-  calendar: Calendar;
+  calendar: {
+    id: number;
+    title: string;
+    description?: string;
+    img?: string | null;
+    owner_id?: number;
+    users?: {
+      id: number;
+      first_name: string;
+      last_name: string;
+      email: string;
+      permissions: {
+        can_view_event_details: boolean;
+        can_create_events: boolean;
+        can_edit_events: boolean;
+        can_delete_events: boolean;
+        can_invite_others: boolean;
+      };
+    }[];
+    date_start?: Date;
+    date_stop?: Date;
+  };
   role: string;
   created_at?: string;
   first_name?: string;

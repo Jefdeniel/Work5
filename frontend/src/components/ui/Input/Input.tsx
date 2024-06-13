@@ -2,7 +2,6 @@ import React from 'react';
 import { FieldMetaState } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../../hooks/useSettings';
-
 import ErrorText from '../ErrorText/ErrorText';
 
 import './Input.scss';

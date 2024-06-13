@@ -106,5 +106,9 @@
     "slogan": "Bienvenue dans votre assistant personnel!",
     "placeholder": "De quoi veux-tu parler?",
     "send": "Envoyer"
+  },
+  "toasts": {
+    "success": "Cela a fonctionné!",
+    "error": "Quelque chose n'a pas fonctionné..."
   }
 }

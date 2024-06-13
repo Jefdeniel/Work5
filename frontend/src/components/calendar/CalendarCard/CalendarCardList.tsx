@@ -24,7 +24,6 @@ const CalendarCardList = ({
   const { t } = useTranslation(['general']);
   const calendarContext = useContext(CalendarContext);
 
-  const USER_AVATARS = ['/icons/user-profile.svg', ''];
   const PLACEHOLDER_IMG =
     'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png';
 
@@ -35,7 +34,6 @@ const CalendarCardList = ({
   const [calendarToDelete, setCalendarToDelete] = useState<CalendarUser | null>(
     null
   );
-
   const [calendarToEdit, setCalendarToEdit] = useState<CalendarUser | null>(
     null
   );
@@ -57,14 +55,16 @@ const CalendarCardList = ({
         }
         const data: CalendarUser[] = await response.json();
 
-        const googleCalendar = {
+        // Assuming googleCalendar is correctly defined as a CalendarUser
+        const googleCalendar: CalendarUser = {
           id: -1,
+          user: 0,
           calendar: {
             id: -1,
             title: 'Google',
-            image: '/img/google-calendar-logo.svg',
+            img: '/img/google-calendar-logo.svg',
+            users: [], // Add necessary properties based on actual data structure
           },
-          user: 0,
           role: '',
         };
 
@@ -73,18 +73,19 @@ const CalendarCardList = ({
         calendarContext.setCalendars(updatedData);
         setFilteredCalendars(updatedData);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching calendars:', error);
       }
     };
+
     fetchCalendarsData();
-  }, []);
+  }, [calendarContext, fetchCalendarsMemoized]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
 
     const filteredData = calendarContext.calendars.filter((calendarUser) => {
-      const calendarTitle = calendarUser.calendar.title.toLowerCase();
+      const calendarTitle = calendarUser.title.toLowerCase();
       return calendarTitle.includes(searchValue);
     });
 
@@ -97,7 +98,11 @@ const CalendarCardList = ({
   };
 
   const handleCloseDeleteModal = () => {
-    setCalendarToDelete(null);
+    if (calendarToDelete) {
+      const deletedCalendarId = calendarToDelete.calendar.id;
+      handleRemoveCalendar(deletedCalendarId);
+      setCalendarToDelete(null);
+    }
   };
 
   const handleEdit = (calendar: CalendarUser) => {
@@ -111,7 +116,7 @@ const CalendarCardList = ({
   const handleRemoveCalendar = (deletedCalendarId: number) => {
     calendarContext.setCalendars((prevCalendars) =>
       prevCalendars.filter(
-        (calendarUser) => calendarUser.calendar.id !== deletedCalendarId
+        (calendarUser) => calendarUser.id !== deletedCalendarId
       )
     );
     setFilteredCalendars((prevCalendars) =>
@@ -124,11 +129,11 @@ const CalendarCardList = ({
   const handleEditCalendar = (editedCalendarId: number) => {
     calendarContext.setCalendars((prevCalendars) =>
       prevCalendars.map((calendarUser) =>
-        calendarUser.calendar.id === editedCalendarId
+        calendarUser.id === editedCalendarId
           ? {
               ...calendarUser,
               calendar: {
-                ...calendarUser.calendar,
+                ...calendarUser,
                 ...calendarToEdit?.calendar,
               },
             }
@@ -167,9 +172,9 @@ const CalendarCardList = ({
       {filteredCalendars.map((calendarUser) => (
         <CalendarCard
           key={calendarUser.id}
-          img={calendarUser.calendar.image || PLACEHOLDER_IMG}
-          name={!isMenuCollapsed ? calendarUser.calendar.title : ''}
-          link={`/calendar/${calendarUser.calendar.id}`}
+          img={calendarUser.calendar?.img || PLACEHOLDER_IMG}
+          name={!isMenuCollapsed ? calendarUser.calendar?.title || '' : ''}
+          link={`/calendar/${calendarUser.calendar?.id || ''}`}
           onDelete={() => handleDelete(calendarUser)}
           onEdit={() => handleEdit(calendarUser)}
         />
@@ -178,16 +183,18 @@ const CalendarCardList = ({
       {calendarToDelete && (
         <DeleteCalendarModal
           onClose={handleCloseDeleteModal}
-          calendar={calendarToDelete.calendar}
-          onRemoveCalendar={handleRemoveCalendar}
+          calendar={calendarToDelete}
+          onRemoveCalendar={() =>
+            handleRemoveCalendar(calendarToDelete.calendar.id)
+          }
         />
       )}
 
       {calendarToEdit && (
         <EditCalendarModal
           onClose={handleCloseEditModal}
-          calendar={calendarToEdit.calendar}
-          onEditCalendar={handleEditCalendar}
+          calendar={calendarToEdit}
+          onEditCalendar={() => handleEditCalendar(calendarToEdit.calendar.id)}
         />
       )}
     </ul>
