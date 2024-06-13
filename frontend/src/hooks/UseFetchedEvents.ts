@@ -1,16 +1,29 @@
-import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { DateTime } from 'ts-luxon';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import useFetch from './useFetch';
+import { toast } from 'react-toastify';
+import { DateTime } from 'ts-luxon';
+
 import { Event } from '../@types/Events';
+import { TimeBlock } from '../@types/TimeBlock';
+
+import useFetch from './useFetch';
 
 const useFetchedEvents = () => {
+  // State
   const [events, setEvents] = useState<Event[]>([]);
+  const [timeBlocks, setTimeBlocks] = useState<TimeBlock[]>([]);
+
   const params = useParams();
+
+  // Fetch
   const { fetchData: getEvents } = useFetch('GET', [
     'events',
+    'calendar',
+    params.id?.toString() ?? '',
+  ]);
+  const { fetchData: getTimeBlocks } = useFetch('GET', [
+    'timeblocks',
     'calendar',
     params.id?.toString() ?? '',
   ]);
@@ -38,6 +51,29 @@ const useFetchedEvents = () => {
         console.error(t('calendar:error.fetchingEvents'), ': ', error);
         toast.error(t('calendar:error.fetchingEvents'));
       });
+
+    // TODO: Add Translations
+    getTimeBlocks()
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to fetch timeblocks');
+        }
+      })
+      .then((data) => {
+        const formattedTimeBlocks = data.map((timeBlock) => ({
+          ...timeBlock,
+          start: DateTime.fromISO(timeBlock.start_time).toJSDate(),
+          end: DateTime.fromISO(timeBlock.end_time).toJSDate(),
+          type: 'timeBlocker',
+        }));
+        setTimeBlocks(formattedTimeBlocks);
+      })
+      .catch((error) => {
+        console.error(t('calendar:error.fetchingTimeBlocks'), ': ', error);
+        toast.error(t('calendar:error.fetchingTimeBlocks'));
+      });
   }, []);
 
   const addEvent = async (newEvent: Event) => {
@@ -63,7 +99,7 @@ const useFetchedEvents = () => {
     }
   };
 
-  return { events, addEvent };
+  return { events, timeBlocks, addEvent };
 };
 
 export default useFetchedEvents;
