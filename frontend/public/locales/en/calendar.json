@@ -64,6 +64,7 @@
     "forOthers": "From others",
     "forYou": "For you",
     "isNew": "New",
+    "emptyList": "No notifications yet",
     "toasts": {
       "notification-updating-failed": "Error updating notification",
       "notification-update-failed": "Failed to update notification"

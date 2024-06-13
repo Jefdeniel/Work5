@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import useSetTitle from '../hooks/setTitle';
 
 import { Notification } from '../@types/Notification';
+
 import NotificationList from '../components/calendar/notifications/NotificationList';
 import Badge from '../components/ui/Badge/Badge';
 import Button from '../components/ui/Button/Button';
