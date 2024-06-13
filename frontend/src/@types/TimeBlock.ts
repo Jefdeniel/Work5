@@ -3,5 +3,5 @@ export interface TimeBlock {
   title: string;
   start_time: string;
   end_time: string;
-  description: string;
+  description?: string;
 }
