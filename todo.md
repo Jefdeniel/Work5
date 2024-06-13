@@ -19,7 +19,6 @@
 
 - Add Calendar (state)
 - Edit Calendar (state)
-- Add Timeblock (state)
 - Edit timeblock (volledig)
 - Add Events (state)
 - Edit events (volledig)
@@ -29,8 +28,6 @@
 # Notificaties
 
 - Notificaties effectief laten werken
-- Notificatiepagina filteren op calendar en personen
-- PUT request maken bij klikken op notificatie en state
 
 # Backend: Fix Seed for Categories in Calendar
 
@@ -47,11 +44,9 @@
 - Fetch Avatars When Calendar GET: Users
 - Bij Updaten van Settings: Loading State Tonen
 - De Grote Translation Check-up
-- Sidebar Calendar Icons bij Collapsed State Fixen
 - Customize: Collaborator Permissions Laten Werken
 - Export naar PDF
 - readme perfectioneren
-- Wanneer back button click -> error in fetching data
 
   # Deployment
 
