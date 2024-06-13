@@ -1,15 +1,15 @@
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import useFetch from '../../hooks/useFetch';
+import AuthBanner from '../../components/auth/AuthBanner/AuthBanner';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
+import useFetch from '../../hooks/useFetch';
 import Validators from '../../utils/Validators';
-import Logo from '../../components/ui/Logo';
 
 const RegisterPage = () => {
   const { t } = useTranslation(['auth']);
@@ -42,13 +42,7 @@ const RegisterPage = () => {
 
   return (
     <Row className="h-100 align-items-center justify-content-center">
-      <Col
-        sm={12}
-        md={6}
-        className="bg-primary-light h-100 d-none d-lg-block d-flex "
-      >
-        <Logo width="50px" height="50px" className={`mt-xsmall`} />
-      </Col>
+      <AuthBanner />
 
       <Col
         sm={12}
