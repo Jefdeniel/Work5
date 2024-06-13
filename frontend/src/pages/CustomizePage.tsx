@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 import { Calendar } from '../@types/Calendar';
-import { TimeBlock } from '../@types/TimeBlock';
 
 import useSetTitle from '../hooks/setTitle';
 import useFetch from '../hooks/useFetch';
@@ -17,16 +15,14 @@ import LabelColorInput from '../components/customize/Inputs/LabelColorInput';
 const CustomizePage = () => {
   const { t } = useTranslation(['general', 'customize']);
   useSetTitle(t('calendar:calendar-customize.title'));
-  const params = useParams();
-  const calendarId = params.id;
+  const params = useParams<{ id: string }>();
   const [calendar, setCalendar] = useState<Calendar | null>(null);
 
   const { fetchData: getCurrentCalendar, loading: isLoading } = useFetch(
     'GET',
-    [`calendars/${calendarId}`]
+    [`calendars/${params.id}`]
   );
 
-  // TODO: Add translations
   useEffect(() => {
     const getCalendar = async () => {
       try {
@@ -51,14 +47,11 @@ const CustomizePage = () => {
 
   return (
     <div className={`d-flex flex-column gap-large`}>
-      <Row>
-        <Heading level={1} className="heading--lg clr-primary" />
-      </Row>
+      <Heading level={1} className="heading--lg clr-primary" />
 
       {calendar && <LabelColorInput calendar={calendar} />}
 
-      <TimeBlockingSelector calendar={calendar!} />
-
+      {calendar && <TimeBlockingSelector calendar={calendar} />}
       <PermissionBoxes />
     </div>
   );

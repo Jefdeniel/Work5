@@ -1,16 +1,16 @@
-import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
-
-import Modal from '../../ui/Modals/Modal';
-import Button from '../../ui/Button/Button';
-
-import './Modal.scss';
-import Validators from '../../../utils/Validators';
-import Input from '../../ui/Input/Input';
-import useFetch from '../../../hooks/useFetch';
-import { TimeBlock } from '../../../@types/TimeBlock';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { TimeBlock } from '../../../@types/TimeBlock';
+import useFetch from '../../../hooks/useFetch';
+import Validators from '../../../utils/Validators';
+import Button from '../../ui/Button/Button';
+import Input from '../../ui/Input/Input';
+import Modal from '../../ui/Modals/Modal';
+
+import './Modal.scss';
 
 interface Props {
   onClose: () => void;
@@ -42,6 +42,7 @@ const AddTimeBlockingModal = ({ onClose, setTimeBlock }: Props) => {
       const newTimeBlock = await response.json();
       setTimeBlock(newTimeBlock);
       toast.success(t('calendar:calendar-customize.time-blocking.success'));
+      onClose();
     } else {
       toast.error(t('calendar:calendar-customize.time-blocking.error'));
     }
@@ -63,7 +64,6 @@ const AddTimeBlockingModal = ({ onClose, setTimeBlock }: Props) => {
                 <Input
                   {...input}
                   meta={meta}
-                  // TODO: Add translations
                   title={'Title of time block'}
                   className="heading--sm clr-primary-400"
                 />
