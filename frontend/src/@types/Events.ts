@@ -11,7 +11,7 @@ export interface Event {
   recurrence_end_date?: string;
   recurrence_interval?: number;
   status?: string;
-  allDay?: boolean; // ADD TO DATABASE
+  allDay?: boolean; // add to db
   color?: string;
   htmlLink?: string;
 }

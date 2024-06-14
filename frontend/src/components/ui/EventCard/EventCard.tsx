@@ -15,7 +15,6 @@ interface EventProps {
   onDoubleClick?: () => void;
 }
 
-// Color has to be in HEX format
 const EventCard = ({
   event: { title, location, priority, status, htmlLink, start_time, end_time },
   color,
@@ -87,7 +86,6 @@ const EventCard = ({
           {location && (
             <div className="event-card__location">
               <strong>Location: </strong>
-              {/* TODO: add translations */}
               {trimmedLocation ?? 'No location specified'}
             </div>
           )}

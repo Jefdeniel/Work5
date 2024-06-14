@@ -56,8 +56,12 @@ const GoogleEventCard = () => {
             isGoogleEvent={true}
             event={{
               title: event.summary || '',
-              start: event.start?.date || 'No start date',
-              end: event.end?.date || 'No end date',
+              start_time: event.start?.date
+                ? new Date(event.start.date)
+                : new Date('No start date'),
+              end_time: event.end?.date
+                ? new Date(event.end.date)
+                : new Date('No end date'),
               location: event.location || '',
               status: event.status || '',
               htmlLink: event.htmlLink || '',
