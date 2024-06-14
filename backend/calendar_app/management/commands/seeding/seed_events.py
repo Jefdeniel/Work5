@@ -20,8 +20,8 @@ def seed_events(command):
         )
         return
 
-    command.stdout.write("Creating 100 events...")
-    for i in range(100):
+    command.stdout.write("Creating 1000 events...")
+    for i in range(1000):
         try:
             start_time = fake.future_datetime(end_date="+30d", tzinfo=timezone.utc)
             end_time = start_time + timedelta(hours=random.randint(1, 4))
@@ -66,10 +66,10 @@ def seed_events(command):
                 recurrence_end_date=recurrence_end_date,
             )
 
-            command.stdout.write(command.style.SUCCESS(f"Created event {i + 1}/100"))
+            command.stdout.write(command.style.SUCCESS(f"Created event {i + 1}/1000"))
         except (ValidationError, IntegrityError, DatabaseError) as e:
             command.stdout.write(
                 command.style.ERROR(f"Error creating event {i + 1}: {e}")
             )
 
-    command.stdout.write(command.style.SUCCESS("100 events created."))
+    command.stdout.write(command.style.SUCCESS("1000 events created."))

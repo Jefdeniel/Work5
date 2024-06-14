@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
+import { useEffect, useState } from 'react';
+
+import { GoogleEvent } from '../../../@types/Events';
+
 import EventCard from '../../ui/EventCard/EventCard';
 import Spinner from '../../ui/Loading/Spinner';
-import { GoogleEvent } from '../../../@types/Events';
 
 const GoogleEventCard = () => {
   const [googleEvents, setGoogleEvents] = useState<GoogleEvent[]>([]); // Explicitly typed as GoogleEvent[]
