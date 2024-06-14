@@ -531,6 +531,10 @@ ul {
 
 /* Mixins */
 @include screen(mobile) {
+  .auth-banner {
+    display: none;
+  }
+
   .register-buttons {
     flex-direction: column;
   }
@@ -588,4 +592,10 @@ ul {
 
 .w-110 {
   width: 110px;
+}
+
+@include screen(tablet) {
+  .auth-banner {
+    display: none;
+  }
 }
