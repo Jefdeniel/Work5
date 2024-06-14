@@ -92,6 +92,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             event={event as Event}
             color={(event as Event).color}
             onDoubleClick={handleOpenEditEventModal}
+            onDelete={() => console.log('Delete event')}
+            onEdit={handleOpenEditEventModal}
           />
         );
       },

@@ -1,18 +1,29 @@
+import { useEffect, useRef, useState } from 'react';
+
 import { Event } from '../../../@types/Events';
+
+import { useSettings } from '../../../hooks/useSettings';
 import ColorConversion from '../../../utils/ColorConversion';
+import Icon from '../Icon/Icon';
 import {
-  VeryLowPriorityIcon,
+  HighPriorityIcon,
   LowPriorityIcon,
   MediumPriorityIcon,
-  HighPriorityIcon,
   VeryHighPriorityIcon,
+  VeryLowPriorityIcon,
 } from '../Icon/PriorityIcons';
+import IconButton from '../IconButton/IconButton';
+import OptionsBox from '../OptionsBox/OptionsBox';
+
+import './EventCard.scss';
 
 interface EventProps {
   event: Event;
   color?: string;
   isGoogleEvent?: boolean;
   onDoubleClick?: () => void;
+  onDelete: () => void;
+  onEdit: () => void;
 }
 
 const EventCard = ({
@@ -20,7 +31,14 @@ const EventCard = ({
   color,
   isGoogleEvent,
   onDoubleClick,
+  onDelete,
+  onEdit,
 }: EventProps) => {
+  const [isOptionsVisible, setIsOptionsVisibility] = useState(false);
+
+  const optionsBoxRef = useRef<HTMLDivElement>(null);
+  const { theme } = useSettings();
+
   const defaultColor = ColorConversion.convertHexToRGBA('#141C57');
   const fadedDefaultColor = ColorConversion.convertHexToRGBA('#141C57', 0.15);
   const rgbaColor = color
@@ -55,12 +73,58 @@ const EventCard = ({
       ? location.substring(0, MAX_LENGTH)
       : location;
 
+  const handleOptionsClick = () => {
+    setIsOptionsVisibility((prev) => !prev);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      optionsBoxRef.current &&
+      !optionsBoxRef.current.contains(event.target as Node)
+    ) {
+      setIsOptionsVisibility(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
       className="event-card"
       style={{ backgroundColor: rgbaColor }}
       onDoubleClick={onDoubleClick}
     >
+      <IconButton
+        icon={
+          theme === 'dark' ? (
+            <Icon
+              className={`event-card__options`}
+              src="/icons/modify-bright.svg"
+              alt="chevron right icon"
+            />
+          ) : (
+            <Icon
+              className={`event-card__options`}
+              src="/icons/modify.svg"
+              alt="chevron right icon"
+            />
+          )
+        }
+        onClick={handleOptionsClick}
+        className={`event-card__options`}
+      />
+
+      {isOptionsVisible && (
+        <div ref={optionsBoxRef}>
+          <OptionsBox onDelete={onDelete} onEdit={onEdit} />
+        </div>
+      )}
+
       <div
         className="event-card__bar"
         style={{

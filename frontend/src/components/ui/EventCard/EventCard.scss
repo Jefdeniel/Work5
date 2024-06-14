@@ -2,11 +2,25 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 100%;
+  background-color: var(--bg-color);
   border-radius: var(--br-base);
   display: flex;
   align-items: center;
+  position: relative;
   overflow: hidden;
-  background-color: var(--bg-color);
+
+  & .options-box {
+    top: 1.2rem;
+    right: 2.5rem;
+  }
+
+  & .event-card__options {
+    padding: var(--sp-base);
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+  }
 
   & .event-card__title {
     padding: var(--p-sm) var(--p-md);
