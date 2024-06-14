@@ -1,16 +1,12 @@
 import moment from 'moment';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import {
-  Calendar,
-  DateLocalizer,
-  Views,
-  momentLocalizer,
-} from 'react-big-calendar';
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
 import { Event } from '../../../@types/Events';
 import { TimeBlock } from '../../../@types/TimeBlock';
 
+import { getCustomFormats, getDateFormats } from '../../../constants/calendar';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
@@ -52,24 +48,19 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const TIMESLOTS = 60 / STEP;
 
   useEffect(() => {
+    const dateFormats = getDateFormats(time_format);
+    const customFormats = getCustomFormats(time_format);
+
     moment.updateLocale('es-es', {
       week: {
         dow: week_start_day === 'Monday' ? 1 : 0,
       },
-      formats: {
-        timeGutterFormat: time_format === '24h' ? 'HH:mm' : 'hh:mm A',
-        eventTimeRangeFormat: (
-          { start, end },
-          culture: string,
-          localizer: DateLocalizer
-        ) =>
-          localizer.format(start, 'HH:mm', culture) +
-          ' - ' +
-          localizer.format(end, 'HH:mm', culture),
-        agendaTimeFormat: time_format === '24h' ? 'HH:mm' : 'hh:mm A',
-      },
+      // * Custom date and time formats -> longDateFormat name is little misleading but comes from Moment.js API design so not editable
+      longDateFormat: dateFormats,
+      // Custom formats for the calendar views
+      formats: customFormats,
     });
-  }, [week_start_day, time_format]);
+  }, [week_start_day, time_format, localizer]);
 
   const handleOpenEditEventModal = () => {
     setShowEditEventModal(true);
@@ -109,8 +100,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     () => [...events, ...timeBlocks],
     [events, timeBlocks]
   );
-
-  console.log('All events: ', allEvents);
 
   const initProps = useMemo(
     () => ({
@@ -224,7 +213,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         components={components}
         timeslots={TIMESLOTS}
         onSelectSlot={handleSelectSlot}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '74%' }}
         onDoubleClickEvent={handleDoubleClickEvent}
         defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
       />
