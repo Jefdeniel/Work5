@@ -7,14 +7,14 @@ export const VIEW_OPTIONS = [
   { id: Views.AGENDA, label: 'Agenda', key: Views.AGENDA },
 ];
 
-export const translateViewOptions = (t) => {
+export const TRANSLATE_VIEW_OPTIONS = (t) => {
   return VIEW_OPTIONS.map((option) => ({
     ...option,
     label: t(`calendar:calendar.views.${option.id}`),
   }));
 };
 
-export const getDateFormats = (time_format) => ({
+export const GET_DATE_FORMATS = (time_format) => ({
   // Short time format
   LT: time_format === '24h' ? 'HH:mm' : 'h A',
   // Long time format with seconds
@@ -29,11 +29,13 @@ export const getDateFormats = (time_format) => ({
   LLLL: 'dddd, MMMM D, YYYY HH:mm',
 });
 
-export const getCustomFormats = (time_format) => ({
+export const GET_VIEW_FORMATS = (time_format) => ({
+  // Create custom formats for calendar VIEWS
   timeGutterFormat: time_format === '24h' ? 'HH:mm' : 'h A',
   dayTimeFormat: time_format === '24h' ? 'HH:mm' : 'h A',
   weekTimeFormat: time_format === '24h' ? 'HH:mm' : 'h A',
   agendaTimeFormat: time_format === '24h' ? 'HH:mm' : 'h A',
+
   eventTimeRangeFormat: ({ start, end }, culture: string, localizer) =>
     localizer.format(start, 'HH:mm', culture) +
     ' - ' +

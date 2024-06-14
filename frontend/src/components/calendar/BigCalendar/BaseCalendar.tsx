@@ -6,7 +6,10 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 import { Event } from '../../../@types/Events';
 import { TimeBlock } from '../../../@types/TimeBlock';
 
-import { getCustomFormats, getDateFormats } from '../../../constants/calendar';
+import {
+  GET_DATE_FORMATS,
+  GET_VIEW_FORMATS,
+} from '../../../constants/calendar';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
@@ -48,17 +51,17 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const TIMESLOTS = 60 / STEP;
 
   useEffect(() => {
-    const dateFormats = getDateFormats(time_format);
-    const customFormats = getCustomFormats(time_format);
+    const dateAndTimeFormats = GET_DATE_FORMATS(time_format);
+    const customViewFormats = GET_VIEW_FORMATS(time_format);
 
     moment.updateLocale('es-es', {
       week: {
         dow: week_start_day === 'Monday' ? 1 : 0,
       },
       // * Custom date and time formats -> longDateFormat name is little misleading but comes from Moment.js API design so not editable
-      longDateFormat: dateFormats,
+      longDateFormat: dateAndTimeFormats,
       // Custom formats for the calendar views
-      formats: customFormats,
+      formats: customViewFormats,
     });
   }, [week_start_day, time_format, localizer]);
 
