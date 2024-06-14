@@ -12,7 +12,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8]
+        python-version: [3.10]
     steps:
       - uses: actions/checkout@v3
       - name: 🐍 Set up Python ${{ matrix.python-version }}
@@ -44,10 +44,6 @@ jobs:
         run: |
           cd frontend
           npm run build
-      - name: Run Frontend Tests
-        run: |
-          # Run frontend test commands here (e.g., jest, karma, etc.)
-          # Example: npm run test
       - name: 🚨 Run Frontend Linting
         run: |
           cd frontend
