@@ -23,6 +23,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
+      # Uncomment and customize the following steps as needed:
       # - name: 🧪 Run Backend Tests
       #   run: |
       #     python manage.py test
@@ -32,19 +33,22 @@ jobs:
       #     # Example: flake8 backend
 
   build-production-frontend:
-   - name: 📦 Install Frontend Dependencies
-     run: |
-        cd frontend
-        npm install
-    - name: 🏗️ Build Frontend
-      run: |
-        cd frontend
-        npm run build
-    - name: Run Frontend Tests
-      run: |
-        Run frontend test commands here (e.g., jest, karma, etc.)
-        Example: npm run test
-    - name: 🚨 Run Frontend Linting
-      run: |
-        cd frontend
-        npm run lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 📦 Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm install
+      - name: 🏗️ Build Frontend
+        run: |
+          cd frontend
+          npm run build
+      - name: Run Frontend Tests
+        run: |
+          # Run frontend test commands here (e.g., jest, karma, etc.)
+          # Example: npm run test
+      - name: 🚨 Run Frontend Linting
+        run: |
+          cd frontend
+          npm run lint
