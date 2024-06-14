@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
 import { gapi } from 'gapi-script';
+import { useEffect, useState } from 'react';
+
+import { GoogleEvent } from '../../../@types/Events';
+
 import EventCard from '../../ui/EventCard/EventCard';
 import Spinner from '../../ui/Loading/Spinner';
-import { GoogleEvent } from '../../../@types/Events';
 
 const GoogleEventCard = () => {
   const [googleEvents, setGoogleEvents] = useState<GoogleEvent[]>([]); // Explicitly typed as GoogleEvent[]
@@ -56,8 +58,8 @@ const GoogleEventCard = () => {
             isGoogleEvent={true}
             event={{
               title: event.summary || '',
-              start: event.start?.date || 'No start date',
-              end: event.end?.date || 'No end date',
+              start_time: event.start?.date || 'No start date',
+              end_time: event.end?.date || 'No end date',
               location: event.location || '',
               status: event.status || '',
               htmlLink: event.htmlLink || '',
