@@ -12,11 +12,7 @@ interface PromptFormProps {
   isLoading: boolean;
 }
 
-const PromptForm = ({
-  onSubmit,
-  onReset,
-  isLoading,
-}: PromptFormProps): JSX.Element => {
+const PromptForm = ({ onSubmit, onReset, isLoading }: PromptFormProps) => {
   const { t } = useTranslation(['calendar']);
 
   return (
