@@ -3,6 +3,7 @@
   padding: var(--sp-base);
 }
 
+
 .css-ewdv3l .ps-menuitem-root:not(:last-child)::after {
   content: '';
   position: absolute;

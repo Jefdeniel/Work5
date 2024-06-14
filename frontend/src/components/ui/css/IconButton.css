@@ -11,8 +11,7 @@
   display: flex;
   align-items: center;
 }
-.icon-button.btn--filled svg,
-.icon-button.btn--filled img {
+.icon-button.btn--filled svg, .icon-button.btn--filled img {
   margin: var(--p-sm);
 }
 .icon-button.btn--filled:hover {
@@ -21,4 +20,4 @@
 
 .icon-button:active {
   background: none;
-} /*# sourceMappingURL=IconButton.css.map */
+}/*# sourceMappingURL=IconButton.css.map */

@@ -109,9 +109,7 @@ const EditEventModal = ({ onClose }: Props) => {
 
               <span>-</span>
 
-              <EventTimeSelector
-                onChange={onHandleEndTime} /*value={end_time}*/
-              />
+              <EventTimeSelector onChange={onHandleEndTime} /*value={end_time}*/ />
             </div>
 
             <span className="my-3">Label choice select</span>

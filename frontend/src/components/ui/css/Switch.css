@@ -1,4 +1,4 @@
-@import url('../../../App.scss');
+@import url("../../../App.scss");
 .switch-label {
   position: relative;
   width: 40px;
@@ -31,7 +31,7 @@
   background-color: var(--sa-bright);
   border-radius: var(--br-full);
   transition: 0.4s;
-  content: '';
+  content: "";
 }
 
 .switch-label input:checked + .switch-slider {
@@ -40,4 +40,4 @@
 
 .switch-label input:checked + .switch-slider:before {
   transform: translateX(14px);
-} /*# sourceMappingURL=Switch.css.map */
+}/*# sourceMappingURL=Switch.css.map */

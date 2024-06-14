@@ -15,13 +15,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
-  plugins: [
-    'react',
-    'react-refresh',
-    'prettier',
-    '@typescript-eslint',
-    '@typescript-eslint/recommended-type-checked',
-  ],
+  plugins: ['react', 'react-refresh', 'prettier', '@typescript-eslint'],
   ignorePatterns: ['.eslintrc.js', 'node_modules/', 'build/', 'dist/'],
   rules: {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
