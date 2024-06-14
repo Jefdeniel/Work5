@@ -9,7 +9,14 @@ interface Props {
   onChange: (value: string) => void;
 }
 
-const ColorInput = ({ className, label, name, value, defaultValue, onChange }: Props) => {
+const ColorInput = ({
+  className,
+  label,
+  name,
+  value,
+  defaultValue,
+  onChange,
+}: Props) => {
   return (
     <label className={className}>
       <input

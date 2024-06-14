@@ -1,1 +1,18 @@
-@media(min-width: 992px){.top-navigation,.container{padding:var(--sp-base) 150px}}@media(max-width: 992px){.top-navigation,.container{padding:var(--sp-base) 50px}}@media(max-width: 576px){.top-navigation,.container{padding:var(--sp-base) 20px}}/*# sourceMappingURL=Layout.min.css.map */
+@media (min-width: 992px) {
+  .top-navigation,
+  .container {
+    padding: var(--sp-base) 150px;
+  }
+}
+@media (max-width: 992px) {
+  .top-navigation,
+  .container {
+    padding: var(--sp-base) 50px;
+  }
+}
+@media (max-width: 576px) {
+  .top-navigation,
+  .container {
+    padding: var(--sp-base) 20px;
+  }
+} /*# sourceMappingURL=Layout.min.css.map */
