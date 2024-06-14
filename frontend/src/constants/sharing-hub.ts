@@ -5,10 +5,10 @@ interface actionItem {
 }
 
 export const EXPORT_AGENDA_ITEMS: actionItem[] = [
-  {
-    onClick: 'exportAsPDF',
-    label: 'PDF',
-  },
+  // {
+  //   onClick: 'exportAsPDF',
+  //   label: 'PDF',
+  // },
   {
     onClick: 'openExcelModal',
     label: 'Excel sheet',

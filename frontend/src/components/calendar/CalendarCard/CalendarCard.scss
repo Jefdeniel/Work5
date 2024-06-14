@@ -9,12 +9,16 @@
   }
 }
 
+.nav-calendar-card {
+  position: relative;
+}
+
 .calendar-card__options {
   padding: var(--sp-base);
   position: absolute;
   z-index: 100;
-  top: -.35rem;
-  right: -.7rem;
+  top: -0.35rem;
+  right: -0.7rem;
 }
 
 .calendar-card__img {

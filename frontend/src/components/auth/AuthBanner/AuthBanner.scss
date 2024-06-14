@@ -1,0 +1,19 @@
+.auth-banner {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  & .auth-banner__img {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    object-fit: cover;
+  }
+
+  & .auth-banner__logo {
+    margin-top: var(--sp-xs);
+    position: relative;
+    z-index: 50;
+  }
+}

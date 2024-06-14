@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import { Event } from '../../../../@types/Events';
@@ -7,13 +7,14 @@ import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
 
 import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Input/Input';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
-import Input from '../../../ui/Input/Input';
-import EventTimeSelector from '../Selectors/EventTimeSelector';
 
-import './EventModal.scss';
+import EndEventTimeSelector from '../Selectors/EndEventTimeSelector';
 import EventRepeatSelector from '../Selectors/EventRepeatSelector';
+import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
+import './EventModal.scss';
 
 interface Props {
   event?: Event;
@@ -35,8 +36,8 @@ const EditEventModal = ({ onClose }: Props) => {
           ...values,
           title: values.title,
           description: values.description,
-          start_time: values.start,
-          end_time: values.end,
+          start_time: values.start_time,
+          end_time: values.end_time,
         }
       );
 
@@ -58,14 +59,6 @@ const EditEventModal = ({ onClose }: Props) => {
     return <LoadingScreen />;
   }
 
-  const onHandleStartTime = (startTime: string) => {
-    console.log('Start time:', startTime);
-  };
-
-  const onHandleEndTime = (endTime: string) => {
-    console.log('End time:', endTime);
-  };
-
   return (
     <Modal
       show={true}
@@ -84,7 +77,27 @@ const EditEventModal = ({ onClose }: Props) => {
                   meta={meta}
                   title={t('events:eventInfo.title')}
                   isBig
-                  value={input.values.title}
+                  value={input.values.title ? input.values.title : ''} // TODO: Fix this
+                />
+              )}
+            </Field>
+
+            <Field name="start_time" validate={Validators.required()}>
+              {({ input, meta }) => (
+                <StartEventTimeSelector
+                  {...input}
+                  meta={meta}
+                  value={input.values.start_time ? input.values.start_time : ''} // TODO: Fix this
+                />
+              )}
+            </Field>
+
+            <Field name="end_time" validate={Validators.required()}>
+              {({ input, meta }) => (
+                <EndEventTimeSelector
+                  {...input}
+                  meta={meta}
+                  value={input.values.end_time ? input.values.end_time : ''} // TODO: Fix this
                 />
               )}
             </Field>
@@ -95,31 +108,17 @@ const EditEventModal = ({ onClose }: Props) => {
                   {...input}
                   meta={meta}
                   title={t('events:eventInfo.description')}
-                  isBig
-                  value={input.description}
+                  value={input.description ? input.description : ''}
                 />
               )}
             </Field>
-
-            <div className={`time-selectors`}>
-              <EventTimeSelector
-                onChange={onHandleStartTime}
-                // value={start_time}
-              />
-
-              <span>-</span>
-
-              <EventTimeSelector onChange={onHandleEndTime} /*value={end_time}*/ />
-            </div>
-
-            <span className="my-3">Label choice select</span>
 
             <Field name="repeat">
               {({ input, meta }) => (
                 <EventRepeatSelector
                   {...input}
                   meta={meta}
-                  onChange={input.onChange}
+                  value={input.values.repeat ? input.values.repeat : ''} // TODO: Fix this
                 />
               )}
             </Field>

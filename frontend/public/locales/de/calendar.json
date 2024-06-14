@@ -5,9 +5,11 @@
     "fetchingCalendars": "Fehler beim Abrufen der Kalender"
   },
   "calendar-overview": {
+    "delete": "Löschen",
     "delete-title": "Kalender löschen",
     "delete-description": "Möchten Sie diesen Kalender wirklich löschen?",
     "delete-confirmation-yes": "Ja, ich bin sicher",
+    "edit": "Bearbeiten",
     "edit-title": "Kalender bearbeiten",
     "edit-description": "Bearbeiten Sie die Details Ihres Kalenders unten.",
     "toast": {
@@ -62,6 +64,7 @@
     "forOthers": "Von anderen",
     "forYou": "Für dich",
     "isNew": "Neu",
+    "emptyList": "Keine Benachrichtigungen gefunden",
     "toasts": {
       "notification-updating-failed": "Fehler beim Aktualisieren der Benachrichtigung",
       "notification-update-failed": "Die Benachrichtigung konnte nicht aktualisiert werden"
@@ -108,5 +111,9 @@
     "send": "Schicken",
     "prompt": "Prompt",
     "response": "Antwort"
+  },
+  "toasts": {
+    "success": "Das hat geklappt",
+    "error": "Etwas ist schief gelaufen"
   }
 }

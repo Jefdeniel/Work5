@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { FieldMetaState } from 'react-final-form';
-import Select from '../../ui/Select/Select';
 import { Col, Row } from 'react-bootstrap';
+
+import Select from '../../ui/Select/Select';
 
 interface Props {
   initialValue?: boolean;
@@ -45,22 +46,23 @@ const WeekendVisbilityOnSelector = ({
     <>
       <Row className="full-select d-flex flex-row align-items-center gap-2">
         <Col>
-          <Row>
-            <span className="title">
-              {t('settings:calendarView.weekendVisibilityToggle')}
-            </span>
-            <small className="description p-0">
-              {t('settings:calendarView.weekendVisibilityToggleDescription')}
-            </small>
-          </Row>
+          <span className="title">
+            {t('settings:calendarView.weekendVisibilityToggle')}
+          </span>
+
+          <small className="description p-0">
+            {t('settings:calendarView.weekendVisibilityToggleDescription')}
+          </small>
         </Col>
-        <Col sm={12} md={6} className="d-flex flex-col justify-content-end p-0">
+
+        <Col className="d-flex flex-col justify-content-end p-0">
           <Select
             defaultValue={initialValue}
             value={value}
             onChange={handleChange}
             options={translatedOptions}
             meta={meta}
+            disabled
             {...rest}
           />
         </Col>

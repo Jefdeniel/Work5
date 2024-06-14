@@ -15,9 +15,8 @@ interface EventProps {
   onDoubleClick?: () => void;
 }
 
-// Color has to be in HEX format
 const EventCard = ({
-  event: { title, location, priority, status, htmlLink, start, end },
+  event: { title, location, priority, status, htmlLink, start_time, end_time },
   color,
   isGoogleEvent,
   onDoubleClick,
@@ -74,12 +73,12 @@ const EventCard = ({
           <div>
             <div className="event-card__time">
               <strong>Start: </strong>
-              {start.toLocaleString()}
+              {start_time.toLocaleString()}
             </div>
 
             <div className="event-card__time">
               <strong>End: </strong>
-              {end.toLocaleString()}
+              {end_time.toLocaleString()}
             </div>
           </div>
         )}
@@ -87,7 +86,6 @@ const EventCard = ({
           {location && (
             <div className="event-card__location">
               <strong>Location: </strong>
-              {/* TODO: add translations */}
               {trimmedLocation ?? 'No location specified'}
             </div>
           )}

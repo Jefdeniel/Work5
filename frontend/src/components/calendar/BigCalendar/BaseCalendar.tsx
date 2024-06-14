@@ -1,36 +1,31 @@
 import moment from 'moment';
-import { useMemo, useEffect, useContext, useState } from 'react';
-import {
-  Calendar,
-  DateLocalizer,
-  Views,
-  momentLocalizer,
-} from 'react-big-calendar';
+import { useContext, useEffect, useMemo, useState } from 'react';
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
 import { Event } from '../../../@types/Events';
+import { TimeBlock } from '../../../@types/TimeBlock';
 
-import { SettingsContext } from '../../../store/SettingsContext';
+import {
+  GET_DATE_FORMATS,
+  GET_VIEW_FORMATS,
+} from '../../../constants/calendar';
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
+import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
-import CustomToolbar from './SmallComponents/CustomToolbar';
-import EditEventModal from '../events/Modals/EditEventModal';
 import AddEventModal from '../events/Modals/AddEventModal';
+import EditEventModal from '../events/Modals/EditEventModal';
+import CustomToolbar from './SmallComponents/CustomToolbar/CustomToolbar';
+import TimeBlockCard from './SmallComponents/TimeBlockCard/TimeBlockCard';
 
 import './BaseCalendar.scss';
 import './Calendar.scss';
 
-// Calendar step 1: General calendar settings/structure
-// TODO: Warning error on Agenda view
-// TODO 2: Transform start and end time to luxon
-
-const DnDCalendar = withDragAndDrop<Event>(Calendar);
-
+type Keys = keyof typeof Views;
+const DnDCalendar = withDragAndDrop<Event | TimeBlock>(Calendar);
 interface CalendarProps {
   onShowEventView: (event: Event) => void;
 }
-
-type Keys = keyof typeof Views;
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
@@ -41,11 +36,13 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [showEditEventModal, setShowEditEventModal] = useState(false);
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event>();
-  const [newEventTimes, setNewEventTimes] = useState<
-    { start: Date; end: Date } | undefined
-  >();
+  const [newEventTimes, setNewEventTimes] = useState<{
+    start: Date;
+    end: Date;
+  }>();
 
-  const { events } = useFetchedEvents();
+  const { events, timeBlocks, addEvent } = useFetchedEvents();
+
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
     useContext(SettingsContext);
@@ -54,32 +51,19 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const TIMESLOTS = 60 / STEP;
 
   useEffect(() => {
+    const dateAndTimeFormats = GET_DATE_FORMATS(time_format);
+    const customViewFormats = GET_VIEW_FORMATS(time_format);
+
     moment.updateLocale('es-es', {
       week: {
         dow: week_start_day === 'Monday' ? 1 : 0,
       },
-      formats: {
-        timeGutterFormat: time_format === '24h' ? 'HH:mm' : 'hh:mm A',
-        eventTimeRangeFormat: (
-          { start, end },
-          culture: string,
-          localizer: DateLocalizer
-        ) =>
-          localizer.format(start, 'HH:mm', culture) +
-          ' - ' +
-          localizer.format(end, 'HH:mm', culture),
-        agendaTimeFormat: time_format === '24h' ? 'HH:mm' : 'hh:mm A',
-      },
+      // * Custom date and time formats -> longDateFormat name is little misleading but comes from Moment.js API design so not editable
+      longDateFormat: dateAndTimeFormats,
+      // Custom formats for the calendar views
+      formats: customViewFormats,
     });
-  }, [week_start_day, time_format]);
-
-  // const handleOpenTimeBlockingModal = () => {
-  //   setShowEditEventModal(true);
-  // };
-
-  // const closeAddTimeBlockingModal = () => {
-  //   setShowEditEventModal(false);
-  // };
+  }, [week_start_day, time_format, localizer]);
 
   const handleOpenEditEventModal = () => {
     setShowEditEventModal(true);
@@ -99,15 +83,25 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
 
   const components = useMemo(
     () => ({
-      event: ({ event }: { event: Event }) => (
-        <EventCard
-          event={event}
-          color={event.color}
-          onDoubleClick={handleOpenEditEventModal}
-        />
-      ),
+      event: ({ event }: { event: Event | TimeBlock }) => {
+        if ((event as TimeBlock).type === 'timeBlocker') {
+          return <TimeBlockCard title={event.title} />;
+        }
+        return (
+          <EventCard
+            event={event as Event}
+            color={(event as Event).color}
+            onDoubleClick={handleOpenEditEventModal}
+          />
+        );
+      },
     }),
     []
+  );
+
+  const allEvents: (Event | TimeBlock)[] = useMemo(
+    () => [...events, ...timeBlocks],
+    [events, timeBlocks]
   );
 
   const initProps = useMemo(
@@ -117,7 +111,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         : [Views.DAY, Views.WORK_WEEK, Views.MONTH, Views.AGENDA],
       defaultView: weekend_visibility ? Views.WEEK : Views.WORK_WEEK,
       onSelectSlot: ({ start, end }) => {
-        console.log('START: ', start, 'END: ', end);
         setNewEventTimes({ start, end });
         setSelectedEvent(undefined);
         handleOpenAddEventModal();
@@ -128,13 +121,13 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         setNewEventTimes(undefined);
         handleOpenEditEventModal();
       },
-      events,
+      events: allEvents,
       style: { width: '100%', height: '100%' },
       components: components,
       selectable: true,
       format: time_format === '24H' ? 'HH:mm' : 'hh:mm A',
     }),
-    [weekend_visibility, events, time_format, components, onShowEventView]
+    [weekend_visibility, allEvents, time_format, components, onShowEventView]
   );
 
   const handleSearchFocus = () => {
@@ -148,7 +141,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }
   };
 
-  // Handle search input
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -157,27 +149,33 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       const filteredEvents = events.filter((event) =>
         event?.title?.toLowerCase().includes(query.toLowerCase())
       );
-      // Set filtered events
       setFilteredEvents(filteredEvents);
     } else {
-      // Reset filtered events
       setFilteredEvents([]);
     }
   };
 
   const handleEventClickForSearch = (event: Event) => {
     console.log('Event clicked: ', event);
-    // setSelectedEvent(event);
-    // handleOpenAddEventModal();
-    // handleOpenEditEventModal();
-    // handleOpenTimeBlockingModal();
+  };
+
+  const handleSelectSlot = ({ start, end }) => {
+    setNewEventTimes({ start, end });
+    handleOpenAddEventModal();
+  };
+
+  const handleDoubleClickEvent = (event: Event) => {
+    setSelectedEvent(event);
+    handleOpenEditEventModal();
+  };
+
+  const handleAddEvent = (newEvent) => {
+    addEvent(newEvent);
+    closeAddEventModal();
   };
 
   return (
-    // TODO: Add weekend visibility toggle
     <div className={'full-calendar'}>
-      {/* <div className={`full-calendar ${weekend_visibility ? 'weekend-visible' : 'weekend-hidden'}`} > */}
-
       <CustomToolbar
         searchQuery={searchQuery}
         handleSearchInput={handleSearchInput}
@@ -192,52 +190,35 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         handleDateChange={handleDateChange}
       />
 
-      {/* {showEditEventModal && selectedEvent && (
-        <EditEventModal
-          title={selectedEvent?.title!}
-          description={selectedEvent?.description!}
-          start_time={selectedEvent?.start as Date}
-          end_time={selectedEvent?.end as Date}
-          onClose={closeEditEventModal}
-        />
-      )} */}
-
       {showEditEventModal && selectedEvent && (
         <EditEventModal event={selectedEvent} onClose={closeEditEventModal} />
       )}
-
       {showAddEventModal && newEventTimes && (
         <AddEventModal
-          // start={newEventTimes.start}
-          // end={newEventTimes.end}
+          start={newEventTimes.start.toISOString()}
+          end={newEventTimes.end.toISOString()}
           onClose={closeAddEventModal}
+          onAddEvent={handleAddEvent}
         />
       )}
 
       <DnDCalendar
         {...initProps}
-        localizer={localizer}
-        view={view}
-        onView={setView}
-        date={date}
-        onNavigate={setDate}
-        defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
-        onSelectSlot={({ start, end }) => {
-          // Logic when selecting a time slot
-          onShowEventView({ start, end });
-          console.log('START: ', start, 'END: ', end);
-        }}
-        onDoubleClickEvent={(event) => {
-          const calendarEvent = event;
-          calendarEvent && onShowEventView(event);
-        }}
-        events={events} // Events db
-        style={{ width: '100%', height: '100%' }} // General props
-        components={components}
         selectable
-        toolbar={false}
+        date={date}
+        view={view}
         step={STEP}
+        events={allEvents}
+        toolbar={false}
+        onView={setView}
+        onNavigate={setDate}
+        localizer={localizer}
+        components={components}
         timeslots={TIMESLOTS}
+        onSelectSlot={handleSelectSlot}
+        style={{ width: '100%', height: '74%' }}
+        onDoubleClickEvent={handleDoubleClickEvent}
+        defaultView={weekend_visibility ? Views.WEEK : Views.WORK_WEEK}
       />
     </div>
   );

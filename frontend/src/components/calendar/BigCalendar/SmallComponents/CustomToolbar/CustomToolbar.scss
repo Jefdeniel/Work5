@@ -1,10 +1,15 @@
-@import '../../../../App.scss';
+@import '../../../../../App.scss';
 
 .toolbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--p-lg);
+}
+
+.toolbar-date-switcher {
+  display: flex;
+  align-items: center;
 }
 
 .navigation-buttons {
@@ -42,4 +47,11 @@
     padding: var(--p-sm) var(--p-lg);
     font-size: var(--fs-sm);
   }
+}
+
+.calendar-users-list {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
 }

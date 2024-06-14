@@ -39,7 +39,7 @@ function App() {
             <Route element={<Layout />}>
               <Route
                 path="/"
-                element={<Navigate to="/calendar/main" replace />}
+                element={<Navigate to="/calendar/overview" replace />}
               />
               <Route path="profile" element={<ProfilePage />} />
               <Route path="settings" element={<SettingsPage />} />

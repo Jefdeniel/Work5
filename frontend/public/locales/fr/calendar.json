@@ -5,9 +5,11 @@
     "fetchingCalendars": "Erreur lors de la récupération des calendriers"
   },
   "calendar-overview": {
+    "delete": "Supprimer",
     "delete-title": "Supprimer le calendrier",
     "delete-description": "Êtes-vous sûr de vouloir supprimer ce calendrier ?",
     "delete-confirmation-yes": "Oui je suis sûr",
+    "edit": "Modifier",
     "edit-title": "Modifier le calendrier",
     "edit-description": "Modifiez les détails de votre calendrier ci-dessous.",
     "toast": {
@@ -62,6 +64,7 @@
     "forOthers": "Des autres",
     "forYou": "Pour toi",
     "isNew": "Nouvelle",
+    "emptyList": "Il n'y a pas de notifications pour le moment.",
     "toasts": {
       "notification-updating-failed": "Erreur lors de la mise à jour de la notification",
       "notification-update-failed": "Échec de la mise à jour de la notification"
@@ -108,5 +111,9 @@
     "send": "Envoyer",
     "prompt": "Prompt",
     "response": "Réponse"
+  },
+  "toasts": {
+    "success": "Cela a fonctionné!",
+    "error": "Quelque chose n'a pas fonctionné..."
   }
 }

@@ -1,97 +1,76 @@
-import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import { DateTime } from 'luxon';
+import { useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
-import useFetch from '../../../hooks/useFetch';
-import useAuth from '../../../hooks/useAuth';
-
-import NotificationCard from './NotificationCard/NotificationCard';
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import { Notification } from '../../../@types/Notification';
 
-const NotificationList = () => {
+import useFetch from '../../../hooks/useFetch';
+import Icon from '../../ui/Icon/Icon';
+import NotificationCard from './NotificationCard/NotificationCard';
+
+const NotificationList = ({ notifications, setNotifications }) => {
   const { t } = useTranslation(['calendar']);
-  const { user_id } = useAuth();
 
-  const { fetchData: getNotifications, loading: isLoading } = useFetch('GET', [
+  const [notificationId, setNotificationId] = useState<number>();
+
+  const { fetchData: putNotification } = useFetch('PATCH', [
     'notifications',
+    notificationId ? notificationId.toString() : '',
   ]);
-  const { fetchData: putNotification } = useFetch('PUT', [
-    'notifications',
-    user_id ? user_id.toString() : '',
-  ]);
-
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await getNotifications();
-        if (response.ok) {
-          const data = await response.json();
-          setNotifications(data);
-        } else if (notifications.length === 0) {
-          //
-        } else {
-          throw new Error('Failed to fetch notifications');
-        }
-      } catch (error) {
-        console.error('Error fetching notifications:', error);
-        toast.error(error.message);
-      }
-    };
-
-    fetchNotifications();
-  }, []);
-
-  const handleUpdateError = (error: any) => {
-    console.error(
-      t('calendar:notifications.toasts.notification-updating-failed'),
-      error
-    );
-    toast.error(
-      t('calendar:notifications.toasts.notification-updating-failed')
-    );
-  };
 
   const handleUpdateSuccess = (
     notificationId: number,
     updatedNotification: Notification
   ) => {
     setNotifications((prevNotifications) =>
-      prevNotifications.map((n) =>
-        n.id === notificationId ? updatedNotification : n
-      )
+      prevNotifications
+        .map((n) => (n.id === notificationId ? updatedNotification : n))
+        .sort((a: Notification, b: Notification) => {
+          if (a.is_new && !b.is_new) return -1;
+          if (!a.is_new && b.is_new) return 1;
+          return 0; // sort by is_new
+        })
     );
   };
 
   const handleNewStatus = async (notificationId: number) => {
+    setNotificationId(notificationId);
     const notification = notifications.find((n) => n.id === notificationId);
     if (!notification) return;
 
     const updatedNotification = {
       ...notification,
-      is_new: !notification.is_new,
+      is_new: notification.is_new ? false : true,
     };
 
     try {
       const response = await putNotification({}, updatedNotification);
       if (response.ok) {
         handleUpdateSuccess(notificationId, updatedNotification);
-      } else {
-        throw new Error(
-          t('calendar:notifications.toasts.notification-update-failed')
-        );
       }
     } catch (error) {
-      handleUpdateError(error);
+      toast.error(
+        t('calendar:notifications.toasts.notification-updating-failed')
+      );
     }
   };
 
-  if (isLoading) {
-    return <LoadingScreen />;
+  if (notifications.length === 0) {
+    return (
+      <div className={`d-flex flex-column align-items-center`}>
+        <Icon
+          src="/icons/notification-light.svg"
+          alt="Notification icon"
+          className={`w-110 mt-5 mb-4`}
+        />
+
+        <span className={`heading heading--lg text-center clr-primary-300`}>
+          {t('calendar:notifications.emptyList')}
+        </span>
+      </div>
+    );
   }
 
   return (
@@ -110,10 +89,8 @@ const NotificationList = () => {
             title={notification.title}
             timeFrom={notificationStart}
             timeTo={notificationStop}
-            onClick={() => handleNewStatus(notification.id!)}
+            onClick={() => handleNewStatus(notification.id)}
             isNew={notification.is_new}
-            // color={notification.color}
-            // TODO: colors
           />
         );
       })}

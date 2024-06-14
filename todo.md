@@ -15,30 +15,17 @@
 - Slack en Apple Calendar button integratie weghalen
 - Alle Agenda's Integreren in 1 Grote Agenda
 
-# Algemene Responsiveness Check-up
-
 # State Bugs en CRUD
 
-- Add Calendar (state)
-- Edit Calendar (state)
-- Add Timeblock (state)
 - Edit timeblock (volledig)
-- Add Events (volledig)
 - Edit events (volledig)
 - Delete Events (volledig)
-- Email Update State Bug Fixen bij Profile Page (state)
 
-# Notificaties
+- Add Events (state)
 
-- Notificaties effectief laten werken
-- Notificatiepagina filteren op calendar en personen
-- PUT request maken bij klikken op notificatie en state
+# Backend:
 
-# Backend: Fix Seed for Categories in Calendar
-
-- Max 5 (huidige situatie: 28)
 - Reset en seed laten werken bij Kyandro
-- Seed file opdelen in seperate files (nice-to-have)
 
 # Settings
 
@@ -48,13 +35,10 @@
 # Random
 
 - Fetch Avatars When Calendar GET: Users
-- Bij Updaten van Settings: Loading State Tonen
 - De Grote Translation Check-up
-- Sidebar Calendar Icons bij Collapsed State Fixen
 - Customize: Collaborator Permissions Laten Werken
 - Export naar PDF
 - readme perfectioneren
-- Wanneer back button click -> error in fetching data
 
   # Deployment
 

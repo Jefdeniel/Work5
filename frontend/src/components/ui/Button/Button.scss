@@ -123,4 +123,9 @@
   & .icon {
     height: 14px;
   }
+
+  &:disabled {
+    color: var(--sa-bright) !important;
+    background-color: var(--sa-dark-dimmed) !important;
+  }
 }

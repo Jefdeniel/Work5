@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import useFetch from '../../../hooks/useFetch';
 import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-
 import { Calendar } from '../../../@types/Calendar';
-
-import useAuth from '../../../hooks/useAuth';
+import useFetch from '../../../hooks/useFetch';
 import Button from '../../ui/Button/Button';
-
 import './Input.scss';
 
 interface Props {
@@ -33,6 +29,8 @@ const LabelColorInput = ({ calendar }: Props) => {
       calendar: category.id,
     }));
 
+    console.log('Updated categories:', updatedCategories);
+
     try {
       const response = await updateCategoryColors({
         categories: updatedCategories,
@@ -52,16 +50,14 @@ const LabelColorInput = ({ calendar }: Props) => {
     }
   };
 
-  console.log('calendar', calendar);
-
   return (
-    <Row className={`label-color-inputs`}>
+    <div className={`label-color-inputs`}>
       <div className={`input-intro`}>
         <span className={`title mb-1`}>
           {t('calendar:calendar-customize.event-labels.title')}
         </span>
 
-        <p className={`w-75`}>
+        <p className={`w-75 customize-intro`}>
           {t('calendar:calendar-customize.event-labels.description')}
         </p>
       </div>
@@ -71,7 +67,7 @@ const LabelColorInput = ({ calendar }: Props) => {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <ul
-              className={`input-list d-flex flex-wrap justify-content-between align-items-center gap-4`}
+              className={`input-list d-flex flex-wrap align-items-center gap-4`}
             >
               {calendar?.categories?.map((category) => (
                 <li key={category.id} className={`input-item`}>
@@ -95,7 +91,7 @@ const LabelColorInput = ({ calendar }: Props) => {
           </form>
         )}
       />
-    </Row>
+    </div>
   );
 };
 

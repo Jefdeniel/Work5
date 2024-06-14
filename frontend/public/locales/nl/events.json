@@ -7,6 +7,13 @@
     "location": "Locatie",
     "status": "Status",
     "priority": "Prioriteit",
+    "priorityOptions": {
+      "very_low": "Zeer laag",
+      "low": "Laag",
+      "medium": "Middel",
+      "high": "Hoog",
+      "very_high": "Zeer hoog"
+    },
     "allDay": "Hele dag"
   },
   "modals": {
@@ -26,5 +33,8 @@
     "added": "Evenement toegevoegd",
     "updated": "Evenement bijgewerkt",
     "deleted": "Evenement verwijderd"
+  },
+  "errors": {
+    "fetchingEvents": "Kan gebeurtenissen niet ophalen"
   }
 }

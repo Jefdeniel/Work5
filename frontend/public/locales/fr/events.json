@@ -7,6 +7,13 @@
     "location": "Lieu",
     "status": "Statut",
     "priority": "Priorité",
+    "priorityOptions": {
+      "very_low": "Très basse",
+      "low": "Basse",
+      "medium": "Moyenne",
+      "high": "Haute",
+      "very_high": "Très haute"
+    },
     "allDay": "Toute la journée"
   },
   "modals": {
@@ -26,5 +33,8 @@
     "added": "Événement ajouté",
     "updated": "Événement mis à jour",
     "deleted": "Événement supprimé"
+  },
+  "errors": {
+    "fetchingEvents": "Échec de la récupération des événements"
   }
 }

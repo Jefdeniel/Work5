@@ -1,12 +1,10 @@
+import { useContext } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useContext } from 'react';
-
-import { Calendar, CalendarUser } from '../../../../@types/Calendar';
+import { Calendar } from '../../../../@types/Calendar';
 import useFetch from '../../../../hooks/useFetch';
 import { CalendarContext } from '../../../../store/CalendarContext';
-
 import Button from '../../../ui/Button/Button';
 
 interface Props {
@@ -21,7 +19,7 @@ const DeleteCalendarModal = ({
   onRemoveCalendar,
 }: Props) => {
   const { t } = useTranslation(['calendar']);
-  const calendarContext = useContext(CalendarContext);
+  const { setCalendars } = useContext(CalendarContext);
 
   const { fetchData: deleteCalendar } = useFetch('DELETE', [
     'calendars',
@@ -31,18 +29,18 @@ const DeleteCalendarModal = ({
   const handleDeleteCalendar = async () => {
     await deleteCalendar({}, { id: calendar.id }).then((response) => {
       if (response.ok) {
-        toast.success(t('calendar:calendar-overview.toast.calendar-deleted'));
+        toast.success(t('calendar:toasts:success'));
         if (calendar.id) {
-          onRemoveCalendar(calendar.id);
-          calendarContext.setCalendars((prev: CalendarUser[]) =>
-            prev.filter((cal) => cal.id !== calendar.id)
+          setCalendars((prevCalendars) =>
+            prevCalendars.filter(
+              (calendarUser) => calendarUser.calendar.id !== calendar.id
+            )
           );
+          onRemoveCalendar(calendar.id!);
         }
       } else {
-        toast.error(
-          t('calendar:calendar-overview.toast.calendar-deletion-failed')
-        );
         console.error(response);
+        toast.error(t('calendar:toasts:error'));
       }
       onClose();
     });

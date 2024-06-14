@@ -3,6 +3,7 @@ from ..models import Calendar, CalendarUser, TimeBlock, CalendarPermissions, Cus
 from .category_serializer import CategorySerializer
 from .timeblock_serializer import TimeBlockSerializer
 from .custom_user_serializer import CustomUserSerializer
+from ..validators import validate_start_before_end
 
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -10,7 +11,10 @@ class CalendarSerializer(serializers.ModelSerializer):
         max_length=255, required=True, help_text="Title of the calendar"
     )
     description = serializers.CharField(
-        max_length=255, required=False, help_text="Description of the calendar"
+        max_length=255,
+        required=False,
+        allow_blank=True,
+        help_text="Description of the calendar",
     )
     img = serializers.ImageField(
         required=False,
@@ -68,6 +72,9 @@ class CalendarSerializer(serializers.ModelSerializer):
         return CustomUserSerializer(
             users, many=True, context={"calendar_id": obj.id}
         ).data
+
+    def validate(self, data):
+        return validate_start_before_end("start_time", "end_time", data)
 
 
 class CalendarPermissionsSerializer(serializers.ModelSerializer):

@@ -1,13 +1,11 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, ReactNode } from 'react';
 import { CalendarUser } from '../@types/Calendar';
 import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';
 
 interface CalendarContextType {
   calendars: CalendarUser[];
-  setCalendars: (
-    calendars: CalendarUser[] | ((prev: CalendarUser[]) => CalendarUser[])
-  ) => void;
+  setCalendars: React.Dispatch<React.SetStateAction<CalendarUser[]>>;
 }
 
 export const CalendarContext = createContext<CalendarContextType>({
@@ -18,7 +16,7 @@ export const CalendarContext = createContext<CalendarContextType>({
 export const CalendarContextProvider = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const { user_id } = useAuth();
   const [calendars, setCalendars] = useState<CalendarUser[]>([]);
@@ -42,7 +40,7 @@ export const CalendarContextProvider = ({
     };
 
     if (user_id) {
-      void fetchData();
+      fetchData();
     }
   }, [user_id]);
 

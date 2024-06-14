@@ -1,18 +1,16 @@
-name: CI 🛠️
+name: CI Pipeline 🛠️
 
 on:
   push:
-    branches: ['main']
+    branches: ['master']
   pull_request:
-    branches: ['main']
+    branches: ['master']
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-production-backend:
+    runs-on: ubuntu-22.04
     strategy:
       max-parallel: 4
-      matrix:
-        python-version: [3.9]
     steps:
       - uses: actions/checkout@v3
       - name: 🐍 Set up Python ${{ matrix.python-version }}
@@ -23,6 +21,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
+      # Uncomment and customize the following steps as needed:
       # - name: 🧪 Run Backend Tests
       #   run: |
       #     python manage.py test
@@ -30,19 +29,20 @@ jobs:
       #   run: |
       #     # Run backend linting commands here (e.g., flake8, pylint, black)
       #     # Example: flake8 backend
+
+  build-production-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: 📦 Install Frontend Dependencies
         run: |
           cd frontend
-          npm install
+          yarn install
       - name: 🏗️ Build Frontend
         run: |
           cd frontend
-          npm run build
-      # - name: Run Frontend Tests
-      #   run: |
-      #     # Run frontend test commands here (e.g., jest, karma, etc.)
-      #     # Example: npm run test
-      # - name: 🚨 Run Frontend Linting
-      #   run: |
-      #     cd frontend
-      #     npm run lint
+          yarn build
+        # run: |
+        #  cd frontend
+        #  yarn lint
+      #- name: 🚨 Run Frontend Linting

@@ -1,20 +1,20 @@
+import moment from 'moment';
 import { useMemo } from 'react';
 import { Views } from 'react-big-calendar';
 import { Col, Row } from 'react-bootstrap';
-import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
-import { Event } from '../../../../@types/Events';
+import { Event } from '../../../../../@types/Events';
 
-import { translateViewOptions } from '../../../../constants/calendar';
-import { useSettings } from '../../../../hooks/useSettings';
-import SmallCalendar from '../../../ui/SmallCalendar/SmallCalendar';
-import IconButton from '../../../ui/IconButton/IconButton';
-import Icon from '../../../ui/Icon/Icon';
-import ProfilePicture from '../../../ui/ProfilePicture/ProfilePicture';
+import { TRANSLATE_VIEW_OPTIONS } from '../../../../../constants/calendar';
+import { useSettings } from '../../../../../hooks/useSettings';
+import Button from '../../../../ui/Button/Button';
+import Icon from '../../../../ui/Icon/Icon';
+import IconButton from '../../../../ui/IconButton/IconButton';
+import ProfilePicture from '../../../../ui/ProfilePicture/ProfilePicture';
+import SmallCalendar from '../../../../ui/SmallCalendar/SmallCalendar';
+import SearchBar from '../SearchBar/SearchBar';
 import ToolbarViewList from './ToolbarViewList';
-import Button from '../../../ui/Button/Button';
-import SearchBar from './SearchBar';
 
 import './CustomToolbar.scss';
 
@@ -46,7 +46,7 @@ const CustomToolbar = ({
   handleDateChange,
 }: Props) => {
   const { t } = useTranslation(['calendar']);
-  const translatedViewOptions = translateViewOptions(t);
+  const translatedViewOptions = TRANSLATE_VIEW_OPTIONS(t);
   const { theme } = useSettings();
 
   // TODO: Add users from the db? maybe put this in a seperate file
@@ -83,7 +83,7 @@ const CustomToolbar = ({
 
   return (
     <div className="custom-toolbar">
-      <Row className={`my-4 d-flex align-items-center search-row`}>
+      <Row className={`mb-4 d-flex align-items-center search-row`}>
         <SearchBar
           searchQuery={searchQuery}
           handleSearchInput={handleSearchInput}
@@ -105,111 +105,121 @@ const CustomToolbar = ({
         {view === Views.AGENDA && <Col></Col>}
 
         {view !== Views.AGENDA && (
-          <Col xs={9} className={`d-flex align-items-center date-title`}>
+          <Col
+            xs={12}
+            md={9}
+            className={`d-flex align-items-center date-title`}
+          >
             <Button
               className={`btn--bordered-primary`}
               text={t('calendar:calendar.today')}
               onClick={onTodayClick}
             />
 
-            <IconButton
-              className={`click-btn`}
-              icon={
-                theme === 'dark' ? (
-                  <img
-                    className="arrow-bright"
-                    src="/icons/arrow-bright.svg"
-                    alt="Arrow icon"
-                  />
-                ) : (
-                  <img src="/icons/arrow.svg" alt="Arrow icon" />
-                )
-              }
-              onClick={onPreviousClick}
-            />
-
-            <span
-              className={`heading heading--lg fw-bold text-center date-title position-relative`}
-              onClick={handleSearchFocus}
-            >
-              {dateText}
-            </span>
-
-            {isSmallCalendarOpen && (
-              <SmallCalendar
-                className={`small-calendar position-absolute`}
-                onChange={handleDateChange}
-                nextLabel={
+            <div className={`toolbar-date-switcher`}>
+              <IconButton
+                className={`click-btn`}
+                icon={
                   theme === 'dark' ? (
-                    <Icon
-                      className={`arrow-bright`}
+                    <img
+                      className="arrow-bright"
                       src="/icons/arrow-bright.svg"
                       alt="Arrow icon"
                     />
                   ) : (
-                    <Icon src="/icons/arrow.svg" alt="Arrow icon" />
+                    <img src="/icons/arrow.svg" alt="Arrow icon" />
                   )
                 }
-                prevLabel={
-                  theme === 'dark' ? (
-                    <Icon
-                      className={`arrow-bright`}
-                      src="/icons/arrow-bright.svg"
-                      alt="Arrow icon"
-                    />
-                  ) : (
-                    <Icon src="/icons/arrow.svg" alt="Arrow icon" />
-                  )
-                }
-                next2Label={
-                  theme === 'dark' ? (
-                    <Icon
-                      className={`arrow-bright`}
-                      src="/icons/double-arrow-bright.svg"
-                      alt="Arrow icon"
-                    />
-                  ) : (
-                    <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
-                  )
-                }
-                prev2Label={
-                  theme === 'dark' ? (
-                    <Icon
-                      className={`arrow-bright`}
-                      src="/icons/double-arrow-bright.svg"
-                      alt="Arrow icon"
-                    />
-                  ) : (
-                    <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
-                  )
-                }
+                onClick={onPreviousClick}
               />
-            )}
 
-            <IconButton
-              className={`click-btn`}
-              icon={
-                theme === 'dark' ? (
-                  <img
-                    className="arrow-bright--last rotate-180"
-                    src="/icons/arrow-bright.svg"
-                    alt="Arrow icon"
-                  />
-                ) : (
-                  <img
-                    className="rotate-180"
-                    src="/icons/arrow.svg"
-                    alt="Arrow icon"
-                  />
-                )
-              }
-              onClick={onNextClick}
-            />
+              <span
+                className={`heading heading--lg fw-bold text-center date-title position-relative`}
+                onClick={handleSearchFocus}
+              >
+                {dateText}
+              </span>
+
+              {isSmallCalendarOpen && (
+                <SmallCalendar
+                  className={`small-calendar position-absolute`}
+                  onChange={handleDateChange}
+                  nextLabel={
+                    theme === 'dark' ? (
+                      <Icon
+                        className={`arrow-bright`}
+                        src="/icons/arrow-bright.svg"
+                        alt="Arrow icon"
+                      />
+                    ) : (
+                      <Icon src="/icons/arrow.svg" alt="Arrow icon" />
+                    )
+                  }
+                  prevLabel={
+                    theme === 'dark' ? (
+                      <Icon
+                        className={`arrow-bright`}
+                        src="/icons/arrow-bright.svg"
+                        alt="Arrow icon"
+                      />
+                    ) : (
+                      <Icon src="/icons/arrow.svg" alt="Arrow icon" />
+                    )
+                  }
+                  next2Label={
+                    theme === 'dark' ? (
+                      <Icon
+                        className={`arrow-bright`}
+                        src="/icons/double-arrow-bright.svg"
+                        alt="Arrow icon"
+                      />
+                    ) : (
+                      <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                    )
+                  }
+                  prev2Label={
+                    theme === 'dark' ? (
+                      <Icon
+                        className={`arrow-bright`}
+                        src="/icons/double-arrow-bright.svg"
+                        alt="Arrow icon"
+                      />
+                    ) : (
+                      <Icon src="/icons/double-arrow.svg" alt="Arrow icon" />
+                    )
+                  }
+                />
+              )}
+
+              <IconButton
+                className={`click-btn`}
+                icon={
+                  theme === 'dark' ? (
+                    <img
+                      className="arrow-bright--last rotate-180"
+                      src="/icons/arrow-bright.svg"
+                      alt="Arrow icon"
+                    />
+                  ) : (
+                    <img
+                      className="rotate-180"
+                      src="/icons/arrow.svg"
+                      alt="Arrow icon"
+                    />
+                  )
+                }
+                onClick={onNextClick}
+              />
+            </div>
           </Col>
         )}
 
-        <Col xs={3} className={`p-0 d-flex justify-content-end`}>
-          <ul className={`d-flex gap-2`}>
+        <Col
+          xs={12}
+          md={3}
+          className={`d-flex align-items-center justify-content-end users-list p-0`}
+        >
+          <ul className={`calendar-users-list`}>
             {calendarUsers.map((user) => (
               <li key={user.id}>
                 {user.avatar ? (

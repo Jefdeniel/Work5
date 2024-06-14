@@ -1,3 +1,5 @@
+import { TimeBlock } from './TimeBlock';
+
 export interface Calendar {
   id?: number;
   title: string;
@@ -9,17 +11,20 @@ export interface Calendar {
   date_stop?: Date;
   users?: CalendarUser[];
   categories?: Category[];
+  timeblocks?: TimeBlock[];
 }
 
 export interface CalendarUser {
-  id?: number;
-  user: number;
+  id?: string;
+  user: string;
   calendar: Calendar;
   role: string;
   created_at?: string;
   first_name?: string;
   avatar?: string;
 }
+
+// Type 'Calendar' is missing the following properties from type 'CalendarUser': user, calendar, rolets(2739)
 
 export interface ExportOption {
   calendar: Calendar;

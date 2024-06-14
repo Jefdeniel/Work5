@@ -5,9 +5,11 @@
     "fetchingCalendars": "Error fetching calendars"
   },
   "calendar-overview": {
+    "delete": "Delete",
     "delete-title": "Delete calendar",
     "delete-description": "Are you sure you want to delete this calendar?",
     "delete-confirmation-yes": "Yes, I am sure",
+    "edit": "Edit",
     "edit-title": "Edit calendar",
     "edit-description": "Edit the details of your calendar below.",
     "toast": {
@@ -62,6 +64,7 @@
     "forOthers": "From others",
     "forYou": "For you",
     "isNew": "New",
+    "emptyList": "No notifications yet",
     "toasts": {
       "notification-updating-failed": "Error updating notification",
       "notification-update-failed": "Failed to update notification"
@@ -108,5 +111,9 @@
     "send": "Send",
     "prompt": "Prompt",
     "response": "Response"
+  },
+  "toasts": {
+    "success": "It worked!",
+    "error": "An error occurred"
   }
 }

@@ -7,6 +7,13 @@
     "location": "Location",
     "status": "Status",
     "priority": "Priority",
+    "priorityOptions": {
+      "very_low": "Very low",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "very_high": "Very high"
+    },
     "allDay": "All day"
   },
   "modals": {
@@ -26,5 +33,8 @@
     "added": "Event added",
     "updated": "Event updated",
     "deleted": "Event deleted"
+  },
+  "errors": {
+    "fetchingEvents": "Failed to fetch events"
   }
 }

@@ -3,10 +3,11 @@ import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import AuthBanner from '../../components/auth/AuthBanner/AuthBanner';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
 import Input from '../../components/ui/Input/Input';
-import Logo from '../../components/ui/Logo';
 import useAuth from '../../hooks/useAuth';
 import useFetch from '../../hooks/useFetch';
 import Validators from '../../utils/Validators';
@@ -44,13 +45,7 @@ const LoginPage = () => {
 
   return (
     <Row className="h-100 align-items-center justify-content-center">
-      <Col
-        sm={12}
-        md={6}
-        className="bg-primary-light h-100 d-none d-lg-block d-flex"
-      >
-        <Logo width="50px" height="50px" className={`mt-xsmall`} />
-      </Col>
+      <AuthBanner />
 
       <Col
         sm={12}
@@ -61,7 +56,10 @@ const LoginPage = () => {
           onSubmit={onLoginHandler}
           render={({ handleSubmit }) => (
             <form onSubmit={handleSubmit} className="d-flex flex-column gap-1">
-              <Heading level={2} className={`heading--lg fw-bold clr-primary`}>
+              <Heading
+                level={2}
+                className={`heading--lg fw-bold clr-primary text-center`}
+              >
                 {t('auth:login.title')}
               </Heading>
 

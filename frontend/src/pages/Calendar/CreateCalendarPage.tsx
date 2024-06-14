@@ -1,22 +1,29 @@
-import Heading from '../../components/ui/Heading/Heading';
-import Input from '../../components/ui/Input/Input';
-import useSetTitle from '../../hooks/setTitle';
-import Icon from '../../components/ui/Icon/Icon';
-import Button from '../../components/ui/Button/Button';
-import { useTranslation } from 'react-i18next';
-import useFetch from '../../hooks/useFetch';
-import { Calendar } from '../../@types/Calendar';
-import { toast } from 'react-toastify';
-import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
-import useAuth from '../../hooks/useAuth';
-import { Field, Form } from 'react-final-form';
-import Validators from '../../utils/Validators';
+import { useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+
+import { Calendar, CalendarUser } from '../../@types/Calendar';
+import useAuth from '../../hooks/useAuth';
+import useFetch from '../../hooks/useFetch';
+import { CalendarContext } from '../../store/CalendarContext';
+import Validators from '../../utils/Validators';
+
+import Button from '../../components/ui/Button/Button';
+import Heading from '../../components/ui/Heading/Heading';
+import Icon from '../../components/ui/Icon/Icon';
+import Input from '../../components/ui/Input/Input';
+import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
+import { PLACEHOLDER_IMG } from '../../constants/placeholders';
+import useSetTitle from '../../hooks/setTitle';
 
 const CreateCalendar = () => {
   const { t } = useTranslation(['calendar']);
   useSetTitle(t('calendar-create.title'));
   const { user_id } = useAuth();
+
+  const { setCalendars } = useContext(CalendarContext);
 
   const { fetchData: addCalendar, loading: isLoading } = useFetch('POST', [
     'calendars',
@@ -28,22 +35,23 @@ const CreateCalendar = () => {
         {},
         {
           ...values,
-          title: values.title,
-          description: values.description,
           owner_id: user_id,
-          image:
-            'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtNDY3YmF0Y2gyLWNhbGVuZGFyLTAwMS5wbmc.png',
-          date_start: values.date_start?.toISOString()
-            ? values.date_start?.toISOString()
-            : null,
-          date_stop: values.date_stop?.toISOString()
-            ? values.date_stop?.toISOString()
-            : null,
+          image: values.image || PLACEHOLDER_IMG,
+          date_start: values.date_start?.toISOString() || null,
+          date_stop: values.date_stop?.toISOString() || null,
         }
       );
 
       if (response.ok) {
-        toast.success(t('calendar:toasts.addSuccess'));
+        const newCalendar = await response.json();
+        const newCalendarUser: CalendarUser = {
+          id: newCalendar.id,
+          user: user_id?.toString() || '',
+          calendar: newCalendar,
+          role: 'owner',
+        };
+        setCalendars((prevCalendars) => [...prevCalendars, newCalendarUser]);
+        toast.success(t('calendar:toasts.success'));
       }
     } catch (error) {
       toast.error(t('calendar:error.addFailed'));
@@ -97,11 +105,10 @@ const CreateCalendar = () => {
             </Field>
 
             {/* PEOPLE */}
-
             <Heading
               level={2}
               children={t('calendar-create.people')}
-              className={`heading--sm clr-primary-400 mb-small`}
+              className={`heading--sm clr-primary-400 mt-5 mb-small`}
             />
 
             <span className={`mb-base`}>
@@ -120,32 +127,15 @@ const CreateCalendar = () => {
             </div>
 
             {/* DATE RANGE */}
-
             <Heading
               level={2}
               children={t('calendar-create.date-range')}
-              className={`heading--sm clr-primary-400 mt-small`}
+              className={`heading--sm clr-primary-400 mt-5 mb-small`}
             />
 
-            <span className={`mb-base`}>
+            <span className={`mb-small`}>
               {t('calendar-create.date-range-description')}
             </span>
-            {/* 
-            <Field name="daterange" type="checkbox">
-              {({ input }) => (
-                <div className="form-check switch d-flex align-items-center">
-                  <label className="switch-label">
-                    <input
-                      id="switch"
-                      type="checkbox"
-                      className="form-check-input"
-                      {...input}
-                    />
-                    <div className="switch-slider"></div>
-                  </label>
-                </div>
-              )}
-            </Field> */}
 
             <Row className="mt-0">
               <Col sm={12} md={6} className="m-0">
@@ -161,6 +151,7 @@ const CreateCalendar = () => {
                   )}
                 </Field>
               </Col>
+
               <Col sm={12} md={6}>
                 <Field name="date_stop">
                   {({ input, meta }) => (
@@ -180,7 +171,7 @@ const CreateCalendar = () => {
               type="submit"
               text={t('calendar-create.title')}
               icon={<Icon src="/icons/plus-bright.svg " alt="Plus icon" />}
-              className="btn--success inline-block"
+              className="btn--success inline-block mt-4 mb-5"
             />
           </form>
         )}
