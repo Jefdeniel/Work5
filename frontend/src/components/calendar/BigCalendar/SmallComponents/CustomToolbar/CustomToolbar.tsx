@@ -1,20 +1,20 @@
+import moment from 'moment';
 import { useMemo } from 'react';
 import { Views } from 'react-big-calendar';
 import { Col, Row } from 'react-bootstrap';
-import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 import { Event } from '../../../../../@types/Events';
 
-import { translateViewOptions } from '../../../../../constants/calendar';
+import { TRANSLATE_VIEW_OPTIONS } from '../../../../../constants/calendar';
 import { useSettings } from '../../../../../hooks/useSettings';
-import SmallCalendar from '../../../../ui/SmallCalendar/SmallCalendar';
-import IconButton from '../../../../ui/IconButton/IconButton';
-import Icon from '../../../../ui/Icon/Icon';
-import ProfilePicture from '../../../../ui/ProfilePicture/ProfilePicture';
-import ToolbarViewList from './ToolbarViewList';
 import Button from '../../../../ui/Button/Button';
+import Icon from '../../../../ui/Icon/Icon';
+import IconButton from '../../../../ui/IconButton/IconButton';
+import ProfilePicture from '../../../../ui/ProfilePicture/ProfilePicture';
+import SmallCalendar from '../../../../ui/SmallCalendar/SmallCalendar';
 import SearchBar from '../SearchBar/SearchBar';
+import ToolbarViewList from './ToolbarViewList';
 
 import './CustomToolbar.scss';
 
@@ -46,7 +46,7 @@ const CustomToolbar = ({
   handleDateChange,
 }: Props) => {
   const { t } = useTranslation(['calendar']);
-  const translatedViewOptions = translateViewOptions(t);
+  const translatedViewOptions = TRANSLATE_VIEW_OPTIONS(t);
   const { theme } = useSettings();
 
   // TODO: Add users from the db? maybe put this in a seperate file
@@ -83,7 +83,7 @@ const CustomToolbar = ({
 
   return (
     <div className="custom-toolbar">
-      <Row className={`my-4 d-flex align-items-center search-row`}>
+      <Row className={`mb-4 d-flex align-items-center search-row`}>
         <SearchBar
           searchQuery={searchQuery}
           handleSearchInput={handleSearchInput}

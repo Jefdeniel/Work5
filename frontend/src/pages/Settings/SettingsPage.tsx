@@ -1,26 +1,24 @@
 import { useContext } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import { toast } from 'react-toastify';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
+import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
+import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
+import LanguageSelector from '../../components/settings/general/LanguageSelector';
+import ThemeSelector from '../../components/settings/general/ThemeSelector';
+import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
+import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
+import ActivityNotificationSelector from '../../components/settings/notifications/ActivityNotificationsSelector';
+import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
 import Button from '../../components/ui/Button/Button';
 import Heading from '../../components/ui/Heading/Heading';
-import ThemeSelector from '../../components/settings/general/ThemeSelector';
-import TimeZoneSelector from '../../components/settings/general/TimeZoneSelector';
-import LanguageSelector from '../../components/settings/general/LanguageSelector';
-import TimeFormatSelector from '../../components/settings/general/TimeFormatSelector';
-import WeekStartsOnSelector from '../../components/settings/agendaView/WeekStartOnSelector';
-import EventReminderSelector from '../../components/settings/notifications/EventReminderSelector';
-import WeekendVisbilityOnSelector from '../../components/settings/agendaView/WeekendVisibiltySelector';
-import ActivityNotificationSelector from '../../components/settings/notifications/ActivityNotificationsSelector';
 
+import useSetTitle from '../../hooks/setTitle';
 import useAuth from '../../hooks/useAuth';
 import useFetch from '../../hooks/useFetch';
-import useSetTitle from '../../hooks/setTitle';
-import Validators from '../../utils/Validators';
 import { SettingsContext } from '../../store/SettingsContext';
-import Spinner from '../../components/ui/Loading/Spinner';
+import Validators from '../../utils/Validators';
 
 const SettingsPage = () => {
   const { t } = useTranslation(['settings']);
@@ -227,7 +225,7 @@ const SettingsPage = () => {
               </Field>
             </div>
 
-            <div className="pad-left-neg mt-4 mb-5 d-flex justify-content-end">
+            <div className="pad-right-neg mt-4 mb-5 d-flex justify-content-end">
               <Button
                 className="btn--success"
                 type="submit"
