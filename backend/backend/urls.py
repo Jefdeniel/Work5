@@ -7,6 +7,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
 from django.conf import settings
+from django.views.generic.base import RedirectView
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.views.generic import TemplateView
@@ -30,6 +31,9 @@ urlpatterns = [
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
+    path(
+        "swagger/", RedirectView.as_view(url="/swagger")
+    ),  # Redirect /swagger/ to /swagger
     path(
         "redoc",
         get_schema_view().with_ui("redoc", cache_timeout=0),

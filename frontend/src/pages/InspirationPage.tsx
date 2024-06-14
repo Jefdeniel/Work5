@@ -1,78 +1,98 @@
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { Row } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
-
 import useSetTitle from '../hooks/setTitle';
+import useFetch from '../hooks/useFetch';
 
-import Heading from '../components/ui/Heading/Heading';
-import Button from '../components/ui/Button/Button';
-import Icon from '../components/ui/Icon/Icon';
 import { InspirationIcon } from '../components/ui/Icon/SvgIcons';
-import Input from '../components/ui/Input/Input';
+import {
+  getLocalstorageItem,
+  setLocalstorageItem,
+  removeLocalstorageItem,
+} from '../service/LocalStorageService';
+import HeadingSection from '../components/calendar/inspiration/HeadingSection';
+import MessageList from '../components/calendar/inspiration/MessageList';
+import PromptForm from '../components/calendar/inspiration/PromptForm';
+import Button from '../components/ui/Button/Button';
 
-const InspirationPage = () => {
+interface Message {
+  prompt: string;
+  inspiration: string;
+}
+
+const LOCAL_STORAGE_KEY = 'inspirationMessages';
+
+const InspirationPage: React.FC = () => {
   const { t } = useTranslation(['general', 'calendar']);
-  // TODO: Add other translations
   useSetTitle(t('general:navigation.inspiration'));
 
-  const handleMessageSubmit = (values: any) => {
-    console.log(values);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const storedMessages = getLocalstorageItem(LOCAL_STORAGE_KEY);
+    return storedMessages ? JSON.parse(storedMessages) : [];
+  });
+  const [isWelcomeVisible, setIsWelcomeVisible] = useState<boolean>(true);
+
+  const { fetchData: getInspiration, loading: isLoading } = useFetch('POST', [
+    'prompt',
+    'inspiration',
+  ]);
+
+  useEffect(() => {
+    setLocalstorageItem(LOCAL_STORAGE_KEY, JSON.stringify(messages));
+  }, [messages]);
+
+  const handlePromptSubmit = async (values: { prompt: string }) => {
+    try {
+      const response = await getInspiration({}, { prompt: values.prompt });
+      if (response.ok) {
+        const data = await response.json();
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { prompt: values.prompt, inspiration: data.message },
+        ]);
+        setIsWelcomeVisible(false);
+        toast.success('Prompt submitted successfully');
+      } else {
+        console.error('Error fetching inspiration');
+        toast.error('Error submitting prompt');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('Error submitting prompt');
+    }
+  };
+
+  const handleReset = () => {
+    setMessages([]);
+    removeLocalstorageItem(LOCAL_STORAGE_KEY);
+    setIsWelcomeVisible(true);
+    toast.info('Conversation reset successfully');
   };
 
   return (
     <div
-      className={`px-5 height-80 d-flex flex-column justify-content-between`}
+      className="d-flex flex-column justify-content-between"
+      style={{ height: '80vh' }}
     >
-      <Row className={`w-75 inspiration-page-intro`}>
-        <Heading level={1} className="heading--lg clr-primary mb-small" />
-        {/* TODO: Add other translations */}
-        <p className={`mb-large`}>{t('calendar:inspiration.description')}</p>
-      </Row>
+      <HeadingSection />
 
-      <div
-        className={`h-100 d-flex justify-content-center align-items-center flex-column`}
-      >
-        {/* TODO: if no messages yet */}
-        <InspirationIcon isBig className={`mb-xlarge`} />
-
-        <span className={`heading heading--lg text-center clr-primary-300 mt-4`}>
-          {t('calendar:inspiration.slogan')}
-        </span>
-
-        {/* TODO: if messages -> add to this div */}
-        <div></div>
+      <div className="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+        {isWelcomeVisible ? (
+          <>
+            <InspirationIcon isBig className="mb-xlarge" />
+            <span className="heading heading--lg clr-primary-300 mt-4">
+              {t('calendar:inspiration.slogan')}
+            </span>
+          </>
+        ) : (
+          <MessageList messages={messages} />
+        )}
       </div>
 
-      <Form
-        onSubmit={handleMessageSubmit}
-        render={({ handleSubmit }) => (
-          <form
-            onSubmit={handleSubmit}
-            className={`height-50px d-flex align-items-center gap-3`}
-          >
-            <Field name="message">
-              {({ input }) => (
-                <Input
-                  isBig
-                  isSearch
-                  type="text"
-                  placeholder={t('calendar:inspiration.placeholder')}
-                  className={`h-100 flex-grow-1`}
-                  {...input}
-                />
-              )}
-            </Field>
-
-            <Button
-              className="h-100 btn--primary d-flex"
-              type="submit"
-              icon={<Icon src="/icons/send.svg" alt="Send icon" />}
-              disabled={/*isLoading*/ false}
-            >
-              {t('calendar:inspiration.send')}
-            </Button>
-          </form>
-        )}
+      <PromptForm
+        onSubmit={handlePromptSubmit}
+        isLoading={isLoading}
+        onReset={handleReset}
       />
     </div>
   );

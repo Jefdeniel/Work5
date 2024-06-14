@@ -13,6 +13,7 @@ from .views.auth_views import SignUpView
 from .views.calendar_users_views import CalendarUsersViewSet
 from .views.calendar_users_views import CalendarUserByUserId
 from .views.timeblock_views import TimeBlockViewSet
+from .views.prompt_views import PromptInspirationViewSet
 
 from django.conf import settings
 
@@ -27,6 +28,7 @@ router.register(r"reminders", ReminderViewSet)
 router.register(r"user_settings", UserSettingsViewSet)
 router.register(r"calendar_users", CalendarUsersViewSet)
 router.register(r"timeblocks", TimeBlockViewSet)
+router.register(r"prompt", PromptInspirationViewSet)
 
 
 urlpatterns = [

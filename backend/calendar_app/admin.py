@@ -9,6 +9,7 @@ from .models import (
     UserSettings,
     Reminder,
     Category,
+    Prompt,
 )
 from django.apps import AppConfig
 
@@ -153,6 +154,11 @@ class UserSettingsAdmin(admin.ModelAdmin):
     )
 
 
+class PromptAdmin(admin.ModelAdmin):
+    list_display = ["prompt"]
+    search_fields = ["prompt"]
+
+
 admin.site.register(CustomUser, UserAdmin)
 admin.site.register(Calendar, CalendarAdmin)
 admin.site.register(CalendarUser, CalendarUserAdmin)
@@ -162,6 +168,7 @@ admin.site.register(Reminder, ReminderAdmin)
 admin.site.register(UserSettings, UserSettingsAdmin)
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Prompt, PromptAdmin)
 
 
 class CalendarAppConfig(AppConfig):
