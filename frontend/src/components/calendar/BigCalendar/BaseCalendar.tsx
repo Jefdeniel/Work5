@@ -58,9 +58,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       week: {
         dow: week_start_day === 'Monday' ? 1 : 0,
       },
-      // * Custom date and time formats -> longDateFormat name is little misleading but comes from Moment.js API design so not editable
-      longDateFormat: dateAndTimeFormats,
-      // Custom formats for the calendar views
+      longDateFormat: dateAndTimeFormats, // Custom date and time formats -> longDateFormat name is little misleading but comes from Moment.js API design so not editable
       formats: customViewFormats,
     });
   }, [week_start_day, time_format, localizer]);
@@ -198,7 +196,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           start={newEventTimes.start.toISOString()}
           end={newEventTimes.end.toISOString()}
           onClose={closeAddEventModal}
-          onAddEvent={handleAddEvent}
         />
       )}
 

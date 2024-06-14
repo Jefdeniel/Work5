@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
@@ -19,8 +19,9 @@ import EventPrioritySelector from '../Selectors/EventPrioritySelector';
 import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
 
 import './EventModal.scss';
+import Spinner from '../../../ui/Loading/Spinner';
 
-const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
+const AddEventModal = ({ onClose, start, end }) => {
   const { t } = useTranslation(['events']);
   const { user_id } = useAuth();
   const params = useParams();
@@ -29,29 +30,9 @@ const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
   const [startTime, setStartTime] = useState(new Date(start));
   const [endTime, setEndTime] = useState(new Date(end));
 
-  const { fetchData: getCurrentCalendar } = useFetch('GET', [
-    `calendars/${calendarId}`,
-  ]);
   const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
     'events',
   ]);
-
-  useEffect(() => {
-    const getCalendar = async () => {
-      try {
-        const response = await getCurrentCalendar();
-        if (response.ok) {
-          const currentCalendar = await response.json();
-          // setLabelList(currentCalendar.categories);
-        } else {
-          console.error('Error fetching calendar');
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getCalendar();
-  }, []);
 
   const handleAddEvent = async (values) => {
     try {
@@ -72,7 +53,6 @@ const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
 
       if (response.ok) {
         toast.success(t('events:toasts.added'));
-        onAddEvent(newEvent);
         onClose && onClose();
       } else {
         toast.error(t('events:toasts.error'));
@@ -93,7 +73,7 @@ const AddEventModal = ({ onClose, start, end, onAddEvent }) => {
   };
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return <Spinner />;
   }
 
   return (
