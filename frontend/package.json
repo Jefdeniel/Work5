@@ -12,6 +12,12 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md}\" --config ./.prettierrc.json",
     "type-check": "tsc"
   },
+  "eslintIgnore": [
+    "**/node_modules/",
+    "**/build/",
+    "**/dist/",
+    "**/.eslintrc.js"
+  ],
   "dependencies": {
     "@types/react-big-calendar": "^1.8.9",
     "axios": "^1.7.2",

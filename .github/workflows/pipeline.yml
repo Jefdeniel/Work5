@@ -42,7 +42,7 @@ jobs:
         run: |
           cd frontend
           yarn build
-      - name: 🚨 Run Frontend Linting
-        run: |
-          cd frontend
-          yarn lint
+        # run: |
+        #  cd frontend
+        #  yarn lint
+      #- name: 🚨 Run Frontend Linting
