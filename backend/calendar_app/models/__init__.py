@@ -9,6 +9,7 @@ from .notification import Notification
 from .user_settings import UserSettings
 from .event_occurrence import EventOccurrence
 from .time_block import TimeBlock
+from .prompt import Prompt
 
 __all__ = [
     "CustomUser",
@@ -22,4 +23,5 @@ __all__ = [
     "UserSettings",
     "EventOccurrence",
     "TimeBlock",
+    "Prompt",
 ]

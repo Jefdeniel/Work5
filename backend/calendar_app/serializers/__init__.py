@@ -6,6 +6,7 @@ from .notification_serializer import NotificationSerializer
 from .user_settings_serializer import UserSettingsSerializer
 from .category_serializer import CategorySerializer
 from .timeblock_serializer import TimeBlockSerializer
+from .prompt_serializer import PromptSerializer
 
 __all__ = [
     "CustomUserSerializer",
@@ -17,4 +18,5 @@ __all__ = [
     "UserSettingsSerializer",
     "CategorySerializer",
     "TimeBlockSerializer",
+    "PromptSerializer",
 ]
