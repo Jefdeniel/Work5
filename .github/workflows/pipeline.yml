@@ -37,12 +37,12 @@ jobs:
       - name: 📦 Install Frontend Dependencies
         run: |
           cd frontend
-           npm install --legacy-peer-deps
+          yarn install --frozen-lockfile
       - name: 🏗️ Build Frontend
         run: |
           cd frontend
-          npm run build
+          yarn build
       - name: 🚨 Run Frontend Linting
         run: |
           cd frontend
-          npm run lint
+          yarn lint
