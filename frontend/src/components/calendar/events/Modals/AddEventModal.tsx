@@ -1,25 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { Field, Form } from 'react-final-form';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { DateTime } from 'ts-luxon';
 
-import { Event } from '../../../../@types/Events';
 import { Category } from '../../../../@types/Calendar';
-
+import { Event } from '../../../../@types/Events';
+import useAuth from '../../../../hooks/useAuth';
 import useFetch from '../../../../hooks/useFetch';
 import Validators from '../../../../utils/Validators';
+
 import Button from '../../../ui/Button/Button';
+import Input from '../../../ui/Input/Input';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
-import Input from '../../../ui/Input/Input';
-import EventTimeSelector from '../Selectors/EventTimeSelector';
 import Select from '../../../ui/Select/Select';
+import EventTimeSelector from '../Selectors/EventTimeSelector';
 
 import './EventModal.scss';
-import ColorConversion from '../../../../utils/ColorConversion';
-import useAuth from '../../../../hooks/useAuth';
 
 interface Props {
   onClose: () => void;
