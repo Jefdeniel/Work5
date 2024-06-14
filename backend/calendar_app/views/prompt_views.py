@@ -29,7 +29,7 @@ class PromptInspirationViewSet(viewsets.ModelViewSet):
         text = text.replace("•", "  *")
         return Markdown(textwrap.indent(text, "> ", predicate=lambda _: True))
 
-    @action(detail=False, methods=["post"], url_path="inspiation")
+    @action(detail=False, methods=["post"], url_path="inspiration")
     def generate_prompt(self, request):
         try:
             prompt_text = request.data.get("prompt")

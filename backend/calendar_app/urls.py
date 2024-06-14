@@ -39,9 +39,4 @@ urlpatterns = [
         CalendarUserByUserId.as_view(),
         name="calendar-user-by-user-id",
     ),
-    path(
-        "inspiration",
-        PromptInspirationViewSet.as_view({"get": "prompt"}),
-        name="prompt",
-    ),
 ]
