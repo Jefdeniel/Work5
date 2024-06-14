@@ -7,7 +7,6 @@
     "start": "vite --port 3000 --mode development",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:fix": "eslint ./src -c .jsx,.js,.ts,.tsx --quiet --fix",
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
     "lint": "yarn lint:format && yarn lint:fix ",
     "type-check": "tsc"
@@ -19,6 +18,7 @@
     "cssnano": "^7.0.2",
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "file-saver": "^2.0.5",
     "final-form": "^4.20.4",
     "gapi-script": "^1.2.0",
