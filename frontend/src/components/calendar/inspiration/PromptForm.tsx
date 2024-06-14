@@ -1,12 +1,10 @@
-import React from 'react';
 import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
-
-import ResetButton from './ResetButton';
 import Validators from '../../../utils/Validators';
-import Input from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 import Icon from '../../ui/Icon/Icon';
+import Input from '../../ui/Input/Input';
+import ResetButton from './ResetButton';
 
 interface PromptFormProps {
   onSubmit: (values: { prompt: string }) => void;
@@ -47,7 +45,7 @@ const PromptForm = ({
             )}
           </Field>
 
-          <ResetButton onClick={onReset} isLoading={isLoading} />
+          <ResetButton onClick={onReset} />
 
           <Button
             className="btn--primary"

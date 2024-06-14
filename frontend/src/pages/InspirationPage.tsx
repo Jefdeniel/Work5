@@ -74,7 +74,7 @@ const InspirationPage: React.FC = () => {
       className="d-flex flex-column justify-content-between"
       style={{ height: '80vh' }}
     >
-      <HeadingSection onReset={handleReset} />
+      <HeadingSection />
 
       <div className="flex-grow-1 d-flex flex-column justify-content-center align-items-center">
         {isWelcomeVisible ? (
@@ -89,7 +89,11 @@ const InspirationPage: React.FC = () => {
         )}
       </div>
 
-      <PromptForm onSubmit={handlePromptSubmit} isLoading={isLoading} />
+      <PromptForm
+        onSubmit={handlePromptSubmit}
+        isLoading={isLoading}
+        onReset={handleReset}
+      />
     </div>
   );
 };
