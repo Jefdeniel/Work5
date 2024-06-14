@@ -83,7 +83,7 @@ const CustomToolbar = ({
 
   return (
     <div className="custom-toolbar">
-      <Row className={`my-4 d-flex align-items-center search-row`}>
+      <Row className={`mb-4 d-flex align-items-center search-row`}>
         <SearchBar
           searchQuery={searchQuery}
           handleSearchInput={handleSearchInput}
