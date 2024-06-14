@@ -62,6 +62,7 @@ const WeekendVisbilityOnSelector = ({
             onChange={handleChange}
             options={translatedOptions}
             meta={meta}
+            disabled
             {...rest}
           />
         </Col>

@@ -14,6 +14,14 @@
     outline: none;
     border-color: var(--sa-primary-500-base);
   }
+
+  &:disabled {
+    font-weight: var(--fw-bold);
+    color: var(--sa-bright) !important;
+    background-color: var(--sa-grey) !important;
+    border: none !important;
+    cursor: default;
+  }
 }
 
 .full-select {
