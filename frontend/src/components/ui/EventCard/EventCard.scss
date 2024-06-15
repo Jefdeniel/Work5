@@ -9,13 +9,16 @@
   position: relative;
 
   & .options-box {
-    top: 1.2rem;
-    right: -130%;
+    position: absolute;
+    top: var(--sp-base);
+    right: 2.5rem;
     z-index: 100;
   }
 
   & .event-card__options {
-    padding: var(--sp-base);
+    background-color: var(--sa-bright);
+    padding: var(--sp-sm);
+    border-radius: var(--br-base);
     position: absolute;
     z-index: 100;
     top: 0;
@@ -51,7 +54,14 @@
     overflow: hidden;
   }
 
+  & .event-card__status {
+    margin-top: var(--sp-xs);
+  }
+
   & .event-card__priority {
     margin-top: var(--sp-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
   }
 }

@@ -173,9 +173,13 @@
 
     & .rbc-event {
       color: var(--sa-primary-950);
-      background: none;
+      background: none !important;
       padding: 0;
       border: none !important;
+
+      & .rbc-event, .rbc-day-slot .rbc-background-event {
+        background: none;
+      }
 
       &.rbc-selected {
         background: none;
