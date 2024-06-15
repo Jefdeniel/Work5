@@ -19,7 +19,6 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
   - [Backend](#backend)
     - [Requirements](#requirements)
     - [Managing dependencies](#managing-dependencies)
-    - [Managing dependencies](#managing-dependencies-1)
     - [How to start](#how-to-start)
   - [Admin and API access](#admin-and-api-access)
   - [Handy links](#handy-links)
@@ -43,7 +42,6 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
   - [Backend](#backend)
     - [Requirements](#requirements)
     - [Managing dependencies](#managing-dependencies)
-    - [Managing dependencies](#managing-dependencies-1)
     - [How to start](#how-to-start)
   - [Admin and API access](#admin-and-api-access)
   - [Handy links](#handy-links)
@@ -72,8 +70,6 @@ This step is necessary due to the configuration in settings.py for STATICFILES_D
 - **Pipenv**: Make sure Pipenv is installed and properly set up in your PATH. For more information, see the handy links.
 - **Django**
 - **Black**: Use Black for code formatting. [Link](https://github.com/psf/black)
-
-### Managing dependencies
 
 ### Managing dependencies
 
