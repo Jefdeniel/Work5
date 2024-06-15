@@ -19,6 +19,7 @@ import './EventModal.scss';
 interface Props {
   event?: Event;
   onClose: () => void;
+  onEditEvent?: (eventId: number) => void;
 }
 
 const EditEventModal = ({ onClose }: Props) => {

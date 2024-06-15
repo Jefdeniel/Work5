@@ -11,34 +11,8 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
 - [@Work5 Smart Calendar Tool](#work5-smart-calendar-tool)
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
-  - [Overview](#overview-1)
-  - [Table of Contents](#table-of-contents-1)
   - [Frontend](#frontend)
     - [Starting the Frontend Locally](#starting-the-frontend-locally)
-    - [Starting the Frontend Locally](#starting-the-frontend-locally-1)
-  - [Backend](#backend)
-    - [Requirements](#requirements)
-    - [Managing dependencies](#managing-dependencies)
-    - [How to start](#how-to-start)
-  - [Admin and API access](#admin-and-api-access)
-  - [Handy links](#handy-links)
-
-![cover](https://restomanager.net/wp-content/uploads/2024/06/readme.png)
-
-## Overview
-
-The @Work5 Smart Calendar Tool is a full-featured calendar application with both frontend and backend components. This tool allows users to manage events and schedules efficiently. The application is built with a React frontend and a Django backend.
-
-## Table of Contents
-
-- [@Work5 Smart Calendar Tool](#work5-smart-calendar-tool)
-  - [Overview](#overview)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview-1)
-  - [Table of Contents](#table-of-contents-1)
-  - [Frontend](#frontend)
-    - [Starting the Frontend Locally](#starting-the-frontend-locally)
-    - [Starting the Frontend Locally](#starting-the-frontend-locally-1)
   - [Backend](#backend)
     - [Requirements](#requirements)
     - [Managing dependencies](#managing-dependencies)
@@ -50,17 +24,12 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
 
 ### Starting the Frontend Locally
 
-### Starting the Frontend Locally
-
 To start the frontend locally, you need to build the `dist` folder first and then start the development server.
 
-1. Build the `dist` folder with `yarn build `
+1. Install all the dependencies with `yarn`
+2. Building the frontend for production is crucial before starting the backend server to prevent crashes with `yarn build`, this results in a `dist` folder
 
 This step is necessary due to the configuration in settings.py for STATICFILES_DIRS.
-
-2. Install all the dependencies with `yarn`
-
-3. Building the frontend for production is crucial before starting the backend server to prevent crashes with `yarn build`
 
 ## Backend
 
