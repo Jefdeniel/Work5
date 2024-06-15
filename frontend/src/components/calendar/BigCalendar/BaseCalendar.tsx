@@ -2,10 +2,8 @@ import moment from 'moment';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-
 import { Event } from '../../../@types/Events';
 import { TimeBlock } from '../../../@types/TimeBlock';
-
 import {
   GET_DATE_FORMATS,
   GET_VIEW_FORMATS,
@@ -18,6 +16,8 @@ import EditEventModal from '../events/Modals/EditEventModal';
 import CustomToolbar from './SmallComponents/CustomToolbar/CustomToolbar';
 import TimeBlockCard from './SmallComponents/TimeBlockCard/TimeBlockCard';
 
+import useFetch from '../../../hooks/useFetch';
+import DeleteEventModal from '../events/Modals/DeleteEventModal';
 import './BaseCalendar.scss';
 import './Calendar.scss';
 
@@ -27,7 +27,17 @@ interface CalendarProps {
   onShowEventView: (event: Event) => void;
 }
 
+const STEP = 15;
+const TIMESLOTS = 60 / STEP;
+
+const id = 1;
+
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
+  const { fetchData: deleteEvent } = useFetch('DELETE', [
+    'events',
+    id.toString() ?? '',
+  ]);
+
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
   const [isSmallCalendarOpen, setIsSmallCalendarOpen] = useState(false);
@@ -35,6 +45,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [showEditEventModal, setShowEditEventModal] = useState(false);
   const [showAddEventModal, setShowAddEventModal] = useState(false);
+  const [showDeleteEventModal, setShowDeleteEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event>();
   const [newEventTimes, setNewEventTimes] = useState<{
     start: Date;
@@ -46,9 +57,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
     useContext(SettingsContext);
-
-  const STEP = 15;
-  const TIMESLOTS = 60 / STEP;
 
   useEffect(() => {
     const dateAndTimeFormats = GET_DATE_FORMATS(time_format);
@@ -62,6 +70,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       formats: customViewFormats,
     });
   }, [week_start_day, time_format, localizer]);
+
+  // MODALS
 
   const handleOpenEditEventModal = () => {
     setShowEditEventModal(true);
@@ -79,6 +89,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     setShowAddEventModal(false);
   };
 
+  const handleDeleteEventModal = () => {
+    setShowDeleteEventModal(true);
+  };
+
+  const closeDeleteEventModal = () => {
+    setShowDeleteEventModal(false);
+  };
+
   const components = useMemo(
     () => ({
       event: ({ event }: { event: Event | TimeBlock }) => {
@@ -90,8 +108,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
             event={event as Event}
             color={(event as Event).color}
             onDoubleClick={handleOpenEditEventModal}
-            onDelete={() => console.log('Delete event')}
             onEdit={handleOpenEditEventModal}
+            onDelete={handleDeleteEventModal}
           />
         );
       },
@@ -116,7 +134,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         handleOpenAddEventModal();
       },
       onDoubleClickEvent: (event) => {
-        console.log('Event double clicked: ', event);
         setSelectedEvent(event);
         setNewEventTimes(undefined);
         handleOpenEditEventModal();
@@ -184,6 +201,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         isSmallCalendarOpen={isSmallCalendarOpen}
         handleDateChange={handleDateChange}
       />
+
+      {showDeleteEventModal && selectedEvent && (
+        <DeleteEventModal
+          event={selectedEvent}
+          onClose={closeDeleteEventModal}
+          onRemoveEvent={deleteEvent}
+        />
+      )}
 
       {showEditEventModal && selectedEvent && (
         <EditEventModal event={selectedEvent} onClose={closeEditEventModal} />

@@ -1,11 +1,3 @@
-# LLAMA Integratie
-
-- Backend:
-- - Post request mogelijk maken om een response te krijgen
-- Frontend:
-- - Post request leren maken, response kunnen tonen
-- - Request opslaan in localstorage of in database?
-
 # Auth Bug
 
 # Connecties
