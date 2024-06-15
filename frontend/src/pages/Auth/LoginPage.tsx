@@ -17,7 +17,6 @@ const LoginPage = () => {
   const auth = useAuth();
   const navigate = useNavigate();
 
-  // Assuming useFetch hook supports passing data in the request body
   const { fetchData: postLogin } = useFetch('POST', ['token']);
 
   const onLoginHandler = async (values: {

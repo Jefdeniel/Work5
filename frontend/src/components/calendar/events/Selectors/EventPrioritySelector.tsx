@@ -62,7 +62,6 @@ const EventPrioritySelector = ({
 
   return (
     <Select
-      defaultValue={initialValue || 'medium'}
       title={t('events:eventInfo.priority')}
       value={value || 'medium'}
       onChange={handlePriorityChange}
