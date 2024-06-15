@@ -1,6 +1,6 @@
-import { Row, Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import { ColorResult, TwitterPicker } from 'react-color';
 import './ColorPicker.scss';
-import { TwitterPicker, ColorResult } from 'react-color';
 
 interface ColorPickerProps {
   color?: string;

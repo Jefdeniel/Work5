@@ -1,12 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import useFetch from '../../../hooks/useFetch';
+import { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
-import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import useFetch from '../../../hooks/useFetch';
 
-import LoadingScreen from '../../ui/Loading/LoadingScreen';
 import Button from '../../ui/Button/Button';
+import LoadingScreen from '../../ui/Loading/LoadingScreen';
 
 import './Input.scss';
 

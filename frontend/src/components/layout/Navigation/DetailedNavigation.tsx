@@ -1,14 +1,11 @@
-import Logo from '../../ui/Logo';
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Menu, Sidebar } from 'react-pro-sidebar';
-import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import Logo from '../../ui/Logo';
 
-import DetailedNavItem from './DetailedNavItem';
-import BackButton from '../../ui/Button/BackButton';
-import IconButton from '../../ui/IconButton/IconButton';
-import Calendar from '../../ui/SmallCalendar/SmallCalendar';
 import { MenuItem, SideBarProps } from '../../../@types/Nav';
+import BackButton from '../../ui/Button/BackButton';
 import Icon from '../../ui/Icon/Icon';
 import {
   CustomizeIcon,
@@ -16,6 +13,9 @@ import {
   NotificationIcon,
   SharingHubIcon,
 } from '../../ui/Icon/SvgIcons';
+import IconButton from '../../ui/IconButton/IconButton';
+import Calendar from '../../ui/SmallCalendar/SmallCalendar';
+import DetailedNavItem from './DetailedNavItem';
 
 import './navigation.scss';
 

@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { Calendar } from '../@types/Calendar';
-
-import ExcelExportModal from '../components/sharing-hub/Modals/ExcelExportModal';
-import Heading from '../components/ui/Heading/Heading';
-import ActionButtonList from '../components/ui/List/ActionButtonList';
 import {
   EXPORT_AGENDA_ITEMS,
   EXTERNAL_SERVICES_ITEMS,
 } from '../constants/sharing-hub';
 import useSetTitle from '../hooks/setTitle';
-import Button from '../components/ui/Button/Button';
-import Icon from '../components/ui/Icon/Icon';
 import useFetch from '../hooks/useFetch';
+
+import ExcelExportModal from '../components/sharing-hub/Modals/ExcelExportModal';
+import Button from '../components/ui/Button/Button';
+import Heading from '../components/ui/Heading/Heading';
+import Icon from '../components/ui/Icon/Icon';
+import ActionButtonList from '../components/ui/List/ActionButtonList';
 import LoadingScreen from '../components/ui/Loading/LoadingScreen';
 
 const SharingHubPage = () => {
@@ -100,14 +99,12 @@ const SharingHubPage = () => {
               </li>
             ))}
 
-          {/* TODO: Add translations */}
           {!calendarUsers && <li>No users in this calendar</li>}
 
           <li>
             <Button
               className={`btn--primary mx-2`}
               icon={<Icon src="/icons/plus-bright.svg" alt="Plus icon" />}
-              // TODO: Add translations
               text={`Invite`}
               isSmall
             />

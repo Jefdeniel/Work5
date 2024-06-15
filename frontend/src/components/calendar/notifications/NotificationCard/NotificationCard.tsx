@@ -1,9 +1,9 @@
 import { Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
+import Badge from '../../../ui/Badge/Badge';
 import NewMessage from '../../../ui/NewMessage/NewMessage';
 import NotificationCardProfileImg from './NotificationCardProfileImg';
-import Badge from '../../../ui/Badge/Badge';
 
 import './NotificationCard.scss';
 

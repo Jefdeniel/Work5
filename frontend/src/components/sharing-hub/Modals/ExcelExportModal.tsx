@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Calendar } from '../../../@types/Calendar';
 import { CalendarContext } from '../../../store/CalendarContext';
 import Modal from '../../ui/Modals/Modal';
 import CalendarExportSelector from '../Selectors/CalendarExportSelector';
-import { Calendar } from '../../../@types/Calendar';
 
 interface Props {
   onClose: () => void;

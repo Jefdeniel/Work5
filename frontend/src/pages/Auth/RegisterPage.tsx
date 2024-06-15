@@ -15,7 +15,6 @@ const RegisterPage = () => {
   const { t } = useTranslation(['auth']);
   const navigate = useNavigate();
 
-  // request to backend to register user
   const { fetchData: register } = useFetch('POST', ['signup']);
 
   const handleRegister = async (values: {

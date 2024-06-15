@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import { useSettings } from '../hooks/useSettings';
-import { Container, Row } from 'react-bootstrap';
 
 import CalendarNavigation from '../components/layout/Navigation/CalendarNavigation';
 import NavigationTop from '../components/layout/Navigation/NavigationTop';
