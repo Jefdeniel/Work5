@@ -22,8 +22,8 @@ interface EventProps {
   color?: string;
   isGoogleEvent?: boolean;
   onDoubleClick?: () => void;
-  onDelete: () => void;
-  onEdit: () => void;
+  onDelete?: () => void;
+  onEdit?: () => void;
 }
 
 const EventCard = ({
@@ -121,7 +121,7 @@ const EventCard = ({
 
       {isOptionsVisible && (
         <div ref={optionsBoxRef}>
-          <OptionsBox onDelete={onDelete} onEdit={onEdit} />
+          <OptionsBox onDelete={onDelete!} onEdit={onEdit!} />
         </div>
       )}
 
