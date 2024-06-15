@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useSetTitle from '../hooks/setTitle';
-import useFetch from '../hooks/useFetch';
-
-import { InspirationIcon } from '../components/ui/Icon/SvgIcons';
-import {
-  getLocalstorageItem,
-  setLocalstorageItem,
-  removeLocalstorageItem,
-} from '../service/LocalStorageService';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import HeadingSection from '../components/calendar/inspiration/HeadingSection';
 import MessageList from '../components/calendar/inspiration/MessageList';
 import PromptForm from '../components/calendar/inspiration/PromptForm';
-import Button from '../components/ui/Button/Button';
+import { InspirationIcon } from '../components/ui/Icon/SvgIcons';
+import { PRE_PROMPT } from '../constants/pre-prompt';
+import useSetTitle from '../hooks/setTitle';
+import useFetch from '../hooks/useFetch';
+import {
+  getLocalstorageItem,
+  removeLocalstorageItem,
+  setLocalstorageItem,
+} from '../service/LocalStorageService';
 
 interface Message {
   prompt: string;
@@ -22,20 +22,53 @@ interface Message {
 
 const LOCAL_STORAGE_KEY = 'inspirationMessages';
 
-const InspirationPage: React.FC = () => {
+const formatCalendarDataToJson = (data) => {
+  if (!data) {
+    return '[]';
+  }
+  return JSON.stringify(data, null, 2);
+};
+
+const InspirationPage = () => {
   const { t } = useTranslation(['general', 'calendar']);
   useSetTitle(t('general:navigation.inspiration'));
+  const calendarId = useParams<{ id: string }>().id ?? '';
 
+  const [isWelcomeVisible, setIsWelcomeVisible] = useState<boolean>(true);
+  const [currentCalendarData, setCurrentCalendarData] = useState<any[]>([]);
   const [messages, setMessages] = useState<Message[]>(() => {
     const storedMessages = getLocalstorageItem(LOCAL_STORAGE_KEY);
     return storedMessages ? JSON.parse(storedMessages) : [];
   });
-  const [isWelcomeVisible, setIsWelcomeVisible] = useState<boolean>(true);
 
   const { fetchData: getInspiration, loading: isLoading } = useFetch('POST', [
     'prompt',
     'inspiration',
   ]);
+
+  const { fetchData: getCalendarData } = useFetch('GET', [
+    'events',
+    'calendar',
+    calendarId?.toString(),
+  ]);
+
+  useEffect(() => {
+    const fetchCalendarData = async () => {
+      try {
+        const response = await getCalendarData();
+        if (response.ok) {
+          const data = await response.json();
+          setCurrentCalendarData(data);
+          console.log('Calendar data:', data);
+        } else {
+          throw new Error(response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching calendar data:', error);
+      }
+    };
+    fetchCalendarData();
+  }, []);
 
   useEffect(() => {
     setLocalstorageItem(LOCAL_STORAGE_KEY, JSON.stringify(messages));
@@ -43,12 +76,17 @@ const InspirationPage: React.FC = () => {
 
   const handlePromptSubmit = async (values: { prompt: string }) => {
     try {
-      const response = await getInspiration({}, { prompt: values.prompt });
+      const calendarDataJson = formatCalendarDataToJson(currentCalendarData);
+      console.log('Prompt:', values.prompt);
+      const fullPrompt = `${PRE_PROMPT}\n\n${values.prompt}\n\nHere is my current calendar data:\n${calendarDataJson}`;
+      console.log('Full prompt:', fullPrompt);
+
+      const response = await getInspiration({}, { prompt: fullPrompt });
       if (response.ok) {
         const data = await response.json();
         setMessages((prevMessages) => [
           ...prevMessages,
-          { prompt: values.prompt, inspiration: data.message },
+          { prompt: fullPrompt, inspiration: data.message },
         ]);
         setIsWelcomeVisible(false);
         toast.success('Prompt submitted successfully');
