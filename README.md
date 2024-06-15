@@ -1,53 +1,82 @@
 # @Work5 Smart Calendar Tool
 
+![cover](https://restomanager.net/wp-content/uploads/2024/06/readme.png)
+
+## Overview
+
+The @Work5 Smart Calendar Tool is a full-featured calendar application with both frontend and backend components. This tool allows users to manage events and schedules efficiently. The application is built with a React frontend and a Django backend.
+
+## Table of Contents
+
+- [@Work5 Smart Calendar Tool](#work5-smart-calendar-tool)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Frontend](#frontend)
+    - [Starting the Frontend Locally](#starting-the-frontend-locally)
+  - [Backend](#backend)
+    - [Requirements](#requirements)
+    - [Managing dependencies](#managing-dependencies)
+    - [How to start](#how-to-start)
+  - [Admin and API access](#admin-and-api-access)
+  - [Handy links](#handy-links)
+
 ## Frontend
 
-### Start the frontend locally
+### Starting the Frontend Locally
 
-Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
-Start with executing the following command in the terminal:
+To start the frontend locally, you need to build the `dist` folder first and then start the development server.
 
-```
-yarn && yarn start
-```
+1. Build the `dist` folder:
 
-### Building for production
+   `yarn build `
 
-Note: Building the frontend first is important, otherwise you will have crashes when starting up the backend server.
+This step is necessary due to the configuration in settings.py for STATICFILES_DIRS.
 
-```
-yarn build
+2. Install all the dependencies
 
-```
+`yarn`
+
+Building the frontend for production is crucial before starting the backend server to prevent crashes.
+
+`yarn build`
 
 ## Backend
 
 ### Requirements
 
-- Python 3.8.12
-  - You can download the **Python** 3.8.12 interpreter and runtime. To verify, run `python` in your terminal (inside the backend folder).
-- Pipenv
-  - Make sure **Pipenv** is installed and your PATH variables are set up properly. See handy links for more information.
-- Django
-- Please use Black formatter to format the code. You can find it [here](https://code.visualstudio.com/docs/python/formatting).
+- **Python 3.8.12**: Ensure you have Python 3.8.12 installed. You can verify the installation by running:
 
-### Managing Dependencies
+`python --version`
 
-- Freeze your current dependencies to get them from requirements.txt file: `pip freeze > requirements.txt`
-- Install dependencies after freeze: `pip install -r requirements.txt`
+- **Pipenv**: Make sure Pipenv is installed and properly set up in your PATH. For more information, see the handy links.
+- **Django**
+- **Black**: Use Black for code formatting. [Link](https://github.com/psf/black)
+
+### Managing dependencies
+
+Run the following command:
+
+`pip freeze > requirements.txt`
 
 ### How to start
 
-1. Make sure your virtual environment is active with `pipenv shell` (run from root).
-2. Create new migration from backend folder: `python manage.py makemigrations`
-   1. After making changes, such as adding models, re-run `python manage.py makemigrations calendar_app`
-3. Apply migration to update database schema: `python manage.py migrate`
-4. Seed: `python manage.py seed_data`
-5. Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
+1. Activate your virtual environment first with `pipenv shell` from your root folder
+2. Run one of the 2 following commands from the backend folder: `python manage.py seed_data`
+3. Run `python manage.py runserver`
 
-6. Start the server: `python manage.py runserver`
-   1. Admin dashboard: `http://localhost:8000/admin`
-   2. API: `http://localhost:8000/api`
-7. after seeding you can try to login with **jefdeniel@icloud.com** and pw: **admin**
+## Admin and API access
 
-Resetting your database, redo migrations and seed at once with `python manage.py reset_and_migrate_seed` from backend folder. All possible commands are in the files themselves in /backend/calendar_app/management
+You first need to login on the admin panel before you can test the API endpoints.
+
+- **Username**: jefdeniel@icloud.com (after seeding)
+- **Password**: admin
+
+- Admin dashboard: [Link](http://localhost:8000/admin)
+- Swagger API: [Link](http://localhost:8000/swagger)
+
+## Handy links
+
+[Python 3.8.12](https://www.python.org/downloads/release/python-3812/)
+[Pipenv installation](https://pipenv.pypa.io/en/latest/install/)
+[Black formatter](https://github.com/psf/black)
+[BVSC - Python formatting](https://code.visualstudio.com/docs/python/formatting)

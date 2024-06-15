@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as XLSX from 'xlsx';
 
-import useFetch from '../../../hooks/useFetch';
 import { ExportOption } from '../../../@types/Calendar';
+import useFetch from '../../../hooks/useFetch';
 
 import useAuth from '../../../hooks/useAuth';
 import Button from '../../ui/Button/Button';
@@ -26,7 +26,6 @@ const CalendarExportSelector = ({
 }: Props) => {
   const { t } = useTranslation(['calendars']);
   const { user_id } = useAuth();
-  console.log(user_id);
 
   const [selectedCalendar, setSelectedCalendar] = useState<number | null>(
     initialValue
@@ -59,7 +58,6 @@ const CalendarExportSelector = ({
       const response = await getEventsByCalendarId();
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         if (data.length === 0) {
           throw new Error('No events to export');
         }

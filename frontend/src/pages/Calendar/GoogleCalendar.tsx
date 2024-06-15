@@ -1,8 +1,8 @@
 import { gapi } from 'gapi-script';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import EventCard from '../../components/ui/EventCard/EventCard';
 import { GoogleEvent } from '../../@types/Events';
+import EventCard from '../../components/ui/EventCard/EventCard';
 
 const GoogleCalendar = () => {
   const [googleEvents, setGoogleEvents] = useState<GoogleEvent[]>([]);

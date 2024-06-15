@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { CalendarUser } from '../@types/Calendar';
 import useAuth from '../hooks/useAuth';
 import useFetch from '../hooks/useFetch';

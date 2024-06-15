@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 
-import Checkbox from '../../ui/Checkbox/Checkbox';
 import Button from '../../ui/Button/Button';
+import Checkbox from '../../ui/Checkbox/Checkbox';
 
 const PermissionBoxes = () => {
   const { t } = useTranslation(['calendar']);
 
-  // State
   const [permissions, setPermissions] = useState({
     can_view_event_details: false,
     can_create_events: false,
@@ -17,8 +15,6 @@ const PermissionBoxes = () => {
     can_delete_events: false,
     can_invite_others: false,
   });
-
-  //  TODO: Fetch existing permissions for this agenda and user -> setPermissions
 
   const onSubmit = async () => {};
 

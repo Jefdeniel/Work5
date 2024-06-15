@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { CalendarUser } from '../../../@types/Calendar';
-
 import { PLACEHOLDER_IMG } from '../../../constants/placeholders';
-import useAuth from '../../../hooks/useAuth';
 import { CalendarContext } from '../../../store/CalendarContext';
 import Input from '../../ui/Input/Input';
 import DeleteCalendarModal from '../BigCalendar/Modals/DeleteCalendarModal';
