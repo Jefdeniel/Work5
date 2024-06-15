@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14-alpine
+    ports:
+      - '5432:5432'
+
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=sa_admin_k
+      - POSTGRES_DB=sa_database
+
+    volumes:
+      - ./data/db:/var/lib/postgresql/data/
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - '80:8080'
+
+    volumes:
+      - ./frontend:/app/frontend
+
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    environment:
+      - SECRET_KEY=django-insecure-&c6e-t5ws_$=@a7ydb($ls_u4tkcqg512=r^nuojsw30^%#)k3
+      - DB_NAME=sa_database
+      - DB_USER=sa_admin_k
+      - DB_PASSWORD=postgres
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - GOOGLE_API_KEY = "AIzaSyD4YoS4VbDutvUbnrtugiVzGSJc2KLxUxg"
+    ports:
+      - '8000:8000'
+
+    volumes:
+      - ./backend:/app/backend
+
+    depends_on:
+      - db

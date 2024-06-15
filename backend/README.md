@@ -13,6 +13,7 @@
 
 - username: jef
 - password: admin
+  docker build -t backend.
 
 # python manage.py createsuperuser
 

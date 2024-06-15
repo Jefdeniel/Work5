@@ -26,6 +26,9 @@ yarn build
 
 ### Requirements
 
+docker build -t backend .
+docker run -p 8000:8000 backend
+
 - Python 3.8.12
   - You can download the **Python** 3.8.12 interpreter and runtime. To verify, run `python` in your terminal (inside the backend folder).
 - Pipenv
