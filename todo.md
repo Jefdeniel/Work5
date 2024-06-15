@@ -23,21 +23,12 @@
 
 - Add Events (state)
 
-# Backend:
-
-- Reset en seed laten werken bij Kyandro
-
-# Settings
-
 - Weekends Visibility Werken in Basecalendar
-- Time Format Setting
 
 # Random
 
 - Fetch Avatars When Calendar GET: Users
-- De Grote Translation Check-up
 - Customize: Collaborator Permissions Laten Werken
-- Export naar PDF
 - readme perfectioneren
 
   # Deployment

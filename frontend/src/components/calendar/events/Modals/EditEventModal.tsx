@@ -19,7 +19,6 @@ import './EventModal.scss';
 interface Props {
   event?: Event;
   onClose: () => void;
-  // setEvent: (event: Event) => void;
 }
 
 const EditEventModal = ({ onClose }: Props) => {
@@ -77,7 +76,7 @@ const EditEventModal = ({ onClose }: Props) => {
                   meta={meta}
                   title={t('events:eventInfo.title')}
                   isBig
-                  value={input.values.title ? input.values.title : ''} // TODO: Fix this
+                  value={input.values.title ? input.values.title : ''}
                 />
               )}
             </Field>
@@ -87,7 +86,7 @@ const EditEventModal = ({ onClose }: Props) => {
                 <StartEventTimeSelector
                   {...input}
                   meta={meta}
-                  value={input.values.start_time ? input.values.start_time : ''} // TODO: Fix this
+                  value={input.values.start_time ? input.values.start_time : ''}
                 />
               )}
             </Field>
@@ -97,7 +96,7 @@ const EditEventModal = ({ onClose }: Props) => {
                 <EndEventTimeSelector
                   {...input}
                   meta={meta}
-                  value={input.values.end_time ? input.values.end_time : ''} // TODO: Fix this
+                  value={input.values.end_time ? input.values.end_time : ''}
                 />
               )}
             </Field>
@@ -118,7 +117,7 @@ const EditEventModal = ({ onClose }: Props) => {
                 <EventRepeatSelector
                   {...input}
                   meta={meta}
-                  value={input.values.repeat ? input.values.repeat : ''} // TODO: Fix this
+                  value={input.values.repeat ? input.values.repeat : ''}
                 />
               )}
             </Field>

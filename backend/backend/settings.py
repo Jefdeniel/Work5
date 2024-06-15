@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import environ
 import psycopg2
 from pathlib import Path
+from django.conf import settings
+import django_heroku
+import os
 
 env = environ.Env()
 environ.Env.read_env()
@@ -25,10 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-&c6e-t5ws_$=@a7ydb($ls_u4tkcqg512=r^nuojsw30^%#)k3"
+SECRET_KEY = os.environ("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -53,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",  # should be as high as possible, especially before CommonMiddleware    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -90,8 +94,6 @@ TEMPLATES = [
         },
     },
 ]
-
-STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 WSGI_APPLICATION = "backend.wsgi.application"
@@ -150,6 +152,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR.joinpath("frontend", "dist")]
 STATIC_ROOT = BASE_DIR.joinpath("static")
+django_heroku.settings(locals())
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR.joinpath("media")

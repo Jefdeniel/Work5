@@ -37,7 +37,7 @@ export default [
     },
 
     languageOptions: {
-      parser: tsParser,
+      parser: 'babel-eslint',
       ecmaVersion: 2020,
       sourceType: 'module',
 
