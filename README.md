@@ -19,7 +19,6 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
   - [Backend](#backend)
     - [Requirements](#requirements)
     - [Managing dependencies](#managing-dependencies)
-    - [Managing dependencies](#managing-dependencies-1)
     - [How to start](#how-to-start)
   - [Admin and API access](#admin-and-api-access)
   - [Handy links](#handy-links)
@@ -43,7 +42,6 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
   - [Backend](#backend)
     - [Requirements](#requirements)
     - [Managing dependencies](#managing-dependencies)
-    - [Managing dependencies](#managing-dependencies-1)
     - [How to start](#how-to-start)
   - [Admin and API access](#admin-and-api-access)
   - [Handy links](#handy-links)
@@ -75,9 +73,7 @@ This step is necessary due to the configuration in settings.py for STATICFILES_D
 
 ### Managing dependencies
 
-### Managing dependencies
-
-Run the following command: `pip freeze > requirements.txt`
+Run the following command: `pip install -r requirements.txt`
 
 ### How to start
 
