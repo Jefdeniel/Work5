@@ -13,12 +13,12 @@ import {
 import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
+import AddEventModal from '../events/Modals/AddEventModal';
+import DeleteEventModal from '../events/Modals/DeleteEventModal';
+import EditEventModal from '../events/Modals/EditEventModal';
 import CustomToolbar from './SmallComponents/CustomToolbar/CustomToolbar';
 import TimeBlockCard from './SmallComponents/TimeBlockCard/TimeBlockCard';
 
-import DeleteEventModal from '../events/Modals/DeleteEventModal';
-
-import EditEventModal from '../events/Modals/EditEventModal';
 import './BaseCalendar.scss';
 import './Calendar.scss';
 
@@ -30,8 +30,6 @@ interface CalendarProps {
 
 const STEP = 15;
 const TIMESLOTS = 60 / STEP;
-
-// const id = 1;
 
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   // States
@@ -123,7 +121,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   // Modals
   const handleOpenEditModal = () => {
     setShowEditEventModal(true);
-    console.log('Opening edit event modal');
+    console.log(showEditEventModal);
   };
 
   const handleOpenAddEventModal = () => {
@@ -151,6 +149,14 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const handleRemoveEvent = (eventId: number) => {
     setEvents((prevEvents) =>
       prevEvents.filter((event) => event.id !== eventId)
+    );
+  };
+
+  const handleEditEvent = (editedEventId: number) => {
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === editedEventId ? { ...event, ...eventToEdit } : event
+      )
     );
   };
 
@@ -189,6 +195,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   };
 
   const handleDoubleClickEvent = (event: Event) => {
+    console.log('Event double clicked: ', event);
+
     setSelectedEvent(event);
     handleOpenEditModal();
   };
@@ -225,8 +233,21 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         />
       )}
 
-      {eventToEdit && (
+      {showEditEventModal && selectedEvent && (
+        <EditEventModal event={selectedEvent} onClose={handleCloseEditModal} onEditEvent={handleEditEvent} />
+      )}
+
+      {/* {eventToEdit && (
         <EditEventModal event={eventToEdit} onClose={handleCloseEditModal} />
+      )} */}
+
+      {showAddEventModal && (
+        <AddEventModal
+          onClose={() => setShowAddEventModal(false)}
+          start={newEventTimes?.start}
+          end={newEventTimes?.end}
+          setEvents={setEvents}
+        />
       )}
 
       <DnDCalendar
