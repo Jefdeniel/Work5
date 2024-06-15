@@ -1,12 +1,13 @@
-import { Form } from 'react-final-form';
+import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { Event } from '../../../../@types/Events';
+
 import useFetch from '../../../../hooks/useFetch';
 import Button from '../../../ui/Button/Button';
-import Modal from '../../../ui/Modals/Modal';
+
 import './EventModal.scss';
-import { toast } from 'react-toastify';
 
 interface Props {
   onClose: () => void;
@@ -22,44 +23,37 @@ const DeleteEventModal = ({ onClose, event, onRemoveEvent }: Props) => {
     event.id?.toString() ?? '',
   ]);
 
+  // TODO: Add translations
   const handleDeleteEvent = async () => {
     await deleteEvent({}, { id: event.id }).then((response) => {
       if (response.ok) {
+        toast.success(t('events:toasts.deleted'));
         if (event.id) {
           onRemoveEvent(event.id!);
         }
       } else {
         console.error(response);
-        toast.error(t('events:toasts.error'));
+        toast.error(t('events:errors.deleted'));
       }
       onClose();
     });
   };
 
   return (
-    <Modal
-      show={true}
-      onClose={onClose}
-      title={t('events:modals.add.title')}
-      size="sm"
-    >
-      <Form
-        onSubmit={handleDeleteEvent}
-        render={({ handleSubmit }) => (
-          <form className={`event-form`} onSubmit={handleSubmit}>
-            <div className="d-flex">
-              <Button
-                className="btn--success mt-3 d-flex"
-                isBig
-                type="submit"
-                disabled={isLoading}
-              >
-                {t('settings:save')}
-              </Button>
-            </div>
-          </form>
-        )}
-      />
+    <Modal show={true} size="sm" onHide={onClose}>
+      <Modal.Header className="p-3" closeButton>
+        <Modal.Title>{t('events:modals.delete.title')}</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body className="p-3 pb-4">
+        <p>{t('events:modals.delete.description')}</p>
+
+        <div className="d-flex justify-content-center">
+          <Button onClick={handleDeleteEvent} className="btn--danger">
+            {t('events:modals.delete.confirm')}
+          </Button>
+        </div>
+      </Modal.Body>
     </Modal>
   );
 };
