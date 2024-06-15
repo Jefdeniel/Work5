@@ -28,15 +28,12 @@ const LabelColorInput = ({ calendar }: Props) => {
       calendar: category.id,
     }));
 
-    console.log('Updated categories:', updatedCategories);
-
     try {
       const response = await updateCategoryColors({
         categories: updatedCategories,
       });
 
       if (response.ok) {
-        console.log('Update successful');
         toast.success('Update successful');
       } else {
         console.error('Update failed', response.statusText);

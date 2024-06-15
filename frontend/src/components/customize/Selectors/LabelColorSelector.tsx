@@ -13,7 +13,7 @@ import './Input.scss';
 const LabelColorSelector = () => {
   const { t } = useTranslation(['calendar']);
 
-  const labels = [
+  const LABELS = [
     { name: 'Work', color: '#FF0000' },
     { name: 'Personal', color: '#00FF00' },
     { name: 'Family', color: '#0000FF' },
@@ -21,7 +21,6 @@ const LabelColorSelector = () => {
     { name: 'Other', color: '#00FFFF' },
   ];
 
-  // TODO: Change to api call that gets the specific calendar and get categories trough that
   const { fetchData: getCategories, loading: isLoading } = useFetch('GET', [
     'categories',
   ]);
@@ -66,7 +65,7 @@ const LabelColorSelector = () => {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <ul className={`input-list`}>
-              {labels.map((label) => (
+              {LABELS.map((label) => (
                 <li key={label.name} className={`input-item`}>
                   <label>
                     <input

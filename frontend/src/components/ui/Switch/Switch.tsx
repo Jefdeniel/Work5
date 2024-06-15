@@ -9,7 +9,6 @@ interface Props {
 const Switch = ({ checked, onChange, ...rest }: Props) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.checked);
-    console.log(event.target.checked);
   };
 
   return (
