@@ -28,7 +28,6 @@
 # Random
 
 - Fetch Avatars When Calendar GET: Users
-- De Grote Translation Check-up
 - Customize: Collaborator Permissions Laten Werken
 - readme perfectioneren
 

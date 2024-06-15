@@ -4,6 +4,7 @@
 
 ### Start the frontend locally
 
+Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
 Start with executing the following command in the terminal:
 
 ```
@@ -12,13 +13,10 @@ yarn && yarn start
 
 ### Building for production
 
-Note: Building first is important, otherwise you will have crashes when starting up the backend server.
+Note: Building the frontend first is important, otherwise you will have crashes when starting up the backend server.
 
 ```
 yarn build
-
-- https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-- - https://stackoverflow.com/questions/49966547/pip-10-0-1-warning-consider-adding-this-directory-to-path-or
 
 ```
 
@@ -38,10 +36,6 @@ yarn build
 - Freeze your current dependencies to get them from requirements.txt file: `pip freeze > requirements.txt`
 - Install dependencies after freeze: `pip install -r requirements.txt`
 
-### DB
-
-- Build dist folder into frontend with `yarn build`. (reason in settings.py for STATICFILES_DIRS)
-
 ### How to start
 
 1. Make sure your virtual environment is active with `pipenv shell` (run from root).
@@ -56,4 +50,4 @@ yarn build
    2. API: `http://localhost:8000/api`
 7. after seeding you can try to login with **jefdeniel@icloud.com** and pw: **admin**
 
-Resetting your database, redo migrations and seed at once with `python manage.py reset_and_migrate_seed` from backend folder
+Resetting your database, redo migrations and seed at once with `python manage.py reset_and_migrate_seed` from backend folder. All possible commands are in the files themselves in /backend/calendar_app/management
