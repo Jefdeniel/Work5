@@ -21,10 +21,6 @@ const MessageList = ({ messages }: MessageListProps) => {
     >
       {messages.map((message, index) => (
         <div key={index}>
-          <div className="font-weight-bold mb-2">
-            <strong>{t('calendar:inspiration.prompt')}:</strong>{' '}
-            {message.prompt}
-          </div>
           <div className="ml-3">
             <strong>{t('calendar:inspiration.response')}:</strong>
             <Markdown remarkPlugins={[remarkGfm]}>
