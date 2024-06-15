@@ -77,7 +77,7 @@ This step is necessary due to the configuration in settings.py for STATICFILES_D
 
 ### Managing dependencies
 
-Run the following command: `pip freeze > requirements.txt`
+Run the following command: `pip install -r requirements.txt`
 
 ### How to start
 
