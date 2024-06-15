@@ -62,12 +62,8 @@ const SharingHubPage = () => {
     handleOutlookClick: () => {},
   };
 
-  if (isLoading) {
+  if (isLoading || !calendar) {
     return <LoadingScreen />;
-  }
-
-  if (!calendar) {
-    return <div>Loading calendar data...</div>;
   }
 
   const calendarUsers = calendar.users;
@@ -134,7 +130,7 @@ const SharingHubPage = () => {
         <Heading level={3} className={`heading heading--sm fw-bold`}>
           <p>{t('calendar:sharing-hub.integrateExternal')}</p>
         </Heading>
-        
+
         <ActionButtonList
           items={EXTERNAL_SERVICES_ITEMS}
           functionMap={functionMap}
