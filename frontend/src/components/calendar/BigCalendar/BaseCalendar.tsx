@@ -41,7 +41,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     end: Date;
   }>();
 
-  const { events, timeBlocks, addEvent } = useFetchedEvents();
+  const { events, timeBlocks, setEvents } = useFetchedEvents();
 
   const localizer = momentLocalizer(moment);
   const { week_start_day, weekend_visibility, time_format } =
@@ -58,7 +58,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       week: {
         dow: week_start_day === 'Monday' ? 1 : 0,
       },
-      longDateFormat: dateAndTimeFormats, // Custom date and time formats -> longDateFormat name is little misleading but comes from Moment.js API design so not editable
+      longDateFormat: dateAndTimeFormats,
       formats: customViewFormats,
     });
   }, [week_start_day, time_format, localizer]);
@@ -167,11 +167,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     handleOpenEditEventModal();
   };
 
-  const handleAddEvent = (newEvent) => {
-    addEvent(newEvent);
-    closeAddEventModal();
-  };
-
   return (
     <div className={'full-calendar'}>
       <CustomToolbar
@@ -196,6 +191,7 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           start={newEventTimes.start.toISOString()}
           end={newEventTimes.end.toISOString()}
           onClose={closeAddEventModal}
+          setEvents={setEvents}
         />
       )}
 

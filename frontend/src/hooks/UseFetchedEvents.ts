@@ -10,13 +10,11 @@ import { TimeBlock } from '../@types/TimeBlock';
 import useFetch from './useFetch';
 
 const useFetchedEvents = () => {
-  // State
   const [events, setEvents] = useState<Event[]>([]);
   const [timeBlocks, setTimeBlocks] = useState<TimeBlock[]>([]);
 
   const params = useParams();
 
-  // Fetch
   const { fetchData: getEvents } = useFetch('GET', [
     'events',
     'calendar',
@@ -87,6 +85,7 @@ const useFetchedEvents = () => {
           end: DateTime.fromISO(data.end_time).toJSDate(),
         };
         setEvents((prevEvents) => [...prevEvents, formattedEvent]);
+        return formattedEvent;
       } else {
         const errorData = await response.json();
         console.error('Error details:', errorData);
@@ -98,7 +97,7 @@ const useFetchedEvents = () => {
     }
   };
 
-  return { events, timeBlocks, addEvent };
+  return { events, timeBlocks, addEvent, setEvents, setTimeBlocks };
 };
 
 export default useFetchedEvents;

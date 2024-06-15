@@ -1,27 +1,22 @@
-import moment from 'moment';
-import { useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import moment from 'moment';
+import { Field, Form } from 'react-final-form';
+import { Col, Row } from 'react-bootstrap';
 import useAuth from '../../../../hooks/useAuth';
-import useFetch from '../../../../hooks/useFetch';
+import useFetchedEvents from '../../../../hooks/UseFetchedEvents';
 import Validators from '../../../../utils/Validators';
-
 import Button from '../../../ui/Button/Button';
 import Input from '../../../ui/Input/Input';
-import LoadingScreen from '../../../ui/Loading/LoadingScreen';
 import Modal from '../../../ui/Modals/Modal';
 import EndEventTimeSelector from '../Selectors/EndEventTimeSelector';
 import EventPrioritySelector from '../Selectors/EventPrioritySelector';
 import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
-
 import './EventModal.scss';
-import Spinner from '../../../ui/Loading/Spinner';
 
-const AddEventModal = ({ onClose, start, end }) => {
+const AddEventModal = ({ onClose, start, end, setEvents }) => {
   const { t } = useTranslation(['events']);
   const { user_id } = useAuth();
   const params = useParams();
@@ -30,9 +25,7 @@ const AddEventModal = ({ onClose, start, end }) => {
   const [startTime, setStartTime] = useState(new Date(start));
   const [endTime, setEndTime] = useState(new Date(end));
 
-  const { fetchData: addEvent, loading: isLoading } = useFetch('POST', [
-    'events',
-  ]);
+  const { addEvent } = useFetchedEvents();
 
   const handleAddEvent = async (values) => {
     try {
@@ -49,15 +42,10 @@ const AddEventModal = ({ onClose, start, end }) => {
         is_recurring: false,
       };
 
-      const response = await addEvent({}, newEvent);
-
-      if (response.ok) {
-        toast.success(t('events:toasts.added'));
-        onClose && onClose();
-      } else {
-        toast.error(t('events:toasts.error'));
-        throw new Error('Failed to save event: ' + response.statusText);
-      }
+      const addedEvent = await addEvent(newEvent);
+      toast.success(t('events:toasts.added'));
+      setEvents((prevEvents) => [...prevEvents, addedEvent]);
+      onClose();
     } catch (error) {
       toast.error(t('events:toasts.addError') + ': ' + error.message);
       console.error('Error adding event:', error);
@@ -71,10 +59,6 @@ const AddEventModal = ({ onClose, start, end }) => {
   const onHandleEndTime = (end) => {
     setEndTime(new Date(end));
   };
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <Modal
@@ -148,12 +132,7 @@ const AddEventModal = ({ onClose, start, end }) => {
             </Field>
 
             <div className="d-flex">
-              <Button
-                className="btn--success mt-3 d-flex"
-                isBig
-                type="submit"
-                disabled={isLoading}
-              >
+              <Button className="btn--success mt-3 d-flex" isBig type="submit">
                 {t('settings:save')}
               </Button>
             </div>
