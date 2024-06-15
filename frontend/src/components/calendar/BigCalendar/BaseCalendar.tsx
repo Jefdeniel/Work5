@@ -2,8 +2,10 @@ import moment from 'moment';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+
 import { Event } from '../../../@types/Events';
 import { TimeBlock } from '../../../@types/TimeBlock';
+
 import {
   GET_DATE_FORMATS,
   GET_VIEW_FORMATS,
@@ -12,12 +14,11 @@ import useFetchedEvents from '../../../hooks/UseFetchedEvents';
 import { SettingsContext } from '../../../store/SettingsContext';
 import EventCard from '../../ui/EventCard/EventCard';
 import AddEventModal from '../events/Modals/AddEventModal';
+import DeleteEventModal from '../events/Modals/DeleteEventModal';
 import EditEventModal from '../events/Modals/EditEventModal';
 import CustomToolbar from './SmallComponents/CustomToolbar/CustomToolbar';
 import TimeBlockCard from './SmallComponents/TimeBlockCard/TimeBlockCard';
 
-import useFetch from '../../../hooks/useFetch';
-import DeleteEventModal from '../events/Modals/DeleteEventModal';
 import './BaseCalendar.scss';
 import './Calendar.scss';
 
@@ -30,14 +31,8 @@ interface CalendarProps {
 const STEP = 15;
 const TIMESLOTS = 60 / STEP;
 
-const id = 1;
-
 const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
-  const { fetchData: deleteEvent } = useFetch('DELETE', [
-    'events',
-    id.toString() ?? '',
-  ]);
-
+  // States
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [date, setDate] = useState(new Date());
   const [isSmallCalendarOpen, setIsSmallCalendarOpen] = useState(false);
@@ -45,6 +40,8 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [showEditEventModal, setShowEditEventModal] = useState(false);
   const [showAddEventModal, setShowAddEventModal] = useState(false);
+  const [eventToDelete, setEventToDelete] = useState<Event | null>(null);
+  const [eventToEdit, setEventToEdit] = useState<Event | null>(null);
   const [showDeleteEventModal, setShowDeleteEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event>();
   const [newEventTimes, setNewEventTimes] = useState<{
@@ -71,32 +68,6 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     });
   }, [week_start_day, time_format, localizer]);
 
-  // MODALS
-
-  const handleOpenEditEventModal = () => {
-    setShowEditEventModal(true);
-  };
-
-  const handleOpenAddEventModal = () => {
-    setShowAddEventModal(true);
-  };
-
-  const closeEditEventModal = () => {
-    setShowEditEventModal(false);
-  };
-
-  const closeAddEventModal = () => {
-    setShowAddEventModal(false);
-  };
-
-  const handleDeleteEventModal = () => {
-    setShowDeleteEventModal(true);
-  };
-
-  const closeDeleteEventModal = () => {
-    setShowDeleteEventModal(false);
-  };
-
   const components = useMemo(
     () => ({
       event: ({ event }: { event: Event | TimeBlock }) => {
@@ -107,9 +78,9 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
           <EventCard
             event={event as Event}
             color={(event as Event).color}
-            onDoubleClick={handleOpenEditEventModal}
-            onEdit={handleOpenEditEventModal}
-            onDelete={handleDeleteEventModal}
+            onDoubleClick={() => handleEdit(event as Event)}
+            onDelete={() => handleDelete(event as Event)}
+            onEdit={() => handleEdit(event as Event)}
           />
         );
       },
@@ -133,10 +104,10 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
         setSelectedEvent(undefined);
         handleOpenAddEventModal();
       },
-      onDoubleClickEvent: (event) => {
+      onDoubleClickEvent: (event: Event) => {
         setSelectedEvent(event);
         setNewEventTimes(undefined);
-        handleOpenEditEventModal();
+        handleOpenEditModal();
       },
       events: allEvents,
       style: { width: '100%', height: '100%' },
@@ -146,6 +117,48 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
     }),
     [weekend_visibility, allEvents, time_format, components, onShowEventView]
   );
+
+  // Modals
+  const handleOpenEditModal = () => {
+    setShowEditEventModal(true);
+    console.log(showEditEventModal);
+  };
+
+  const handleOpenAddEventModal = () => {
+    setShowAddEventModal(true);
+    console.log('Opening add event modal');
+  };
+
+  // Handlers
+  const handleDelete = (event: Event) => {
+    setEventToDelete(event);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setEventToDelete(null);
+  };
+
+  const handleEdit = (event: Event) => {
+    setEventToEdit(event);
+  };
+
+  const handleCloseEditModal = () => {
+    setEventToEdit(null);
+  };
+
+  const handleRemoveEvent = (eventId: number) => {
+    setEvents((prevEvents) =>
+      prevEvents.filter((event) => event.id !== eventId)
+    );
+  };
+
+  const handleEditEvent = (editedEventId: number) => {
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === editedEventId ? { ...event, ...eventToEdit } : event
+      )
+    );
+  };
 
   const handleSearchFocus = () => {
     setIsSmallCalendarOpen(true);
@@ -182,8 +195,10 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
   };
 
   const handleDoubleClickEvent = (event: Event) => {
+    console.log('Event double clicked: ', event);
+
     setSelectedEvent(event);
-    handleOpenEditEventModal();
+    handleOpenEditModal();
   };
 
   return (
@@ -205,19 +220,32 @@ const BaseCalendar = ({ onShowEventView }: CalendarProps) => {
       {showDeleteEventModal && selectedEvent && (
         <DeleteEventModal
           event={selectedEvent}
-          onClose={closeDeleteEventModal}
-          onRemoveEvent={deleteEvent}
+          onClose={handleCloseDeleteModal}
+          onRemoveEvent={handleRemoveEvent}
+        />
+      )}
+
+      {eventToDelete && (
+        <DeleteEventModal
+          event={eventToDelete}
+          onClose={handleCloseDeleteModal}
+          onRemoveEvent={handleRemoveEvent}
         />
       )}
 
       {showEditEventModal && selectedEvent && (
-        <EditEventModal event={selectedEvent} onClose={closeEditEventModal} />
+        <EditEventModal event={selectedEvent} onClose={handleCloseEditModal} onEditEvent={handleEditEvent} />
       )}
-      {showAddEventModal && newEventTimes && (
+
+      {/* {eventToEdit && (
+        <EditEventModal event={eventToEdit} onClose={handleCloseEditModal} />
+      )} */}
+
+      {showAddEventModal && (
         <AddEventModal
-          start={newEventTimes.start.toISOString()}
-          end={newEventTimes.end.toISOString()}
-          onClose={closeAddEventModal}
+          onClose={() => setShowAddEventModal(false)}
+          start={newEventTimes?.start}
+          end={newEventTimes?.end}
           setEvents={setEvents}
         />
       )}

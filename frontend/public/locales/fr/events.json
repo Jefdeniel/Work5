@@ -22,6 +22,11 @@
     },
     "edit": {
       "title": "Modifier un événement"
+    },
+    "delete": {
+      "title": "Supprimer un événement",
+      "description": "Êtes-vous sûr de vouloir supprimer cet événement ?",
+      "confirm": "Oui, supprimer"
     }
   },
   "buttons": {
@@ -35,6 +40,7 @@
     "deleted": "Événement supprimé"
   },
   "errors": {
-    "fetchingEvents": "Échec de la récupération des événements"
+    "fetchingEvents": "Échec de la récupération des événements",
+    "deleted": "Échec de la suppression de l'événement"
   }
 }

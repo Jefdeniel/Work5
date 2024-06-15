@@ -4,8 +4,8 @@ import { useSettings } from '../../../hooks/useSettings';
 import { CalendarCardProps } from '../../../@types/CalendarCard';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';
-import ProfilePicture from '../../ui/ProfilePicture/ProfilePicture';
 import OptionsBox from '../../ui/OptionsBox/OptionsBox';
+import ProfilePicture from '../../ui/ProfilePicture/ProfilePicture';
 
 import './CalendarCard.scss';
 

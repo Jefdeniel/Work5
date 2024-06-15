@@ -7,6 +7,8 @@
 }
 
 .prio-icon {
+    padding: 4px;
+    border: 1.5px solid var(--sa-primary-950);
+    border-radius: var(--br-full);
     display: inline-block;
-    background-color: red;
 }

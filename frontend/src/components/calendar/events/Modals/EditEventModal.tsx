@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 
 import { Event } from '../../../../@types/Events';
 import useFetch from '../../../../hooks/useFetch';
-import Validators from '../../../../utils/Validators';
 
+import Validators from '../../../../utils/Validators';
 import Button from '../../../ui/Button/Button';
 import Input from '../../../ui/Input/Input';
 import LoadingScreen from '../../../ui/Loading/LoadingScreen';
@@ -14,22 +14,24 @@ import Modal from '../../../ui/Modals/Modal';
 import EndEventTimeSelector from '../Selectors/EndEventTimeSelector';
 import EventRepeatSelector from '../Selectors/EventRepeatSelector';
 import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
+
 import './EventModal.scss';
 
 interface Props {
-  event?: Event;
+  event: Event;
   onClose: () => void;
+  onEditEvent: (eventId: number) => void;
 }
 
 const EditEventModal = ({ onClose }: Props) => {
   const { t } = useTranslation(['events']);
-  const { fetchData: addEvent, loading: isLoading } = useFetch('PUT', [
+  const { fetchData: updateEvent, loading: isLoading } = useFetch('PUT', [
     'events',
   ]);
 
   const handleUpdateEvent = async (values: Event) => {
     try {
-      const response = await addEvent(
+      const response = await updateEvent(
         {},
         {
           ...values,
@@ -66,6 +68,7 @@ const EditEventModal = ({ onClose }: Props) => {
       size="sm"
     >
       <Form
+        initialValues={event}
         onSubmit={handleUpdateEvent}
         render={({ handleSubmit }) => (
           <form className={`event-form`} onSubmit={handleSubmit}>

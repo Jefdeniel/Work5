@@ -2,9 +2,16 @@ import moment from 'moment';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
+import moment from 'moment';
+import { useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { Event } from '../../../../@types/Events';
+
 import useAuth from '../../../../hooks/useAuth';
 import useFetchedEvents from '../../../../hooks/UseFetchedEvents';
 import Validators from '../../../../utils/Validators';
@@ -14,16 +21,24 @@ import Modal from '../../../ui/Modals/Modal';
 import EndEventTimeSelector from '../Selectors/EndEventTimeSelector';
 import EventPrioritySelector from '../Selectors/EventPrioritySelector';
 import StartEventTimeSelector from '../Selectors/StartEventTimeSelector';
+
 import './EventModal.scss';
 
-const AddEventModal = ({ onClose, start, end, setEvents }) => {
+interface Props {
+  onClose: () => void;
+  start?: Date;
+  end?: Date;
+  setEvents: React.Dispatch<React.SetStateAction<Event[]>>;
+}
+
+const AddEventModal = ({ onClose, start, end, setEvents }: Props) => {
   const { t } = useTranslation(['events']);
   const { user_id } = useAuth();
   const params = useParams();
   const calendarId = params.id;
 
-  const [startTime, setStartTime] = useState(new Date(start));
-  const [endTime, setEndTime] = useState(new Date(end));
+  const [startTime, setStartTime] = useState(start ? new Date(start) : null);
+  const [endTime, setEndTime] = useState(end ? new Date(end) : null);
 
   const { addEvent } = useFetchedEvents();
 
@@ -44,7 +59,7 @@ const AddEventModal = ({ onClose, start, end, setEvents }) => {
 
       const addedEvent = await addEvent(newEvent);
       toast.success(t('events:toasts.added'));
-      setEvents((prevEvents) => [...prevEvents, addedEvent]);
+      setEvents((prevEvents: Event[]) => [...prevEvents, addedEvent]);
       onClose();
     } catch (error) {
       toast.error(t('events:toasts.addError') + ': ' + error.message);

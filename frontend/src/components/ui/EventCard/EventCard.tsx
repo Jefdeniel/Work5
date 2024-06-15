@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Event } from '../../../@types/Events';
+import { EventCardProps } from '../../../@types/EventCard';
 
 import { useSettings } from '../../../hooks/useSettings';
 import ColorConversion from '../../../utils/ColorConversion';
@@ -17,15 +17,6 @@ import OptionsBox from '../OptionsBox/OptionsBox';
 
 import './EventCard.scss';
 
-interface EventProps {
-  event: Event;
-  color?: string;
-  isGoogleEvent?: boolean;
-  onDoubleClick?: () => void;
-  onDelete?: () => void;
-  onEdit?: () => void;
-}
-
 const EventCard = ({
   event: { title, location, priority, status, htmlLink, start_time, end_time },
   color,
@@ -33,8 +24,8 @@ const EventCard = ({
   onDoubleClick,
   onDelete,
   onEdit,
-}: EventProps) => {
-  const [isOptionsVisible, setIsOptionsVisibility] = useState(false);
+}: EventCardProps) => {
+  const [isOptionBoxVisible, setIsOptionBoxVisible] = useState(false);
 
   const optionsBoxRef = useRef<HTMLDivElement>(null);
   const { theme } = useSettings();
@@ -45,7 +36,7 @@ const EventCard = ({
     ? ColorConversion.convertHexToRGBA(color, 0.2)
     : fadedDefaultColor;
 
-  let priorityIcon;
+  let priorityIcon: React.ReactNode;
 
   switch (priority) {
     case 'very_low':
@@ -74,7 +65,7 @@ const EventCard = ({
       : location;
 
   const handleOptionsClick = () => {
-    setIsOptionsVisibility((prev) => !prev);
+    setIsOptionBoxVisible((prev) => !prev);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -82,7 +73,7 @@ const EventCard = ({
       optionsBoxRef.current &&
       !optionsBoxRef.current.contains(event.target as Node)
     ) {
-      setIsOptionsVisibility(false);
+      setIsOptionBoxVisible((prev) => !prev);
     }
   };
 
@@ -91,7 +82,7 @@ const EventCard = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isOptionBoxVisible]);
 
   return (
     <div
@@ -119,9 +110,9 @@ const EventCard = ({
         className={`event-card__options`}
       />
 
-      {isOptionsVisible && (
+      {isOptionBoxVisible && (
         <div ref={optionsBoxRef}>
-          <OptionsBox onDelete={onDelete!} onEdit={onEdit!} />
+          <OptionsBox onDelete={onDelete} onEdit={onEdit} />
         </div>
       )}
 
@@ -167,6 +158,7 @@ const EventCard = ({
           {priority && (
             <div className="event-card__priority">
               <strong>Priority: </strong>
+
               {priorityIcon}
             </div>
           )}

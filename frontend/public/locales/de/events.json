@@ -22,6 +22,11 @@
     },
     "edit": {
       "title": "Ereignis bearbeiten"
+    },
+    "delete": {
+      "title": "Ereignis löschen",
+      "description": "Möchten Sie dieses Ereignis wirklich löschen?",
+      "confirm": "Ja, löschen"
     }
   },
   "buttons": {
@@ -35,6 +40,7 @@
     "deleted": "Ereignis gelöscht"
   },
   "errors": {
-    "fetchingEvents": "Ereignisse konnten nicht abgerufen werden"
+    "fetchingEvents": "Ereignisse konnten nicht abgerufen werden",
+    "deleted": "Ereignis konnte nicht gelöscht werden"
   }
 }
