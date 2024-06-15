@@ -24,8 +24,6 @@ export interface CalendarUser {
   avatar?: string;
 }
 
-// Type 'Calendar' is missing the following properties from type 'CalendarUser': user, calendar, rolets(2739)
-
 export interface ExportOption {
   calendar: Calendar;
 }

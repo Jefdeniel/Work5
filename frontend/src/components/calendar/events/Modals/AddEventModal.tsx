@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import moment from 'moment';
+import { useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import moment from 'moment';
-import { Field, Form } from 'react-final-form';
-import { Col, Row } from 'react-bootstrap';
 import useAuth from '../../../../hooks/useAuth';
 import useFetchedEvents from '../../../../hooks/UseFetchedEvents';
 import Validators from '../../../../utils/Validators';

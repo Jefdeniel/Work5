@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import useSetTitle from '../../hooks/setTitle';
-import useFetch from '../../hooks/useFetch';
+import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
 import Heading from '../../components/ui/Heading/Heading';
 import LoadingScreen from '../../components/ui/Loading/LoadingScreen';
-import CalendarView from '../../components/calendar/BigCalendar/CalendarView';
+import useSetTitle from '../../hooks/setTitle';
+import useFetch from '../../hooks/useFetch';
 
 const CalendarPage = () => {
   const { t } = useTranslation(['calendar']);

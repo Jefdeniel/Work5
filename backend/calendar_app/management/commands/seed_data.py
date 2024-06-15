@@ -12,6 +12,8 @@ from calendar_app.management.commands.seeding.seed_notifications import (
 )
 from calendar_app.management.commands.seeding.seed_time_blocks import seed_time_blocks
 
+# python manage.py seed_data
+
 
 class Command(BaseCommand):
     help = "Seeds the database with data for each model"

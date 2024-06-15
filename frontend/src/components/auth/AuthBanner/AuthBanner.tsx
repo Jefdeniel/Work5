@@ -1,7 +1,5 @@
 import { Col } from 'react-bootstrap';
-
 import Logo from '../../ui/Logo';
-
 import './AuthBanner.scss';
 
 const AuthBanner = () => {

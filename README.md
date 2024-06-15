@@ -11,16 +11,46 @@ The @Work5 Smart Calendar Tool is a full-featured calendar application with both
 - [@Work5 Smart Calendar Tool](#work5-smart-calendar-tool)
   - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
+  - [Overview](#overview-1)
+  - [Table of Contents](#table-of-contents-1)
   - [Frontend](#frontend)
     - [Starting the Frontend Locally](#starting-the-frontend-locally)
+    - [Starting the Frontend Locally](#starting-the-frontend-locally-1)
   - [Backend](#backend)
     - [Requirements](#requirements)
     - [Managing dependencies](#managing-dependencies)
+    - [Managing dependencies](#managing-dependencies-1)
+    - [How to start](#how-to-start)
+  - [Admin and API access](#admin-and-api-access)
+  - [Handy links](#handy-links)
+
+![cover](https://restomanager.net/wp-content/uploads/2024/06/readme.png)
+
+## Overview
+
+The @Work5 Smart Calendar Tool is a full-featured calendar application with both frontend and backend components. This tool allows users to manage events and schedules efficiently. The application is built with a React frontend and a Django backend.
+
+## Table of Contents
+
+- [@Work5 Smart Calendar Tool](#work5-smart-calendar-tool)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview-1)
+  - [Table of Contents](#table-of-contents-1)
+  - [Frontend](#frontend)
+    - [Starting the Frontend Locally](#starting-the-frontend-locally)
+    - [Starting the Frontend Locally](#starting-the-frontend-locally-1)
+  - [Backend](#backend)
+    - [Requirements](#requirements)
+    - [Managing dependencies](#managing-dependencies)
+    - [Managing dependencies](#managing-dependencies-1)
     - [How to start](#how-to-start)
   - [Admin and API access](#admin-and-api-access)
   - [Handy links](#handy-links)
 
 ## Frontend
+
+### Starting the Frontend Locally
 
 ### Starting the Frontend Locally
 
@@ -42,6 +72,8 @@ This step is necessary due to the configuration in settings.py for STATICFILES_D
 - **Pipenv**: Make sure Pipenv is installed and properly set up in your PATH. For more information, see the handy links.
 - **Django**
 - **Black**: Use Black for code formatting. [Link](https://github.com/psf/black)
+
+### Managing dependencies
 
 ### Managing dependencies
 
