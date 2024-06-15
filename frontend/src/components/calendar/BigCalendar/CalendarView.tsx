@@ -1,7 +1,5 @@
 import { useState } from 'react';
-
 import { Event } from '../../../@types/Events';
-
 import EditEventModal from '../events/Modals/EditEventModal';
 import BaseCalendar from './BaseCalendar';
 
@@ -17,19 +15,16 @@ const CalendarView = () => {
       setSelectedEvent(event as Event);
     }
   };
-
   return (
     <div className="full-calendar">
       <BaseCalendar onShowEventView={handleShowEventView} />
 
-      {selectedEvent &&
-        (console.log('Selected event:', selectedEvent),
-        (
-          <EditEventModal
-            event={selectedEvent}
-            onClose={() => setSelectedEvent(undefined)}
-          />
-        ))}
+      {selectedEvent && (
+        <EditEventModal
+          event={selectedEvent}
+          onClose={() => setSelectedEvent(undefined)}
+        />
+      )}
     </div>
   );
 };

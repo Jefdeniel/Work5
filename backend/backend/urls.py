@@ -1,13 +1,11 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
-
 from django.conf.urls.static import static
-from rest_framework_swagger.views import get_swagger_view
+from django.conf import settings
+from django.views.generic.base import RedirectView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
-from django.conf import settings
-from django.views.generic.base import RedirectView
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.views.generic import TemplateView
@@ -39,9 +37,7 @@ urlpatterns = [
         get_schema_view().with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),
-    path(
-        "api/", include("calendar_app.urls")
-    ),  # Ensure this line includes the calendar_app urls
+    path("api/", include("calendar_app.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path(r"^.*", TemplateView.as_view(template_name="index.html"))]

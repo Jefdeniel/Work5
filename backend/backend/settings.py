@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import environ
 from pathlib import Path
+import django_heroku
 import os
+from decouple import config
 
 env = environ.Env()
 environ.Env.read_env()
@@ -28,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -182,7 +184,7 @@ CORS_ALLOW_CREDENTIALS = True
 FILE_UPLOAD_PERMISSIONS = 0o644
 
 # PRODUCTION: SET TO TRUE
-# CSRF_COOKY_HTTPONLY = False
+# CSRF_COOKY_HTTPONLY = True
 # SESSION_COOKIE_HTTPONLY = True
 
 CSRF_TRUSTED_ORIGINS = [

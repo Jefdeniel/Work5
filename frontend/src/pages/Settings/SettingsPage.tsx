@@ -66,7 +66,6 @@ const SettingsPage = () => {
       );
 
       if (response.ok) {
-        // Update context with new values
         setLanguage(values.language);
         setTimezone(values.time_zone);
         setTimeFormat(values.time_format);

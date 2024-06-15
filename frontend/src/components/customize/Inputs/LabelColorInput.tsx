@@ -12,7 +12,6 @@ interface Props {
   calendar: Calendar;
 }
 
-// TODO: Add translations
 const LabelColorInput = ({ calendar }: Props) => {
   const { t } = useTranslation(['calendar']);
   const [categories, setCategories] = useState(calendar.categories);
@@ -29,17 +28,13 @@ const LabelColorInput = ({ calendar }: Props) => {
       calendar: category.id,
     }));
 
-    console.log('Updated categories:', updatedCategories);
-
     try {
       const response = await updateCategoryColors({
         categories: updatedCategories,
       });
 
       if (response.ok) {
-        console.log('Update successful');
         toast.success('Update successful');
-        // setCategories(updatedCategories);
       } else {
         console.error('Update failed', response.statusText);
         toast.error('Update failed');

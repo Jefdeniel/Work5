@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useSettings } from '../../../hooks/useSettings';
-
 import { CalendarCardProps } from '../../../@types/CalendarCard';
 import Icon from '../../ui/Icon/Icon';
 import IconButton from '../../ui/IconButton/IconButton';

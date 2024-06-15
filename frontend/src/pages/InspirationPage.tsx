@@ -59,7 +59,6 @@ const InspirationPage = () => {
         if (response.ok) {
           const data = await response.json();
           setCurrentCalendarData(data);
-          console.log('Calendar data:', data);
         } else {
           throw new Error(response.statusText);
         }
@@ -77,9 +76,7 @@ const InspirationPage = () => {
   const handlePromptSubmit = async (values: { prompt: string }) => {
     try {
       const calendarDataJson = formatCalendarDataToJson(currentCalendarData);
-      console.log('Prompt:', values.prompt);
       const fullPrompt = `${PRE_PROMPT}\n\n${values.prompt}\n\nHere is my current calendar data:\n${calendarDataJson}`;
-      console.log('Full prompt:', fullPrompt);
 
       const response = await getInspiration({}, { prompt: fullPrompt });
       if (response.ok) {

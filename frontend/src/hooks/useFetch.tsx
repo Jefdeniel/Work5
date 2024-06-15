@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
-import { Config } from '../Config';
+import { useContext, useState } from 'react';
 import Cookies from 'universal-cookie';
+import { Config } from '../Config';
 import AuthContext from '../store/AuthContext';
 
 const useFetch = (

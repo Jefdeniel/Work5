@@ -12,7 +12,6 @@ const Signout = ({ className }: Props) => {
   const { t } = useTranslation(['settings']);
   const auth = useAuth();
 
-  // TODO: write function in backend
   const { fetchData: logout } = useFetch('POST', ['logout']);
 
   const handleSignout = async () => {
