@@ -131,8 +131,10 @@ const EventCard = ({
           borderLeft: `10px solid ${color ? color : defaultColor}`,
         }}
       ></div>
+
       <div>
         <span className="event-card__title">{title}</span>
+
         {isGoogleEvent && (
           <div>
             <div className="event-card__time">
@@ -146,6 +148,7 @@ const EventCard = ({
             </div>
           </div>
         )}
+
         <div className="event-card__details">
           {location && (
             <div className="event-card__location">
@@ -153,18 +156,21 @@ const EventCard = ({
               {trimmedLocation ?? 'No location specified'}
             </div>
           )}
-          {priority && (
-            <div className="event-card__priority">
-              <strong>Priority: </strong>
-              {priorityIcon}
-            </div>
-          )}
+
           {status && (
             <div className="event-card__status">
               <strong>Status: </strong>
               {status}
             </div>
           )}
+
+          {priority && (
+            <div className="event-card__priority">
+              <strong>Priority: </strong>
+              {priorityIcon}
+            </div>
+          )}
+
           {isGoogleEvent && (
             <p className="text-gray-700">
               <a
