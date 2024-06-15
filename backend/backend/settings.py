@@ -171,6 +171,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://localhost:5177",
     "http://localhost:8000",
+    "https://smart-calendar-backend-lsaf.onrender.com/swagger",
+    "https://smart-calendar-backend-lsaf.onrender.com/admin",
 ]
 
 # If you host your front-end and back-end at different hosts, you should configure the CORS settings to make the front-end is able to access the resources of the back-end
@@ -178,6 +180,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5177",
     "http://localhost:8000",
+    "https://smart-calendar-backend-lsaf.onrender.com/swagger",
+    "https://smart-calendar-backend-lsaf.onrender.com/admin",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -186,11 +190,13 @@ CORS_ALLOW_CREDENTIALS = True
 FILE_UPLOAD_PERMISSIONS = 0o644
 
 # PRODUCTION: SET TO TRUE
-# CSRF_COOKY_HTTPONLY = False
-# SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKY_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5177",
     "http://localhost:8000",
+    "https://smart-calendar-backend-lsaf.onrender.com/swagger",
+    "https://smart-calendar-backend-lsaf.onrender.com/admin",
 ]
