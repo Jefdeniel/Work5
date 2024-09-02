@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "@types/react-big-calendar": "^1.8.9",
-    "axios": "^1.7.2",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "cssnano": "^7.0.2",
     "dotenv": "^16.4.5",
