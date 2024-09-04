@@ -51,7 +51,7 @@
     "react-timezone-select": "^3.2.5",
     "react-toastify": "^10.0.5",
     "remark-gfm": "^4.0.0",
-    "sass": "^1.77.8",
+    "sass": "^1.78.0",
     "ts-luxon": "^5.0.5",
     "universal-cookie": "^7.1.4",
     "xlsx": "^0.18.5"
